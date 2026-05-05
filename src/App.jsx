@@ -4,6 +4,7 @@ import Layout from './components/Layout.jsx';
 import Home from './pages/Home.jsx';
 import Drill from './pages/Drill.jsx';
 import BearFlag from './pages/BearFlag.jsx';
+import BullFlag from './pages/BullFlag.jsx';
 import DoubleTop from './pages/DoubleTop.jsx';
 import PreSession from './pages/PreSession.jsx';
 import InSession from './pages/InSession.jsx';
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/drill" element={<Drill />} />
         <Route path="/lab/bear-flag" element={<BearFlag />} />
+        <Route path="/lab/bull-flag" element={<BullFlag />} />
         <Route path="/lab/double-top" element={<DoubleTop />} />
         <Route path="/protocol/pre-session" element={<PreSession />} />
         <Route path="/protocol/in-session" element={<InSession />} />

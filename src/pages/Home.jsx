@@ -42,12 +42,17 @@ const PRINCIPLES = [
   }
 ];
 
-const PATTERN_FOCUS = ['bearFlag', 'doubleTop'];
+const PATTERN_FOCUS = ['bearFlag', 'bullFlag', 'doubleTop'];
 const FOCUS_COPY = {
   bearFlag: {
     title: 'Bear Flag',
     line: '2-minute scalper\'s complete bear flag treatment — 12 examples, decision tree, entry tiers.',
     href: '/lab/bear-flag'
+  },
+  bullFlag: {
+    title: 'Bull Flag',
+    line: '2-minute scalper\'s complete bull flag treatment — 12 examples, decision tree, entry tiers, lookalike patterns, time-of-day guide.',
+    href: '/lab/bull-flag'
   },
   doubleTop: {
     title: 'Double Top → Reversal',
