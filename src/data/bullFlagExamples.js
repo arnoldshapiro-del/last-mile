@@ -365,90 +365,187 @@ function openingDrive() {
 }
 
 // --------------------------------------------------------------------------
+// ANNOTATION HELPER
+// --------------------------------------------------------------------------
+// Builds the trendline / marker overlay block consumed by BullFlagChart.
+// upper / lower: [startIdx, startPrice, endIdx, endPrice] for the descending
+// flag trendline pair. The chart extrapolates the line to the right past the
+// end point so the breakout / retest / failure can sit on or under it.
+function ann({ pole, upper, lower, breakout, failed, failureIdx, retest, secondPole, secondUpper, secondLower, secondBreakout }) {
+  return {
+    poleRange: pole,
+    upperTrendline: upper && { startIdx: upper[0], startPrice: upper[1], endIdx: upper[2], endPrice: upper[3] },
+    lowerTrendline: lower && { startIdx: lower[0], startPrice: lower[1], endIdx: lower[2], endPrice: lower[3] },
+    breakoutIdx: breakout != null ? breakout : null,
+    failed: !!failed,
+    failureIdx: failureIdx != null ? failureIdx : null,
+    retestIdx: retest != null ? retest : null,
+    secondPoleRange: secondPole || null,
+    secondUpperTrendline: secondUpper && { startIdx: secondUpper[0], startPrice: secondUpper[1], endIdx: secondUpper[2], endPrice: secondUpper[3] },
+    secondLowerTrendline: secondLower && { startIdx: secondLower[0], startPrice: secondLower[1], endIdx: secondLower[2], endPrice: secondLower[3] },
+    secondBreakoutIdx: secondBreakout != null ? secondBreakout : null
+  };
+}
+
+// --------------------------------------------------------------------------
 // EXPORTS
 // --------------------------------------------------------------------------
 export const examples = [
   {
     n: 1,
     title: 'The Textbook Bull Flag',
-    pattern: textbook(),
+    pattern: { ...textbook(), annotation: ann({
+      pole: [2, 5],
+      upper: [5, 2521.2, 11, 2518.4],
+      lower: [6, 2520.0, 11, 2517.6],
+      breakout: 12
+    }) },
     caption:
       "This is the platonic ideal. Sharp 4-candle pole rallies 10 ticks. 6-candle flag drifts down at a shallow angle on visibly fading volume. Breakout candle is the longest green body on the chart and prints the highest volume — both confirmations align. Take it without overthinking. Entry on the breakout's close, stop below the flag's low, target a measured move up."
   },
   {
     n: 2,
     title: 'The Tight Bull Flag (Strong Trend Day)',
-    pattern: tight(),
+    pattern: { ...tight(), annotation: ann({
+      pole: [1, 3],
+      upper: [3, 2519.0, 7, 2517.8],
+      lower: [4, 2518.0, 7, 2517.0],
+      breakout: 8
+    }) },
     caption:
       "On powerful trend days the flag barely forms — only 3 pole candles and a 4-candle pause before continuation. Don't wait for textbook duration. If structure is there, take it. Strong trends compress patterns. Hesitation costs you the move."
   },
   {
     n: 3,
     title: 'The Loose Bull Flag (Acceptable but Riskier)',
-    pattern: loose(),
+    pattern: { ...loose(), annotation: ann({
+      pole: [1, 5],
+      upper: [5, 2526.4, 13, 2524.4],
+      lower: [6, 2525.0, 13, 2522.6],
+      breakout: 14
+    }) },
     caption:
       "Wider flags have more candles, more wicks, and more noise. The pattern is still valid but less precise. Wait for the breakout candle's CLOSE above the upper trendline, not just a wick poking through. Use smaller size when the day's range is already wide."
   },
   {
     n: 4,
     title: 'The Retest Entry (Highest Probability)',
-    pattern: retest(),
+    pattern: { ...retest(), annotation: ann({
+      pole: [1, 4],
+      upper: [4, 2529.4, 13, 2528.6],
+      lower: [5, 2528.4, 13, 2527.4],
+      breakout: 10,
+      retest: 13
+    }) },
     caption:
       "Pattern breaks up. Price rises 3-4 ticks. Then pulls DOWN to the broken trendline, touches it from above, gets bought with a green candle, and continues higher. Three entry points marked: yellow = aggressive (on break), green = confirmation (next candle close), cyan = retest (bounce off trendline). The retest is the highest-probability long. Patient traders get paid here."
   },
   {
     n: 5,
     title: 'The FAILED Bull Flag (Bull Trap)',
-    pattern: failed(),
+    pattern: { ...failed(), annotation: ann({
+      pole: [1, 4],
+      upper: [4, 2539.4, 9, 2537.4],
+      lower: [5, 2538.4, 9, 2536.8],
+      breakout: 10,
+      failed: true,
+      failureIdx: 11
+    }) },
     caption:
       "Looks identical to a real bull flag right through the breakout. Then the next candle prints a long red body that closes back BELOW the flag's upper trendline. Longs are trapped. Price reverses down. This is exactly why you wait for the candle AFTER the breakout. The breakout candle alone is not confirmation. Bull traps catch the impatient."
   },
   {
     n: 6,
     title: 'The Premature Entry Disaster',
-    pattern: premature(),
+    pattern: { ...premature(), annotation: ann({
+      pole: [1, 4],
+      upper: [4, 2550.0, 9, 2548.0],
+      lower: [5, 2549.0, 9, 2547.4],
+      breakout: 10
+    }) },
     caption:
       "Trader buys on the breakout candle's close with stop just below the breakout candle's low. Next candle is a long red wick that spikes through the stop — then price continues higher without him. He was right about direction but wrong about timing AND stop placement. The candle AFTER the breakout is non-negotiable."
   },
   {
     n: 7,
     title: 'Volume Failure',
-    pattern: volumeFail(),
+    pattern: { ...volumeFail(), annotation: ann({
+      pole: [1, 4],
+      upper: [4, 2559.4, 9, 2557.4],
+      lower: [5, 2558.4, 9, 2556.8],
+      breakout: 10,
+      failed: true,
+      failureIdx: 14
+    }) },
     caption:
       "Bull flag forms perfectly. Volume during the flag is FLAT/RISING (sellers were distributing into the rally). Breakout candle has SMALLER volume than the flag's average. Five candles later price drifts back into the flag and breaks out the BOTTOM. Skip these 80% of the time. Take half-size 20% of the time only when the rest of the chart is a strong uptrend."
   },
   {
     n: 8,
     title: "Bull Flag Inside a Downtrend (Don't Trade)",
-    pattern: inDowntrend(),
+    pattern: { ...inDowntrend(), annotation: ann({
+      pole: [2, 5],
+      upper: [5, 2568.0, 10, 2566.2],
+      lower: [6, 2567.0, 10, 2565.4],
+      breakout: 11,
+      failed: true,
+      failureIdx: 13
+    }) },
     caption:
       "On the small inset chart, the larger trend is clearly DOWN. Inside that downtrend, a small bull flag forms. It breaks up briefly — then the larger downtrend resumes and crushes the long. A bull flag inside a downtrend is just a bear flag pullback in disguise. Always check the larger context (zoom out one timeframe) before entering."
   },
   {
     n: 9,
     title: 'The Two-Stage Bull Flag (Stacked Continuation)',
-    pattern: twoStage(),
+    pattern: { ...twoStage(), annotation: ann({
+      pole: [1, 3],
+      upper: [3, 2587.2, 7, 2586.0],
+      lower: [4, 2586.4, 7, 2585.4],
+      breakout: 8,
+      secondPole: [9, 10],
+      secondUpper: [10, 2592.8, 14, 2591.6],
+      secondLower: [11, 2592.0, 14, 2590.8],
+      secondBreakout: 15
+    }) },
     caption:
       "First bull flag completes, price rallies to a new high. Then a SECOND bull flag forms at that higher level. Both work. Strong trend days produce stacked bull flags. After the first one fires successfully, watch the higher zone for a second one. Two clean continuations beat one home-run swing."
   },
   {
     n: 10,
     title: 'The Wide Flag That Went Sideways Too Long',
-    pattern: tooLong(),
+    pattern: { ...tooLong(), annotation: ann({
+      pole: [1, 4],
+      upper: [4, 2610.0, 17, 2609.4],
+      lower: [5, 2608.6, 17, 2608.0],
+      breakout: 18,
+      failed: true,
+      failureIdx: 19
+    }) },
     caption:
       "Pole forms cleanly. Flag goes sideways for 13+ candles. Buyers' urgency dissipates — the longer the pause, the more sellers have time to organize. Eventually the flag breaks up weakly, then reverses down. Time kills bull flags. If the flag drifts beyond ~8-10 candles on a 2-min, buyers have lost their edge. Skip it."
   },
   {
     n: 11,
     title: 'The Steep Flag (Warning Sign)',
-    pattern: steep(),
+    pattern: { ...steep(), annotation: ann({
+      pole: [1, 4],
+      upper: [4, 2631.6, 8, 2625.8],
+      lower: [5, 2629.6, 8, 2623.4],
+      failed: true,
+      failureIdx: 9
+    }) },
     caption:
       "Pole forms. Flag drops STEEPLY downward — much more than a shallow 15° drift. Steep pullbacks in the flag mean sellers are aggressive, not just passive profit-takers. This setup often becomes a reversal, not a continuation. Wait for proof (a clear failure of the selling) or skip the trade entirely."
   },
   {
     n: 12,
     title: 'The Opening Drive Bull Flag (Best of the Day)',
-    pattern: openingDrive(),
+    pattern: { ...openingDrive(), annotation: ann({
+      pole: [0, 3],
+      upper: [3, 2713.8, 8, 2710.8],
+      lower: [4, 2712.6, 8, 2710.0],
+      breakout: 9
+    }) },
     caption:
       "First bull flag forms in the 30-45 minutes after RTH open at 9:30 ET. Sharp 4-candle pole right off the open, tight 5-candle pullback, decisive break with massive volume — institutional buying confirms direction. If your trade window opens at 10:15, the second-wave bull flag forming around 10:15-10:45 frequently extends the opening drive's gains. Often the highest-quality setup of the day."
   }

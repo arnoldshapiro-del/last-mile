@@ -9,6 +9,7 @@ export default function BullFlag() {
       <Header />
       <Section1Plain />
       <Section2ThreeParts />
+      <Section2_5HowToDraw />
       <Section3Timeframe />
       <Section4Gallery />
       <Section5DecisionTree />
@@ -88,6 +89,277 @@ function Section2ThreeParts() {
         <Tile color="amber" title="The Continuation (Breakout)" body="A green candle closes above the flag's upper line. Volume surges. Buyers back." />
       </div>
     </SectionShell>
+  );
+}
+
+// ============================================================
+// 2.5 — HOW TO DRAW THE TRENDLINE (STEP BY STEP)
+// ============================================================
+function Section2_5HowToDraw() {
+  return (
+    <SectionShell n="2.5" title="How to Draw the Bull Flag Trendline (Step by Step)">
+      <p className="mb-5">
+        Five numbered steps. Trace each marker on the chart with your eye, then read the matching caption below.
+      </p>
+      <HowToDrawSVG />
+      <div className="mt-5 card-tight border-green/40 bg-green/5">
+        <p className="font-display font-bold text-green text-base mb-2">To draw the bull flag trendline:</p>
+        <ol className="space-y-1 text-text/90 leading-relaxed list-decimal list-inside">
+          <li>Find the highest point of the pole.</li>
+          <li>Find the next highest wick on a flag candle.</li>
+          <li>Connect those two dots and extend the line right.</li>
+          <li>Long only when a 2-minute candle CLOSES above the extended line.</li>
+        </ol>
+      </div>
+    </SectionShell>
+  );
+}
+
+function HowToDrawSVG() {
+  // 1200 x 600 instructional diagram
+  // Sample bull-flag layout (numbers are in SVG pixel space):
+  // Pole: 5 candles climbing from x=120 → x=320, top reaches y=180 (pole top)
+  // Flag: 6 candles drifting down from x=360 → x=560, with high wicks descending from 180 → 240
+  // Breakout candle: x=620, body closes above the trendline
+  // Wick-only candle (failed signal): x=720
+  // Confirming continuation candle: x=780
+  const svgW = 1200, svgH = 600;
+
+  // Pole candles: [x, openY, closeY, highY, lowY]
+  const pole = [
+    [140, 460, 410, 466, 405],
+    [180, 410, 360, 416, 355],
+    [220, 360, 310, 366, 305],
+    [260, 310, 260, 316, 255],
+    [300, 260, 200, 266, 195]   // top of pole at y=195
+  ];
+  // Flag candles drifting down, top wick descending
+  // Format: [x, openY, closeY, highY, lowY] — small red/green
+  const flag = [
+    [350, 215, 230, 200, 235],
+    [390, 230, 245, 215, 250],
+    [430, 245, 260, 230, 265],
+    [470, 260, 275, 250, 280],
+    [510, 275, 290, 265, 295],
+    [550, 290, 305, 280, 310]
+  ];
+  // Breakout candle (green) closes above trendline projection
+  const breakout = [610, 295, 215, 305, 210]; // body 215 (close) - well above trendline at x=610 (~280)
+  // Wick-only failed candle (the wick pokes above but body closes back below)
+  const wickOnly = [710, 290, 285, 245, 295];  // wick to 245, but body 285-290 below trendline
+  // Confirming follow-through candle
+  const followThrough = [810, 195, 130, 200, 125];
+
+  // Trendline points: from top of pole (300, 195) extending through next-highest flag wick (350, 200)
+  // Slope: (200-195)/(350-300) = 0.1 px/px
+  // At x=1140 (right edge): y = 195 + 0.1 * (1140 - 300) = 195 + 84 = 279
+  const tlStart = { x: 300, y: 195 };
+  const tlMid   = { x: 350, y: 200 };
+  const tlExtRight = { x: 1140, y: 195 + 0.1 * (1140 - 300) };
+
+  return (
+    <div className="overflow-x-auto -mx-2 md:mx-0">
+      <svg viewBox={`0 0 ${svgW} ${svgH}`}
+        preserveAspectRatio="xMidYMid meet"
+        className="block rounded-xl border border-border w-full h-auto"
+        style={{ background: '#0a0a0a' }}
+        aria-label="How to draw the bull flag trendline">
+
+        {/* Background grid */}
+        {[100, 200, 300, 400, 500].map((y, i) => (
+          <line key={i} x1={40} x2={1160} y1={y} y2={y} stroke="#1f1f1f" strokeWidth={1} />
+        ))}
+
+        {/* Title bar */}
+        <rect x={40} y={20} width={1120} height={36} rx={5} fill="#0a0a0a" stroke="#86efac" strokeWidth={1.5} />
+        <text x={600} y={45} fill="#86efac" fontSize={16} fontWeight="bold"
+          textAnchor="middle" fontFamily="'Oxanium', sans-serif">
+          HOW TO DRAW THE BULL FLAG TRENDLINE — 5 NUMBERED STEPS
+        </text>
+
+        {/* Pole candles */}
+        {pole.map(([x, oy, cy, hy, ly], i) => (
+          <g key={`p${i}`}>
+            <line x1={x} x2={x} y1={hy} y2={ly} stroke="#22c55e" strokeWidth={2} />
+            <rect x={x - 9} y={Math.min(oy, cy)} width={18} height={Math.abs(cy - oy)} fill="#22c55e" />
+          </g>
+        ))}
+        {/* Pole label */}
+        <text x={220} y={500} fill="#86efac" fontSize={13} fontWeight="bold"
+          textAnchor="middle" fontFamily="'Oxanium', sans-serif">
+          POLE (sharp rally)
+        </text>
+
+        {/* Flag candles (red, drifting down) */}
+        {flag.map(([x, oy, cy, hy, ly], i) => (
+          <g key={`f${i}`}>
+            <line x1={x} x2={x} y1={hy} y2={ly} stroke="#ef4444" strokeWidth={2} />
+            <rect x={x - 9} y={Math.min(oy, cy)} width={18} height={Math.max(2, Math.abs(cy - oy))} fill="#ef4444" />
+          </g>
+        ))}
+        <text x={450} y={355} fill="#ef4444" fontSize={13} fontWeight="bold"
+          textAnchor="middle" fontFamily="'Oxanium', sans-serif">
+          FLAG (drift down)
+        </text>
+
+        {/* Breakout candle (green) */}
+        <g>
+          <line x1={breakout[0]} x2={breakout[0]} y1={breakout[3]} y2={breakout[4]} stroke="#22c55e" strokeWidth={2.5} />
+          <rect x={breakout[0] - 11} y={Math.min(breakout[1], breakout[2])} width={22} height={Math.abs(breakout[2] - breakout[1])} fill="#22c55e" />
+        </g>
+
+        {/* Wick-only fake-out candle (mostly red body, long upper wick poking above the line) */}
+        <g>
+          <line x1={wickOnly[0]} x2={wickOnly[0]} y1={wickOnly[3]} y2={wickOnly[4]} stroke="#ef4444" strokeWidth={2} />
+          <rect x={wickOnly[0] - 9} y={Math.min(wickOnly[1], wickOnly[2])} width={18} height={Math.max(2, Math.abs(wickOnly[2] - wickOnly[1]))} fill="#ef4444" />
+        </g>
+
+        {/* Follow-through candle (green) */}
+        <g>
+          <line x1={followThrough[0]} x2={followThrough[0]} y1={followThrough[3]} y2={followThrough[4]} stroke="#22c55e" strokeWidth={2.5} />
+          <rect x={followThrough[0] - 11} y={Math.min(followThrough[1], followThrough[2])} width={22} height={Math.abs(followThrough[2] - followThrough[1])} fill="#22c55e" />
+        </g>
+
+        {/* STEP 3: Trendline (drawn through points 1 and 2, extended right with arrow) */}
+        <line x1={tlStart.x} y1={tlStart.y} x2={tlExtRight.x} y2={tlExtRight.y}
+          stroke="#06b6d4" strokeWidth={3.5} strokeDasharray="10 5" />
+        {/* Arrowhead at right end */}
+        <polygon
+          points={`${tlExtRight.x + 14},${tlExtRight.y} ${tlExtRight.x},${tlExtRight.y - 9} ${tlExtRight.x},${tlExtRight.y + 9}`}
+          fill="#06b6d4" />
+
+        {/* Step 1 marker — top of pole */}
+        <g>
+          <circle cx={tlStart.x} cy={tlStart.y} r={16} fill="#86efac" stroke="#000" strokeWidth={2.5} />
+          <text x={tlStart.x} y={tlStart.y + 6}
+            fill="#000" fontSize={18} fontWeight="bold"
+            textAnchor="middle" fontFamily="'Oxanium', sans-serif">
+            1
+          </text>
+          {/* Connector line + label */}
+          <line x1={tlStart.x - 14} y1={tlStart.y - 8} x2={tlStart.x - 60} y2={tlStart.y - 50}
+            stroke="#86efac" strokeWidth={1.5} />
+          <rect x={tlStart.x - 350} y={tlStart.y - 78} width={300} height={28} rx={4}
+            fill="#0a0a0a" stroke="#86efac" strokeWidth={1.5} />
+          <text x={tlStart.x - 200} y={tlStart.y - 60}
+            fill="#86efac" fontSize={13} fontWeight="bold"
+            textAnchor="middle" fontFamily="'Space Mono', monospace">
+            Step 1: Top of the pole
+          </text>
+        </g>
+
+        {/* Step 2 marker — next-highest flag wick */}
+        <g>
+          <circle cx={tlMid.x} cy={tlMid.y} r={16} fill="#86efac" stroke="#000" strokeWidth={2.5} />
+          <text x={tlMid.x} y={tlMid.y + 6}
+            fill="#000" fontSize={18} fontWeight="bold"
+            textAnchor="middle" fontFamily="'Oxanium', sans-serif">
+            2
+          </text>
+          <line x1={tlMid.x + 14} y1={tlMid.y - 8} x2={tlMid.x + 60} y2={tlMid.y - 50}
+            stroke="#86efac" strokeWidth={1.5} />
+          <rect x={tlMid.x + 60} y={tlMid.y - 64} width={300} height={28} rx={4}
+            fill="#0a0a0a" stroke="#86efac" strokeWidth={1.5} />
+          <text x={tlMid.x + 210} y={tlMid.y - 46}
+            fill="#86efac" fontSize={13} fontWeight="bold"
+            textAnchor="middle" fontFamily="'Space Mono', monospace">
+            Step 2: Highest wick of next flag candle
+          </text>
+        </g>
+
+        {/* Step 3 marker — the trendline itself, label at midpoint */}
+        <g>
+          <rect x={620} y={88} width={420} height={28} rx={4}
+            fill="#0a0a0a" stroke="#06b6d4" strokeWidth={1.5} />
+          <text x={830} y={106}
+            fill="#06b6d4" fontSize={13} fontWeight="bold"
+            textAnchor="middle" fontFamily="'Space Mono', monospace">
+            Step 3: Connect the dots and extend RIGHT →
+          </text>
+          {/* Step 3 number badge sitting on the line */}
+          <circle cx={780} cy={195 + 0.1 * (780 - 300)} r={16}
+            fill="#06b6d4" stroke="#000" strokeWidth={2.5} />
+          <text x={780} y={195 + 0.1 * (780 - 300) + 6}
+            fill="#000" fontSize={18} fontWeight="bold"
+            textAnchor="middle" fontFamily="'Oxanium', sans-serif">
+            3
+          </text>
+        </g>
+
+        {/* Step 4 marker — breakout candle that CLOSES above the line */}
+        <g>
+          <circle cx={breakout[0]} cy={breakout[2]} r={16}
+            fill="#f97316" stroke="#000" strokeWidth={2.5} />
+          <text x={breakout[0]} y={breakout[2] + 6}
+            fill="#000" fontSize={18} fontWeight="bold"
+            textAnchor="middle" fontFamily="'Oxanium', sans-serif">
+            4
+          </text>
+          {/* Connector going UP to label box */}
+          <line x1={breakout[0]} y1={breakout[2] - 14} x2={breakout[0]} y2={breakout[2] - 60}
+            stroke="#f97316" strokeWidth={1.5} />
+          <rect x={breakout[0] - 175} y={breakout[2] - 90} width={350} height={28} rx={4}
+            fill="#0a0a0a" stroke="#f97316" strokeWidth={1.5} />
+          <text x={breakout[0]} y={breakout[2] - 72}
+            fill="#f97316" fontSize={13} fontWeight="bold"
+            textAnchor="middle" fontFamily="'Space Mono', monospace">
+            Step 4: 2-min candle CLOSES above the line — LONG
+          </text>
+        </g>
+
+        {/* Step 5 marker — wick poking above without closing (NOT a signal) */}
+        <g>
+          {/* Red X over the wick area */}
+          <line x1={wickOnly[0] - 16} y1={wickOnly[3] - 6} x2={wickOnly[0] + 16} y2={wickOnly[3] + 26}
+            stroke="#ef4444" strokeWidth={4} strokeLinecap="round" />
+          <line x1={wickOnly[0] + 16} y1={wickOnly[3] - 6} x2={wickOnly[0] - 16} y2={wickOnly[3] + 26}
+            stroke="#ef4444" strokeWidth={4} strokeLinecap="round" />
+          {/* Step 5 badge */}
+          <circle cx={wickOnly[0] + 28} cy={wickOnly[3] - 14} r={16}
+            fill="#ef4444" stroke="#000" strokeWidth={2.5} />
+          <text x={wickOnly[0] + 28} y={wickOnly[3] - 8}
+            fill="#fff" fontSize={18} fontWeight="bold"
+            textAnchor="middle" fontFamily="'Oxanium', sans-serif">
+            5
+          </text>
+          {/* Label */}
+          <line x1={wickOnly[0]} y1={wickOnly[3] + 30} x2={wickOnly[0]} y2={wickOnly[3] + 70}
+            stroke="#ef4444" strokeWidth={1.5} />
+          <rect x={wickOnly[0] - 175} y={wickOnly[3] + 70} width={350} height={28} rx={4}
+            fill="#0a0a0a" stroke="#ef4444" strokeWidth={1.5} />
+          <text x={wickOnly[0]} y={wickOnly[3] + 88}
+            fill="#ef4444" fontSize={13} fontWeight="bold"
+            textAnchor="middle" fontFamily="'Space Mono', monospace">
+            Step 5: Wick only — NOT a signal, flag still intact
+          </text>
+        </g>
+
+        {/* Step captions block at the bottom of the SVG */}
+        <g>
+          <line x1={40} y1={520} x2={1160} y2={520} stroke="#262626" strokeWidth={1} />
+          <text x={60} y={545} fill="#86efac" fontSize={12} fontWeight="bold" fontFamily="'Space Mono', monospace">1</text>
+          <text x={80} y={545} fill="#a3a3a3" fontSize={12} fontFamily="'Space Mono', monospace">
+            Find the highest point of the pole — the highest price reached before the flag started forming.
+          </text>
+          <text x={60} y={565} fill="#86efac" fontSize={12} fontWeight="bold" fontFamily="'Space Mono', monospace">2</text>
+          <text x={80} y={565} fill="#a3a3a3" fontSize={12} fontFamily="'Space Mono', monospace">
+            Find the highest wick of the next flag candle — gives you the line's angle.
+          </text>
+          <text x={60} y={585} fill="#06b6d4" fontSize={12} fontWeight="bold" fontFamily="'Space Mono', monospace">3</text>
+          <text x={80} y={585} fill="#a3a3a3" fontSize={12} fontFamily="'Space Mono', monospace">
+            Draw a straight line through those two points and EXTEND it to the right past the latest candle.
+          </text>
+          <text x={620} y={545} fill="#f97316" fontSize={12} fontWeight="bold" fontFamily="'Space Mono', monospace">4</text>
+          <text x={640} y={545} fill="#a3a3a3" fontSize={12} fontFamily="'Space Mono', monospace">
+            Wait until a 2-minute candle CLOSES (not just wicks) above the line — long signal.
+          </text>
+          <text x={620} y={565} fill="#ef4444" fontSize={12} fontWeight="bold" fontFamily="'Space Mono', monospace">5</text>
+          <text x={640} y={565} fill="#a3a3a3" fontSize={12} fontFamily="'Space Mono', monospace">
+            A wick poking above the line is NOT a signal — flag is still intact.
+          </text>
+        </g>
+      </svg>
+    </div>
   );
 }
 

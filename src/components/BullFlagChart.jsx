@@ -2,7 +2,9 @@ import React, { useMemo } from 'react';
 
 /**
  * Hand-coded SVG renderer for the Bull Flag lab.
- * Bullish #22c55e, bearish #ef4444. Markers, zones, news, RTH-open marker.
+ * Bullish #22c55e, bearish #ef4444. Markers, zones, news, RTH-open marker,
+ * plus the annotated trendline overlay (upper/lower flag trendline,
+ * pole boundary, breakout/retest/failure markers) driven by pattern.annotation.
  */
 export default function BullFlagChart({
   pattern,
@@ -16,11 +18,13 @@ export default function BullFlagChart({
   flagLabel,
   breakoutLabel,
   inset,
+  showAnnotations = true,
   className = ''
 }) {
   const padding = { top: 28, right: 110, bottom: 28, left: 60 };
   const candles = pattern.candles;
   const markers = pattern.markers || [];
+  const annotation = showAnnotations ? pattern.annotation : null;
 
   const chart = useMemo(() => {
     const volH = showVolume ? 110 : 0;
@@ -55,6 +59,8 @@ export default function BullFlagChart({
     ticks.push(p);
   }
 
+  const rightEdgeIdx = candles.length - 1;
+
   return (
     <div className={`overflow-x-auto -mx-2 md:mx-0 ${className}`}>
       <svg
@@ -86,6 +92,14 @@ export default function BullFlagChart({
         )}
         {zoneBreakout && (
           <ZoneBox chart={chart} fromIndex={zoneBreakout[0]} toIndex={zoneBreakout[1]} color="#f97316" label={breakoutLabel} top={chart.yFor(chart.yMax) + 4} />
+        )}
+
+        {/* Annotation overlay — pole boundary box (drawn first, behind candles) */}
+        {annotation?.poleRange && (
+          <PoleBoundary chart={chart} from={annotation.poleRange[0]} to={annotation.poleRange[1]} candles={candles} />
+        )}
+        {annotation?.secondPoleRange && (
+          <PoleBoundary chart={chart} from={annotation.secondPoleRange[0]} to={annotation.secondPoleRange[1]} candles={candles} label="POLE 2" />
         )}
 
         {/* Candles */}
@@ -184,8 +198,267 @@ export default function BullFlagChart({
           }
           return null;
         })}
+
+        {/* Annotation overlay — trendlines + start/end markers + breakout/retest/failure */}
+        {annotation?.upperTrendline && (
+          <TrendlinePair chart={chart} annotation={annotation} candles={candles} rightEdgeIdx={rightEdgeIdx} />
+        )}
+        {annotation?.secondUpperTrendline && (
+          <TrendlinePair chart={chart} annotation={{
+            upperTrendline: annotation.secondUpperTrendline,
+            lowerTrendline: annotation.secondLowerTrendline,
+            breakoutIdx: annotation.secondBreakoutIdx,
+            failed: false,
+            failureIdx: null,
+            retestIdx: null
+          }} candles={candles} rightEdgeIdx={rightEdgeIdx} variant="second" />
+        )}
       </svg>
     </div>
+  );
+}
+
+// --------------------------------------------------------------------------
+// ANNOTATION SUB-COMPONENTS
+// --------------------------------------------------------------------------
+
+function PoleBoundary({ chart, from, to, candles, label = 'POLE' }) {
+  const x1 = chart.xFor(from) - chart.slot / 2;
+  const x2 = chart.xFor(to) + chart.slot / 2;
+  const poleHigh = Math.max(...candles.slice(from, to + 1).map(c => c.h));
+  const poleLow = Math.min(...candles.slice(from, to + 1).map(c => c.l));
+  const yTop = chart.yFor(poleHigh) - 6;
+  const yBot = chart.yFor(poleLow) + 6;
+  return (
+    <g>
+      <rect x={x1} y={yTop} width={x2 - x1} height={yBot - yTop}
+        fill="none" stroke="#86efac" strokeWidth={1.4}
+        strokeDasharray="5 4" opacity={0.85} rx={3} />
+      <rect x={x1 + 4} y={yTop - 16} width={56} height={14} rx={3}
+        fill="#86efac" opacity={0.95} />
+      <text x={x1 + 10} y={yTop - 5}
+        fill="#000" fontSize={10} fontWeight="bold"
+        fontFamily="'Oxanium', sans-serif">
+        {label}
+      </text>
+    </g>
+  );
+}
+
+function TrendlinePair({ chart, annotation, candles, rightEdgeIdx, variant = 'primary' }) {
+  const upper = annotation.upperTrendline;
+  const lower = annotation.lowerTrendline;
+  if (!upper) return null;
+
+  // Compute slope from the upper trendline anchors
+  const dxIdx = upper.endIdx - upper.startIdx;
+  const dyPrice = upper.endPrice - upper.startPrice;
+  const slopePerIdx = dxIdx === 0 ? 0 : dyPrice / dxIdx;
+  const upperPriceAt = idx => upper.startPrice + slopePerIdx * (idx - upper.startIdx);
+
+  // Lower line slope (parallel, anchored at lower's start)
+  let lowerPriceAt = null;
+  if (lower) {
+    const ldx = lower.endIdx - lower.startIdx;
+    const ldy = lower.endPrice - lower.startPrice;
+    const lslope = ldx === 0 ? 0 : ldy / ldx;
+    lowerPriceAt = idx => lower.startPrice + lslope * (idx - lower.startIdx);
+  }
+
+  // Upper line: extend from start across to (rightEdgeIdx + 0.6) so it visibly extrapolates past the last candle
+  const extendIdx = rightEdgeIdx + 0.6;
+  const x1 = chart.xFor(upper.startIdx);
+  const y1 = chart.yFor(upper.startPrice);
+  const xExt = chart.xFor(extendIdx);
+  const yExt = chart.yFor(upperPriceAt(extendIdx));
+
+  // Lower extension end
+  let lx1, ly1, lxExt, lyExt;
+  if (lower && lowerPriceAt) {
+    lx1 = chart.xFor(lower.startIdx);
+    ly1 = chart.yFor(lower.startPrice);
+    lxExt = chart.xFor(extendIdx);
+    lyExt = chart.yFor(lowerPriceAt(extendIdx));
+  }
+
+  // Start/end labels
+  const xEnd = chart.xFor(upper.endIdx);
+  const yEnd = chart.yFor(upper.endPrice);
+
+  const breakoutIdx = annotation.breakoutIdx;
+  const breakoutCandle = breakoutIdx != null ? candles[breakoutIdx] : null;
+  const failureIdx = annotation.failureIdx;
+  const failureCandle = failureIdx != null ? candles[failureIdx] : null;
+  const retestIdx = annotation.retestIdx;
+  const retestCandle = retestIdx != null ? candles[retestIdx] : null;
+
+  // Position a compact "UPPER TRENDLINE" tag at the right edge of the line —
+  // past the last candle in the margin area so it doesn't overlap candles.
+  const tagX = xExt - 8;
+  const tagY = yExt + 4;
+
+  return (
+    <g>
+      {/* Lower (parallel) trendline — drawn first, behind */}
+      {lower && (
+        <line x1={lx1} y1={ly1} x2={lxExt} y2={lyExt}
+          stroke="#06b6d4" strokeWidth={1.5} strokeDasharray="6 4" opacity={0.5} />
+      )}
+      {lower && (
+        <text x={lxExt - 4} y={lyExt + 14}
+          fill="#06b6d4" fontSize={10} opacity={0.7}
+          textAnchor="end" fontFamily="'Space Mono', monospace">
+          Lower trendline (parallel)
+        </text>
+      )}
+
+      {/* Upper trendline — the critical line */}
+      <line x1={x1} y1={y1} x2={xExt} y2={yExt}
+        stroke="#06b6d4" strokeWidth={3} strokeDasharray="8 4" />
+
+      {/* Compact trendline tag — pinned to the right end of the line, in the margin */}
+      <g>
+        <rect x={tagX - 110} y={tagY} width={108} height={18} rx={3}
+          fill="#0a0a0a" stroke="#06b6d4" strokeWidth={1.4} />
+        <text x={tagX - 56} y={tagY + 13}
+          fill="#06b6d4" fontSize={10} fontWeight="bold"
+          textAnchor="middle" fontFamily="'Space Mono', monospace">
+          UPPER TRENDLINE
+        </text>
+      </g>
+
+      {/* Start point — mint green circle + numbered label */}
+      {variant === 'primary' && (
+        <g>
+          <circle cx={x1} cy={y1} r={8} fill="#86efac" stroke="#000" strokeWidth={1.8} />
+          <text x={x1} y={y1 + 3.5}
+            fill="#000" fontSize={10} fontWeight="bold"
+            textAnchor="middle" fontFamily="'Oxanium', sans-serif">
+            1
+          </text>
+          {/* Connector to label box */}
+          <line x1={x1} y1={y1 - 8} x2={x1 - 18} y2={y1 - 30}
+            stroke="#86efac" strokeWidth={1.2} />
+          <rect x={x1 - 192} y={y1 - 44} width={176} height={18} rx={3}
+            fill="#0a0a0a" stroke="#86efac" strokeWidth={1.2} />
+          <text x={x1 - 184} y={y1 - 31}
+            fill="#86efac" fontSize={10.5}
+            fontFamily="'Space Mono', monospace">
+            1. Start here (top of pole)
+          </text>
+        </g>
+      )}
+
+      {/* End point — circle + numbered label (skip if breakout would overlap) */}
+      {variant === 'primary' && (
+        <g>
+          <circle cx={xEnd} cy={yEnd} r={7} fill="#86efac" stroke="#000" strokeWidth={1.5} />
+          <text x={xEnd} y={yEnd + 3}
+            fill="#000" fontSize={9} fontWeight="bold"
+            textAnchor="middle" fontFamily="'Oxanium', sans-serif">
+            2
+          </text>
+          <line x1={xEnd} y1={yEnd + 7} x2={xEnd + 14} y2={yEnd + 32}
+            stroke="#86efac" strokeWidth={1.2} />
+          <rect x={xEnd + 12} y={yEnd + 22} width={168} height={18} rx={3}
+            fill="#0a0a0a" stroke="#86efac" strokeWidth={1.2} />
+          <text x={xEnd + 18} y={yEnd + 35}
+            fill="#86efac" fontSize={10}
+            fontFamily="'Space Mono', monospace">
+            2. Extend to last flag high
+          </text>
+        </g>
+      )}
+
+      {/* Breakout arrow + label */}
+      {breakoutCandle != null && (
+        <BreakoutArrow chart={chart} idx={breakoutIdx} candle={breakoutCandle} failed={annotation.failed} />
+      )}
+
+      {/* Failure marker (red X) */}
+      {annotation.failed && failureCandle != null && (
+        <FailureMark chart={chart} idx={failureIdx} candle={failureCandle} />
+      )}
+
+      {/* Retest arrow */}
+      {retestCandle != null && (
+        <RetestArrow chart={chart} idx={retestIdx} candle={retestCandle} />
+      )}
+    </g>
+  );
+}
+
+function BreakoutArrow({ chart, idx, candle, failed }) {
+  const x = chart.xFor(idx);
+  const y = chart.yFor(candle.h) - 6;
+  const arrowEndY = y - 38;
+  const labelText = failed
+    ? 'BREAK appears here — but watch the next candle'
+    : 'BREAK — 2-min candle closes ABOVE the line. LONG here.';
+  return (
+    <g>
+      {/* Arrow shaft */}
+      <line x1={x} y1={arrowEndY} x2={x} y2={y - 4}
+        stroke="#f97316" strokeWidth={2.5} />
+      {/* Arrowhead */}
+      <polygon points={`${x},${y - 2} ${x - 6},${y - 12} ${x + 6},${y - 12}`}
+        fill="#f97316" />
+      {/* Label box */}
+      <rect x={x - 145} y={arrowEndY - 22} width={290} height={20} rx={3}
+        fill="#0a0a0a" stroke="#f97316" strokeWidth={1.4} />
+      <text x={x} y={arrowEndY - 8}
+        fill="#f97316" fontSize={10.5} fontWeight="bold"
+        textAnchor="middle" fontFamily="'Space Mono', monospace">
+        {labelText}
+      </text>
+    </g>
+  );
+}
+
+function FailureMark({ chart, idx, candle }) {
+  const x = chart.xFor(idx);
+  const y = chart.yFor((candle.h + candle.l) / 2);
+  const r = 16;
+  return (
+    <g>
+      {/* Red X strokes */}
+      <line x1={x - r} y1={y - r} x2={x + r} y2={y + r}
+        stroke="#ef4444" strokeWidth={4} strokeLinecap="round" />
+      <line x1={x + r} y1={y - r} x2={x - r} y2={y + r}
+        stroke="#ef4444" strokeWidth={4} strokeLinecap="round" />
+      {/* Label box */}
+      <rect x={x - 165} y={y + r + 6} width={330} height={20} rx={3}
+        fill="#0a0a0a" stroke="#ef4444" strokeWidth={1.4} />
+      <text x={x} y={y + r + 20}
+        fill="#ef4444" fontSize={10.5} fontWeight="bold"
+        textAnchor="middle" fontFamily="'Space Mono', monospace">
+        FAILED — closed back below the line, abort
+      </text>
+    </g>
+  );
+}
+
+function RetestArrow({ chart, idx, candle }) {
+  const x = chart.xFor(idx);
+  const y = chart.yFor(candle.l) + 8;
+  const arrowEndY = y + 38;
+  return (
+    <g>
+      {/* Arrow shaft going UP into wick */}
+      <line x1={x} y1={arrowEndY} x2={x} y2={y + 4}
+        stroke="#f97316" strokeWidth={2.5} />
+      {/* Arrowhead pointing up */}
+      <polygon points={`${x},${y + 2} ${x - 6},${y + 12} ${x + 6},${y + 12}`}
+        fill="#f97316" />
+      {/* Label box */}
+      <rect x={x - 130} y={arrowEndY + 4} width={260} height={20} rx={3}
+        fill="#0a0a0a" stroke="#f97316" strokeWidth={1.4} />
+      <text x={x} y={arrowEndY + 18}
+        fill="#f97316" fontSize={10.5} fontWeight="bold"
+        textAnchor="middle" fontFamily="'Space Mono', monospace">
+        RETEST — best entry, long on bounce
+      </text>
+    </g>
   );
 }
 
