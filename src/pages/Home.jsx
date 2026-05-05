@@ -46,7 +46,7 @@ const PATTERN_FOCUS = ['bearFlag', 'doubleTop'];
 const FOCUS_COPY = {
   bearFlag: {
     title: 'Bear Flag',
-    line: 'Continuation pattern. Pole = sharp drop. Flag = brief upward drift on declining volume. Entry on body close below the flag trendline.',
+    line: '2-minute scalper\'s complete bear flag treatment — 12 examples, decision tree, entry tiers.',
     href: '/lab/bear-flag'
   },
   doubleTop: {
