@@ -369,88 +369,101 @@ function preNews() {
 // --------------------------------------------------------------------------
 // EXPORTS
 // --------------------------------------------------------------------------
+function ann({ pole, lower, upper, breakout, failed, retest, openSecond }) {
+  return {
+    poleRange: pole,
+    flagTrendline: { startIdx: lower[0], startPrice: lower[1], endIdx: lower[2], endPrice: lower[3] },
+    upperTrendline: upper && { startIdx: upper[0], startPrice: upper[1], endIdx: upper[2], endPrice: upper[3] },
+    breakoutIdx: breakout?.[0],
+    breakoutPrice: breakout?.[1],
+    failed: !!failed,
+    retestIdx: retest,
+    secondTrendline: openSecond
+  };
+}
+
 export const examples = [
   {
     n: 1,
     title: 'The Textbook Bear Flag',
-    pattern: textbook(),
+    pattern: { ...textbook(), annotation: ann({ pole: [2, 5], lower: [5, 2500.4, 11, 2502.6], upper: [6, 2501.4, 11, 2503.5], breakout: [12, 2499.8] }) },
     caption:
       "Sharp 4-candle pole drops 10 ticks. 6-candle flag drifts up at a shallow angle on visibly fading volume. Breakout candle is the longest red body on the chart and prints the highest volume — both confirmations align. Entry is the close of that candle, stop above the flag's high, target a measured move down."
   },
   {
     n: 2,
     title: 'The Tight Bear Flag (Fast Trend Day)',
-    pattern: tight(),
+    pattern: { ...tight(), annotation: ann({ pole: [1, 3], lower: [3, 2501.4, 7, 2502.5], upper: [4, 2502.2, 7, 2503.2], breakout: [8, 2500.2] }) },
     caption:
       "On strong trend days the flag barely forms — only 3 pole candles and a 4-candle pause before continuation. Don't wait for textbook duration. If the structure (sharp pole, shallow drift, declining volume, body close below) is there, take the trade. Strong days reward fast triggers."
   },
   {
     n: 3,
     title: 'The Loose Bear Flag (Acceptable but Riskier)',
-    pattern: loose(),
+    pattern: { ...loose(), annotation: ann({ pole: [1, 5], lower: [5, 2504.4, 13, 2506.0], upper: [6, 2506.0, 13, 2508.0], breakout: [14, 2503.4] }) },
     caption:
       "Wider flags have more candles, more wicks, and more noise. The pattern is still valid but less precise. Wait for the breakout candle's CLOSE, not just a wick poking through the trendline. Smaller size or skip if the day's range is already wide."
   },
   {
     n: 4,
     title: 'The Retest Entry (Highest Probability)',
-    pattern: retest(),
+    pattern: { ...retest(), annotation: ann({ pole: [1, 4], lower: [4, 2510.2, 9, 2512.2], upper: [5, 2511.2, 9, 2513.2], breakout: [10, 2509.6], retest: 14 }) },
     caption:
       "Pattern breaks down. Price drops 3-4 ticks. Then rallies UP to the broken trendline, touches it from below, gets rejected with a red candle, and continues lower. Three entry points are marked: yellow = aggressive (on break), green = confirmation (next candle close), cyan = retest (rejection from underside). The retest is the highest-probability entry because the pattern has now been confirmed twice."
   },
   {
     n: 5,
     title: 'The FAILED Bear Flag (Bear Trap)',
-    pattern: failed(),
+    pattern: { ...failed(), annotation: ann({ pole: [1, 4], lower: [4, 2520.8, 9, 2522.5], upper: [5, 2521.8, 9, 2523.2], breakout: [10, 2520.6], failed: true }) },
     caption:
       "Looks identical to a real bear flag right through the breakout. Then the next candle prints a long green body that closes back ABOVE the flag's lower trendline. Shorts are trapped. Price runs higher. This is exactly why you wait for the candle AFTER the breakout. The breakout candle alone is not confirmation."
   },
   {
     n: 6,
     title: 'The Premature Entry Disaster',
-    pattern: premature(),
+    pattern: { ...premature(), annotation: ann({ pole: [1, 4], lower: [4, 2530.4, 9, 2532.3], upper: [5, 2531.4, 9, 2533.0], breakout: [10, 2530.4] }) },
     caption:
       "Trader shorts on the breakout candle's close with stop just above the breakout candle's high. Next candle is a long green wick that spikes through the stop — then price continues lower without him. He was right about direction but wrong about timing AND stop placement. Two errors compounding."
   },
   {
     n: 7,
     title: 'Volume Failure',
-    pattern: volumeFail(),
+    pattern: { ...volumeFail(), annotation: ann({ pole: [1, 4], lower: [4, 2540.4, 9, 2542.3], upper: [5, 2541.4, 9, 2543.0], breakout: [10, 2540.4], failed: true }) },
     caption:
       "Bear flag forms perfectly. Volume during the flag is FLAT/RISING (someone was accumulating long). Breakout candle has SMALLER volume than the flag's average. Five candles later price drifts back into the flag and breaks out the TOP. Skip these 80% of the time. Take half-size 20% of the time only if the rest of the chart is a strong downtrend."
   },
   {
     n: 8,
     title: "Bear Flag Inside an Uptrend (Don't Trade)",
-    pattern: inUptrend(),
+    pattern: { ...inUptrend(), annotation: ann({ pole: [2, 5], lower: [5, 2555.6, 10, 2557.5], upper: [6, 2556.6, 10, 2558.4], breakout: [11, 2555.4], failed: true }) },
     caption:
       "On the small inset chart, the larger trend is clearly UP. Inside that uptrend, a small bear flag forms. It breaks down briefly — then the larger uptrend resumes and crushes the short. Bear flags only work inside established downtrends. Always check the larger context (zoom out one timeframe) before entering."
   },
   {
     n: 9,
     title: 'The Two-Stage Bear Flag (Bonus Continuation)',
-    pattern: twoStage(),
+    pattern: { ...twoStage(), annotation: ann({ pole: [1, 3], lower: [3, 2572.2, 7, 2573.7], upper: [4, 2573.2, 7, 2574.6], breakout: [8, 2571.6], openSecond: { lowerStartIdx: 10, lowerStartPrice: 2566.6, lowerEndIdx: 14, lowerEndPrice: 2568.1, breakoutIdx: 15, breakoutPrice: 2566.2 } }) },
     caption:
       "First bear flag completes, price drops to a new low. Then a SECOND bear flag forms at that lower level. Both work. Strong trend days produce stacked bear flags. After the first one fires successfully, watch the lower zone for a second one. Same rules apply — pole, flag, body close below, volume confirmation."
   },
   {
     n: 10,
     title: 'The Wide Flag That Went Sideways Too Long',
-    pattern: tooLong(),
+    pattern: { ...tooLong(), annotation: ann({ pole: [1, 4], lower: [4, 2590.4, 17, 2591.0], upper: [5, 2592.0, 17, 2592.5], breakout: [18, 2589.8], failed: true }) },
     caption:
       "Pole forms cleanly. Flag goes sideways for 13+ candles. The sellers' urgency dissipates — the longer the pause, the more buyers have time to step in. Eventually the flag breaks down weakly, then reverses up. Time kills bear flags. If the flag drifts beyond ~8-10 candles on a 2-min, sellers have lost their edge. Skip it."
   },
   {
     n: 11,
     title: 'The Steep Flag (Warning Sign)',
-    pattern: steep(),
+    pattern: { ...steep(), annotation: ann({ pole: [1, 4], lower: [4, 2608.4, 8, 2614.2], upper: [5, 2610.4, 8, 2617.0], failed: true }) },
     caption:
       "Pole forms. Flag rallies STEEPLY upward — much more than a shallow 15° drift. Steep rallies in the flag mean buyers are aggressive, not just passive profit-takers. This setup often becomes a reversal, not a continuation. Wait for proof (a clear failure of the rally) or skip the trade entirely."
   },
   {
     n: 12,
     title: 'The Pre-Earnings / Pre-News Fake-Out',
-    pattern: preNews(),
+    pattern: { ...preNews(), annotation: ann({ pole: [1, 4], lower: [4, 2630.4, 8, 2631.9], upper: [5, 2631.4, 8, 2632.8], breakout: [9, 2629.8], failed: true }) },
     caption:
       "Bear flag forms 5 minutes before a scheduled news release. Breakout looks valid. News drops, price rips up violently. ALWAYS check the economic calendar before entering. Never enter a 2-min pattern within 5 minutes of FOMC, NFP, CPI, or earnings releases. Scheduled news invalidates technical setups."
   }

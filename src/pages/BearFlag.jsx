@@ -9,6 +9,7 @@ export default function BearFlag() {
       <Header />
       <Section1Plain />
       <Section2ThreeParts />
+      <Section2_5DrawingGuide />
       <Section3Timeframe />
       <Section4Gallery />
       <Section5DecisionTree />
@@ -89,6 +90,165 @@ function Section2ThreeParts() {
         <Tile color="amber" title="The Continuation (Breakout)" body="A red candle closes below the flag's lower line. Volume surges. Sellers back." />
       </div>
     </SectionShell>
+  );
+}
+
+// ============================================================
+// SECTION 2.5 — HOW TO DRAW THE TRENDLINE
+// ============================================================
+function Section2_5DrawingGuide() {
+  return (
+    <SectionShell n="2.5" title="How to Draw the Bear Flag Trendline (Step by Step)">
+      <p className="mb-5">
+        Five numbered steps. Master these and you can mark up any 2-minute chart in seconds — and avoid the two biggest entry mistakes.
+      </p>
+      <div className="overflow-x-auto -mx-2 md:mx-0">
+        <DrawingGuideSVG />
+      </div>
+      <div className="mt-5 card border-green/40 bg-green/[0.04]">
+        <div className="font-display font-semibold text-green mb-3">Plain-language summary</div>
+        <ol className="space-y-1.5 text-text/90 leading-relaxed">
+          <li><span className="text-green num">1.</span> Find the lowest point of the pole.</li>
+          <li><span className="text-green num">2.</span> Find the next lowest wick on a flag candle.</li>
+          <li><span className="text-green num">3.</span> Connect those two dots and extend the line right.</li>
+          <li><span className="text-green num">4.</span> Short only when a 2-minute candle CLOSES below the extended line.</li>
+        </ol>
+      </div>
+    </SectionShell>
+  );
+}
+
+function DrawingGuideSVG() {
+  const W = 1200, H = 600;
+  const chartL = 30, chartT = 30, chartR = 720, chartB = 540;
+  const capX = 750;
+  const candles = [
+    { o: 100, h: 101, l: 99.5, c: 100.5 },
+    { o: 100.5, h: 101, l: 100, c: 100 },
+    { o: 100, h: 100.2, l: 96, c: 96.2 },
+    { o: 96.2, h: 96.4, l: 92.5, c: 92.7 },
+    { o: 92.7, h: 92.9, l: 89, c: 89.2 },
+    { o: 89.2, h: 89.4, l: 86, c: 86.2 },
+    { o: 86.2, h: 87.2, l: 86, c: 87 },
+    { o: 87, h: 88, l: 86.6, c: 87.8 },
+    { o: 87.8, h: 88.8, l: 87.3, c: 88.6 },
+    { o: 88.6, h: 89.6, l: 88.0, c: 89.4 },
+    { o: 89.4, h: 90.4, l: 88.8, c: 90.2 },
+    { o: 90.2, h: 91.0, l: 89.5, c: 90.7 },
+    { o: 90.7, h: 90.8, l: 86.5, c: 86.8 },
+    { o: 86.8, h: 87.0, l: 84.0, c: 84.2 }
+  ];
+  const minP = Math.min(...candles.map(c => c.l)) - 1.5;
+  const maxP = Math.max(...candles.map(c => c.h)) + 1.5;
+  const innerW = chartR - chartL;
+  const innerH = chartB - chartT;
+  const slot = innerW / candles.length;
+  const bodyW = Math.max(8, slot * 0.65);
+  const xFor = i => chartL + i * slot + slot / 2;
+  const yFor = price => chartT + ((maxP - price) / (maxP - minP)) * innerH;
+
+  const slope = (89.5 - 86.0) / (11 - 5);
+  const extEndIdx = 13.5;
+  const extEndPrice = 86.0 + slope * (extEndIdx - 5);
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} className="block rounded-xl border border-border w-full h-auto"
+      style={{ background: '#0a0a0a', minWidth: '880px' }}>
+      <text x={W / 2} y={20} fill="#10b981" fontSize={14} fontWeight="bold"
+        fontFamily="'Oxanium', sans-serif" textAnchor="middle">
+        BEAR FLAG TRENDLINE — 5 STEPS
+      </text>
+      {[0.25, 0.5, 0.75].map((t, i) => (
+        <line key={i} x1={chartL} x2={chartR} y1={chartT + innerH * t} y2={chartT + innerH * t} stroke="#262626" strokeWidth={1} />
+      ))}
+      <rect x={xFor(2) - slot / 2} y={chartT} width={(5 - 2 + 1) * slot} height={chartB - chartT}
+        fill="rgba(255, 61, 90, 0.05)" stroke="#FF3D5A" strokeWidth={1} strokeDasharray="3 3" opacity={0.65} />
+      <text x={xFor(3.5)} y={chartT + 14} fill="#FF3D5A" fontSize={10} textAnchor="middle"
+        fontFamily="'Space Mono', monospace" fontWeight="bold">POLE</text>
+
+      {candles.map((c, i) => {
+        const x = xFor(i);
+        const isUp = c.c >= c.o;
+        const color = isUp ? '#10b981' : '#FF3D5A';
+        const yO = yFor(c.o), yC = yFor(c.c), yH = yFor(c.h), yL = yFor(c.l);
+        return (
+          <g key={i}>
+            <line x1={x} x2={x} y1={yH} y2={yL} stroke={color} strokeWidth={1.5} />
+            <rect x={x - bodyW / 2} y={Math.min(yO, yC)} width={bodyW}
+              height={Math.max(2, Math.abs(yC - yO))} fill={color} />
+          </g>
+        );
+      })}
+
+      <line x1={xFor(5)} y1={yFor(86.0)} x2={xFor(11)} y2={yFor(89.5)} stroke="#06b6d4" strokeWidth={3} strokeDasharray="8 4" />
+      <line x1={xFor(11)} y1={yFor(89.5)} x2={xFor(extEndIdx)} y2={yFor(extEndPrice)} stroke="#06b6d4" strokeWidth={3} strokeDasharray="8 4" opacity={0.6} />
+      <polygon points={`${xFor(extEndIdx)},${yFor(extEndPrice)} ${xFor(extEndIdx) - 12},${yFor(extEndPrice) - 6} ${xFor(extEndIdx) - 12},${yFor(extEndPrice) + 6}`} fill="#06b6d4" />
+
+      <NumCircle x={xFor(5)} y={yFor(86.0)} n="1" />
+      <NumCircle x={xFor(11)} y={yFor(89.5)} n="2" />
+      <NumCircle x={xFor(8)} y={yFor((86.0 + 89.5) / 2) - 14} n="3" color="#06b6d4" />
+
+      <line x1={xFor(12)} y1={yFor(86.8) + 70} x2={xFor(12)} y2={yFor(86.8) + 14} stroke="#f97316" strokeWidth={2.5} />
+      <polygon points={`${xFor(12)},${yFor(86.8) + 8} ${xFor(12) - 7},${yFor(86.8) + 20} ${xFor(12) + 7},${yFor(86.8) + 20}`} fill="#f97316" />
+      <NumCircle x={xFor(12)} y={yFor(86.8) + 86} n="4" color="#f97316" />
+
+      <g transform={`translate(${xFor(11) + 18},${yFor(extEndPrice + 0.8)})`}>
+        <g stroke="#FF3D5A" strokeWidth={3.5} opacity={0.85} strokeLinecap="round">
+          <line x1={-12} y1={-12} x2={12} y2={12} />
+          <line x1={12} y1={-12} x2={-12} y2={12} />
+        </g>
+        <NumCircle x={20} y={-20} n="5" color="#FF3D5A" />
+      </g>
+
+      <line x1={chartR + 8} y1={chartT} x2={chartR + 8} y2={chartB} stroke="#262626" strokeWidth={1} />
+
+      <CaptionBlock x={capX} y={50} num={1} color="#10b981"
+        title="Find the bottom of the pole"
+        body="The lowest price reached before the flag started forming. This is your anchor point." />
+      <CaptionBlock x={capX} y={150} num={2} color="#10b981"
+        title="Find the next lowest wick"
+        body="The lowest wick of the next flag candle. This gives you the line's angle." />
+      <CaptionBlock x={capX} y={250} num={3} color="#06b6d4"
+        title="Draw + extend the line"
+        body="Connect the two points with a straight line and extend it to the right past the most recent candle." />
+      <CaptionBlock x={capX} y={350} num={4} color="#f97316"
+        title="Wait for a body close below"
+        body="Until a 2-minute candle CLOSES (not just wicks) below the line. THAT is your short signal." />
+      <CaptionBlock x={capX} y={450} num={5} color="#FF3D5A"
+        title="Bounce = no short"
+        body="If price touches the line but bounces and stays above, the flag is intact. Do NOT short until a body close below." />
+    </svg>
+  );
+}
+
+function NumCircle({ x, y, n, color = '#10b981' }) {
+  return (
+    <g>
+      <circle cx={x} cy={y} r={11} fill={color} stroke="#000" strokeWidth={2} />
+      <text x={x} y={y + 4.5} fill="#000" fontSize={13} fontWeight="bold"
+        fontFamily="'Oxanium', sans-serif" textAnchor="middle">{n}</text>
+    </g>
+  );
+}
+
+function CaptionBlock({ x, y, num, color, title, body }) {
+  const words = body.split(' ');
+  const lines = [];
+  let line = [];
+  let lineLen = 0;
+  for (const w of words) {
+    if (lineLen + w.length + 1 > 50) { lines.push(line.join(' ')); line = [w]; lineLen = w.length; }
+    else { line.push(w); lineLen += w.length + 1; }
+  }
+  if (line.length) lines.push(line.join(' '));
+  return (
+    <g>
+      <NumCircle x={x + 14} y={y + 14} n={num} color={color} />
+      <text x={x + 36} y={y + 18} fill={color} fontSize={14} fontWeight="bold" fontFamily="'Oxanium', sans-serif">{title}</text>
+      {lines.map((ln, i) => (
+        <text key={i} x={x + 36} y={y + 38 + i * 14} fill="#cbd5e1" fontSize={11} fontFamily="'Inter', sans-serif">{ln}</text>
+      ))}
+    </g>
   );
 }
 
