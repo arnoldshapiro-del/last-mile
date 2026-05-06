@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import AskClaudeHandoff from './AskClaudeHandoff.jsx';
 
 const NAV = [
   { to: '/',                       label: 'Home',     icon: HomeIcon },
@@ -86,6 +87,8 @@ export default function Layout() {
       <main className={`flex-1 min-w-0 ${isInSession ? '' : 'pb-8 md:pb-8'}`}>
         <Outlet />
       </main>
+
+      <AskClaudeHandoff />
     </div>
   );
 }
