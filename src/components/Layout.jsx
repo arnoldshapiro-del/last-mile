@@ -5,6 +5,7 @@ import AskClaudeHandoff from './AskClaudeHandoff.jsx';
 const NAV = [
   { to: '/',                       label: 'Home',     icon: HomeIcon },
   { to: '/drill',                  label: 'Drill',    icon: DrillIcon },
+  { to: '/qa',                     label: 'Trading Q&A',  icon: NotebookIcon, accent: 'qa' },
   { kind: 'group', label: 'Setup Labs' },
   { to: '/lab/bull-flag',          label: 'Bull Flag',     icon: BullFlagIcon },
   { to: '/lab/bear-flag',          label: 'Bear Flag',     icon: BearFlagIcon },
@@ -43,12 +44,13 @@ export default function Layout() {
                 </div>
               );
             }
+            const accentClasses = item.accent === 'qa'
+              ? ({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-display font-medium transition-colors ` +
+                  (isActive ? 'bg-blue/15 text-blue border border-blue/30' : 'text-blue/80 hover:bg-blue/10 border border-blue/20')
+              : ({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-display font-medium transition-colors ` +
+                  (isActive ? 'bg-green/10 text-green border border-green/20' : 'text-text/80 hover:bg-surface2 border border-transparent');
             return (
-              <NavLink key={item.to} to={item.to} end={item.to === '/'}
-                className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-display font-medium transition-colors ` +
-                  (isActive ? 'bg-green/10 text-green border border-green/20' : 'text-text/80 hover:bg-surface2 border border-transparent')
-                }>
+              <NavLink key={item.to} to={item.to} end={item.to === '/'} className={accentClasses}>
                 <item.icon className="w-4 h-4" />
                 {item.label}
               </NavLink>
@@ -70,16 +72,19 @@ export default function Layout() {
           <div className="font-display font-bold text-base leading-none">Last Mile</div>
         </div>
         <div className="flex overflow-x-auto gap-1 px-2 py-2 -mx-px">
-          {NAV.filter(i => i.kind !== 'group').map(item => (
-            <NavLink key={item.to} to={item.to} end={item.to === '/'}
-              className={({ isActive }) =>
-                `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-display font-medium whitespace-nowrap shrink-0 ` +
-                (isActive ? 'bg-green/15 text-green border border-green/30' : 'text-text/70 border border-transparent')
-              }>
-              <item.icon className="w-3.5 h-3.5" />
-              {item.label}
-            </NavLink>
-          ))}
+          {NAV.filter(i => i.kind !== 'group').map(item => {
+            const mobileClasses = item.accent === 'qa'
+              ? ({ isActive }) => `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-display font-medium whitespace-nowrap shrink-0 ` +
+                  (isActive ? 'bg-blue/20 text-blue border border-blue/40' : 'text-blue/80 border border-blue/20')
+              : ({ isActive }) => `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-display font-medium whitespace-nowrap shrink-0 ` +
+                  (isActive ? 'bg-green/15 text-green border border-green/30' : 'text-text/70 border border-transparent');
+            return (
+              <NavLink key={item.to} to={item.to} end={item.to === '/'} className={mobileClasses}>
+                <item.icon className="w-3.5 h-3.5" />
+                {item.label}
+              </NavLink>
+            );
+          })}
         </div>
       </nav>
 
@@ -154,4 +159,8 @@ function BookIcon({ className }) {
 }
 function ChartIcon({ className }) {
   return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19V5" /><path d="M4 19h16" /><path d="M8 15v-4" /><path d="M12 15V8" /><path d="M16 15v-2" /></svg>);
+}
+// Notebook with bookmark — Q&A Journal
+function NotebookIcon({ className }) {
+  return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h11a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4Z" /><path d="M4 4v14" /><path d="M10 2v6l2-2 2 2V2" /></svg>);
 }

@@ -15,6 +15,13 @@ import PreSession from './pages/PreSession.jsx';
 import InSession from './pages/InSession.jsx';
 import Journal from './pages/Journal.jsx';
 import Progress from './pages/Progress.jsx';
+import QALayout from './pages/qa/QALayout.jsx';
+import QAToday from './pages/qa/Today.jsx';
+import QABrowse from './pages/qa/Browse.jsx';
+import QAReview from './pages/qa/Review.jsx';
+import QAQuiz from './pages/qa/Quiz.jsx';
+import QAAdd from './pages/qa/AddEntry.jsx';
+import QAProgress from './pages/qa/QAProgress.jsx';
 
 export default function App() {
   return (
@@ -34,6 +41,14 @@ export default function App() {
         <Route path="/protocol/in-session" element={<InSession />} />
         <Route path="/journal" element={<Journal />} />
         <Route path="/progress" element={<Progress />} />
+        <Route path="/qa" element={<QALayout />}>
+          <Route index element={<QAToday />} />
+          <Route path="browse" element={<QABrowse />} />
+          <Route path="review" element={<QAReview />} />
+          <Route path="quiz" element={<QAQuiz />} />
+          <Route path="add" element={<QAAdd />} />
+          <Route path="progress" element={<QAProgress />} />
+        </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
