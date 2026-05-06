@@ -12,6 +12,7 @@ const NAV = [
   { to: '/lab/breakouts',          label: 'Breakouts',     icon: BreakoutIcon },
   { to: '/lab/opening-range-breakout', label: 'Opening Range', icon: SunriseIcon },
   { to: '/lab/inside-bar',         label: 'Inside Bar',     icon: BoxIcon },
+  { to: '/lab/vwap-rejection',     label: 'VWAP Rejection', icon: AnchorIcon },
   { kind: 'group', label: 'Session' },
   { to: '/protocol/pre-session',   label: 'Protocol', icon: ShieldIcon },
   { to: '/journal',                label: 'Journal',  icon: BookIcon },
@@ -137,6 +138,10 @@ function SunriseIcon({ className }) {
 // Box — inside bar contained within mother bar (Lucide-style)
 function BoxIcon({ className }) {
   return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5Z" /><path d="m3.3 7 8.7 5 8.7-5" /><path d="M12 22V12" /></svg>);
+}
+// Anchor — VWAP is anchored to session open (Lucide-style)
+function AnchorIcon({ className }) {
+  return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="3" /><path d="M12 22V8" /><path d="M5 12H2a10 10 0 0 0 20 0h-3" /></svg>);
 }
 function ShieldIcon({ className }) {
   return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3 4 6v6c0 5 4 8 8 9 4-1 8-4 8-9V6l-8-3Z" /></svg>);
