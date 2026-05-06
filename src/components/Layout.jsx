@@ -10,6 +10,7 @@ const NAV = [
   { to: '/lab/double-top',         label: 'Double Top',    icon: DoubleTopIcon },
   { to: '/lab/double-bottom',      label: 'Double Bottom', icon: DoubleBottomIcon },
   { to: '/lab/breakouts',          label: 'Breakouts',     icon: BreakoutIcon },
+  { to: '/lab/opening-range-breakout', label: 'Opening Range', icon: SunriseIcon },
   { kind: 'group', label: 'Session' },
   { to: '/protocol/pre-session',   label: 'Protocol', icon: ShieldIcon },
   { to: '/journal',                label: 'Journal',  icon: BookIcon },
@@ -127,6 +128,10 @@ function DoubleBottomIcon({ className }) {
 // Breakouts — arrow piercing a horizontal line
 function BreakoutIcon({ className }) {
   return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 14h18" /><path d="M12 21V7" /><path d="m7 12 5-5 5 5" /></svg>);
+}
+// Sunrise — sun rising over horizon (Lucide-style)
+function SunriseIcon({ className }) {
+  return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v6" /><path d="m4.93 8.93 1.41 1.41" /><path d="m17.66 10.34 1.41-1.41" /><path d="M2 18h20" /><path d="M22 22H2" /><path d="m8 6 4-4 4 4" /><path d="M16 18a4 4 0 0 0-8 0" /></svg>);
 }
 function ShieldIcon({ className }) {
   return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3 4 6v6c0 5 4 8 8 9 4-1 8-4 8-9V6l-8-3Z" /></svg>);

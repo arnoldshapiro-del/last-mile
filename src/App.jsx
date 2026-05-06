@@ -8,6 +8,7 @@ import BullFlag from './pages/BullFlag.jsx';
 import DoubleTop from './pages/DoubleTop.jsx';
 import DoubleBottom from './pages/DoubleBottom.jsx';
 import Breakouts from './pages/Breakouts.jsx';
+import OpeningRangeBreakout from './pages/OpeningRangeBreakout.jsx';
 import PreSession from './pages/PreSession.jsx';
 import InSession from './pages/InSession.jsx';
 import Journal from './pages/Journal.jsx';
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/lab/double-top" element={<DoubleTop />} />
         <Route path="/lab/double-bottom" element={<DoubleBottom />} />
         <Route path="/lab/breakouts" element={<Breakouts />} />
+        <Route path="/lab/opening-range-breakout" element={<OpeningRangeBreakout />} />
         <Route path="/protocol/pre-session" element={<PreSession />} />
         <Route path="/protocol/in-session" element={<InSession />} />
         <Route path="/journal" element={<Journal />} />
