@@ -10,6 +10,7 @@ import DoubleBottom from './pages/DoubleBottom.jsx';
 import Breakouts from './pages/Breakouts.jsx';
 import OpeningRangeBreakout from './pages/OpeningRangeBreakout.jsx';
 import InsideBar from './pages/InsideBar.jsx';
+import VWAPRejection from './pages/VWAPRejection.jsx';
 import PreSession from './pages/PreSession.jsx';
 import InSession from './pages/InSession.jsx';
 import Journal from './pages/Journal.jsx';
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/lab/breakouts" element={<Breakouts />} />
         <Route path="/lab/opening-range-breakout" element={<OpeningRangeBreakout />} />
         <Route path="/lab/inside-bar" element={<InsideBar />} />
+        <Route path="/lab/vwap-rejection" element={<VWAPRejection />} />
         <Route path="/protocol/pre-session" element={<PreSession />} />
         <Route path="/protocol/in-session" element={<InSession />} />
         <Route path="/journal" element={<Journal />} />
