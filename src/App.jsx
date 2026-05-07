@@ -22,6 +22,15 @@ import QAReview from './pages/qa/Review.jsx';
 import QAQuiz from './pages/qa/Quiz.jsx';
 import QAAdd from './pages/qa/AddEntry.jsx';
 import QAProgress from './pages/qa/QAProgress.jsx';
+import MasteryLayout from './pages/mastery/MasteryLayout.jsx';
+import MasteryOverview from './pages/mastery/MasteryOverview.jsx';
+import PrinciplesPage from './pages/mastery/PrinciplesPage.jsx';
+import CoreLessonsIndex from './pages/mastery/CoreLessonsIndex.jsx';
+import CoreLessonPage from './pages/mastery/CoreLessonPage.jsx';
+import ChecklistsPage from './pages/mastery/ChecklistsPage.jsx';
+import DailyLessonsIndex from './pages/mastery/DailyLessonsIndex.jsx';
+import DailyLessonPage from './pages/mastery/DailyLessonPage.jsx';
+import AddLessonPage from './pages/mastery/AddLessonPage.jsx';
 
 export default function App() {
   return (
@@ -48,6 +57,16 @@ export default function App() {
           <Route path="quiz" element={<QAQuiz />} />
           <Route path="add" element={<QAAdd />} />
           <Route path="progress" element={<QAProgress />} />
+        </Route>
+        <Route path="/mastery" element={<MasteryLayout />}>
+          <Route index element={<MasteryOverview />} />
+          <Route path="principles" element={<PrinciplesPage />} />
+          <Route path="lessons" element={<CoreLessonsIndex />} />
+          <Route path="lesson/:lessonId" element={<CoreLessonPage />} />
+          <Route path="checklists" element={<ChecklistsPage />} />
+          <Route path="daily" element={<DailyLessonsIndex />} />
+          <Route path="daily/:date" element={<DailyLessonPage />} />
+          <Route path="add-lesson" element={<AddLessonPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>

@@ -5,6 +5,7 @@ import AskClaudeHandoff from './AskClaudeHandoff.jsx';
 const NAV = [
   { to: '/',                       label: 'Home',     icon: HomeIcon },
   { to: '/drill',                  label: 'Drill',    icon: DrillIcon },
+  { to: '/mastery',                label: 'Live Trading Mastery', icon: TargetIcon, accent: 'mastery' },
   { to: '/qa',                     label: 'Trading Q&A',  icon: NotebookIcon, accent: 'qa' },
   { kind: 'group', label: 'Setup Labs' },
   { to: '/lab/bull-flag',          label: 'Bull Flag',     icon: BullFlagIcon },
@@ -47,6 +48,9 @@ export default function Layout() {
             const accentClasses = item.accent === 'qa'
               ? ({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-display font-medium transition-colors ` +
                   (isActive ? 'bg-blue/15 text-blue border border-blue/30' : 'text-blue/80 hover:bg-blue/10 border border-blue/20')
+              : item.accent === 'mastery'
+              ? ({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-display font-medium transition-colors ` +
+                  (isActive ? 'bg-amber/15 text-amber border border-amber/40 shadow-glowAmber' : 'text-amber/80 hover:bg-amber/10 border border-amber/25')
               : ({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-display font-medium transition-colors ` +
                   (isActive ? 'bg-green/10 text-green border border-green/20' : 'text-text/80 hover:bg-surface2 border border-transparent');
             return (
@@ -76,6 +80,9 @@ export default function Layout() {
             const mobileClasses = item.accent === 'qa'
               ? ({ isActive }) => `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-display font-medium whitespace-nowrap shrink-0 ` +
                   (isActive ? 'bg-blue/20 text-blue border border-blue/40' : 'text-blue/80 border border-blue/20')
+              : item.accent === 'mastery'
+              ? ({ isActive }) => `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-display font-medium whitespace-nowrap shrink-0 ` +
+                  (isActive ? 'bg-amber/20 text-amber border border-amber/40' : 'text-amber/80 border border-amber/25')
               : ({ isActive }) => `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-display font-medium whitespace-nowrap shrink-0 ` +
                   (isActive ? 'bg-green/15 text-green border border-green/30' : 'text-text/70 border border-transparent');
             return (
@@ -112,6 +119,10 @@ function Logo() {
 
 function HomeIcon({ className }) {
   return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12 12 4l9 8" /><path d="M5 10v10h14V10" /></svg>);
+}
+// Target — Live Trading Mastery (concentric circles, amber accent)
+function TargetIcon({ className }) {
+  return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>);
 }
 function DrillIcon({ className }) {
   return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>);
