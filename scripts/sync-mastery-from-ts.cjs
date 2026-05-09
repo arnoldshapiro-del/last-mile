@@ -33,6 +33,11 @@ function stripTs(src, isJsx) {
     loader: isJsx ? 'tsx' : 'ts',
     target: 'esnext',
     format: 'esm',
+    // Use the automatic JSX runtime — equivalent to React 17+'s "new transform".
+    // Emits `_jsx()` calls that import from `react/jsx-runtime` automatically.
+    // Without this, classic mode emits React.createElement and requires
+    // `import React` to be present, which our source TSX files don't have.
+    jsx: isJsx ? 'automatic' : undefined,
     // Don't minify; keep readable JS
     minify: false,
     // Preserve comments where possible (esbuild drops some by default)

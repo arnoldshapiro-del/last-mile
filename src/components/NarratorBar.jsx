@@ -1,5 +1,6 @@
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
 import {
   Play,
@@ -58,7 +59,7 @@ function NarratorBar() {
   const currentItem = script.items[itemIdx];
   const sectionLabel = currentItem?.section || "";
   const progressPct = totalSentences > 0 ? Math.round(sentenceIdx / totalSentences * 100) : 0;
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ jsxs(
     "div",
     {
       className: "narrator-bar",
@@ -80,156 +81,226 @@ function NarratorBar() {
         width: expanded ? "min(420px, calc(100vw - 32px))" : "auto",
         maxWidth: "calc(100vw - 32px)",
         marginLeft: expanded ? "auto" : void 0
-      }
-    },
-    /* @__PURE__ */ React.createElement("div", { style: { padding: "10px 12px", display: "flex", alignItems: "center", gap: 8 } }, /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        type: "button",
-        onClick: () => isPlaying ? narrator.pause() : narrator.play(),
-        "aria-label": isPlaying ? "Pause" : "Play",
-        style: {
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: 44,
-          height: 44,
-          borderRadius: "50%",
-          background: "linear-gradient(135deg, #14b8a6, #0d9488)",
-          color: "#070c18",
-          border: "none",
-          cursor: "pointer",
-          boxShadow: "0 4px 12px rgba(20, 184, 166, 0.40)",
-          flexShrink: 0,
-          touchAction: "manipulation"
-        }
       },
-      isPlaying ? /* @__PURE__ */ React.createElement(Pause, { className: "w-5 h-5" }) : /* @__PURE__ */ React.createElement(Play, { className: "w-5 h-5" })
-    ), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0, fontSize: 12, lineHeight: 1.3 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 6, marginBottom: 2 } }, /* @__PURE__ */ React.createElement(Headphones, { className: "w-3 h-3", style: { color: "#5eead4", flexShrink: 0 } }), /* @__PURE__ */ React.createElement("span", { style: { color: "#5eead4", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "Oxanium, system-ui, sans-serif" } }, isPlaying ? "Reading" : isPaused ? "Paused" : "Ready", totalItems > 0 && ` \xB7 ${itemIdx + 1}/${totalItems}`)), /* @__PURE__ */ React.createElement("div", { style: { color: "#f5f9ff", fontWeight: 600, fontSize: 13, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: expanded ? 280 : 200 } }, script.title)), /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        type: "button",
-        onClick: () => setExpanded((e) => !e),
-        "aria-label": expanded ? "Collapse" : "Expand",
-        style: {
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: 36,
-          height: 36,
-          borderRadius: 8,
-          background: "rgba(255, 255, 255, 0.04)",
-          color: "#94a3b8",
-          border: "1px solid rgba(255, 255, 255, 0.08)",
-          cursor: "pointer",
-          flexShrink: 0,
-          touchAction: "manipulation"
-        }
-      },
-      expanded ? /* @__PURE__ */ React.createElement(ChevronDown, { className: "w-4 h-4" }) : /* @__PURE__ */ React.createElement(ChevronUp, { className: "w-4 h-4" })
-    ), /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        type: "button",
-        onClick: () => narrator.close(),
-        "aria-label": "Close",
-        style: {
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: 36,
-          height: 36,
-          borderRadius: 8,
-          background: "rgba(239, 68, 68, 0.10)",
-          color: "#fca5a5",
-          border: "1px solid rgba(239, 68, 68, 0.30)",
-          cursor: "pointer",
-          flexShrink: 0,
-          touchAction: "manipulation"
-        }
-      },
-      /* @__PURE__ */ React.createElement(X, { className: "w-4 h-4" })
-    )),
-    totalSentences > 0 && /* @__PURE__ */ React.createElement(
-      "div",
-      {
-        style: {
-          padding: "0 12px 8px",
-          position: "relative",
-          cursor: "pointer",
-          touchAction: "manipulation"
-        },
-        onClick: (e) => {
-          const rect = e.currentTarget.getBoundingClientRect();
-          const pct = (e.clientX - rect.left - 12) / (rect.width - 24);
-          const target = Math.round(Math.max(0, Math.min(1, pct)) * totalSentences);
-          narrator.seekToSentence(target);
-        },
-        role: "slider",
-        "aria-label": "Reading progress \u2014 click to seek",
-        "aria-valuemin": 0,
-        "aria-valuemax": totalSentences,
-        "aria-valuenow": sentenceIdx
-      },
-      /* @__PURE__ */ React.createElement("div", { style: { height: 16, display: "flex", alignItems: "center" } }, /* @__PURE__ */ React.createElement(
-        "div",
-        {
-          style: {
-            height: 4,
-            width: "100%",
-            borderRadius: 2,
-            background: "rgba(255, 255, 255, 0.06)",
-            overflow: "hidden"
-          }
-        },
-        /* @__PURE__ */ React.createElement(
+      children: [
+        /* @__PURE__ */ jsxs("div", { style: { padding: "10px 12px", display: "flex", alignItems: "center", gap: 8 }, children: [
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              type: "button",
+              onClick: () => isPlaying ? narrator.pause() : narrator.play(),
+              "aria-label": isPlaying ? "Pause" : "Play",
+              style: {
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 44,
+                height: 44,
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, #14b8a6, #0d9488)",
+                color: "#070c18",
+                border: "none",
+                cursor: "pointer",
+                boxShadow: "0 4px 12px rgba(20, 184, 166, 0.40)",
+                flexShrink: 0,
+                touchAction: "manipulation"
+              },
+              children: isPlaying ? /* @__PURE__ */ jsx(Pause, { className: "w-5 h-5" }) : /* @__PURE__ */ jsx(Play, { className: "w-5 h-5" })
+            }
+          ),
+          /* @__PURE__ */ jsxs("div", { style: { flex: 1, minWidth: 0, fontSize: 12, lineHeight: 1.3 }, children: [
+            /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", gap: 6, marginBottom: 2 }, children: [
+              /* @__PURE__ */ jsx(Headphones, { className: "w-3 h-3", style: { color: "#5eead4", flexShrink: 0 } }),
+              /* @__PURE__ */ jsxs("span", { style: { color: "#5eead4", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "Oxanium, system-ui, sans-serif" }, children: [
+                isPlaying ? "Reading" : isPaused ? "Paused" : "Ready",
+                totalItems > 0 && ` \xB7 ${itemIdx + 1}/${totalItems}`
+              ] })
+            ] }),
+            /* @__PURE__ */ jsx("div", { style: { color: "#f5f9ff", fontWeight: 600, fontSize: 13, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: expanded ? 280 : 200 }, children: script.title })
+          ] }),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              type: "button",
+              onClick: () => setExpanded((e) => !e),
+              "aria-label": expanded ? "Collapse" : "Expand",
+              style: {
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 36,
+                height: 36,
+                borderRadius: 8,
+                background: "rgba(255, 255, 255, 0.04)",
+                color: "#94a3b8",
+                border: "1px solid rgba(255, 255, 255, 0.08)",
+                cursor: "pointer",
+                flexShrink: 0,
+                touchAction: "manipulation"
+              },
+              children: expanded ? /* @__PURE__ */ jsx(ChevronDown, { className: "w-4 h-4" }) : /* @__PURE__ */ jsx(ChevronUp, { className: "w-4 h-4" })
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "button",
+            {
+              type: "button",
+              onClick: () => narrator.close(),
+              "aria-label": "Close",
+              style: {
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 36,
+                height: 36,
+                borderRadius: 8,
+                background: "rgba(239, 68, 68, 0.10)",
+                color: "#fca5a5",
+                border: "1px solid rgba(239, 68, 68, 0.30)",
+                cursor: "pointer",
+                flexShrink: 0,
+                touchAction: "manipulation"
+              },
+              children: /* @__PURE__ */ jsx(X, { className: "w-4 h-4" })
+            }
+          )
+        ] }),
+        totalSentences > 0 && /* @__PURE__ */ jsx(
           "div",
           {
             style: {
-              height: "100%",
-              width: `${progressPct}%`,
-              background: "linear-gradient(90deg, #14b8a6, #5eead4)",
-              transition: "width 200ms linear"
-            }
+              padding: "0 12px 8px",
+              position: "relative",
+              cursor: "pointer",
+              touchAction: "manipulation"
+            },
+            onClick: (e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const pct = (e.clientX - rect.left - 12) / (rect.width - 24);
+              const target = Math.round(Math.max(0, Math.min(1, pct)) * totalSentences);
+              narrator.seekToSentence(target);
+            },
+            role: "slider",
+            "aria-label": "Reading progress \u2014 click to seek",
+            "aria-valuemin": 0,
+            "aria-valuemax": totalSentences,
+            "aria-valuenow": sentenceIdx,
+            children: /* @__PURE__ */ jsx("div", { style: { height: 16, display: "flex", alignItems: "center" }, children: /* @__PURE__ */ jsx(
+              "div",
+              {
+                style: {
+                  height: 4,
+                  width: "100%",
+                  borderRadius: 2,
+                  background: "rgba(255, 255, 255, 0.06)",
+                  overflow: "hidden"
+                },
+                children: /* @__PURE__ */ jsx(
+                  "div",
+                  {
+                    style: {
+                      height: "100%",
+                      width: `${progressPct}%`,
+                      background: "linear-gradient(90deg, #14b8a6, #5eead4)",
+                      transition: "width 200ms linear"
+                    }
+                  }
+                )
+              }
+            ) })
           }
-        )
-      ))
-    ),
-    expanded && /* @__PURE__ */ React.createElement("div", { style: { padding: "0 12px 12px", display: "flex", flexDirection: "column", gap: 12, borderTop: "1px solid rgba(255, 255, 255, 0.06)" } }, /* @__PURE__ */ React.createElement("div", { style: { paddingTop: 10, fontSize: 11, color: "#94a3b8", display: "flex", justifyContent: "space-between" } }, /* @__PURE__ */ React.createElement("span", { style: { textTransform: "uppercase", letterSpacing: "0.12em" } }, sectionLabel || "reading"), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "Space Mono, ui-monospace, monospace" } }, "sentence ", sentenceIdx + 1, "/", totalSentences)), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: 4 } }, /* @__PURE__ */ React.createElement(TButton, { onClick: () => narrator.prevItem(), title: "Previous item" }, /* @__PURE__ */ React.createElement(SkipBack, { className: "w-4 h-4" })), /* @__PURE__ */ React.createElement(TButton, { onClick: () => narrator.seekBySeconds(-30), title: "Back 30 seconds" }, /* @__PURE__ */ React.createElement(Rewind, { className: "w-4 h-4" }), /* @__PURE__ */ React.createElement("span", { style: { fontSize: 9, marginLeft: 2 } }, "30")), /* @__PURE__ */ React.createElement(TButton, { onClick: () => narrator.seekBySeconds(-15), title: "Back 15 seconds" }, /* @__PURE__ */ React.createElement(Rewind, { className: "w-3.5 h-3.5" }), /* @__PURE__ */ React.createElement("span", { style: { fontSize: 9, marginLeft: 2 } }, "15")), /* @__PURE__ */ React.createElement(TButton, { onClick: () => isPlaying ? narrator.pause() : narrator.play(), title: isPlaying ? "Pause" : "Play", primary: true }, isPlaying ? /* @__PURE__ */ React.createElement(Pause, { className: "w-4 h-4" }) : /* @__PURE__ */ React.createElement(Play, { className: "w-4 h-4" })), /* @__PURE__ */ React.createElement(TButton, { onClick: () => narrator.seekBySeconds(15), title: "Forward 15 seconds" }, /* @__PURE__ */ React.createElement(FastForward, { className: "w-3.5 h-3.5" }), /* @__PURE__ */ React.createElement("span", { style: { fontSize: 9, marginLeft: 2 } }, "15")), /* @__PURE__ */ React.createElement(TButton, { onClick: () => narrator.seekBySeconds(30), title: "Forward 30 seconds" }, /* @__PURE__ */ React.createElement(FastForward, { className: "w-4 h-4" }), /* @__PURE__ */ React.createElement("span", { style: { fontSize: 9, marginLeft: 2 } }, "30")), /* @__PURE__ */ React.createElement(TButton, { onClick: () => narrator.nextItem(), title: "Next item" }, /* @__PURE__ */ React.createElement(SkipForward, { className: "w-4 h-4" })), /* @__PURE__ */ React.createElement(TButton, { onClick: () => narrator.stop(), title: "Stop" }, /* @__PURE__ */ React.createElement(Square, { className: "w-3.5 h-3.5" }))), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { style: { fontSize: 10, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 4, display: "block", fontFamily: "Oxanium, system-ui, sans-serif" } }, "Voice ", voicesAvail === 0 && "(loading...)"), /* @__PURE__ */ React.createElement(
-      "select",
-      {
-        value: voiceProfile,
-        onChange: (e) => narrator.setVoiceProfile(e.target.value),
-        style: {
-          width: "100%",
-          background: "rgba(255, 255, 255, 0.04)",
-          border: "1px solid rgba(255, 255, 255, 0.10)",
-          borderRadius: 8,
-          color: "#e2e8f0",
-          padding: "6px 8px",
-          fontSize: 12,
-          fontFamily: "inherit"
-        }
-      },
-      VOICE_PROFILES.map((p) => /* @__PURE__ */ React.createElement("option", { key: p.id, value: p.id }, p.label))
-    ), /* @__PURE__ */ React.createElement("p", { style: { fontSize: 10, color: "#64748b", margin: "4px 0 0 0", lineHeight: 1.3 } }, VOICE_PROFILES.find((p) => p.id === voiceProfile)?.blurb)), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { style: { fontSize: 10, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 4, display: "flex", justifyContent: "space-between", fontFamily: "Oxanium, system-ui, sans-serif" } }, /* @__PURE__ */ React.createElement("span", null, "Speed"), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "Space Mono, ui-monospace, monospace" } }, rate.toFixed(2), "\xD7")), /* @__PURE__ */ React.createElement(
-      "input",
-      {
-        type: "range",
-        min: 0.75,
-        max: 1.5,
-        step: 0.05,
-        value: rate,
-        onChange: (e) => narrator.setRate(parseFloat(e.target.value)),
-        style: { width: "100%", accentColor: "#14b8a6" }
-      }
-    )), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "#64748b", display: "flex", alignItems: "center", gap: 4 } }, /* @__PURE__ */ React.createElement(Volume2, { className: "w-3 h-3" }), /* @__PURE__ */ React.createElement("span", null, "Lock-screen / headset controls active when playing.")))
+        ),
+        expanded && /* @__PURE__ */ jsxs("div", { style: { padding: "0 12px 12px", display: "flex", flexDirection: "column", gap: 12, borderTop: "1px solid rgba(255, 255, 255, 0.06)" }, children: [
+          /* @__PURE__ */ jsxs("div", { style: { paddingTop: 10, fontSize: 11, color: "#94a3b8", display: "flex", justifyContent: "space-between" }, children: [
+            /* @__PURE__ */ jsx("span", { style: { textTransform: "uppercase", letterSpacing: "0.12em" }, children: sectionLabel || "reading" }),
+            /* @__PURE__ */ jsxs("span", { style: { fontFamily: "Space Mono, ui-monospace, monospace" }, children: [
+              "sentence ",
+              sentenceIdx + 1,
+              "/",
+              totalSentences
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: 4 }, children: [
+            /* @__PURE__ */ jsx(TButton, { onClick: () => narrator.prevItem(), title: "Previous item", children: /* @__PURE__ */ jsx(SkipBack, { className: "w-4 h-4" }) }),
+            /* @__PURE__ */ jsxs(TButton, { onClick: () => narrator.seekBySeconds(-30), title: "Back 30 seconds", children: [
+              /* @__PURE__ */ jsx(Rewind, { className: "w-4 h-4" }),
+              /* @__PURE__ */ jsx("span", { style: { fontSize: 9, marginLeft: 2 }, children: "30" })
+            ] }),
+            /* @__PURE__ */ jsxs(TButton, { onClick: () => narrator.seekBySeconds(-15), title: "Back 15 seconds", children: [
+              /* @__PURE__ */ jsx(Rewind, { className: "w-3.5 h-3.5" }),
+              /* @__PURE__ */ jsx("span", { style: { fontSize: 9, marginLeft: 2 }, children: "15" })
+            ] }),
+            /* @__PURE__ */ jsx(TButton, { onClick: () => isPlaying ? narrator.pause() : narrator.play(), title: isPlaying ? "Pause" : "Play", primary: true, children: isPlaying ? /* @__PURE__ */ jsx(Pause, { className: "w-4 h-4" }) : /* @__PURE__ */ jsx(Play, { className: "w-4 h-4" }) }),
+            /* @__PURE__ */ jsxs(TButton, { onClick: () => narrator.seekBySeconds(15), title: "Forward 15 seconds", children: [
+              /* @__PURE__ */ jsx(FastForward, { className: "w-3.5 h-3.5" }),
+              /* @__PURE__ */ jsx("span", { style: { fontSize: 9, marginLeft: 2 }, children: "15" })
+            ] }),
+            /* @__PURE__ */ jsxs(TButton, { onClick: () => narrator.seekBySeconds(30), title: "Forward 30 seconds", children: [
+              /* @__PURE__ */ jsx(FastForward, { className: "w-4 h-4" }),
+              /* @__PURE__ */ jsx("span", { style: { fontSize: 9, marginLeft: 2 }, children: "30" })
+            ] }),
+            /* @__PURE__ */ jsx(TButton, { onClick: () => narrator.nextItem(), title: "Next item", children: /* @__PURE__ */ jsx(SkipForward, { className: "w-4 h-4" }) }),
+            /* @__PURE__ */ jsx(TButton, { onClick: () => narrator.stop(), title: "Stop", children: /* @__PURE__ */ jsx(Square, { className: "w-3.5 h-3.5" }) })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { children: [
+            /* @__PURE__ */ jsxs("label", { style: { fontSize: 10, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 4, display: "block", fontFamily: "Oxanium, system-ui, sans-serif" }, children: [
+              "Voice ",
+              voicesAvail === 0 && "(loading...)"
+            ] }),
+            /* @__PURE__ */ jsx(
+              "select",
+              {
+                value: voiceProfile,
+                onChange: (e) => narrator.setVoiceProfile(e.target.value),
+                style: {
+                  width: "100%",
+                  background: "rgba(255, 255, 255, 0.04)",
+                  border: "1px solid rgba(255, 255, 255, 0.10)",
+                  borderRadius: 8,
+                  color: "#e2e8f0",
+                  padding: "6px 8px",
+                  fontSize: 12,
+                  fontFamily: "inherit"
+                },
+                children: VOICE_PROFILES.map((p) => /* @__PURE__ */ jsx("option", { value: p.id, children: p.label }, p.id))
+              }
+            ),
+            /* @__PURE__ */ jsx("p", { style: { fontSize: 10, color: "#64748b", margin: "4px 0 0 0", lineHeight: 1.3 }, children: VOICE_PROFILES.find((p) => p.id === voiceProfile)?.blurb })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { children: [
+            /* @__PURE__ */ jsxs("label", { style: { fontSize: 10, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 4, display: "flex", justifyContent: "space-between", fontFamily: "Oxanium, system-ui, sans-serif" }, children: [
+              /* @__PURE__ */ jsx("span", { children: "Speed" }),
+              /* @__PURE__ */ jsxs("span", { style: { fontFamily: "Space Mono, ui-monospace, monospace" }, children: [
+                rate.toFixed(2),
+                "\xD7"
+              ] })
+            ] }),
+            /* @__PURE__ */ jsx(
+              "input",
+              {
+                type: "range",
+                min: 0.75,
+                max: 1.5,
+                step: 0.05,
+                value: rate,
+                onChange: (e) => narrator.setRate(parseFloat(e.target.value)),
+                style: { width: "100%", accentColor: "#14b8a6" }
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxs("div", { style: { fontSize: 10, color: "#64748b", display: "flex", alignItems: "center", gap: 4 }, children: [
+            /* @__PURE__ */ jsx(Volume2, { className: "w-3 h-3" }),
+            /* @__PURE__ */ jsx("span", { children: "Lock-screen / headset controls active when playing." })
+          ] })
+        ] })
+      ]
+    }
   );
 }
 __name(NarratorBar, "NarratorBar");
 function TButton(props) {
   const { onClick, title, children, primary } = props;
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ jsx(
     "button",
     {
       type: "button",
@@ -252,9 +323,9 @@ function TButton(props) {
         flexShrink: 0,
         touchAction: "manipulation",
         WebkitTapHighlightColor: "transparent"
-      }
-    },
-    children
+      },
+      children
+    }
   );
 }
 __name(TButton, "TButton");
