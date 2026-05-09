@@ -1,5 +1,25 @@
 # SESSION_NOTES.md — Last Mile
 
+## Session — 2026-05-09 (cont'd) — Trading Q&A merged into Live Trading Mastery (synced from bootcamp)
+
+**What we did:**
+- Mirrored the bootcamp's Q&A → Mastery merger. The "Trading Q&A" section is gone; Mastery now has Drill, Library, and Progress tabs that take over its functionality.
+- Pulled all the new files from `unis-ta-bootcamp-day1` via the existing `scripts/sync-mastery-from-ts.cjs` (extended this session to also sync `qa-concepts/*` and `MasteryDrill/Library/Progress/EntryCard.tsx`).
+- Deleted `src/pages/qa/` and the "Trading Q&A" entry in the global Layout sidebar. Old `/qa/*` routes redirect into `/mastery/{drill,library,progress}` so any bookmarks still resolve.
+- Mastery subnav now: Overview, 10 Principles, Core Lessons, Master Checklists, Daily Lessons, Drill, Library, Progress.
+
+**What's working:**
+- Vite production build succeeds clean.
+- Netlify auto-deploy completed; live bundle at arnies-last-mile.netlify.app contains the new Q&A merger strings (TEXTBOOK BULL FLAG, Mastery by Concept, Active recall).
+
+**Important decisions:**
+- The Firestore `journal_entries` collection (shared with bootcamp) is **not migrated**. Both apps keep reading the same data from it, just through the new Mastery views.
+
+**Sync script improvements (this session):**
+- Generic walker now requires NO whitespace between identifier and `<` so JSX like `<code>` is no longer mistaken for a generic.
+- Mixed imports `import { x, type Y }` strip the `type` identifiers correctly.
+- Optional params `(arg?: T)` strip cleanly.
+
 ## Session — 2026-05-09 — Live Trading Mastery deep-teaching uplift (synced from unis-ta-bootcamp-day1)
 
 **What we did:**
