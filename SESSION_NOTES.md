@@ -1,5 +1,28 @@
 # SESSION_NOTES.md — Last Mile
 
+## Session — 2026-05-09 — Live Trading Mastery deep-teaching uplift (synced from unis-ta-bootcamp-day1)
+
+**What we did:**
+- Mirrored the bootcamp app's parallel uplift: Overview, 10 Principles, Core Lessons, and Master Checklists now have the same teaching depth as Daily Lessons.
+- Pulled chart data + page components from `unis-ta-bootcamp-day1` (TS source of truth) and converted to JS via `scripts/sync-mastery-from-ts.cjs`. The script strips type-only imports, exported interfaces, generic type params (handles nested generics like `useState<Set<number>>`), and converts `export function X` to `export default function X` so it matches last-mile's import style.
+- Added ~140 candlestick teaching charts and ~60 Q&A units. Same visual-language CandlestickChart + ChartGallery components reused from day-2026-05-07.
+- Installed `lucide-react` (was not previously a dependency in last-mile but is required by the page components).
+
+**What's working:**
+- Vite production build succeeds clean.
+- Netlify auto-deploy completed; live bundle at arnies-last-mile.netlify.app contains the new content strings (`TEXTBOOK BULL POLE`, `Visual Teaching`, `System At A Glance`, `Pole identified in 2 seconds`).
+
+**What's next:**
+- Whenever the bootcamp app gets new mastery content, re-run `node scripts/sync-mastery-from-ts.cjs` from this folder to mirror it. The script is idempotent.
+
+**Important decisions:**
+- Source of truth for the four new sections is unis-ta-bootcamp-day1 (TS). last-mile is the mirror. Sync direction is one-way for now; daily lessons remain shared via Firestore.
+- Did not move or rename the existing CandlestickChart or ChartGallery — kept them where they are in day-2026-05-07 for stability.
+
+**Problems encountered:**
+- Initial regex-based TS strip missed nested generics. Replaced with a balanced-bracket walker. Now strips `useState<Set<number>>`, `Record<string, ChartDef[]>`, etc. cleanly.
+- Existing pages use `export default`; converted pages used `export function`. Sync script now adds `default`.
+
 ## Session — 2026-05-05
 
 **What we did:**
