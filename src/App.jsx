@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
+import { NarratorBar } from './components/NarratorBar.jsx';
 import Home from './pages/Home.jsx';
 import Drill from './pages/Drill.jsx';
 import BearFlag from './pages/BearFlag.jsx';
@@ -69,5 +70,14 @@ export default function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
+  );
+}
+
+export function AppWithNarrator() {
+  return (
+    <>
+      <App />
+      <NarratorBar />
+    </>
   );
 }

@@ -1,13 +1,19 @@
 /**
  * One-shot sync script — copies the mastery chart galleries + extended
  * data + updated page components from unis-ta-bootcamp-day1 (TS) into
- * last-mile (JS). Strips TypeScript-specific syntax.
+ * last-mile (JS).
  *
- * Run from anywhere: `node scripts/sync-mastery-from-ts.cjs`
+ * Uses esbuild to strip TypeScript (proper AST-based conversion). The
+ * bootcamp app is the source of truth; whenever it changes, run:
+ *
+ *   node scripts/sync-mastery-from-ts.cjs
+ *
+ * from the last-mile root and the JS mirror updates.
  */
 
 const fs = require('fs');
 const path = require('path');
+const esbuild = require('esbuild');
 
 const SRC = 'C:\\Users\\arnol\\Desktop\\Project Files Do Not Delete\\unis-ta-bootcamp-day1';
 const DST = 'C:\\Users\\arnol\\Desktop\\Project Files Do Not Delete\\last-mile';
@@ -18,126 +24,48 @@ function write(p, c) {
   fs.writeFileSync(p, c, 'utf8');
 }
 
-// ---- Chart files (no inline types, just an import-type + annotation) ----
-function stripChartFile(src) {
-  return src
-    .replace(/^import type \{[^}]+\} from [^;]+;\n?/gm, '')
-    .replace(/: ChartDef\[\]/g, '')
-    .replace(/: Record<[^>]+>/g, '');
-}
-
-// principles index has a Record<number, ChartDef[]> → drop both type annotations and the type-only import.
-// qa-concepts index has its own exported ConceptGallery interface + ConceptGallery[] annotation.
-function stripPrinciplesIndex(src) {
-  return src
-    .replace(/^import type \{[^}]+\} from [^;]+;\n?/gm, '')
-    .replace(/^export interface [\s\S]*?^\}\n?/gm, '') // strip ConceptGallery interface
-    .replace(/: Record<number, ChartDef\[\]>/g, '')
-    .replace(/: Record<string, ChartDef\[\]>/g, '')
-    .replace(/: ConceptGallery\[\]/g, '')
-    // findConceptForEntry has param/return type annotations
-    .replace(/export function findConceptForEntry\(patternType: string \| null \| undefined, tags\?: string\[\] \| null\): ConceptGallery \| null \{/, 'export function findConceptForEntry(patternType, tags) {')
-    .replace(/new Map<string, ConceptGallery>\(\)/g, 'new Map()');
-}
-
-// ---- Data files (principles.ts, coreLessons.ts) ----
-// Strip exported interfaces, drop type annotations on the const, keep everything else.
-function stripPrinciplesTs(src) {
-  // Remove exported interfaces
-  src = src.replace(/export interface [\s\S]*?^\}\n?/gm, '');
-  // Remove `: Principle[]` annotation on the export
-  src = src.replace(/: Principle\[\]/g, '');
-  return src;
-}
-
-function stripCoreLessonsTs(src) {
-  src = src.replace(/export interface [\s\S]*?^\}\n?/gm, '');
-  src = src.replace(/: CoreLesson\[\]/g, '');
-  return src;
-}
-
-// ---- Page components (.tsx → .jsx) ----
-// Use a balanced-bracket walker for generics so we handle nested <> correctly.
-function stripGenerics(src) {
-  // Walk through the source character by character. When we find an identifier
-  // followed by `<`, we treat it as a generic only if the next chars form a
-  // valid TS type (uppercase ident or known builtins) — and we walk to the
-  // matching `>` accounting for nested generics.
-  let out = '';
-  let i = 0;
-  while (i < src.length) {
-    const ch = src[i];
-    if (ch === '<') {
-      // Generics have NO space between identifier and `<`: useState<X>, Set<string>, Record<K, V>.
-      // JSX always has whitespace, `>`, `}`, `(`, `,`, `;`, etc. before `<`.
-      // So only treat as generic if the IMMEDIATELY preceding character is a JS identifier char.
-      const prevChar = out[out.length - 1];
-      const isIdentChar = prevChar && /[A-Za-z_$0-9\]]/.test(prevChar);
-      const ahead = src.slice(i + 1, i + 3);
-      if (isIdentChar && /^[A-Za-z?{]/.test(ahead)) {
-        // Walk to matching >
-        let depth = 1;
-        let j = i + 1;
-        while (j < src.length && depth > 0) {
-          if (src[j] === '<') depth++;
-          else if (src[j] === '>') depth--;
-          if (depth === 0) break;
-          j++;
-        }
-        if (depth === 0) {
-          // Skip the generic block entirely
-          i = j + 1;
-          continue;
-        }
-      }
-    }
-    out += ch;
-    i++;
-  }
-  return out;
-}
-
-function stripTsx(src) {
-  let s = src;
-  // Strip type-only imports
-  s = s.replace(/^import type \{[^}]+\} from [^;]+;\n?/gm, '');
-  // Strip mixed imports — remove `type X,` and `, type X` from named-imports lists
-  s = s.replace(/^(import \{[^}]*?)(?:\s*type\s+[A-Za-z_$][\w$]*\s*,?\s*)+(\}[^;]*;)/gm, (_m, head, tail) => {
-    // Pull out the remaining (non-type) names from `head`, drop the `type X` ones.
-    const inner = head.replace(/import \{/, '').replace(/\n/g, ' ');
-    const names = inner.split(',').map(n => n.trim()).filter(n => n && !n.startsWith('type '));
-    if (names.length === 0) {
-      // Whole import was types — drop the line entirely
-      return '';
-    }
-    return `import { ${names.join(', ')} ${tail}`;
+/**
+ * Strip TypeScript using esbuild's transformSync. Preserves comments.
+ * Returns valid JavaScript with all type syntax removed.
+ */
+function stripTs(src, isJsx) {
+  const result = esbuild.transformSync(src, {
+    loader: isJsx ? 'tsx' : 'ts',
+    target: 'esnext',
+    format: 'esm',
+    // Don't minify; keep readable JS
+    minify: false,
+    // Preserve comments where possible (esbuild drops some by default)
+    legalComments: 'inline',
+    // Keep names so React DevTools etc. work
+    keepNames: true,
+    // Don't add any source-map URLs
+    sourcemap: false,
   });
-  // Strip non-exported interfaces (export interfaces handled in data files; here in pages too)
-  s = s.replace(/^(?:export )?interface [\s\S]*?^\}\n?/gm, '');
-  // Strip type aliases at top level
-  s = s.replace(/^(?:export )?type [A-Za-z_$][\w$]* = [^;]+;\n?/gm, '');
-  // Walk generics first (handles useState<Set<number>>, Record<X, Y>, etc)
-  s = stripGenerics(s);
-  // After generics removed, strip explicit param types in arrow functions: (n: number) → (n)
-  // Also handle optional params: (n?: number) → (n)
-  // Also handle destructuring with simple type: ({ children }: { children: ReactNode })
-  s = s.replace(/\(([a-zA-Z_$][\w$]*)\??: [^)]+\)/g, '($1)');
-  s = s.replace(/\}: \{[^}]*\}\)/g, '})');
-  s = s.replace(/\}: [A-Za-z_$][\w$\s.,]*\)/g, '})');
-  // Strip return type annotations like ): JSX.Element {
-  s = s.replace(/\): [A-Za-z_$][\w$.\s,|\[\]]* \{/g, ') {');
-  // Strip type assertions `as X`
-  s = s.replace(/ as [A-Za-z_$][\w$.\s,|\[\]]*/g, '');
-  // Strip `: TYPE = ` annotation on const/let
-  s = s.replace(/^(\s*(?:const|let|var) [a-zA-Z_$][\w$]*): [^=\n]+ =/gm, '$1 =');
-  // Convert `export function X` to `export default function X` for page components
-  s = s.replace(/^export function ([A-Z][\w$]*)\(/m, 'export default function $1(');
-  return s;
+  return result.code;
 }
 
-// ---- Files to copy ----
+/**
+ * For the page components: rewrite esbuild's named-export footer
+ *   export { MasteryOverview };
+ * into a default export so last-mile's App.jsx (which uses default imports) works:
+ *   export default MasteryOverview;
+ *
+ * esbuild always emits `export { Name }` for top-level `export function Name()`
+ * (because of keepNames: true and ESM normalization). We can't change that, so
+ * we postprocess the footer.
+ */
+function toDefaultExport(src) {
+  // Match the very last `export { Name };` (esbuild puts it at the end of the file).
+  const match = src.match(/export \{\s*([A-Z][\w$]*)\s*\};?\s*$/);
+  if (!match) return src;
+  const name = match[1];
+  return src.replace(match[0], `export default ${name};`);
+}
 
-// Chart files — direct copy, strip type-only imports + annotations
+// ─── Files to copy ────────────────────────────────────────────────────────
+
+// Chart files — pure data, esbuild strips the type-only import
 const chartFiles = [
   'src/components/charts/mastery/principles/01-pole-first.ts',
   'src/components/charts/mastery/principles/02-context.ts',
@@ -161,7 +89,7 @@ const chartFiles = [
   'src/components/charts/mastery/core-lessons/10-capitulation-deep.ts',
   'src/components/charts/mastery/overview/hero.ts',
   'src/components/charts/mastery/checklists/checklist-charts.ts',
-  // qa-concepts — pattern-type chart galleries (Q&A merger)
+  // qa-concepts
   'src/components/charts/qa-concepts/bull-flag.ts',
   'src/components/charts/qa-concepts/bear-flag.ts',
   'src/components/charts/qa-concepts/double-top.ts',
@@ -179,7 +107,7 @@ const chartFiles = [
   'src/components/charts/qa-concepts/candlestick-patterns.ts',
 ];
 
-// Index files (have Record<...> / interface / type annotations to strip)
+// Index files — same loader, esbuild handles `export type { ... }` correctly
 const indexFiles = [
   'src/components/charts/mastery/principles/index.ts',
   'src/components/charts/mastery/core-lessons/index.ts',
@@ -187,54 +115,60 @@ const indexFiles = [
   'src/components/charts/qa-concepts/index.ts',
 ];
 
-let count = 0;
-
-for (const rel of chartFiles) {
-  const src = read(path.join(SRC, rel));
-  const out = stripChartFile(src);
-  const dst = path.join(DST, rel.replace(/\.ts$/, '.js'));
-  write(dst, out);
-  count++;
-}
-
-for (const rel of indexFiles) {
-  const src = read(path.join(SRC, rel));
-  const out = stripPrinciplesIndex(src);
-  const dst = path.join(DST, rel.replace(/\.ts$/, '.js'));
-  write(dst, out);
-  count++;
-}
-
-// Data files
-{
-  const src = read(path.join(SRC, 'src/data/mastery/principles.ts'));
-  write(path.join(DST, 'src/data/mastery/principles.js'), stripPrinciplesTs(src));
-  count++;
-}
-{
-  const src = read(path.join(SRC, 'src/data/mastery/coreLessons.ts'));
-  write(path.join(DST, 'src/data/mastery/coreLessons.js'), stripCoreLessonsTs(src));
-  count++;
-}
-
-// Page components — go to .jsx
-const pageFiles = [
-  ['src/pages/mastery/PrinciplesPage.tsx',     'src/pages/mastery/PrinciplesPage.jsx'],
-  ['src/pages/mastery/CoreLessonPage.tsx',     'src/pages/mastery/CoreLessonPage.jsx'],
-  ['src/pages/mastery/ChecklistsPage.tsx',     'src/pages/mastery/ChecklistsPage.jsx'],
-  ['src/pages/mastery/MasteryOverview.tsx',    'src/pages/mastery/MasteryOverview.jsx'],
-  // Q&A merger pages
-  ['src/pages/mastery/MasteryEntryCard.tsx',   'src/pages/mastery/MasteryEntryCard.jsx'],
-  ['src/pages/mastery/MasteryDrill.tsx',       'src/pages/mastery/MasteryDrill.jsx'],
-  ['src/pages/mastery/MasteryLibrary.tsx',     'src/pages/mastery/MasteryLibrary.jsx'],
-  ['src/pages/mastery/MasteryProgress.tsx',    'src/pages/mastery/MasteryProgress.jsx'],
+// Data files (principles.ts, coreLessons.ts) — ts loader
+const dataFiles = [
+  'src/data/mastery/principles.ts',
+  'src/data/mastery/coreLessons.ts',
 ];
 
-for (const [srcRel, dstRel] of pageFiles) {
-  const src = read(path.join(SRC, srcRel));
-  const out = stripTsx(src);
-  write(path.join(DST, dstRel), out);
+// Page components (.tsx → .jsx) — App.jsx imports these as DEFAULTS
+const pageFiles = [
+  'src/pages/mastery/PrinciplesPage.tsx',
+  'src/pages/mastery/CoreLessonPage.tsx',
+  'src/pages/mastery/ChecklistsPage.tsx',
+  'src/pages/mastery/MasteryOverview.tsx',
+  'src/pages/mastery/MasteryEntryCard.tsx',
+  'src/pages/mastery/MasteryDrill.tsx',
+  'src/pages/mastery/MasteryLibrary.tsx',
+  'src/pages/mastery/MasteryProgress.tsx',
+];
+
+// Inner UI components — imported as NAMED elsewhere; keep named export
+const innerComponentFiles = [
+  'src/components/NarratorBar.tsx',
+  'src/components/ReadAloudButton.tsx',
+];
+
+// Narrator lib files — ts loader (no JSX)
+const narratorLibFiles = [
+  'src/lib/narrator/types.ts',
+  'src/lib/narrator/voices.ts',
+  'src/lib/narrator/sentenceSplitter.ts',
+  'src/lib/narrator/numberSpeech.ts',
+  'src/lib/narrator/chartNarrator.ts',
+  'src/lib/narrator/scriptBuilders.ts',
+  'src/lib/narrator/Narrator.ts',
+  'src/lib/narrator/index.ts',
+];
+
+let count = 0;
+
+function syncOne(rel, { isJsx, defaultExport }) {
+  const ts = read(path.join(SRC, rel));
+  let js = stripTs(ts, isJsx);
+  if (defaultExport) js = toDefaultExport(js);
+  // Output extension
+  const dstExt = isJsx ? '.jsx' : '.js';
+  const dstRel = rel.replace(/\.tsx?$/, dstExt);
+  write(path.join(DST, dstRel), js);
   count++;
 }
 
-console.log(`Synced ${count} files to last-mile.`);
+for (const rel of chartFiles)            syncOne(rel, { isJsx: false });
+for (const rel of indexFiles)            syncOne(rel, { isJsx: false });
+for (const rel of dataFiles)             syncOne(rel, { isJsx: false });
+for (const rel of narratorLibFiles)      syncOne(rel, { isJsx: false });
+for (const rel of pageFiles)             syncOne(rel, { isJsx: true, defaultExport: true });
+for (const rel of innerComponentFiles)   syncOne(rel, { isJsx: true, defaultExport: false });
+
+console.log(`Synced ${count} files to last-mile (esbuild TS→JS).`);
