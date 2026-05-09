@@ -1,5 +1,20 @@
 # SESSION_NOTES.md — Last Mile
 
+## Session — 2026-05-09 (cont'd) — Read-aloud narrator (synced from bootcamp)
+
+**What we did:**
+- Synced the full read-aloud narrator from `unis-ta-bootcamp-day1`. Every Mastery page now has a "Read this aloud" button; the floating audio bar provides full transport controls, voice picker, speed slider, and click-to-seek progress; mediaSession enables lock-screen and Bluetooth headset controls.
+- Chart narration uses the L1-L4 pedagogical framework with predict-and-pause beats and emphasis on the takeaway. Trader terms and prices are spoken naturally.
+
+**Sync script rewrite (this session):**
+- Replaced the regex-based TS→JS stripper with esbuild's `transformSync`. The hand-rolled approach kept hitting subtle bugs (treating `=>` as a generic close, eating object literals inside ternaries, double-emitting parens). esbuild does proper AST conversion and handles all TS edge cases. Sync script now uses `transformSync({ loader: 'ts' or 'tsx', target: 'esnext', format: 'esm', keepNames: true })` and a small post-processor that converts esbuild's `export { Name }` footer into `export default Name` for page components App.jsx imports as defaults.
+- Inner components like NarratorBar / ReadAloudButton remain named exports (they're imported as named in pages).
+
+**Architecture in last-mile:**
+- `AppWithNarrator` exported from App.jsx mounts NarratorBar globally; main.jsx imports `{ AppWithNarrator as App }`.
+
+**Pushed to GitHub main; Netlify auto-deploy completed; live bundle confirmed to contain narrator code.**
+
 ## Session — 2026-05-09 (cont'd) — Trading Q&A merged into Live Trading Mastery (synced from bootcamp)
 
 **What we did:**
