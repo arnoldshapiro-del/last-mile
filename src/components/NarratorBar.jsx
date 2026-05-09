@@ -64,8 +64,10 @@ function NarratorBar() {
       className: "narrator-bar",
       style: {
         position: "fixed",
-        bottom: 16,
-        right: 16,
+        // Safe-area-inset handles iOS notch/home-indicator + Android nav bar
+        bottom: "max(16px, env(safe-area-inset-bottom))",
+        right: "max(16px, env(safe-area-inset-right))",
+        left: expanded ? "max(16px, env(safe-area-inset-left))" : "auto",
         zIndex: 50,
         background: "linear-gradient(180deg, rgba(15, 23, 42, 0.96) 0%, rgba(7, 12, 24, 0.96) 100%)",
         border: "1px solid rgba(94, 234, 212, 0.30)",
@@ -75,8 +77,9 @@ function NarratorBar() {
         WebkitBackdropFilter: "blur(12px)",
         color: "#e2e8f0",
         fontFamily: "Inter, system-ui, sans-serif",
-        width: expanded ? 380 : "auto",
-        maxWidth: "calc(100vw - 32px)"
+        width: expanded ? "min(420px, calc(100vw - 32px))" : "auto",
+        maxWidth: "calc(100vw - 32px)",
+        marginLeft: expanded ? "auto" : void 0
       }
     },
     /* @__PURE__ */ React.createElement("div", { style: { padding: "10px 12px", display: "flex", alignItems: "center", gap: 8 } }, /* @__PURE__ */ React.createElement(
@@ -89,17 +92,19 @@ function NarratorBar() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          width: 36,
-          height: 36,
+          width: 44,
+          height: 44,
           borderRadius: "50%",
           background: "linear-gradient(135deg, #14b8a6, #0d9488)",
           color: "#070c18",
           border: "none",
           cursor: "pointer",
-          boxShadow: "0 4px 12px rgba(20, 184, 166, 0.40)"
+          boxShadow: "0 4px 12px rgba(20, 184, 166, 0.40)",
+          flexShrink: 0,
+          touchAction: "manipulation"
         }
       },
-      isPlaying ? /* @__PURE__ */ React.createElement(Pause, { className: "w-4 h-4" }) : /* @__PURE__ */ React.createElement(Play, { className: "w-4 h-4" })
+      isPlaying ? /* @__PURE__ */ React.createElement(Pause, { className: "w-5 h-5" }) : /* @__PURE__ */ React.createElement(Play, { className: "w-5 h-5" })
     ), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0, fontSize: 12, lineHeight: 1.3 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 6, marginBottom: 2 } }, /* @__PURE__ */ React.createElement(Headphones, { className: "w-3 h-3", style: { color: "#5eead4", flexShrink: 0 } }), /* @__PURE__ */ React.createElement("span", { style: { color: "#5eead4", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "Oxanium, system-ui, sans-serif" } }, isPlaying ? "Reading" : isPaused ? "Paused" : "Ready", totalItems > 0 && ` \xB7 ${itemIdx + 1}/${totalItems}`)), /* @__PURE__ */ React.createElement("div", { style: { color: "#f5f9ff", fontWeight: 600, fontSize: 13, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: expanded ? 280 : 200 } }, script.title)), /* @__PURE__ */ React.createElement(
       "button",
       {
@@ -110,16 +115,18 @@ function NarratorBar() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          width: 28,
-          height: 28,
+          width: 36,
+          height: 36,
           borderRadius: 8,
           background: "rgba(255, 255, 255, 0.04)",
           color: "#94a3b8",
           border: "1px solid rgba(255, 255, 255, 0.08)",
-          cursor: "pointer"
+          cursor: "pointer",
+          flexShrink: 0,
+          touchAction: "manipulation"
         }
       },
-      expanded ? /* @__PURE__ */ React.createElement(ChevronDown, { className: "w-3.5 h-3.5" }) : /* @__PURE__ */ React.createElement(ChevronUp, { className: "w-3.5 h-3.5" })
+      expanded ? /* @__PURE__ */ React.createElement(ChevronDown, { className: "w-4 h-4" }) : /* @__PURE__ */ React.createElement(ChevronUp, { className: "w-4 h-4" })
     ), /* @__PURE__ */ React.createElement(
       "button",
       {
@@ -130,31 +137,32 @@ function NarratorBar() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          width: 28,
-          height: 28,
+          width: 36,
+          height: 36,
           borderRadius: 8,
           background: "rgba(239, 68, 68, 0.10)",
           color: "#fca5a5",
           border: "1px solid rgba(239, 68, 68, 0.30)",
-          cursor: "pointer"
+          cursor: "pointer",
+          flexShrink: 0,
+          touchAction: "manipulation"
         }
       },
-      /* @__PURE__ */ React.createElement(X, { className: "w-3.5 h-3.5" })
+      /* @__PURE__ */ React.createElement(X, { className: "w-4 h-4" })
     )),
-    totalSentences > 0 && /* @__PURE__ */ React.createElement("div", { style: { padding: "0 12px 8px", position: "relative" } }, /* @__PURE__ */ React.createElement(
+    totalSentences > 0 && /* @__PURE__ */ React.createElement(
       "div",
       {
         style: {
-          height: 4,
-          borderRadius: 2,
-          background: "rgba(255, 255, 255, 0.06)",
-          overflow: "hidden",
-          cursor: "pointer"
+          padding: "0 12px 8px",
+          position: "relative",
+          cursor: "pointer",
+          touchAction: "manipulation"
         },
         onClick: (e) => {
           const rect = e.currentTarget.getBoundingClientRect();
-          const pct = (e.clientX - rect.left) / rect.width;
-          const target = Math.round(pct * totalSentences);
+          const pct = (e.clientX - rect.left - 12) / (rect.width - 24);
+          const target = Math.round(Math.max(0, Math.min(1, pct)) * totalSentences);
           narrator.seekToSentence(target);
         },
         role: "slider",
@@ -163,18 +171,30 @@ function NarratorBar() {
         "aria-valuemax": totalSentences,
         "aria-valuenow": sentenceIdx
       },
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ React.createElement("div", { style: { height: 16, display: "flex", alignItems: "center" } }, /* @__PURE__ */ React.createElement(
         "div",
         {
           style: {
-            height: "100%",
-            width: `${progressPct}%`,
-            background: "linear-gradient(90deg, #14b8a6, #5eead4)",
-            transition: "width 200ms linear"
+            height: 4,
+            width: "100%",
+            borderRadius: 2,
+            background: "rgba(255, 255, 255, 0.06)",
+            overflow: "hidden"
           }
-        }
-      )
-    )),
+        },
+        /* @__PURE__ */ React.createElement(
+          "div",
+          {
+            style: {
+              height: "100%",
+              width: `${progressPct}%`,
+              background: "linear-gradient(90deg, #14b8a6, #5eead4)",
+              transition: "width 200ms linear"
+            }
+          }
+        )
+      ))
+    ),
     expanded && /* @__PURE__ */ React.createElement("div", { style: { padding: "0 12px 12px", display: "flex", flexDirection: "column", gap: 12, borderTop: "1px solid rgba(255, 255, 255, 0.06)" } }, /* @__PURE__ */ React.createElement("div", { style: { paddingTop: 10, fontSize: 11, color: "#94a3b8", display: "flex", justifyContent: "space-between" } }, /* @__PURE__ */ React.createElement("span", { style: { textTransform: "uppercase", letterSpacing: "0.12em" } }, sectionLabel || "reading"), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "Space Mono, ui-monospace, monospace" } }, "sentence ", sentenceIdx + 1, "/", totalSentences)), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: 4 } }, /* @__PURE__ */ React.createElement(TButton, { onClick: () => narrator.prevItem(), title: "Previous item" }, /* @__PURE__ */ React.createElement(SkipBack, { className: "w-4 h-4" })), /* @__PURE__ */ React.createElement(TButton, { onClick: () => narrator.seekBySeconds(-30), title: "Back 30 seconds" }, /* @__PURE__ */ React.createElement(Rewind, { className: "w-4 h-4" }), /* @__PURE__ */ React.createElement("span", { style: { fontSize: 9, marginLeft: 2 } }, "30")), /* @__PURE__ */ React.createElement(TButton, { onClick: () => narrator.seekBySeconds(-15), title: "Back 15 seconds" }, /* @__PURE__ */ React.createElement(Rewind, { className: "w-3.5 h-3.5" }), /* @__PURE__ */ React.createElement("span", { style: { fontSize: 9, marginLeft: 2 } }, "15")), /* @__PURE__ */ React.createElement(TButton, { onClick: () => isPlaying ? narrator.pause() : narrator.play(), title: isPlaying ? "Pause" : "Play", primary: true }, isPlaying ? /* @__PURE__ */ React.createElement(Pause, { className: "w-4 h-4" }) : /* @__PURE__ */ React.createElement(Play, { className: "w-4 h-4" })), /* @__PURE__ */ React.createElement(TButton, { onClick: () => narrator.seekBySeconds(15), title: "Forward 15 seconds" }, /* @__PURE__ */ React.createElement(FastForward, { className: "w-3.5 h-3.5" }), /* @__PURE__ */ React.createElement("span", { style: { fontSize: 9, marginLeft: 2 } }, "15")), /* @__PURE__ */ React.createElement(TButton, { onClick: () => narrator.seekBySeconds(30), title: "Forward 30 seconds" }, /* @__PURE__ */ React.createElement(FastForward, { className: "w-4 h-4" }), /* @__PURE__ */ React.createElement("span", { style: { fontSize: 9, marginLeft: 2 } }, "30")), /* @__PURE__ */ React.createElement(TButton, { onClick: () => narrator.nextItem(), title: "Next item" }, /* @__PURE__ */ React.createElement(SkipForward, { className: "w-4 h-4" })), /* @__PURE__ */ React.createElement(TButton, { onClick: () => narrator.stop(), title: "Stop" }, /* @__PURE__ */ React.createElement(Square, { className: "w-3.5 h-3.5" }))), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { style: { fontSize: 10, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 4, display: "block", fontFamily: "Oxanium, system-ui, sans-serif" } }, "Voice ", voicesAvail === 0 && "(loading...)"), /* @__PURE__ */ React.createElement(
       "select",
       {
@@ -220,15 +240,18 @@ function TButton(props) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        height: 32,
-        minWidth: 32,
-        padding: "0 6px",
-        borderRadius: 8,
+        height: 40,
+        minWidth: 40,
+        padding: "0 8px",
+        borderRadius: 10,
         background: primary ? "linear-gradient(135deg, #14b8a6, #0d9488)" : "rgba(255, 255, 255, 0.04)",
         color: primary ? "#070c18" : "#cbd5e1",
         border: primary ? "none" : "1px solid rgba(255, 255, 255, 0.08)",
         cursor: "pointer",
-        fontFamily: "Oxanium, system-ui, sans-serif"
+        fontFamily: "Oxanium, system-ui, sans-serif",
+        flexShrink: 0,
+        touchAction: "manipulation",
+        WebkitTapHighlightColor: "transparent"
       }
     },
     children
