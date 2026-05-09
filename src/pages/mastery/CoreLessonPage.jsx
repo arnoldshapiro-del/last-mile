@@ -9,7 +9,7 @@ export default function CoreLessonPage() {
   const { lessonId } = useParams();
   const [openUnits, setOpenUnits] = useState(new Set([0]));
   const idx = coreLessons.findIndex(l => l.id === lessonId);
-  if (idx === -1) return ;
+  if (idx === -1) return <Navigate to="/mastery/lessons" replace />;
   const lesson = coreLessons[idx];
   const prev = idx > 0 ? coreLessons[idx - 1] : null;
   const next = idx < coreLessons.length - 1 ? coreLessons[idx + 1] : null;

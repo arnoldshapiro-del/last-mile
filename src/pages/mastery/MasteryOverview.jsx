@@ -169,7 +169,7 @@ export default function MasteryOverview() {
               fontFamily: 'Oxanium, system-ui, sans-serif',
             }}
           >
-            Open today's lesson 
+            Open today's lesson <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </section>
       )}

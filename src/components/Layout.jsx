@@ -6,7 +6,6 @@ const NAV = [
   { to: '/',                       label: 'Home',     icon: HomeIcon },
   { to: '/drill',                  label: 'Drill',    icon: DrillIcon },
   { to: '/mastery',                label: 'Live Trading Mastery', icon: TargetIcon, accent: 'mastery' },
-  { to: '/qa',                     label: 'Trading Q&A',  icon: NotebookIcon, accent: 'qa' },
   { kind: 'group', label: 'Setup Labs' },
   { to: '/lab/bull-flag',          label: 'Bull Flag',     icon: BullFlagIcon },
   { to: '/lab/bear-flag',          label: 'Bear Flag',     icon: BearFlagIcon },

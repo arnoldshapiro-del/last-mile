@@ -15,13 +15,6 @@ import PreSession from './pages/PreSession.jsx';
 import InSession from './pages/InSession.jsx';
 import Journal from './pages/Journal.jsx';
 import Progress from './pages/Progress.jsx';
-import QALayout from './pages/qa/QALayout.jsx';
-import QAToday from './pages/qa/Today.jsx';
-import QABrowse from './pages/qa/Browse.jsx';
-import QAReview from './pages/qa/Review.jsx';
-import QAQuiz from './pages/qa/Quiz.jsx';
-import QAAdd from './pages/qa/AddEntry.jsx';
-import QAProgress from './pages/qa/QAProgress.jsx';
 import MasteryLayout from './pages/mastery/MasteryLayout.jsx';
 import MasteryOverview from './pages/mastery/MasteryOverview.jsx';
 import PrinciplesPage from './pages/mastery/PrinciplesPage.jsx';
@@ -31,6 +24,9 @@ import ChecklistsPage from './pages/mastery/ChecklistsPage.jsx';
 import DailyLessonsIndex from './pages/mastery/DailyLessonsIndex.jsx';
 import DailyLessonPage from './pages/mastery/DailyLessonPage.jsx';
 import AddLessonPage from './pages/mastery/AddLessonPage.jsx';
+import MasteryDrill from './pages/mastery/MasteryDrill.jsx';
+import MasteryLibrary from './pages/mastery/MasteryLibrary.jsx';
+import MasteryProgress from './pages/mastery/MasteryProgress.jsx';
 
 export default function App() {
   return (
@@ -50,14 +46,13 @@ export default function App() {
         <Route path="/protocol/in-session" element={<InSession />} />
         <Route path="/journal" element={<Journal />} />
         <Route path="/progress" element={<Progress />} />
-        <Route path="/qa" element={<QALayout />}>
-          <Route index element={<QAToday />} />
-          <Route path="browse" element={<QABrowse />} />
-          <Route path="review" element={<QAReview />} />
-          <Route path="quiz" element={<QAQuiz />} />
-          <Route path="add" element={<QAAdd />} />
-          <Route path="progress" element={<QAProgress />} />
-        </Route>
+        {/* Old /qa routes redirect into /mastery — Drill / Library / Progress replaced them. */}
+        <Route path="/qa" element={<Navigate to="/mastery/library" replace />} />
+        <Route path="/qa/browse" element={<Navigate to="/mastery/library" replace />} />
+        <Route path="/qa/review" element={<Navigate to="/mastery/drill" replace />} />
+        <Route path="/qa/quiz" element={<Navigate to="/mastery/drill" replace />} />
+        <Route path="/qa/add" element={<Navigate to="/mastery/library" replace />} />
+        <Route path="/qa/progress" element={<Navigate to="/mastery/progress" replace />} />
         <Route path="/mastery" element={<MasteryLayout />}>
           <Route index element={<MasteryOverview />} />
           <Route path="principles" element={<PrinciplesPage />} />
@@ -67,6 +62,9 @@ export default function App() {
           <Route path="daily" element={<DailyLessonsIndex />} />
           <Route path="daily/:date" element={<DailyLessonPage />} />
           <Route path="add-lesson" element={<AddLessonPage />} />
+          <Route path="drill" element={<MasteryDrill />} />
+          <Route path="library" element={<MasteryLibrary />} />
+          <Route path="progress" element={<MasteryProgress />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>

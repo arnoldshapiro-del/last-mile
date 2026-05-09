@@ -7,6 +7,9 @@ const subnav = [
   { to: '/mastery/lessons',     label: 'Core Lessons',      end: false },
   { to: '/mastery/checklists',  label: 'Master Checklists', end: false },
   { to: '/mastery/daily',       label: 'Daily Lessons',     end: false },
+  { to: '/mastery/drill',       label: 'Drill',             end: false },
+  { to: '/mastery/library',     label: 'Library',           end: false },
+  { to: '/mastery/progress',    label: 'Progress',          end: false },
 ];
 
 function TargetIcon({ className }) {

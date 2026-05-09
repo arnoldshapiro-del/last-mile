@@ -26,12 +26,18 @@ function stripChartFile(src) {
     .replace(/: Record<[^>]+>/g, '');
 }
 
-// principles index has a Record<number, ChartDef[]> → drop both type annotations and the type-only import
+// principles index has a Record<number, ChartDef[]> → drop both type annotations and the type-only import.
+// qa-concepts index has its own exported ConceptGallery interface + ConceptGallery[] annotation.
 function stripPrinciplesIndex(src) {
   return src
     .replace(/^import type \{[^}]+\} from [^;]+;\n?/gm, '')
+    .replace(/^export interface [\s\S]*?^\}\n?/gm, '') // strip ConceptGallery interface
     .replace(/: Record<number, ChartDef\[\]>/g, '')
-    .replace(/: Record<string, ChartDef\[\]>/g, '');
+    .replace(/: Record<string, ChartDef\[\]>/g, '')
+    .replace(/: ConceptGallery\[\]/g, '')
+    // findConceptForEntry has param/return type annotations
+    .replace(/export function findConceptForEntry\(patternType: string \| null \| undefined, tags\?: string\[\] \| null\): ConceptGallery \| null \{/, 'export function findConceptForEntry(patternType, tags) {')
+    .replace(/new Map<string, ConceptGallery>\(\)/g, 'new Map()');
 }
 
 // ---- Data files (principles.ts, coreLessons.ts) ----
@@ -62,12 +68,13 @@ function stripGenerics(src) {
   while (i < src.length) {
     const ch = src[i];
     if (ch === '<') {
-      // Look back: previous non-whitespace char should be a JS identifier/word
-      const prev = out.match(/[A-Za-z_$0-9\]]\s*$/);
-      // Look ahead: type generics start with `[A-Z?]` or `{` or `keyof` etc.
-      // For our use-case (useState<...>, Record<...>, Set<...>), all start with [A-Z]
+      // Generics have NO space between identifier and `<`: useState<X>, Set<string>, Record<K, V>.
+      // JSX always has whitespace, `>`, `}`, `(`, `,`, `;`, etc. before `<`.
+      // So only treat as generic if the IMMEDIATELY preceding character is a JS identifier char.
+      const prevChar = out[out.length - 1];
+      const isIdentChar = prevChar && /[A-Za-z_$0-9\]]/.test(prevChar);
       const ahead = src.slice(i + 1, i + 3);
-      if (prev && /^[A-Z?{]/.test(ahead)) {
+      if (isIdentChar && /^[A-Za-z?{]/.test(ahead)) {
         // Walk to matching >
         let depth = 1;
         let j = i + 1;
@@ -94,6 +101,17 @@ function stripTsx(src) {
   let s = src;
   // Strip type-only imports
   s = s.replace(/^import type \{[^}]+\} from [^;]+;\n?/gm, '');
+  // Strip mixed imports — remove `type X,` and `, type X` from named-imports lists
+  s = s.replace(/^(import \{[^}]*?)(?:\s*type\s+[A-Za-z_$][\w$]*\s*,?\s*)+(\}[^;]*;)/gm, (_m, head, tail) => {
+    // Pull out the remaining (non-type) names from `head`, drop the `type X` ones.
+    const inner = head.replace(/import \{/, '').replace(/\n/g, ' ');
+    const names = inner.split(',').map(n => n.trim()).filter(n => n && !n.startsWith('type '));
+    if (names.length === 0) {
+      // Whole import was types — drop the line entirely
+      return '';
+    }
+    return `import { ${names.join(', ')} ${tail}`;
+  });
   // Strip non-exported interfaces (export interfaces handled in data files; here in pages too)
   s = s.replace(/^(?:export )?interface [\s\S]*?^\}\n?/gm, '');
   // Strip type aliases at top level
@@ -101,8 +119,9 @@ function stripTsx(src) {
   // Walk generics first (handles useState<Set<number>>, Record<X, Y>, etc)
   s = stripGenerics(s);
   // After generics removed, strip explicit param types in arrow functions: (n: number) → (n)
+  // Also handle optional params: (n?: number) → (n)
   // Also handle destructuring with simple type: ({ children }: { children: ReactNode })
-  s = s.replace(/\(([a-zA-Z_$][\w$]*): [^)]+\)/g, '($1)');
+  s = s.replace(/\(([a-zA-Z_$][\w$]*)\??: [^)]+\)/g, '($1)');
   s = s.replace(/\}: \{[^}]*\}\)/g, '})');
   s = s.replace(/\}: [A-Za-z_$][\w$\s.,]*\)/g, '})');
   // Strip return type annotations like ): JSX.Element {
@@ -142,13 +161,30 @@ const chartFiles = [
   'src/components/charts/mastery/core-lessons/10-capitulation-deep.ts',
   'src/components/charts/mastery/overview/hero.ts',
   'src/components/charts/mastery/checklists/checklist-charts.ts',
+  // qa-concepts — pattern-type chart galleries (Q&A merger)
+  'src/components/charts/qa-concepts/bull-flag.ts',
+  'src/components/charts/qa-concepts/bear-flag.ts',
+  'src/components/charts/qa-concepts/double-top.ts',
+  'src/components/charts/qa-concepts/double-bottom.ts',
+  'src/components/charts/qa-concepts/breakouts.ts',
+  'src/components/charts/qa-concepts/opening-range-breakout.ts',
+  'src/components/charts/qa-concepts/vwap-rejection.ts',
+  'src/components/charts/qa-concepts/inside-bar.ts',
+  'src/components/charts/qa-concepts/capitulation.ts',
+  'src/components/charts/qa-concepts/measured-move.ts',
+  'src/components/charts/qa-concepts/stop-placement.ts',
+  'src/components/charts/qa-concepts/discipline.ts',
+  'src/components/charts/qa-concepts/trend-trading.ts',
+  'src/components/charts/qa-concepts/support-resistance.ts',
+  'src/components/charts/qa-concepts/candlestick-patterns.ts',
 ];
 
-// Index files (have Record<...> type annotations to strip)
+// Index files (have Record<...> / interface / type annotations to strip)
 const indexFiles = [
   'src/components/charts/mastery/principles/index.ts',
   'src/components/charts/mastery/core-lessons/index.ts',
   'src/components/charts/mastery/index.ts',
+  'src/components/charts/qa-concepts/index.ts',
 ];
 
 let count = 0;
@@ -183,10 +219,15 @@ for (const rel of indexFiles) {
 
 // Page components — go to .jsx
 const pageFiles = [
-  ['src/pages/mastery/PrinciplesPage.tsx',   'src/pages/mastery/PrinciplesPage.jsx'],
-  ['src/pages/mastery/CoreLessonPage.tsx',   'src/pages/mastery/CoreLessonPage.jsx'],
-  ['src/pages/mastery/ChecklistsPage.tsx',   'src/pages/mastery/ChecklistsPage.jsx'],
-  ['src/pages/mastery/MasteryOverview.tsx',  'src/pages/mastery/MasteryOverview.jsx'],
+  ['src/pages/mastery/PrinciplesPage.tsx',     'src/pages/mastery/PrinciplesPage.jsx'],
+  ['src/pages/mastery/CoreLessonPage.tsx',     'src/pages/mastery/CoreLessonPage.jsx'],
+  ['src/pages/mastery/ChecklistsPage.tsx',     'src/pages/mastery/ChecklistsPage.jsx'],
+  ['src/pages/mastery/MasteryOverview.tsx',    'src/pages/mastery/MasteryOverview.jsx'],
+  // Q&A merger pages
+  ['src/pages/mastery/MasteryEntryCard.tsx',   'src/pages/mastery/MasteryEntryCard.jsx'],
+  ['src/pages/mastery/MasteryDrill.tsx',       'src/pages/mastery/MasteryDrill.jsx'],
+  ['src/pages/mastery/MasteryLibrary.tsx',     'src/pages/mastery/MasteryLibrary.jsx'],
+  ['src/pages/mastery/MasteryProgress.tsx',    'src/pages/mastery/MasteryProgress.jsx'],
 ];
 
 for (const [srcRel, dstRel] of pageFiles) {
