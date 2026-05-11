@@ -7,6 +7,9 @@ import { dailyLessons as seedLessons } from '../../data/mastery/dailyLessons.js'
 const ADMIN_CODE = 'arnie2026';
 const SESSION_KEY = 'mastery_admin_authed';
 
+// Permissive validator. Only rejects when the three required fields
+// (date, title, sessionSummary) are missing or malformed. Everything else
+// is preserved as-given so the schema can evolve without code changes.
 function validateLesson(raw) {
   const errors = [];
   if (!raw || typeof raw !== 'object') return { ok: false, errors: ['JSON must be an object.'] };
@@ -20,26 +23,43 @@ function validateLesson(raw) {
   if (!raw.sessionSummary || typeof raw.sessionSummary !== 'string' || raw.sessionSummary.length < 10) {
     errors.push('Field "sessionSummary" is required and must be at least 10 characters.');
   }
-  if (!Array.isArray(raw.teachingUnits) || raw.teachingUnits.length < 1) {
-    errors.push('Field "teachingUnits" is required and must have at least 1 entry.');
-  }
-  if (!Array.isArray(raw.keyRules)) errors.push('Field "keyRules" must be an array (can be empty).');
-  if (!Array.isArray(raw.principlesReinforced)) errors.push('Field "principlesReinforced" must be an array of numbers.');
-  if (typeof raw.whatIllDoDifferently !== 'string') errors.push('Field "whatIllDoDifferently" must be a string.');
 
   if (errors.length > 0) return { ok: false, errors };
 
+  // Normalize whatIllDoDifferently: accept string OR array of strings,
+  // convert array to bullet-joined string for storage consistency.
+  let wid = raw.whatIllDoDifferently;
+  if (Array.isArray(wid)) {
+    wid = wid.map(s => String(s).trim()).filter(Boolean).map(s => '• ' + s).join('\n');
+  } else if (typeof wid !== 'string') {
+    wid = '';
+  }
+
+  // Build the normalized payload by passing through every input field unchanged,
+  // then overlaying the canonicalized values. Unknown fields are preserved
+  // so future schema additions reach Firestore without code changes.
   const normalized = {
+    ...raw,
     date: raw.date,
     title: raw.title,
     sessionSummary: raw.sessionSummary,
-    teachingUnits: raw.teachingUnits,
-    chartReferences: raw.chartReferences || raw.charts || [],
-    keyRules: raw.keyRules || [],
-    principlesReinforced: raw.principlesReinforced || [],
-    whatIllDoDifferently: raw.whatIllDoDifferently || '',
+    teachingUnits: Array.isArray(raw.teachingUnits) ? raw.teachingUnits : [],
+    chartReferences: Array.isArray(raw.chartReferences)
+      ? raw.chartReferences
+      : Array.isArray(raw.charts) ? raw.charts : [],
+    keyRules: Array.isArray(raw.keyRules) ? raw.keyRules : [],
+    principlesReinforced: Array.isArray(raw.principlesReinforced) ? raw.principlesReinforced : [],
+    whatIllDoDifferently: wid,
     savedAt: serverTimestamp(),
   };
+  // Pass-through optional fields explicitly so they round-trip through Firestore
+  // even if a future client doesn't know about them.
+  if (typeof raw.subtitle === 'string') normalized.subtitle = raw.subtitle;
+  if (Array.isArray(raw.tradesReview)) normalized.tradesReview = raw.tradesReview;
+  if (Array.isArray(raw.qaCards)) normalized.qaCards = raw.qaCards;
+  if (typeof raw.closingThought === 'string') normalized.closingThought = raw.closingThought;
+  // Strip `charts` alias so we don't store both keys.
+  delete normalized.charts;
   return { ok: true, errors: [], normalized };
 }
 

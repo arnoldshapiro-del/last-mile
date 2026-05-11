@@ -302,6 +302,7 @@ const may7_2026 = {
     "Tomorrow opens a fresh session and a fresh chat with Claude. The first thing I do before any trade is identify whether the session is trending or ranging — if it's not clearly trending, I pass on flag setups entirely. The first thing I do before any flag is find the pole — if I can't immediately point to a clean impulsive move, there's no trade. I wait for every entry candle to fully close before pulling the trigger, no exceptions. I count my losses — three in the same direction and I stop trading for the day, no matter how good the next setup looks. I respect my own tools — when a Bullish Engulfing fires while I'm short, or a Bearish Engulfing fires while I'm long, I take it seriously. Today proved every one of these rules in real losses. Tomorrow they're not theory — they're reflexes. The system is built. The principles are written. The losses today became the curriculum. Five years end here.",
 };
 
+
 export const dailyLessons = [may7_2026, foundationDay];
 
 export function getDailyLesson(date) {

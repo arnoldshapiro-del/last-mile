@@ -6,17 +6,26 @@ import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from '../../lib/firebase.js';
 import { dailyLessons as seedLessons } from './dailyLessons.js';
 
+// Permissive normalizer — preserves new optional fields (subtitle,
+// tradesReview, qaCards, closingThought) and accepts either string or
+// string[] for whatIllDoDifferently. The renderer guards every field.
 export function normalizeLesson(raw) {
   const charts = raw.chartReferences || raw.charts || [];
+  const wid = raw.whatIllDoDifferently;
   return {
     date: String(raw.date || ''),
     title: String(raw.title || ''),
+    subtitle: typeof raw.subtitle === 'string' ? raw.subtitle : undefined,
     sessionSummary: String(raw.sessionSummary || ''),
-    teachingUnits: raw.teachingUnits || [],
-    chartReferences: charts,
-    keyRules: raw.keyRules || [],
-    principlesReinforced: raw.principlesReinforced || [],
-    whatIllDoDifferently: String(raw.whatIllDoDifferently || ''),
+    teachingUnits: Array.isArray(raw.teachingUnits) ? raw.teachingUnits : [],
+    chartReferences: Array.isArray(charts) ? charts : [],
+    keyRules: Array.isArray(raw.keyRules) ? raw.keyRules : [],
+    principlesReinforced: Array.isArray(raw.principlesReinforced) ? raw.principlesReinforced : [],
+    whatIllDoDifferently:
+      typeof wid === 'string' ? wid : Array.isArray(wid) ? wid : '',
+    tradesReview: Array.isArray(raw.tradesReview) ? raw.tradesReview : undefined,
+    qaCards: Array.isArray(raw.qaCards) ? raw.qaCards : undefined,
+    closingThought: typeof raw.closingThought === 'string' ? raw.closingThought : undefined,
   };
 }
 
