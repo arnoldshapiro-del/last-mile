@@ -2,7 +2,17 @@ import React, { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { formatDailyDate, principles } from '../../data/mastery/index.js';
 import { useDailyLessons, findLesson } from '../../data/mastery/useFirestoreDailyLessons.js';
-import { ChartGallery, CHARTS_BY_UNIT_INDEX, CONCEPT_SLUGS } from '../../components/charts/day-2026-05-07/index.js';
+import { ChartGallery } from '../../components/charts/day-2026-05-07/ChartGallery.jsx';
+import { CHARTS_BY_UNIT_INDEX as MAY7_CHARTS, CONCEPT_SLUGS as MAY7_SLUGS } from '../../components/charts/day-2026-05-07/index.js';
+import { CHARTS_BY_UNIT_INDEX as MAY11_CHARTS, CONCEPT_SLUGS as MAY11_SLUGS } from '../../components/charts/day-2026-05-11/index.js';
+
+// Per-date chart bundle registry. Add new entries here as more daily lessons
+// gain their own chart galleries. Renderer falls back gracefully when a date
+// has no charts (returns null → no gallery rendered).
+const CHARTS_BY_DATE = {
+  '2026-05-07': { charts: MAY7_CHARTS, slugs: MAY7_SLUGS },
+  '2026-05-11': { charts: MAY11_CHARTS, slugs: MAY11_SLUGS },
+};
 
 // Detect a unit's schema. Old units have `question` + `answer` + `rules`;
 // new units have `title` + `concept` + `detail` + `rule`.
@@ -247,10 +257,14 @@ export default function DailyLessonPage() {
                       </div>
                     )}
 
-                    {/* Visual Examples — chart gallery only on May 7 lesson */}
-                    {lesson.date === '2026-05-07' && CHARTS_BY_UNIT_INDEX[i] && (
-                      <ChartGallery conceptId={CONCEPT_SLUGS[i] || ('unit-' + i)} charts={CHARTS_BY_UNIT_INDEX[i]} />
-                    )}
+                    {/* Visual Examples — per-date chart gallery */}
+                    {(() => {
+                      const bundle = CHARTS_BY_DATE[lesson.date];
+                      const unitCharts = bundle?.charts?.[i];
+                      if (!unitCharts) return null;
+                      const slug = bundle?.slugs?.[i] || ('unit-' + i);
+                      return <ChartGallery conceptId={slug} charts={unitCharts} />;
+                    })()}
 
                     {/* Old shape: rules list */}
                     {!newShape && rulesList.length > 0 && (
