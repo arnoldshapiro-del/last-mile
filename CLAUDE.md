@@ -6,11 +6,11 @@
 ## Purpose
 Arnie has 5.5 years of pattern recognition and a persistent give-back problem (sessions go green, then he keeps trading and gives the gains back). This app is the mechanical solution: rule-locked sessions, pre-trade rituals, profit-target lockouts, and pattern-reflex training. It is NOT a charting tool, NOT a trading platform, NOT connected to any broker. It is a behavior-change tool.
 
-## GitHub repo (planned)
-`arnoldshapiro-del/last-mile` — not yet pushed. Awaiting Arnie's go-ahead per the spec's build-order rule #14.
+## GitHub repo
+`arnoldshapiro-del/last-mile` — live, default branch `main`.
 
-## Netlify URL (planned)
-`last-mile.netlify.app` — not yet deployed.
+## Netlify URL
+`https://arnies-last-mile.netlify.app` — live, auto-deploys on push to main.
 
 ## Tech stack
 - Vite 5 + React 18 + React Router 6
@@ -20,11 +20,23 @@ Arnie has 5.5 years of pattern recognition and a persistent give-back problem (s
 - Web Audio API (no audio files — synthesized brief acoustic cues)
 
 ## Status
-- **Initial build complete (2026-05-05).**
-- All 6 modules implemented per spec.
+- **Deployed and live (2026-05-12).** GitHub + Netlify both active.
+- All 6 original modules + Live Trading Mastery section (Principles, Core Lessons, Master Checklists, Daily Lessons, Drill, Library, Progress, Overview).
 - Dev server runs on port 5300 via launch.json config "last-mile".
-- Verified end-to-end in preview: Home, Pre-Session Ritual, Drill, Setup Labs, Journal, Progress — all rendering and functioning.
-- NOT yet deployed. NOT yet pushed to GitHub. Awaiting explicit instruction.
+- Daily lesson workflow proven end-to-end: paste Claude.ai transcript → JSON + Firestore push + chart concept files + deploy in ~45-90 min.
+- Per-date chart registry in `src/pages/mastery/DailyLessonPage.jsx` (`CHARTS_BY_DATE`) wires `2026-05-07`, `2026-05-11`, `2026-05-12` so far.
+- Chart inventory: ~455 hand-crafted SVG candlestick charts across Principles/Core Lessons/Q&A/Checklists/Overview/3 daily lessons.
+
+## Daily lesson pipeline
+1. Arnie pastes Claude.ai trading transcript at end of trading day
+2. Lesson JSON saved to `Daily Lesson Pipeline\drafts\YYYY-MM-DD-FULL.json` on Desktop
+3. Pushed to Firestore via `C:\Users\arnol\.claude\scripts\firestore-seed\push-lesson.mjs`
+4. Chart concept files created at `src/components/charts/day-YYYY-MM-DD/concepts/` (6-14 files)
+5. Bundle index created at `src/components/charts/day-YYYY-MM-DD/index.js`
+6. Mirrored to unis-ta-bootcamp-day1 app (chart bundle is per-app local; Firestore is shared)
+7. Per-date registry updated in `DailyLessonPage.jsx`
+8. Build + commit + push → Netlify auto-deploys
+9. Optional companion HTML at `Desktop\YYYY-MM-DD-<topic>.html` for offline study
 
 ## Modules built (per spec)
 1. **Home (`/`)** — locked commitments display, four principles cards, today's pattern focus, quick stats

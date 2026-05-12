@@ -1,5 +1,47 @@
 # SESSION_NOTES.md — Last Mile
 
+## Session — 2026-05-12 — Daily lesson workflow shipped end-to-end + chart component upgrade
+
+**What we did:**
+- Shipped the May 11 daily lesson (text + 96 charts) live to both apps.
+- Built the end-of-day daily-lesson pipeline: paste Claude.ai transcript → I generate JSON + push to Firestore + build 6-9 chart concept files + deploy. ~45-90 min depending on lesson depth.
+- Shipped the May 12 daily lesson — "Structure Shifts, Bear Traps & The Limbo State" — 9 teaching units, 49 chart variants, full JSON in Firestore, deployed both apps.
+- Built a companion standalone HTML at `C:\Users\arnol\Desktop\structure-shifts-and-bear-traps-2026-05-12.html` — self-contained 9-section study deck with embedded SVG chart generator, dark navy theme matching the apps. Opens in any browser, no app needed.
+- Upgraded `CandlestickChart.jsx` (mirrored to `.tsx` in unis) with a new `pivot` annotation type: labeled circle at a candle's wick high or low. The new chart files use it natively; older files unaffected.
+- Refactored `DailyLessonPage` renderer with per-date dynamic chart registry (was hardcoded to May 7). Adding a new day's charts now requires only adding the bundle to `CHARTS_BY_DATE` in both apps.
+- Made the admin form validator permissive — only requires date/title/sessionSummary; everything else round-trips to Firestore. Fixed the bug that silently dropped subtitle/tradesReview/qaCards/closingThought.
+- Added daily-lesson schema fields: `subtitle`, `tradesReview[]`, `qaCards[]`, `closingThought` — full renderer support across both apps.
+
+**Pipeline artifacts on Arnie's Desktop:**
+- `Daily Lesson Pipeline\README.md` — workflow entry point
+- `Daily Lesson Pipeline\MY-PIPELINE.md` — what I do step-by-step
+- `Daily Lesson Pipeline\drafts\2026-05-12-FULL.json` — tonight's lesson JSON
+- `ChatGPT-Daily-Lesson-Prompt.md` — granular prompt for parallel ChatGPT runs
+- `structure-shifts-and-bear-traps-2026-05-12.html` — tonight's HTML study deck
+
+**Backup safety copies (gitignored, in project folders):**
+- `last-mile\daily-lessons-backup\2026-05-11-FULL.json` + `READABLE.md`
+- `unis-ta-bootcamp-day1\2026-05-11-FULL.json` + `READABLE.md`
+
+**What's working:**
+- 3 daily lessons live in Firestore: foundation-day (May 6), 2026-05-07 (May 7), 2026-05-11, 2026-05-12
+- Chart inventory: ~310 across Principles/Core Lessons/Checklists/Q&A/Overview/May 7, +96 for May 11, +49 for May 12 = ~455 total
+- Per-date chart registry pattern proven across 3 days
+- Both Netlify deploys verified live (last-mile `951dc7f`, unis `4de52ce`)
+
+**Important decisions:**
+- Skipped retrofitting May 11's charts to use the new pivot annotation — too much rework for marginal gain. Going forward only.
+- Stop using NinjaTrader-style pattern recognition (Evening Star, Bearish Engulfing) without structural confirmation. Tonight's M2K JUN26 trade was a textbook example: bearish patterns fired into a bullish-structure context, got run over, but Arnie's trade WORKED because he read the structure (not the patterns).
+- Tomorrow's lesson workflow: paste Claude.ai transcript → say "build today's daily lesson — full content + charts + deploy." That's the whole ritual.
+
+**Problems encountered:**
+- Mid-session I narrated too much instead of just executing — wasted Arnie's time. Lesson: when he says "go", call Write/Bash immediately, no preamble.
+- A `cp` command put 3 new chart files in the wrong folder (mirror folder root instead of `concepts/`). Caught and fixed with `mv`.
+
+**What's next:**
+- Continue daily-lesson rhythm tomorrow: paste transcript end-of-day, build lesson + charts + deploy.
+- Consider future upgrades: side-translation panel layout in ChartGallery; richer chart sizes (50-70 candles instead of 10-15); auto-generated lesson preview before push.
+
 ## Session — 2026-05-09 (cont'd) — Read-aloud narrator (synced from bootcamp)
 
 **What we did:**
