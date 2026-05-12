@@ -321,6 +321,225 @@ const foundationDay = {
     'Stop reacting to flag shape. Identify the pole first, every single time. Mark the 50% line as soon as the pole forms. Wait for the close. Apply the four-pillar test to every entry — no exceptions, no "this one looks too good to wait."',
 };
 
+
+
+// =============================================================================
+// DAILY LESSON — 2026-05-11 — The Day Structure Became Everything
+// =============================================================================
+const may11_2026 = {
+  "date": "2026-05-11",
+  "title": "The Day Structure Became Everything",
+  "subtitle": "Real swings, fake setups, and the discipline of waiting",
+  "sessionSummary": "A breakthrough session across ES, M2K, and MES that crystallized the difference between structural analysis and pattern-shape recognition. Arnie identified valid bull flags and traded them well, took a real loss shorting a 'bear flag' that didn't qualify, then executed a textbook bear flag short with proper LH/LL confirmation — the same setup type with two opposite outcomes. The day produced foundational lessons on swing structure vs single candles, liquidity as the map of where markets want to go, the bull/bear flag asymmetry that most traders never internalize, multi-timeframe profit tiers, and the lunch-hour trap. Most importantly, this was the day Arnie started catching himself BEFORE bad trades — pausing to ask 'is this a real setup or a forced one?' That pause is the foundation of profitable trading.",
+  "tradesReview": [
+    {
+      "lesson": "Pattern was invalidated when structure broke. Standing aside on broken structure saved real money. The setup later reformed as a spring/liquidity sweep — a different pattern entirely.",
+      "setup": "Bull flag continuation long, trendline break entry",
+      "instrument": "ES JUN26",
+      "decision": "STOOD ASIDE",
+      "outcome": "Validated — price made a lower low after the trendline break"
+    },
+    {
+      "lesson": "Process trumped outcome. BE protection meant zero risk while bearish engulfing warning played out. When the secondary flag resolved bullish, full upside captured. Same framework would have protected if it had reversed.",
+      "decision": "ENTERED LONG 4 contracts at 2884.5 area",
+      "outcome": "Took 2 off at +$11.50 profit, held remaining at BE through bearish engulfing scare, eventually hit Target 2 and Target 3 as flag-inside-flag pattern played out",
+      "setup": "Bull flag with Inverted Hammer #21 reversal at flag low",
+      "instrument": "M2K JUN26"
+    },
+    {
+      "lesson": "Textbook bull flag execution. Pole, pullback to EMA, reversal candle, breakout with BE protection. Same setup pattern as M2K reinforced this is Arnie's bread-and-butter pattern.",
+      "setup": "Bull flag with clean pullback to 20 EMA, breakout from consolidation",
+      "instrument": "MES JUN26",
+      "decision": "ENTERED LONG 8 contracts at 7434 then 7436",
+      "outcome": "WIN — captured the move through Target 1 at 7437.75"
+    },
+    {
+      "lesson": "Setup did not qualify as a bear flag. Three failures: (1) one candle is not a pole, (2) bounce exceeded 50% retracement, (3) prior structure was bullish with no LH/LL. Shorting into an uptrend disguised as a brief selloff is a losing trade waiting to happen. The trigger mechanic was correct; the pattern recognition was wrong.",
+      "setup": "Attempted bear flag short — single red candle 'pole,' deep bounce, trendline break entry",
+      "instrument": "MES JUN26",
+      "decision": "ENTERED SHORT 8 contracts at 7434",
+      "outcome": "LOSS — $290 hit before structure-based exit, max stop was $380"
+    },
+    {
+      "lesson": "Same setup type as the loss earlier, but THIS TIME structure was actually bearish before entry. The difference between forcing a setup and waiting for one is the difference between losing and winning money on identical-looking patterns.",
+      "decision": "ENTERED SHORT at 7439.25 area after structure confirmation",
+      "outcome": "WIN — booked $44.50 realized on partial, additional runners working",
+      "setup": "Bear flag short with confirmed LH AND LL structure first",
+      "instrument": "MES JUN26"
+    },
+    {
+      "outcome": "Avoided the trade — setup was lunchtime imitation, not real",
+      "decision": "PAUSED, asked instead of clicked",
+      "instrument": "MES JUN26",
+      "setup": "Apparent bear flag at 12:20 PM during lunch hour",
+      "lesson": "The pause itself was the win. Lunch hour patterns look like real setups but lack the volume to make them work. Skipping marginal lunch trades has higher expected value than taking them."
+    }
+  ],
+  "teachingUnits": [
+    {
+      "applicationToday": "Arnie's prior framework called any candle lower than the previous one a 'lower low.' This caused him to misread structure constantly, especially on the 2-minute chart where wiggles are common. Once corrected to swing-based identification, the bear flag setup that lost $290 (no real LH/LL) became distinguishable from the one that won (clean LH/LL formed).",
+      "concept": "A swing low is a candle with at least one (ideally two) HIGHER lows on BOTH sides of it — a pivot the market tested, rejected, and turned away from. A single candle going lower than the previous candle is NOT a lower low. That's noise.",
+      "detail": "Most new traders identify 'lower lows' from any candle that closes below the prior candle. This is the single most common structural misread in trading. Real swing points stand out — if you squint at the chart and let individual candles blur, the peaks and valleys you can still see are the swings. Everything else is noise. The minimum rule is a 1-bar pivot: a candle with the candle before it making a higher low AND the candle after it making a higher low. The better rule is a 2-bar pivot — two candles on each side. This filters more noise.",
+      "rule": "Only swing highs and swing lows count for structural analysis. Individual candles are noise.",
+      "title": "The Foundation: Swing Highs and Lows vs Single Candles",
+      "id": 1
+    },
+    {
+      "title": "Liquidity: The Map That Shows Where the Market Wants to Go",
+      "rule": "The market goes where the money is, and the money sits at obvious stop levels. Don't place YOUR stops at the obvious spots — put them beyond. Watch for liquidity sweeps as entry signals (quick wick below an obvious low followed by strong reversal candle = often a great long).",
+      "detail": "When everyone places a stop at the same obvious level, that spot becomes a liquidity pool. To buy 10,000 contracts, an institution needs 10,000 sellers — conveniently waiting as stop-loss orders below the swing low. The market gets pushed down to trigger those stops, creates panic selling, lets the institution fill its BUY order against that selling at a great price. Then price reverses up. This is a liquidity sweep — also called a spring or a stop hunt.",
+      "id": 2,
+      "concept": "Liquidity = where the stop-loss orders are stacked. Below an obvious swing low sits a pool of sell-stops. Above an obvious swing high sits a pool of buy-stops. The market is drawn to these pools because institutions need them to fill large orders.",
+      "applicationToday": "The ES chart in the morning is the textbook example. After the bearish harami and the dump, price swept below the prior swing low, found buyers, and reversed hard back to the highs. Traders who shorted the trendline break got run over by the liquidity sweep."
+    },
+    {
+      "applicationToday": "The morning ES chart broke the prior swing low before the trendline break entry would have triggered. Structure was already broken. The continuation rule (trendline break long) requires the prior trend to still be intact — applying continuation rules inside broken structure is systematically buying where shorts are pressing and trapped longs are getting stopped.",
+      "concept": "A bull flag pullback and a trend reversal look identical for the first one or two candles. Structure — not appearance — determines which one you're in.",
+      "id": 3,
+      "detail": "An uptrend is alive only as long as HH then HL then HH then HL is intact. The instant price prints a lower low (breaks below the most recent HL), the uptrend is mechanically over on that timeframe. The bull flag thesis is invalidated. The trend might resume later, but at THIS moment, you are in 'undefined' — which means NO LONG. The 5-point checklist: (1) Structure intact? (2) Pullback depth under 50%? (3) Character of pullback shallow vs aggressive? (4) Moving average behavior? (5) Higher-timeframe context aligned?",
+      "rule": "Before any pullback long, ask one question: 'Is the most recent higher low still holding?' Yes = take the trade. No = stand aside or flip to looking for shorts.",
+      "title": "Bull Flag vs Trend Reversal: The Structure Test"
+    },
+    {
+      "detail": "Three tiers: (1) Wick below, body recovers above = often bullish — a liquidity sweep, Wyckoff spring. One of the highest-probability long setups. (2) Wick below, body closes near the low but slightly above prior swing low = yellow flag, wait one candle. (3) Body closes below prior swing low = structure broken, no long entries. Treating every wick as a break makes traders sell every bottom. Stop hunts and liquidity sweeps are not conspiracy theories — they are how order flow works in liquid futures markets.",
+      "title": "Wick Below vs Body Close Below: A Wick Is a Question, a Close Is an Answer",
+      "rule": "Train your eye to wait for the close before declaring structure broken. Wicks ask questions. Closes give answers.",
+      "id": 4,
+      "applicationToday": "On the first ES chart, the close at 7271 was below the prior swing low — Tier 3, real break. If instead it had wicked to 7270 and reversed to close at 7278 with strong volume, the entire picture would flip to a bullish spring setup.",
+      "concept": "A wick below the prior swing low is a WARNING, not an invalidation. A 2-minute candle that CLOSES below it is the structural break."
+    },
+    {
+      "detail": "A pattern can be objectively dead while the chart remains tradeable in a different way. The bull flag broken on the first ES chart was over. But within minutes, the market swept liquidity, reversed, and created a NEW setup — a spring/V-recovery. Different pattern, different rules, different entry. The trader's job when a pattern dies is to stop trading the dead one and start watching for what's setting up next.",
+      "title": "Patterns Die, Charts Keep Trading",
+      "rule": "Stop trading dead patterns. Start watching for the next setup. The chart keeps trading even when your idea about it doesn't.",
+      "id": 5,
+      "applicationToday": "The ES bull flag died at 7271. Within minutes the same chart became a spring setup at 7270 that rallied back to R2 at 7283. The valid long entry was at the spring low with confirmation — NOT at the original trendline break. Different setup entirely.",
+      "concept": "When a specific pattern invalidates, the chart isn't dead. Often a new pattern forms underneath the dead one — and recognizing the transition is the skill that separates surviving traders from those who get stuck arguing with the market."
+    },
+    {
+      "id": 6,
+      "title": "The Bull Flag Life Cycle: Four Stages You Must Track In Real Time",
+      "rule": "Always know what stage of the pattern you're in. The decision to hold or exit lives in Stage 4 — not in the beauty of Stage 1.",
+      "detail": "Stage 1 — POLE: the big green run, the setup ingredient. Stage 2 — FLAG: the pullback, should be shallow, lower volume, holding 20 EMA. Stage 3 — BREAKOUT & FOLLOW-THROUGH: the validation — without clear higher highs after entry, the breakout was just noise. Stage 4 — CONTINUATION OR FAILURE: clean stair-step extension (hold runners) OR stall at prior high with bearish patterns (exit runners). The pole tells you whether to take the trade. It does NOT tell you whether to hold the trade. Past beauty is finished history.",
+      "concept": "Every bull flag has four distinct stages, and you must always know which one you're in DURING the trade — not just at entry.",
+      "applicationToday": "M2K bull flag: pole formed, flag was clean, entry was textbook on the Inverted Hammer, but Stage 4 showed bearish engulfing at the highs — a warning that the trade was at a decision point. Took partials (right move), BE protection (right move), held remaining to see if Stage 4 resolved bullish or bearish. It resolved bullish via secondary flag — runner targets hit. Process worked regardless of which way it could have gone."
+    },
+    {
+      "concept": "Good trading is not about being right. It's about taking trades with positive expected value and managing risk so the outcome doesn't break you.",
+      "applicationToday": "Held M2K runners at BE through the bearish engulfing scare. Outcome was favorable (flag resolved bullish). But the lesson is that BE protection made BOTH outcomes acceptable — full upside on continuation, zero loss on reversal. That's the framework working, not luck.",
+      "id": 7,
+      "rule": "Outcomes don't validate or invalidate the framework. Process discipline does. Don't change rules because of one outcome — good or bad.",
+      "title": "Process vs Outcome: Protected Risk Always Wins",
+      "detail": "When the bearish engulfing printed at the top of the M2K flag, the chart showed a coin flip — maybe 55/45 in favor of reversal, maybe 50/50. The correct response in that situation is NOT to predict — it's to PROTECT. Tightening to BE protection means: if reversal, exit at BE (no loss); if continuation, runners stay in with full upside. The framework is correct regardless of which way the coin lands. Bad outcomes from correct process don't invalidate the process. Good outcomes from forced trades don't validate the bad process."
+    },
+    {
+      "applicationToday": "M2K printed bearish engulfing, then consolidated near the 20 EMA, then rallied through the highs to Target 3. The secondary flag (consolidation) was the continuation setup that the bearish engulfing temporarily masked.",
+      "concept": "Consolidation that prints AFTER a reversal candle inside a larger uptrend isn't necessarily reversal — it can be the market resting before the next leg up. If the 20 EMA holds during the consolidation, the original bull flag thesis can resume.",
+      "id": 8,
+      "detail": "Bearish reversal candles at the top of bull flags don't always invalidate the trade. The market often needs another rest period before continuation. Watch the 20 EMA: if it holds during the consolidation, the original thesis is alive. If it breaks with conviction, the reversal is real. This pattern is common enough to name — flag inside a flag.",
+      "title": "Flag Inside a Flag: When the Original Thesis Resumes",
+      "rule": "After a reversal candle inside an uptrend, watch the 20 EMA during the consolidation. EMA holds = original thesis alive. EMA breaks = reversal is real."
+    },
+    {
+      "id": 9,
+      "detail": "In a bull flag, the pullback can take many candles because buyers accumulate patiently. You have time to draw your trendline, watch it form, and wait for the break. In a bear flag, the bounce is usually fast, sharp, and short-lived because shorts are aggressive — they don't want to give buyers time to organize. A 'real' bear flag often only has 3-6 candles of counter-bounce before the next leg down. If you're drawing a clean upward trendline through 8-10 candles of bounce after a 3-candle drop, that's not a bear flag — it's a failed selloff being reabsorbed by the uptrend.",
+      "rule": "Bear flag bounces should be SHORT, SHALLOW, and FAST. If the bounce takes 8+ candles, that's not a flag — it's a reversal of the move down.",
+      "title": "Bear Flag Asymmetry: Why Bear Flags Aren't Just Inverted Bull Flags",
+      "applicationToday": "The MES short loss came from treating a deep V-recovery as a bear flag bounce. The bounce was too long, too deep (over 50%), and on too much volume to qualify. Recognizing this asymmetry would have prevented the loss.",
+      "concept": "Markets fall faster than they rise. This isn't trader folklore — it has real implications for flag patterns. Bear flags require stricter conditions than bull flags."
+    },
+    {
+      "id": 10,
+      "detail": "(1) Has price already made at least one lower high AND one lower low on this timeframe? No = no short. (2) Does the 'pole' consist of multiple impulse candles OR a confirmed break of structure? One candle isn't a pole. (3) Is the bounce shallow (under 50%)? Beyond 61.8% retracement, the bear thesis is dead. (4) Is the bounce stalling at logical resistance (broken support flipping to resistance, key MA, prior swing low) with declining volume? (5) Is the higher timeframe also bearish? If no, size down or skip.",
+      "title": "The Bear Flag Setup Checklist: 5 Conditions That MUST Be True",
+      "rule": "Run the 5-point checklist before EVERY bear flag short. Any NO = no trade. Discipline at the checklist saves more money than skill at the trigger.",
+      "applicationToday": "The MES short loss failed checks 1, 2, and 3 — three out of five fails. The MES short WIN passed all five. Same setup type, opposite outcomes because the checklist was the discriminator.",
+      "concept": "Five questions answered in order. If any answer is NO, skip the trade."
+    },
+    {
+      "applicationToday": "After the winning MES bear flag short, identified 7441-7443 as the re-entry zone (broken support flipping to resistance). The discipline of waiting for that exact level + bearish candle prevents chasing.",
+      "concept": "After a winning bear flag short, the bounces become potential re-entry opportunities — but only specific kinds of bounces qualify.",
+      "detail": "Run this checklist on every potential re-entry: (1) Is bounce shallow (under 50% of prior down leg)? (2) Did the bounce fail at logical resistance — broken support flipping to resistance is the cleanest? (3) Did a bearish confirmation candle print at resistance? (4) Is structure still LH/LL? (5) Is volume DECLINING on the bounce? Best re-entry zones: broken support flipping to resistance, the 20 EMA from below, prior swing low that price just broke through. Smaller size than initial entry — don't give back what you just made.",
+      "title": "The Bear Flag Re-entry Framework",
+      "rule": "Re-enter shorts only when broken support flips to resistance AND a bearish candle confirms — anything less is forcing it.",
+      "id": 11
+    },
+    {
+      "applicationToday": "This is THE framework upgrade Arnie needs. Being right over 50% with 1R wins barely covers commissions. Being right over 50% with 2-3R average is a thriving trading business. Same trade selection, just better targets.",
+      "concept": "Taking profits in tiers IS the right framework. The problem most scalpers have is using only 2-minute resistance for every tier — capturing only the smallest possible move every time.",
+      "detail": "Build the tier plan using levels from MULTIPLE timeframes: Tier 1 (25% off) = nearest 2-min resistance. Tier 2 (25% off) = nearest 5-min resistance. Tier 3 (25% off) = nearest 15-min resistance. Tier 4 (25% runners) = 60-min or daily level with trailing stop. The market doesn't care about your 2-minute timeframe — when MES runs, it stops at MEANINGFUL levels, which usually come from higher timeframes. Using 5/15/60-min resistance catches moves the market actually respects.",
+      "title": "Multi-Timeframe Profit Tiers: Where Your Real Edge Hides",
+      "rule": "Before every trade, pull up 5-min and 15-min, mark the next resistance on each, map them onto your 2-min chart. Those become your tier targets. Your edge is hidden in your last tier.",
+      "id": 12
+    },
+    {
+      "id": 13,
+      "title": "Break-Even Stops: Three Approaches and When to Use Each",
+      "rule": "Moving to BE too fast = many losing-to-BE trades that should have been winners. Moving too slowly = giving back too much. Structure-based stops solve both because they tie the stop to actual market behavior.",
+      "detail": "(A) BE after first partial profit — simple, protects capital quickly, the default. (B) BE after price has moved 1R in your favor — cleaner mathematical logic, less arbitrary. (C) Structure-based stop — move stop to JUST BELOW the most recent confirmed higher low. Mathematically optimal, follows price action, lets winners breathe through normal volatility. Recommendation: combine (A) and (C) — move to BE after first partial OR after a new higher low forms, whichever comes first. As structural identification improves, transition fully to (C).",
+      "concept": "Move-to-BE timing has three valid frameworks. The best one for a scalper at your level combines simplicity with structure.",
+      "applicationToday": "The MES and M2K bull flag trades used BE-after-first-partial. Worked well. Both trades survived bearish engulfing scares because BE protection meant no risk, runners could ride."
+    },
+    {
+      "applicationToday": "Arnie saw an apparent bear flag at 12:20 PM ET and PAUSED to ask about lunch trading. That pause was a major win. The setup was a lunchtime imitation — right shape, wrong substance. Skipping it had higher expected value than taking it.",
+      "concept": "The midday window has structural problems that make 2-minute scalping particularly dangerous. Pattern shapes still form, but the volume that makes patterns work is absent.",
+      "detail": "Volume collapses (look at your own volume bars), algos dominate, chop replaces trend, slow grinds eat stops, false signals multiply. A bearish engulfing on low volume has a fraction of the predictive power it does on real volume. Setups that look perfect during lunch fail at much higher rates than identical setups during high-volume periods. Resume time: 1:30 PM ET minimum — not 1:00, not 1:15. The 1:00-1:30 window is statistically the most dangerous because price moves like a real market but liquidity hasn't caught up. Best afternoon trading window: 2:00-3:00 PM ET.",
+      "title": "The Lunch Hour Trap: Why 11:30-1:30 ET Destroys Accounts",
+      "rule": "No trades 11:30 AM – 1:30 PM ET unless there's a major catalyst, a key-level test, or strong-trend-day continuation. Default = sit out. Resume at 1:30 minimum, prefer 2:00.",
+      "id": 14
+    }
+  ],
+  "qaCards": [
+    {
+      "question": "If price wicks below the swing low but closes above it, is the bull flag dead?",
+      "answer": "No — that wick is often a liquidity sweep / spring, one of the highest-probability bullish setups. Only a BODY close below invalidates the structure. Watch the next candle: if green and reclaiming the area with volume, that's the spring entry."
+    },
+    {
+      "answer": "The afternoon trade had confirmed lower high AND lower low BEFORE entry. The morning trade did not — it shorted into an uptrend with one red candle as the supposed 'pole.' Same trigger mechanics, different structural context. Structure is the discriminator.",
+      "question": "Why did the same bear flag setup lose money in the morning and make money in the afternoon?"
+    },
+    {
+      "answer": "For now, whichever comes first. Long-term, transition to structural — it lets winners breathe through normal volatility. BE-after-partial is fine while learning, but it's not optimal.",
+      "question": "Should I move to break-even after first partial or after a structural higher-low forms?"
+    },
+    {
+      "answer": "Because it IS leaving money on the table. The market respects 5-min, 15-min, and 60-min levels — not 2-min ones. Use multi-timeframe levels for your tiers. The biggest profit usually comes from the last 25% riding to a higher-TF target.",
+      "question": "Why does taking profits at 2-minute resistance feel like leaving money on the table?"
+    },
+    {
+      "answer": "1:30 PM ET minimum, with caveats. The 1:00-1:30 window LOOKS like a market but isn't yet — volume hasn't caught up. Best afternoon window: 2:00-3:00 PM ET when institutional desks are back and the afternoon character is established.",
+      "question": "When can I trade after lunch?"
+    }
+  ],
+  "chartReferences": [],
+  "keyRules": [
+    "Only swing highs and swing lows count for structural analysis. Single candles are noise.",
+    "Before any pullback long: is the most recent higher low still holding? If no, no trade.",
+    "Wicks below swing lows are warnings. Body closes below are invalidations.",
+    "Never take a bear flag short until at least one lower high AND one lower low have formed.",
+    "A bear flag pole requires multiple impulse candles OR a confirmed structure break. One candle is never a pole.",
+    "Bear flag bounces should be shallow (under 50%) and short (3-6 candles). Anything more is a reversal in disguise.",
+    "When a pattern dies, the chart isn't dead — watch for the next pattern to set up cleanly.",
+    "Take partials in tiers from multiple timeframes (2-min, 5-min, 15-min, 60-min). Your hidden edge is in the higher-TF runners.",
+    "Move stop to BE after first partial OR after a new higher low forms, whichever comes first.",
+    "Don't trade lunch hour (11:30 AM – 1:30 PM ET). The shapes look right but the volume isn't there to make them work.",
+    "Process discipline determines long-term success. One good outcome doesn't validate a bad process; one bad outcome doesn't invalidate a correct one.",
+    "After winning trades, the temptation to keep finding more setups becomes a force for forcing trades that don't qualify. Stay aware.",
+    "Patience is a position. Skipping marginal setups has higher expected value than forcing them.",
+    "Re-enter winning shorts only at broken support flipping to resistance, with bearish confirmation candle."
+  ],
+  "principlesReinforced": [
+    "STRUCTURE BEFORE PATTERNS — pattern shapes mean nothing without the underlying structural conditions that make patterns work",
+    "PROCESS OVER OUTCOME — protect capital with framework, then accept whatever happens",
+    "MULTI-CONFIRMATION REQUIRED — single-factor signals are weak; alignment of structure + volume + level + candle confirmation is strong",
+    "PATIENCE IS A POSITION — skipping marginal setups is itself a trade decision",
+    "TIME OF DAY MATTERS — the same setup at 10 AM and 12:30 PM have different expected values",
+    "MANAGE RISK FIRST — BE protection turns coin flips into free shots at upside",
+    "RECOGNIZE PSYCHOLOGICAL DRIFT — after winners, the brain wants more dopamine and starts inventing setups"
+  ],
+  "whatIllDoDifferently": "• Identify swing points using the squint test — if I can't clearly see the pivot when individual candles blur, it isn't a real swing.\n• Before any pullback long, run the 5-point checklist. If any answer is NO, no trade.\n• Before any bear flag short, require both lower high AND lower low confirmed BEFORE entry — period.\n• Use 5-min, 15-min, and 60-min resistance as profit tiers, not just 2-min.\n• Move stop to break-even after first partial OR new HL forms — whichever comes first.\n• No trades between 11:30 AM and 1:30 PM ET unless major catalyst.\n• After every winning trade, force a self-check before the next trade: am I selecting setups or inventing them?\n• When a pattern invalidates, stop trading the dead pattern and watch for the next setup — don't chase the original thesis.\n• Treat wicks and closes differently. Wick below = warning. Close below = invalidation.\n• Look for liquidity sweeps as entry signals — wicks below obvious lows followed by strong reversals are some of the best setups.",
+  "closingThought": "Today was the day pattern recognition became structural analysis. The same bear flag setup printed twice — once it lost $290, once it made money. The difference wasn't skill or luck; it was whether the structural conditions that make bear flags work were actually present. Real setups have structure backing them. Forced setups have only shape. Learning to tell the difference, in real time, is the work — and today, that work started compounding."
+};
 const may7_2026 = {
   date: '2026-05-07',
   title: 'The Day Five Years Started to Turn',
@@ -546,7 +765,7 @@ const may7_2026 = {
 };
 
 
-export const dailyLessons = [may12_2026, may7_2026, foundationDay];
+export const dailyLessons = [may12_2026, may11_2026, may7_2026, foundationDay];
 
 export function getDailyLesson(date) {
   return dailyLessons.find(l => l.date === date);
