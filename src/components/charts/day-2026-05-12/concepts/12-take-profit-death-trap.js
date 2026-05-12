@@ -1,0 +1,66 @@
+// Teaching unit 12: The take-profit death trap — capped winners.
+export const charts = [
+  {
+    title: 'Capped TP — your maximum reward stops at 2.67R',
+    candles: [
+      { o: 2810, h: 2810.5, l: 2809.5, c: 2810.2 },
+      { o: 2810.2, h: 2811, l: 2810, c: 2810.8 },
+      { o: 2810.8, h: 2813, l: 2810.5, c: 2812.5 },
+      { o: 2812.5, h: 2815, l: 2812, c: 2814.5 },
+      { o: 2814.5, h: 2817, l: 2814, c: 2816.5 },
+      { o: 2816.5, h: 2819, l: 2816, c: 2818.5 },
+      { o: 2818.5, h: 2821, l: 2818, c: 2820.2 },
+      { o: 2820.2, h: 2822, l: 2820, c: 2821.5 },
+      { o: 2821.5, h: 2824, l: 2821, c: 2823.5 },
+      { o: 2823.5, h: 2826, l: 2823, c: 2825.5 },
+      { o: 2825.5, h: 2828, l: 2825, c: 2827.5 },
+      { o: 2827.5, h: 2830, l: 2827, c: 2829.5 },
+    ],
+    annotations: [
+      { type: 'level', price: 2810, color: '#FF3D5A', label: 'Stop' },
+      { type: 'level', price: 2811.5, color: '#FBBF24', label: 'T1 +1R' },
+      { type: 'level', price: 2812.2, color: '#FBBF24', label: 'T2 +1.47R', dash: true },
+      { type: 'level', price: 2813, color: '#FBBF24', label: 'T3 +2R', dash: true },
+      { type: 'level', price: 2814, color: '#FF3D5A', label: 'T4 +2.67R ceiling' },
+      { type: 'arrow', at: { i: 11, price: 2829.5 }, direction: 'down', color: '#FF3D5A', label: 'move went here without you' },
+    ],
+    verdict: { label: 'You exit at 2.67R while the move runs to 12R', type: 'bad' },
+    caption: 'When your T4 caps at 2.67R, the runner mathematically cannot happen. The 5.5-year ceiling that has kept Arnie at almost-profitable lives in these four TP boxes.',
+  },
+  {
+    title: 'Same 50% win rate — capped vs runner — over 100 trades',
+    candles: [
+      { o: 100, h: 100.1, l: 99.9, c: 100 },
+    ],
+    annotations: [
+      { type: 'level', price: 100, color: '#a78bfa', label: 'Same win rate, same stop, same setups' },
+      { type: 'level', price: 112.5, color: '#FF3D5A', label: 'CAPPED — net +12.5R / 100 trades', dash: true },
+      { type: 'level', price: 157, color: '#00D9A0', label: 'RUNNER — net +57R / 100 trades' },
+    ],
+    verdict: { label: '4.5x more profit just from uncapping T4', type: 'good' },
+    caption: 'Trader A (capped 1.25R avg win): 50 × 1.25R − 50 × 1R = +12.5R. Trader B (1R + 2R + 5R runners): +57R. Same trades. 4.5x the profit. The exit structure IS the edge.',
+  },
+  {
+    title: "Capped TPs end BEFORE the pattern's measured move",
+    candles: [
+      { o: 7378, h: 7380, l: 7377, c: 7379 },
+      { o: 7379, h: 7382, l: 7378.5, c: 7381.5 },
+      { o: 7381.5, h: 7384, l: 7381, c: 7383.5 },
+      { o: 7383.5, h: 7387, l: 7383, c: 7386.5 },
+      { o: 7386.5, h: 7390, l: 7386, c: 7389.5 },
+      { o: 7389.5, h: 7395, l: 7389, c: 7394.5 },
+      { o: 7394.5, h: 7400, l: 7394, c: 7399.5 },
+      { o: 7399.5, h: 7406, l: 7399, c: 7405.5 },
+      { o: 7405.5, h: 7412, l: 7405, c: 7411.5 },
+    ],
+    annotations: [
+      { type: 'level', price: 7389.75, color: '#FF3D5A', label: 'Old T4 cap 7389.75' },
+      { type: 'level', price: 7395, color: '#FBBF24', label: 'TRUE neckline 7395' },
+      { type: 'level', price: 7412, color: '#a78bfa', label: 'Measured move 7412' },
+      { type: 'arrow', at: { i: 4, price: 7389.5 }, direction: 'up', color: '#FF3D5A', label: 'you exit HERE' },
+      { type: 'arrow', at: { i: 8, price: 7411.5 }, direction: 'down', color: '#00D9A0', label: 'market goes HERE' },
+    ],
+    verdict: { label: 'Exiting BEFORE the pattern even confirms', type: 'bad' },
+    caption: 'On the MES setup, the old T4 at 7389.75 closes the entire position BEFORE the neckline at 7395 is broken — flat while the move you correctly anticipated plays out without you.',
+  },
+];

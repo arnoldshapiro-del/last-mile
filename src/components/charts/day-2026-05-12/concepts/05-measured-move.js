@@ -1,0 +1,68 @@
+// Teaching unit 5: Measured move — pattern depth projected ABOVE the neckline.
+export const charts = [
+  {
+    title: 'Measure pattern depth — neckline minus lowest trough',
+    candles: [
+      { o: 7400, h: 7401, l: 7395, c: 7395.5 },
+      { o: 7395.5, h: 7396, l: 7385, c: 7385.5 },
+      { o: 7385.5, h: 7386, l: 7378, c: 7378.5 },
+      { o: 7378.5, h: 7382, l: 7378, c: 7381.5 },
+      { o: 7381.5, h: 7390, l: 7381, c: 7389 },
+      { o: 7389, h: 7395, l: 7388, c: 7394.5 },
+      { o: 7394.5, h: 7395, l: 7392, c: 7392.5 },
+      { o: 7392.5, h: 7393, l: 7388, c: 7388 },
+      { o: 7388, h: 7388.5, l: 7384, c: 7384.5 },
+      { o: 7384.5, h: 7385, l: 7380, c: 7380.5 },
+      { o: 7380.5, h: 7383, l: 7378.5, c: 7382.5 },
+    ],
+    annotations: [
+      { type: 'level', price: 7395, color: '#FBBF24', label: 'Neckline 7395' },
+      { type: 'level', price: 7378, color: '#FF3D5A', label: 'Trough 7378', dash: true },
+      { type: 'arrow', at: { i: 5, price: 7395 }, direction: 'down', color: '#FBBF24' },
+      { type: 'arrow', at: { i: 2, price: 7378 }, direction: 'up', color: '#FF3D5A' },
+    ],
+    verdict: { label: 'Depth = 7395 − 7378 = 17 points', type: 'good' },
+    caption: 'Pattern depth is the vertical distance from the structural neckline to the lowest trough. This number IS the measured-move projection — same depth, projected upward from the neckline.',
+  },
+  {
+    title: 'Project depth UP from the neckline = measured move target',
+    candles: [
+      { o: 7380, h: 7383, l: 7378.5, c: 7382.5 },
+      { o: 7382.5, h: 7388, l: 7382, c: 7387.5 },
+      { o: 7387.5, h: 7392, l: 7387, c: 7391.5 },
+      { o: 7391.5, h: 7396, l: 7391, c: 7395.5 },
+      { o: 7395.5, h: 7400, l: 7395, c: 7399.5 },
+      { o: 7399.5, h: 7404, l: 7399, c: 7403.5 },
+      { o: 7403.5, h: 7408, l: 7403, c: 7407.5 },
+      { o: 7407.5, h: 7412, l: 7407, c: 7411.5 },
+      { o: 7411.5, h: 7413, l: 7410, c: 7411 },
+    ],
+    annotations: [
+      { type: 'level', price: 7395, color: '#FBBF24', label: 'Neckline (launch point)' },
+      { type: 'level', price: 7412, color: '#a78bfa', label: 'Measured move = 7395 + 17 = 7412' },
+      { type: 'arrow', at: { i: 7, price: 7412 }, direction: 'down', color: '#a78bfa', label: 'TARGET' },
+    ],
+    verdict: { label: 'Target lines up with existing 7410.63 marker — confirmation', type: 'good' },
+    caption: 'Add the 17-point depth to the 7395 neckline = target ~7412. Notice how cleanly this lines up with the prior structural level at 7410.63 already on the chart — not a coincidence.',
+  },
+  {
+    title: 'Wrong neckline = wrong target = bad R:R math',
+    candles: [
+      { o: 7380, h: 7383, l: 7378.5, c: 7382.5 },
+      { o: 7382.5, h: 7388, l: 7382, c: 7387.5 },
+      { o: 7387.5, h: 7392, l: 7387, c: 7391.5 },
+      { o: 7391.5, h: 7396, l: 7391, c: 7395.5 },
+      { o: 7395.5, h: 7400, l: 7395, c: 7399.5 },
+      { o: 7399.5, h: 7404, l: 7399, c: 7403.5 },
+      { o: 7403.5, h: 7408, l: 7403, c: 7407.5 },
+      { o: 7407.5, h: 7412, l: 7407, c: 7411.5 },
+    ],
+    annotations: [
+      { type: 'level', price: 7387, color: '#FF3D5A', label: 'MISREAD neckline → target 7400 only', dash: true },
+      { type: 'level', price: 7395, color: '#FBBF24', label: 'TRUE neckline → target 7412' },
+      { type: 'level', price: 7412, color: '#a78bfa', label: 'Real target +12 more points', dash: true },
+    ],
+    verdict: { label: 'Wrong neckline shaves 50% off the target', type: 'bad' },
+    caption: 'If you misread the neckline at 7387 instead of 7395, your measured-move target shrinks from 7412 to 7400 — half the runway, half the R:R, missed the actual move.',
+  },
+];
