@@ -1,0 +1,66 @@
+// Teaching unit 6: The 3-question real-time decision tree.
+export const charts = [
+  {
+    title: 'Q1 — Did price escape ALL prior wicks?',
+    candles: [
+      { o:100.0, h:102.0, l:99.8, c:101.8 },
+      { o:101.8, h:102.2, l:101.4, c:101.5 },
+      { o:101.5, h:101.7, l:100.8, c:101.0 },
+      { o:101.0, h:101.4, l:100.6, c:101.3 },
+      { o:101.3, h:101.5, l:100.7, c:100.8 },
+      { o:100.8, h:101.5, l:100.7, c:101.4 },
+      { o:101.4, h:102.3, l:101.3, c:102.2 },
+      { o:102.2, h:103.4, l:102.1, c:103.3 },
+    ],
+    annotations: [
+      { type: 'level', price: 102.2, color: '#FBBF24', label: 'Prior wick high' },
+      { type: 'arrow', at: { i: 7, price: 103.4 }, direction: 'down', color: '#4ADE80', label: 'ESCAPED — Q1 YES' },
+    ],
+    verdict: { label: 'Test pass', type: 'good' },
+    caption: 'Look at the wick boundaries of the relevant prior swing candles. If the new candle\'s wick has not exceeded those, you are still inside structure. If it has, you have an external move.',
+  },
+  {
+    title: 'Q2 — Did the OPPOSING structure point also break?',
+    candles: [
+      { o:103.0, h:103.2, l:102.6, c:102.7 },
+      { o:102.7, h:102.9, l:101.8, c:101.9 },
+      { o:101.9, h:102.2, l:101.0, c:101.1 },
+      { o:101.1, h:102.0, l:101.0, c:101.9 },
+      { o:101.9, h:102.5, l:101.8, c:102.4 },
+      { o:102.4, h:102.6, l:101.4, c:101.5 },
+      { o:101.5, h:101.7, l:100.6, c:100.7 },
+      { o:100.7, h:100.9, l:99.7, c:99.8 },
+    ],
+    annotations: [
+      { type: 'arrow', at: { i: 4, price: 102.5 }, direction: 'down', color: '#F43F5E', label: 'LH ✓' },
+      { type: 'arrow', at: { i: 7, price: 99.7 }, direction: 'up', color: '#F43F5E', label: 'LL ✓' },
+      { type: 'level', price: 101.0, color: '#F43F5E', label: 'Prior HL broken', dash: true },
+      { type: 'badge', at: { i: 7, price: 100.4 }, text: 'BOTH PRESENT', color: '#F43F5E' },
+    ],
+    verdict: { label: 'Test pass', type: 'good' },
+    caption: 'One pivot alone is a question. After the LH formed, the LL also confirmed by closing below the prior HL. Both pivots present = bearish quorum.',
+  },
+  {
+    title: 'Q3 — Did the shift CONFIRM or immediately reclaim (trap)?',
+    candles: [
+      { o:103.0, h:103.2, l:102.6, c:102.7 },
+      { o:102.7, h:102.9, l:101.8, c:101.9 },
+      { o:101.9, h:102.5, l:101.8, c:102.4 },
+      { o:102.4, h:102.6, l:101.4, c:101.5 },
+      { o:101.5, h:101.7, l:100.6, c:100.7 },
+      { o:100.7, h:100.8, l:99.7, c:100.7 },
+      { o:100.7, h:101.7, l:100.6, c:101.6 },
+      { o:101.6, h:102.7, l:101.5, c:102.6 },
+      { o:102.6, h:103.8, l:102.5, c:103.7 },
+    ],
+    annotations: [
+      { type: 'arrow', at: { i: 2, price: 102.5 }, direction: 'down', color: '#F43F5E', label: 'LH' },
+      { type: 'arrow', at: { i: 5, price: 99.7 }, direction: 'up', color: '#EC4899', label: 'SWEEP (wick LL)' },
+      { type: 'level', price: 102.6, color: '#22C55E', label: 'LH reclaimed ✓' },
+      { type: 'arrow', at: { i: 8, price: 103.8 }, direction: 'down', color: '#4ADE80', label: 'RECLAIM' },
+      { type: 'badge', at: { i: 8, price: 103.3 }, text: 'TRAP', color: '#EC4899' },
+    ],
+    verdict: { label: 'Trap fired', type: 'bad' },
+    caption: 'After LH/LL printed, the next 2 candles ripped back through the prior LH. Reclaim. Q3 says NO — the shift failed. Bear trap, not bear trend.',
+  },
+];

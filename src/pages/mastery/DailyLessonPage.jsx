@@ -5,6 +5,7 @@ import { useDailyLessons, findLesson } from '../../data/mastery/useFirestoreDail
 import { ChartGallery } from '../../components/charts/day-2026-05-07/ChartGallery.jsx';
 import { CHARTS_BY_UNIT_INDEX as MAY7_CHARTS, CONCEPT_SLUGS as MAY7_SLUGS } from '../../components/charts/day-2026-05-07/index.js';
 import { CHARTS_BY_UNIT_INDEX as MAY11_CHARTS, CONCEPT_SLUGS as MAY11_SLUGS } from '../../components/charts/day-2026-05-11/index.js';
+import { CHARTS_BY_UNIT_INDEX as MAY12_CHARTS, CONCEPT_SLUGS as MAY12_SLUGS } from '../../components/charts/day-2026-05-12/index.js';
 
 // Per-date chart bundle registry. Add new entries here as more daily lessons
 // gain their own chart galleries. Renderer falls back gracefully when a date
@@ -12,6 +13,7 @@ import { CHARTS_BY_UNIT_INDEX as MAY11_CHARTS, CONCEPT_SLUGS as MAY11_SLUGS } fr
 const CHARTS_BY_DATE = {
   '2026-05-07': { charts: MAY7_CHARTS, slugs: MAY7_SLUGS },
   '2026-05-11': { charts: MAY11_CHARTS, slugs: MAY11_SLUGS },
+  '2026-05-12': { charts: MAY12_CHARTS, slugs: MAY12_SLUGS },
 };
 
 // Detect a unit's schema. Old units have `question` + `answer` + `rules`;

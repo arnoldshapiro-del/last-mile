@@ -1,0 +1,82 @@
+// Teaching unit 1: Wick vs body for swing points — always use the wick.
+export const charts = [
+  {
+    title: 'Long upper wick — the WICK is the swing high',
+    candles: [
+      { o:100.0, h:100.6, l:99.7, c:100.5 },
+      { o:100.5, h:101.2, l:100.4, c:101.0 },
+      { o:101.0, h:101.7, l:100.9, c:101.6 },
+      { o:101.6, h:103.5, l:101.5, c:102.0 },
+      { o:102.0, h:102.3, l:101.0, c:101.2 },
+      { o:101.2, h:101.4, l:100.4, c:100.6 },
+      { o:100.6, h:101.0, l:100.0, c:100.8 },
+    ],
+    annotations: [
+      { type: 'level', price: 103.5, color: '#FBBF24', label: 'Real swing high — wick 103.50' },
+      { type: 'level', price: 102.0, color: '#F43F5E', label: 'Body high (wrong)', dash: true },
+      { type: 'arrow', at: { i: 3, price: 103.5 }, direction: 'down', color: '#FBBF24', label: 'SH wick' },
+    ],
+    verdict: { label: 'WICK = real high', type: 'good' },
+    caption: 'The wick at candle 4 punches up to 103.50; body closes at 102.00. The wick is the real swing high — adjacent candles never reach 103.50.',
+  },
+  {
+    title: 'Long lower wick — the WICK is the swing low',
+    candles: [
+      { o:100.0, h:100.4, l:99.4, c:99.5 },
+      { o:99.5, h:99.8, l:98.8, c:99.0 },
+      { o:99.0, h:99.3, l:98.3, c:98.4 },
+      { o:98.4, h:98.5, l:96.5, c:98.0 },
+      { o:98.0, h:99.0, l:97.9, c:98.8 },
+      { o:98.8, h:99.6, l:98.6, c:99.4 },
+      { o:99.4, h:100.0, l:99.3, c:99.8 },
+    ],
+    annotations: [
+      { type: 'level', price: 96.5, color: '#22D3EE', label: 'Real swing low — wick 96.50' },
+      { type: 'level', price: 98.0, color: '#F43F5E', label: 'Body low (wrong)', dash: true },
+      { type: 'arrow', at: { i: 3, price: 96.5 }, direction: 'up', color: '#22D3EE', label: 'SL wick' },
+    ],
+    verdict: { label: 'WICK = real low', type: 'good' },
+    caption: 'Mirror image. The lower wick at candle 4 punches down to 96.50. Even though the body closes at 98.00, the swing low is 96.50.',
+  },
+  {
+    title: 'Body-only reads MISS the rejection zone entirely',
+    candles: [
+      { o:100.0, h:100.4, l:99.6, c:100.3 },
+      { o:100.3, h:101.0, l:100.2, c:100.9 },
+      { o:100.9, h:101.5, l:100.8, c:101.4 },
+      { o:101.4, h:103.5, l:101.3, c:101.5 },
+      { o:101.5, h:102.0, l:101.0, c:101.4 },
+      { o:101.4, h:101.6, l:100.5, c:100.6 },
+      { o:100.6, h:101.0, l:100.0, c:100.7 },
+      { o:100.7, h:101.4, l:100.6, c:101.3 },
+      { o:101.3, h:103.4, l:101.2, c:101.6 },
+    ],
+    annotations: [
+      { type: 'level', price: 103.5, color: '#FBBF24', label: 'Real wick resistance' },
+      { type: 'level', price: 101.6, color: '#F43F5E', label: 'Body-only reads stop here', dash: true },
+      { type: 'arrow', at: { i: 3, price: 103.5 }, direction: 'down', color: '#FBBF24', label: 'rejected' },
+      { type: 'arrow', at: { i: 8, price: 103.4 }, direction: 'down', color: '#FBBF24', label: 'rejected again' },
+    ],
+    verdict: { label: 'Body misread', type: 'bad' },
+    caption: 'If you marked only the body high, resistance looks like 101.50. The wick rejection at 103.50 is the actual resistance — twice — and you would not see it coming.',
+  },
+  {
+    title: 'NinjaTrader convention — High[] and Low[] include the wick',
+    candles: [
+      { o:100.0, h:100.5, l:99.6, c:100.4 },
+      { o:100.4, h:101.0, l:100.3, c:100.9 },
+      { o:100.9, h:101.8, l:100.8, c:101.7 },
+      { o:101.7, h:102.5, l:101.6, c:102.4 },
+      { o:102.4, h:103.0, l:101.4, c:101.5 },
+      { o:101.5, h:101.7, l:100.6, c:100.7 },
+      { o:100.7, h:101.2, l:100.5, c:101.0 },
+      { o:101.0, h:101.8, l:100.9, c:101.7 },
+    ],
+    annotations: [
+      { type: 'arrow', at: { i: 3, price: 102.5 }, direction: 'down', color: '#FBBF24', label: 'High[3]=102.5 (wick)' },
+      { type: 'arrow', at: { i: 5, price: 100.6 }, direction: 'up', color: '#22D3EE', label: 'Low[5]=100.6 (wick)' },
+    ],
+    verdict: { label: 'Standard', type: 'good' },
+    caption: 'In NinjaScript, High[0] is the full bar high including the wick. Same for Low[0]. Any swing-detection indicator built on these series defaults to wick-based pivots.',
+  },
+];
