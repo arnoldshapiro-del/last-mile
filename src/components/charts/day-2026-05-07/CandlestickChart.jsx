@@ -44,6 +44,10 @@ export function CandlestickChart({ chart }) {
     if (a.type === 'zone') prices.push(a.topPrice, a.bottomPrice);
     if (a.type === 'arrow') prices.push(a.at.price);
     if (a.type === 'badge') prices.push(a.at.price);
+    if (a.type === 'pivot') {
+      const c = candles[a.at.i];
+      if (c) prices.push(a.at.side === 'high' ? c.h : c.l);
+    }
   });
   const dataMin = Math.min(...prices);
   const dataMax = Math.max(...prices);
@@ -219,6 +223,30 @@ export function CandlestickChart({ chart }) {
             <text x={x} y={y + 3} textAnchor="middle" fill="#070c18" fontSize={8.5} fontWeight={700} fontFamily="Oxanium, system-ui, sans-serif">
               {a.text}
             </text>
+          </g>
+        );
+      })}
+
+      {/* PIVOT — labeled circle at a candle's wick high or low. */}
+      {annotations.filter(a => a.type === 'pivot').map((a, i) => {
+        const candle = candles[a.at.i];
+        if (!candle) return null;
+        const isHigh = a.at.side === 'high';
+        const price = isHigh ? candle.h : candle.l;
+        const x = indexToX(a.at.i, candles.length);
+        const y = priceToY(price, min, max, CHART_TOP, chartBottom);
+        const offsetY = isHigh ? -7 : 7;
+        const cy = y + offsetY;
+        const color = a.color || (isHigh ? '#FBBF24' : '#22D3EE');
+        const labelY = isHigh ? cy - 6 : cy + 14;
+        return (
+          <g key={'p' + i}>
+            <circle cx={x} cy={cy} r={4} fill={color} stroke="#070c18" strokeWidth={1.2} />
+            {a.label && (
+              <text x={x} y={labelY} textAnchor="middle" fill={color} fontSize={9} fontWeight={700} fontFamily="Oxanium, system-ui, sans-serif">
+                {a.label}
+              </text>
+            )}
           </g>
         );
       })}

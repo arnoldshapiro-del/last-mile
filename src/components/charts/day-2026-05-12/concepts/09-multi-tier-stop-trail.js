@@ -1,0 +1,115 @@
+// Teaching unit 9: Multi-tier stop trail — Stop 1 → Stop 2 → Stop 3 → Stop 4 → BE.
+// The progression that managed tonight's M2K trade from entry to runner.
+export const charts = [
+  {
+    title: 'Stop 1 — initial hard stop, below the sweep',
+    candles: [
+      { o:2871.0, h:2871.5, l:2870.4, c:2871.2 },
+      { o:2871.2, h:2872.0, l:2871.1, c:2871.9 },
+      { o:2871.9, h:2872.8, l:2871.8, c:2872.7 },
+    ],
+    annotations: [
+      { type: 'arrow', at: { i: 0, price: 2871.0 }, direction: 'up', color: '#22C55E', label: 'Entry 2871.0' },
+      { type: 'level', price: 2870.0, color: '#F43F5E', label: 'Stop 1 — below the sweep', dash: false },
+      { type: 'zone', topPrice: 2871.0, bottomPrice: 2870.0, color: 'rgba(239, 68, 68, 0.15)', label: 'Initial risk = $50' },
+    ],
+    verdict: { label: 'Stage 1', type: 'good' },
+    caption: 'First stop sits BELOW the sweep low (2870.4) with a small buffer. This is the maximum dollar risk on the trade. Defined and accepted BEFORE entering.',
+  },
+  {
+    title: 'Stop 2 — first partial taken, BE protection kicks in',
+    candles: [
+      { o:2871.0, h:2871.5, l:2870.4, c:2871.2 },
+      { o:2871.2, h:2872.0, l:2871.1, c:2871.9 },
+      { o:2871.9, h:2872.8, l:2871.8, c:2872.7 },
+      { o:2872.7, h:2873.0, l:2872.4, c:2872.6 },
+    ],
+    annotations: [
+      { type: 'arrow', at: { i: 0, price: 2871.0 }, direction: 'up', color: '#22C55E', label: 'Entry' },
+      { type: 'arrow', at: { i: 2, price: 2872.8 }, direction: 'down', color: '#A3E635', label: 'T1 hit — partial out' },
+      { type: 'level', price: 2871.0, color: '#FBBF24', label: 'Stop 2 = BE (entry)', dash: true },
+      { type: 'badge', at: { i: 3, price: 2872.4 }, text: 'NOW RISK-FREE', color: '#FBBF24' },
+    ],
+    verdict: { label: 'Stage 2', type: 'good' },
+    caption: 'After T1 partial fills, move stop to entry price. The trade can no longer lose money. The remaining runner is "free" — pure upside with no downside.',
+  },
+  {
+    title: 'Stop 3 — new HL forms, trail stop under it',
+    candles: [
+      { o:2871.0, h:2871.5, l:2870.4, c:2871.2 },
+      { o:2871.2, h:2872.0, l:2871.1, c:2871.9 },
+      { o:2871.9, h:2872.8, l:2871.8, c:2872.7 },
+      { o:2872.7, h:2873.0, l:2872.2, c:2872.4 },
+      { o:2872.4, h:2873.5, l:2872.3, c:2873.4 },
+      { o:2873.4, h:2874.0, l:2873.3, c:2873.9 },
+    ],
+    annotations: [
+      { type: 'pivot', at: { i: 3, side: 'low' }, color: '#22D3EE', label: 'New HL 2872.2' },
+      { type: 'level', price: 2872.0, color: '#A3E635', label: 'Stop 3 — under new HL', dash: true },
+      { type: 'arrow', at: { i: 5, price: 2874.0 }, direction: 'down', color: '#A3E635', label: 'T2 close' },
+    ],
+    verdict: { label: 'Stage 3', type: 'good' },
+    caption: 'When the next higher low confirms (here at 2872.2), trail the stop just beneath it. Each new HL locks in more profit while still giving the trade structural room to breathe.',
+  },
+  {
+    title: 'Stop 4 — runner mode, trail under most recent HL',
+    candles: [
+      { o:2871.0, h:2871.5, l:2870.4, c:2871.2 },
+      { o:2871.2, h:2872.0, l:2871.1, c:2871.9 },
+      { o:2871.9, h:2872.8, l:2871.8, c:2872.7 },
+      { o:2872.7, h:2873.0, l:2872.2, c:2872.4 },
+      { o:2872.4, h:2873.5, l:2872.3, c:2873.4 },
+      { o:2873.4, h:2874.0, l:2873.3, c:2873.9 },
+      { o:2873.9, h:2874.3, l:2873.5, c:2873.7 },
+      { o:2873.7, h:2874.7, l:2873.6, c:2874.6 },
+    ],
+    annotations: [
+      { type: 'pivot', at: { i: 6, side: 'low' }, color: '#22D3EE', label: 'New HL 2873.5' },
+      { type: 'level', price: 2873.3, color: '#FBBF24', label: 'Stop 4 — locked $230 profit', dash: true },
+      { type: 'arrow', at: { i: 7, price: 2874.7 }, direction: 'down', color: '#FBBF24', label: 'T3/T4 close' },
+    ],
+    verdict: { label: 'Stage 4', type: 'good' },
+    caption: 'On the runner portion, trail the stop under the most recent confirmed HL. Locks in escalating profit, lets the trade run to its higher-timeframe target without arbitrary exit.',
+  },
+  {
+    title: 'WRONG — never moving stop, giving back full move on reversal',
+    candles: [
+      { o:2871.0, h:2871.5, l:2870.4, c:2871.2 },
+      { o:2871.2, h:2872.0, l:2871.1, c:2871.9 },
+      { o:2871.9, h:2872.8, l:2871.8, c:2872.7 },
+      { o:2872.7, h:2874.5, l:2872.6, c:2874.4 },
+      { o:2874.4, h:2874.6, l:2872.0, c:2872.2 },
+      { o:2872.2, h:2872.4, l:2870.5, c:2870.6 },
+      { o:2870.6, h:2870.8, l:2870.0, c:2870.0 },
+    ],
+    annotations: [
+      { type: 'arrow', at: { i: 0, price: 2871.0 }, direction: 'up', color: '#22C55E', label: 'Entry' },
+      { type: 'level', price: 2870.0, color: '#F43F5E', label: 'Stop never moved', dash: true },
+      { type: 'arrow', at: { i: 6, price: 2870.0 }, direction: 'up', color: '#F43F5E', label: 'STOPPED — full give-back' },
+    ],
+    verdict: { label: 'No trail = no edge', type: 'bad' },
+    caption: 'Trade went +3.5 points in your favor, then reversed and stopped you out at break-even or worse. Not moving the stop is voluntarily abandoning every dollar of unrealized profit.',
+  },
+  {
+    title: 'The full ladder — Entry → S1 → S2 → S3 → S4 → exit, with $ at each stage',
+    candles: [
+      { o:2871.0, h:2871.5, l:2870.4, c:2871.2 },
+      { o:2871.2, h:2872.0, l:2871.1, c:2871.9 },
+      { o:2871.9, h:2872.8, l:2871.8, c:2872.7 },
+      { o:2872.7, h:2873.0, l:2872.2, c:2872.4 },
+      { o:2872.4, h:2873.5, l:2872.3, c:2873.4 },
+      { o:2873.4, h:2874.0, l:2873.3, c:2873.9 },
+      { o:2873.9, h:2874.7, l:2873.6, c:2874.6 },
+    ],
+    annotations: [
+      { type: 'arrow', at: { i: 0, price: 2871.0 }, direction: 'up', color: '#22C55E', label: 'Entry — risk $50' },
+      { type: 'arrow', at: { i: 2, price: 2872.8 }, direction: 'down', color: '#22D3EE', label: 'T1 +$18' },
+      { type: 'arrow', at: { i: 4, price: 2873.5 }, direction: 'down', color: '#A3E635', label: 'T2 +$25' },
+      { type: 'arrow', at: { i: 5, price: 2874.0 }, direction: 'down', color: '#FB923C', label: 'T3 +$30' },
+      { type: 'arrow', at: { i: 6, price: 2874.7 }, direction: 'down', color: '#FBBF24', label: 'T4 +$37 (runner)' },
+      { type: 'badge', at: { i: 6, price: 2870.6 }, text: '$110 booked', color: '#FBBF24' },
+    ],
+    verdict: { label: 'Full ladder ran', type: 'good' },
+    caption: "Every stage of the stop trail captured incrementally more profit, while the structural exit on the runner let the higher-timeframe move complete. This is exactly how tonight's M2K trade played out.",
+  },
+];
