@@ -10,8 +10,13 @@ import { charts as c06 } from './concepts/06-decision-tree.js';
 import { charts as c07 } from './concepts/07-fibonacci-tiers.js';
 import { charts as c08 } from './concepts/08-evening-star-anatomy.js';
 import { charts as c09 } from './concepts/09-multi-tier-stop-trail.js';
+import { charts as c10 } from './concepts/10-fib-extensions-vs-retracements.js';
+import { charts as c11 } from './concepts/11-fib-extension-drawing.js';
+import { charts as c12 } from './concepts/12-mentor-tier-ladder.js';
+import { charts as c13 } from './concepts/13-when-extensions-work-fail.js';
+import { charts as c14 } from './concepts/14-unified-fib-framework.js';
 
-export const CHARTS_BY_UNIT_INDEX = [c01, c02, c03, c04, c05, c06, c07, c08, c09];
+export const CHARTS_BY_UNIT_INDEX = [c01, c02, c03, c04, c05, c06, c07, c08, c09, c10, c11, c12, c13, c14];
 
 export const CONCEPT_SLUGS = [
   '01-wick-vs-body',
@@ -23,4 +28,9 @@ export const CONCEPT_SLUGS = [
   '07-fibonacci-tiers',
   '08-evening-star-anatomy',
   '09-multi-tier-stop-trail',
+  '10-fib-extensions-vs-retracements',
+  '11-fib-extension-drawing',
+  '12-mentor-tier-ladder',
+  '13-when-extensions-work-fail',
+  '14-unified-fib-framework',
 ];
