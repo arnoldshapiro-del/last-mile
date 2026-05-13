@@ -1,0 +1,82 @@
+// Teaching unit 13: Parent trendline = trigger, child = radar.
+export const charts = [
+  {
+    title: 'The parent trendline — 4+ touches over 30+ minutes',
+    candles: [
+      { o: 2854, h: 2854.5, l: 2851, c: 2851.5 },
+      { o: 2851.5, h: 2852, l: 2848, c: 2848.5 },
+      { o: 2848.5, h: 2852, l: 2848, c: 2851 },
+      { o: 2851, h: 2851.5, l: 2846, c: 2846.5 },
+      { o: 2846.5, h: 2847, l: 2843, c: 2843.5 },
+      { o: 2843.5, h: 2846, l: 2843, c: 2845.5 },
+      { o: 2845.5, h: 2846, l: 2840, c: 2840.5 },
+      { o: 2840.5, h: 2843, l: 2840, c: 2842.5 },
+      { o: 2842.5, h: 2843, l: 2838, c: 2838.5 },
+      { o: 2838.5, h: 2839, l: 2836, c: 2836.5 },
+    ],
+    annotations: [
+      { type: 'trendline', from: { i: 0, price: 2854 }, to: { i: 9, price: 2839 }, color: '#FBBF24', label: 'PARENT TL — 4 touches', dash: false },
+      { type: 'pivot', at: { i: 0, side: 'high' }, color: '#FBBF24', label: 'T1' },
+      { type: 'pivot', at: { i: 2, side: 'high' }, color: '#FBBF24', label: 'T2' },
+      { type: 'pivot', at: { i: 5, side: 'high' }, color: '#FBBF24', label: 'T3' },
+      { type: 'pivot', at: { i: 7, side: 'high' }, color: '#FBBF24', label: 'T4' },
+    ],
+    verdict: { label: 'Parent = HIGH conviction, trade THIS one', type: 'good' },
+    caption: 'Parent trendline drawn from 4+ confirmed swing highs over 30+ minutes. Battle-tested. Other participants are watching it. This line\'s break on CLOSE = the structural trigger.',
+  },
+  {
+    title: 'The child trendline — newer, steeper, lower conviction',
+    candles: [
+      { o: 2843.5, h: 2846, l: 2843, c: 2845.5 },
+      { o: 2845.5, h: 2846, l: 2840, c: 2840.5 },
+      { o: 2840.5, h: 2843, l: 2840, c: 2842.5 },
+      { o: 2842.5, h: 2843, l: 2838, c: 2838.5 },
+      { o: 2838.5, h: 2839, l: 2836, c: 2836.5 },
+    ],
+    annotations: [
+      { type: 'trendline', from: { i: 0, price: 2846 }, to: { i: 4, price: 2839 }, color: '#FBBF24', label: 'PARENT', dash: false },
+      { type: 'trendline', from: { i: 0, price: 2845.5 }, to: { i: 3, price: 2838.5 }, color: '#94a3b8', label: 'CHILD — steeper', dash: true },
+    ],
+    verdict: { label: 'Child = RADAR, never the trigger alone', type: 'warn' },
+    caption: 'Newer steeper trendline reflects current momentum acceleration. Only 2 touches. NOT battle-tested. Use as radar — when it breaks, momentum is shifting. Get ready, don\'t click.',
+  },
+  {
+    title: 'How both lines work together — fan-line principle',
+    candles: [
+      { o: 2843.5, h: 2846, l: 2843, c: 2845.5 },
+      { o: 2845.5, h: 2846, l: 2840, c: 2840.5 },
+      { o: 2840.5, h: 2843, l: 2840, c: 2842.5 },
+      { o: 2842.5, h: 2843, l: 2838, c: 2838.5 },
+      { o: 2838.5, h: 2839, l: 2836, c: 2836.5 },
+      { o: 2836.5, h: 2840, l: 2836, c: 2839.5 },
+      { o: 2839.5, h: 2842, l: 2839, c: 2841.5 },
+    ],
+    annotations: [
+      { type: 'trendline', from: { i: 0, price: 2846 }, to: { i: 4, price: 2839 }, color: '#FBBF24', label: 'PARENT', dash: false },
+      { type: 'trendline', from: { i: 0, price: 2845.5 }, to: { i: 3, price: 2838.5 }, color: '#94a3b8', label: 'CHILD', dash: true },
+      { type: 'badge', at: { i: 5, price: 2840 }, color: '#FBBF24', text: 'Child breaks — TIGHTEN' },
+      { type: 'badge', at: { i: 6, price: 2842 }, color: '#00D9A0', text: 'Parent breaks — ENTER' },
+    ],
+    verdict: { label: 'Two lines = two jobs', type: 'good' },
+    caption: 'Child break = tighten stops, take partial profits, get ready. Parent break on close = TRIGGER. Different jobs. Don\'t conflate them. Both lines drawn, both lines matter.',
+  },
+  {
+    title: 'The trap — replacing parent with child (more false signals)',
+    candles: [
+      { o: 2843, h: 2846, l: 2843, c: 2845 },
+      { o: 2845, h: 2845.5, l: 2842, c: 2842.5 },
+      { o: 2842.5, h: 2845, l: 2842, c: 2844 },
+      { o: 2844, h: 2845, l: 2843, c: 2843.5 },
+      { o: 2843.5, h: 2844, l: 2842, c: 2842.5 },
+      { o: 2842.5, h: 2845, l: 2842, c: 2844.5 },
+    ],
+    annotations: [
+      { type: 'trendline', from: { i: 0, price: 2846 }, to: { i: 5, price: 2843 }, color: '#FBBF24', label: 'PARENT — never broken', dash: false },
+      { type: 'trendline', from: { i: 0, price: 2845 }, to: { i: 2, price: 2843 }, color: '#94a3b8', dash: true },
+      { type: 'badge', at: { i: 2, price: 2845.5 }, color: '#FF3D5A', text: 'False child break' },
+      { type: 'badge', at: { i: 4, price: 2845 }, color: '#FF3D5A', text: 'Another false break' },
+    ],
+    verdict: { label: 'Child line alone = many false signals', type: 'bad' },
+    caption: 'Trading the child line as the trigger means entering early and getting whipped. The parent line never broke — the trend was still intact. Don\'t replace the parent.',
+  },
+];

@@ -1,0 +1,81 @@
+// Teaching unit 2: Counter-trend long earned by 5-of-5 confluence.
+export const charts = [
+  {
+    title: 'The 5-of-5 confluence panel — what makes counter-trend valid',
+    candles: [
+      { o: 2828, h: 2828.5, l: 2825, c: 2825.5 },
+      { o: 2825.5, h: 2826, l: 2823.5, c: 2824 },
+      { o: 2824, h: 2828, l: 2823.5, c: 2827.5 },
+      { o: 2827.5, h: 2832, l: 2827, c: 2831.8 },
+      { o: 2831.8, h: 2835, l: 2831, c: 2834.5 },
+      { o: 2834.5, h: 2837, l: 2834, c: 2836.5 },
+    ],
+    annotations: [
+      { type: 'level', price: 2832, color: '#00D9A0', label: '✓ 1 — Upper flag boundary BROKEN' },
+      { type: 'trendline', from: { i: 0, price: 2828.5 }, to: { i: 3, price: 2831 }, color: '#94a3b8', label: '✓ 2 — Descending TL BROKEN', dash: true },
+      { type: 'badge', at: { i: 3, price: 2832 }, color: '#00D9A0', text: '✓ 3 — MA reclaim' },
+      { type: 'badge', at: { i: 4, price: 2834.5 }, color: '#00D9A0', text: '✓ 4 — VOL spike' },
+      { type: 'badge', at: { i: 5, price: 2836.5 }, color: '#00D9A0', text: '✓ 5 — DELTA green' },
+    ],
+    verdict: { label: '5 of 5 confluence — counter-trend EARNED', type: 'good' },
+    caption: 'Counter-trend trades require FIVE confluence signals — break, TL, MA, volume, delta. Below five it is gambling. At five, the contrarian play has structural edge.',
+  },
+  {
+    title: 'TWO of five — counter-trend GAMBLE (this is most retail trades)',
+    candles: [
+      { o: 2828, h: 2828.5, l: 2825, c: 2825.5 },
+      { o: 2825.5, h: 2826, l: 2823.5, c: 2824 },
+      { o: 2824, h: 2828, l: 2823.5, c: 2827.5 },
+      { o: 2827.5, h: 2829, l: 2827, c: 2828.5 },
+      { o: 2828.5, h: 2829, l: 2826, c: 2826.5 },
+      { o: 2826.5, h: 2827, l: 2824, c: 2824.5 },
+    ],
+    annotations: [
+      { type: 'level', price: 2828, color: '#FBBF24', label: '✓ 1 — minor break' },
+      { type: 'trendline', from: { i: 0, price: 2828.5 }, to: { i: 3, price: 2829 }, color: '#FBBF24', label: '✓ 2 — TL touch only', dash: true },
+      { type: 'badge', at: { i: 3, price: 2829 }, color: '#FF3D5A', text: '✗ NO MA reclaim' },
+      { type: 'badge', at: { i: 4, price: 2828.5 }, color: '#FF3D5A', text: '✗ NO volume' },
+      { type: 'badge', at: { i: 5, price: 2826.5 }, color: '#FF3D5A', text: '✗ NO delta' },
+    ],
+    verdict: { label: '2 of 5 — this is a coin flip, not edge', type: 'bad' },
+    caption: 'Most retail traders take counter-trend trades on TWO signals and call them reversals. The math is brutal — single signals hit 50-55%, five stacked hits 75%+. Pass at 2.',
+  },
+  {
+    title: 'Chase vs retest — same trade, different efficiency',
+    candles: [
+      { o: 2828, h: 2828.5, l: 2826, c: 2826.5 },
+      { o: 2826.5, h: 2827, l: 2825, c: 2825.5 },
+      { o: 2825.5, h: 2829, l: 2825, c: 2828.5 },
+      { o: 2828.5, h: 2834, l: 2828, c: 2833.5 },
+      { o: 2833.5, h: 2835, l: 2832, c: 2832.5 },
+      { o: 2832.5, h: 2833, l: 2830.5, c: 2831 },
+      { o: 2831, h: 2833.5, l: 2830.8, c: 2833 },
+      { o: 2833, h: 2837, l: 2832.5, c: 2836.5 },
+    ],
+    annotations: [
+      { type: 'level', price: 2832, color: '#FBBF24', label: 'Breakout level — 2832', dash: true },
+      { type: 'arrow', at: { i: 3, price: 2833.5 }, direction: 'up', color: '#FF3D5A', label: 'CHASE 2833.5' },
+      { type: 'arrow', at: { i: 6, price: 2832 }, direction: 'up', color: '#00D9A0', label: 'RETEST 2832' },
+    ],
+    verdict: { label: 'Retest > Chase every time', type: 'good' },
+    caption: 'The breakout candle is the trigger. The retest is the entry. Chasing the green candle gives you 1.5+ points of worse fill. Wait for the broken level to become support.',
+  },
+  {
+    title: 'Cumulative delta — the confluence signal most retail ignores',
+    candles: [
+      { o: 2826, h: 2826.5, l: 2824, c: 2824.5 },
+      { o: 2824.5, h: 2825, l: 2823, c: 2823.5 },
+      { o: 2823.5, h: 2828, l: 2823.5, c: 2827.5 },
+      { o: 2827.5, h: 2832, l: 2827, c: 2831.5 },
+      { o: 2831.5, h: 2834, l: 2831, c: 2833.5 },
+    ],
+    annotations: [
+      { type: 'volume', bars: [120, 100, 240, 320, 280] },
+      { type: 'badge', at: { i: 2, price: 2827.5 }, color: '#FBBF24', text: 'Delta flip' },
+      { type: 'badge', at: { i: 3, price: 2831.5 }, color: '#00D9A0', text: 'DELTA GREEN' },
+      { type: 'badge', at: { i: 4, price: 2833.5 }, color: '#00D9A0', text: 'Real buying' },
+    ],
+    verdict: { label: 'Delta confirms — not a short squeeze', type: 'good' },
+    caption: 'Cumulative delta turning green on the breakout candle means REAL buy orders, not just short covers. This is the signal that separates trustworthy breakouts from fakes.',
+  },
+];

@@ -4,6 +4,205 @@
 
 
 // =============================================================================
+// DAILY LESSON — 2026-05-13 — The Day The Rule Became Universal
+// =============================================================================
+const may13_2026 = {
+  "date": "2026-05-13",
+  "title": "The Day The Rule Became Universal",
+  "subtitle": "One discipline ported to every pattern — bottoms, tops, flags, and the trendlines that surround them all.",
+  "sessionSummary": "Today's session locked the meta-rule that ties every pattern together: every chart pattern has a DEFINING BOUNDARY, and the trigger is always a body close beyond that boundary — never a wick, never an internal trendline, never a feeling. The conversation arc moved through six structural truths and one real-world safety lesson. First — bear flag vs double bottom: the chart was screaming flag and the brain wanted double bottom (the FOMO trap). Second — when the contrarian setup is actually valid: 2832 broke, the descending trendline broke, MAs reclaimed, cumulative delta spiked green. That counter-trend long was earned, not gambled. Third — the BE stop got Arnie out flat exactly as designed. The discipline was perfect even though the position closed. Fourth — should Arnie add new patterns or stay focused? Bulkowski's research settled it: double bottoms with neckline close run 88%, hammers and engulfings 60-63%, tweezers 56%. The 80% system he already has is the edge — diluting focus is the leak. Fifth — Tier 1 vs Tier 2 patterns clarified mechanically: Tier 1 fires the trade, Tier 2 stacks evidence ON TOP of Tier 1 or compounds with other Tier 2 signals at a major level. Tier 2 is never the foundation. Sixth — the double top mistake on the trendline break revealed a subtle truth: the trendline inside the pattern was NOT the pattern's defining boundary, but in flags the trendline IS the defining boundary. Same unified rule, different line per pattern. Seventh — the NinjaTrader Sim101 quantity error turned out to be a safety FEATURE — the modification got rejected, the original stop stayed at its original price, the position was never unprotected. Today is the day the discipline became universal. The rule no longer changes per pattern — only the line does.",
+  "tradesReview": [
+    {
+      "instrument": "RTY 2-min (live sim)",
+      "setup": "Apparent double bottom forming near 2824, OR alternatively a bear flag consolidating in the middle of the day's range. Sticky note on chart literally said 'looks like a bear flag.' Six signals against a real W forming. The two-minute drift was pause-before-continuation behavior, not reversal behavior.",
+      "decision": "WAITED — did not chase the middle of the range. Then the chart shifted: 2832 broke on a strong green candle, descending trendline broke, MAs reclaimed, cumulative delta spiked green. Took the COUNTER-TREND long on confluence.",
+      "outcome": "BE EXIT — scaled out partials, moved stop to break-even, runner stopped at BE. Trade closed flat. Discipline executed perfectly even though the dollar outcome was zero.",
+      "lesson": "A flat trade with perfect discipline is a win in the long run. The setup was valid (4+ confluence signals on the contrarian trade), the entry chased the breakout candle (lesson: wait for the retest next time), partials and BE worked exactly as designed. Process > outcome on a single trade."
+    },
+    {
+      "instrument": "RTY 2-min (live sim)",
+      "setup": "Possible double top forming at 2841 resistance. M-shape with two roughly equal peaks. Internal ascending trendline of higher lows inside the consolidation between the peaks.",
+      "decision": "ENTERED SHORT on the internal trendline break instead of waiting for the neckline (2836.2) close below. Faster signal, weaker probability. Same exact impatience that took DB win rate from 8/10 down to 2/10 in the past.",
+      "outcome": "SMALL LOSS — price moved against Arnie back toward 2841 resistance. Then a HUGE bearish engulfing fired. Asked: should I have pyramided on the strong confirmation? Honest answer: no, because the original entry was UNDERWATER, and pyramiding into a loser is averaging down.",
+      "lesson": "Mirror the double bottom discipline onto double tops. The trendline is RADAR. The neckline close is the TRIGGER. The internal trendline inside a top is NOT the pattern's defining boundary — the neckline is. Never pyramid a losing position even if a strong confirmation prints. Add to winners only."
+    }
+  ],
+  "teachingUnits": [
+    {
+      "id": 1,
+      "title": "Bear flag vs double bottom — the chart almost always tells you which",
+      "concept": "A real double bottom needs four elements present: (1) first low, (2) a strong impulsive bounce creating a defined neckline, (3) second low at/near the first, (4) break above the neckline on volume. A bear flag is tight consolidation in the middle of the range after a strong impulsive down move, with descending MAs capping bounces and volume dying through the consolidation. If the consolidation is sideways drift after a strong down move — not a measured bounce-to-neckline — that's flag behavior, not reversal behavior.",
+      "detail": "The hardest moment in pattern recognition is when the brain WANTS one pattern (the reversal long that pays huge) but the chart is showing the other (the continuation short that just keeps grinding lower). The sticky-note rule applies here: if your own gut wrote 'bear flag' on the chart before your conscious mind talked itself into 'double bottom,' your gut was reading structure correctly and your conscious mind was reading FOMO. Statistically bear flags continue down more often than they reverse, by a wide margin.",
+      "applicationToday": "Arnie's first chart had a sticky note on it that literally said 'looks like a bear flag.' At the same time he was asking whether a double bottom was forming. The two readings can't both be right — and the structure (flagpole from 2854 → 2824, tight middle-range consolidation, descending MAs capping bounces, dying volume) was textbook flag. The correct play was wait, not trade the middle.",
+      "rule": "If your gut wrote 'flag' before your brain said 'double bottom,' trust the gut. The middle of any range is the worst place to initiate either direction. Wait for the defining boundary to break before pulling the trigger."
+    },
+    {
+      "id": 2,
+      "title": "When the counter-trend trade is actually earned — five-of-five confluence",
+      "concept": "A valid counter-trend long against a bear flag requires multiple confluence signals firing together: (1) clean break above the flag's upper boundary, (2) descending trendline broken on close, (3) reclaim of key moving average cluster, (4) volume expansion on the breakout candle, (5) cumulative delta flipping green (real buying, not short squeeze noise). When all five are present, the contrarian setup is no longer 'fighting the trend' — it's catching a confirmed structural shift.",
+      "detail": "Most retail traders take counter-trend trades on TWO of those five signals and call them 'reversals.' Pros wait for FIVE. The math is brutal: a single signal hits 50-55% of the time, three signals stacked hits maybe 65%, five signals stacked pushes 75%+. The patience to wait for full confluence is what separates a counter-trend EDGE from a counter-trend GAMBLE. The breakout candle is the trigger only if every other element is already confirming.",
+      "applicationToday": "On the bear flag chart, Arnie watched 2832 break on a strong green candle. Descending trendline broke. The gold MA cluster reclaimed. Cumulative delta spiked green. Five confluence signals — the counter-trend long was earned. Arnie executed it correctly. The only refinement: chasing the breakout candle is the suboptimal entry; the pullback retest of the broken trendline is the high-efficiency entry. Same trade, better R:R.",
+      "rule": "Counter-trend trades require 5 confluence signals minimum. Below that, you're gambling. The pullback retest entry is always more efficient than chasing the breakout candle — wait for it whenever possible."
+    },
+    {
+      "id": 3,
+      "title": "Break-even stops do their job even when the trade closes flat",
+      "concept": "The BE stop is mechanical risk elimination. The moment partials fill or the trade reaches a defined R-multiple, the stop ratchets to break-even. From that instant forward, the trade can ONLY pay or pay nothing — it can never cost. A flat exit on a BE stop is a successful execution of the discipline, not a failure of the trade. The system worked exactly as designed.",
+      "detail": "The trap is the language Arnie used: 'I'll probably stop out.' That sounds like nerves when read literally — like the trader plans to manually exit because the trade feels uncomfortable. The clean version is: 'I'll probably GET stopped out at BE.' Same dollar outcome, completely different psychology. The first version is an emotional override of structure; the second is a passive acceptance that the BE stop will do its job. The discipline is to set up mechanical exits and then NOT touch them.",
+      "applicationToday": "Arnie's counter-trend long scaled out partials and moved to BE. Price hesitated, BE stop hit, trade closed flat. This is the system functioning perfectly. The lesson: when you find yourself saying 'I'll probably stop out,' check whether you mean 'GET stopped out' (passive, healthy) or 'manually stop out' (active, dangerous). The wording matters because the action follows the wording.",
+      "rule": "BE stops are mechanical. They never get overridden, never get pulled in 'because of nerves,' never get widened to give the trade more room. A flat exit is a successful execution of the discipline, not a failure."
+    },
+    {
+      "id": 4,
+      "title": "Bulkowski's reliability ladder — why pattern selection matters more than pattern volume",
+      "concept": "Bulkowski's tested data is the gold standard for pattern reliability. The numbers stack like this: Double bottom with neckline close = 88% success. Triple bottom = 87%. Head & shoulders bottom = 89%. Bullish engulfing = 63%. Morning star = 60-65%. Hammer = 60% when confirmed by break above the high. Tweezer bottom = 56%. Inverted hammer alone = ~50%. Doji alone = 50-55%. The gap between chart patterns (~88%) and candle patterns (~60%) is the difference between a profitable system and a coin flip with commissions.",
+      "detail": "The reason chart patterns outperform candle patterns is sample size and structural confirmation. A double bottom requires multiple bars of price action proving sellers cannot push lower AND buyers can break the neckline. A hammer requires one candle. One bar is a story; ten bars is a thesis. The market needs time to prove direction — and that time is what raises the reliability number. So the right question isn't 'how many patterns can I trade?' — it's 'which patterns have the highest reliability for my edge?'",
+      "applicationToday": "Arnie's empirical real-money experience matches Bulkowski's research exactly. Without neckline-close discipline he was 2/10 winners on double bottoms. With neckline-close discipline he hit 8/10 — Bulkowski's number, validated by his own account. The data confirmed what the live trading proved: confirmation > speed, every single time.",
+      "rule": "Trade the highest-reliability patterns at the highest-confidence triggers. Pattern volume is not the same as pattern edge. One 88% setup beats five 60% setups across 100 trades."
+    },
+    {
+      "id": 5,
+      "title": "Tier 1 vs Tier 2 — the mechanical difference (size never varies)",
+      "concept": "Tier 1 patterns are TRADE TRIGGERS — they fire the entry. Double bottom with neckline close. Double top with neckline close. Flag break on a close. These are the primary setups; the trade exists because they fired. Tier 2 patterns (hammer, engulfing, morning star, tweezer) are CONFLUENCE SIGNALS — they stack ON TOP of a Tier 1 setup or pile up at a major level to compound conviction. They are never the foundation of an entry by themselves.",
+      "detail": "Position size NEVER varies based on tier — that's the mistake retail traders make when they hear 'tier 2.' Either a setup has enough confluence to take at full size, or it doesn't. Varying size is how traders end up with a hundred small 'tester' positions that bleed accounts. The decision is binary: take or pass. Tier 2 affects what GROUP a setup belongs to — primary trigger or supporting evidence — not how many contracts you trade.",
+      "applicationToday": "If Arnie sees a hammer floating in the middle of chop with no Tier 1 structure around it, that's Tier 2 alone = no trade. If a hammer prints AT the level where a double bottom is forming and the neckline then closes above, that's Tier 1 trigger + Tier 2 confluence = full size with maximum conviction. Same size in both cases when the trigger fires — the hammer just told him the W was more likely to complete.",
+      "rule": "Tier 1 fires the trade. Tier 2 stacks confluence ON TOP of Tier 1. Position size is binary — full or zero, never sliding. The decision is take-or-pass, not big-or-small."
+    },
+    {
+      "id": 6,
+      "title": "Tier 2 in practice — three real scenarios",
+      "concept": "Three scenarios cover every Tier 2 usage. SCENARIO 1: Tier 2 alone (e.g. hammer in mid-range chop) → no trade. SCENARIO 2: Tier 2 inside a forming Tier 1 setup (e.g. hammer at the second-low candle of a developing W) → same trade, same size, more conviction to hold. SCENARIO 3: Multiple Tier 2 signals at a major level (engulfing + volume + delta + MA reclaim + trendline break, all at prior support) → take the trade, full size, the confluence replaces the need for a complete Tier 1 pattern.",
+      "detail": "The discipline rule: 'If you can't articulate 2-3 pieces of stacked evidence at a meaningful level, you're not taking the trade.' Tier 2 patterns are bricks you stack. They are never the foundation by themselves. The rookie trader stares at one hammer and takes the trade. The professional stares at a hammer AND notes that nothing else around it confirms — and passes. Same chart, two different reads, two different outcomes.",
+      "applicationToday": "On the bear flag → counter-trend long, Arnie was actually in Scenario 3. No textbook Tier 1 reversal pattern had completed (no double bottom). But he had 5 Tier 2 confluence signals stacked at the upper boundary of the flag — trendline break, MA reclaim, delta spike, volume expansion, breakout candle. The pile of Tier 2 evidence justified the trade, even though no Tier 1 pattern fired by itself.",
+      "rule": "Tier 2 alone = no trade. Tier 2 inside a Tier 1 = more conviction, same size. Tier 2 multiple at a major level = full size, the stack IS the setup. Always articulate the evidence list aloud before clicking buy."
+    },
+    {
+      "id": 7,
+      "title": "Tier 2 as trade management — three uses beyond entry",
+      "concept": "Tier 2 patterns have three valuable uses AFTER entry. (1) Holding power: a small hammer at a pullback low tells you to hold the existing long instead of cutting on noise. (2) Defensive signal: a bearish engulfing at resistance tells you to tighten the stop or take partial profits. (3) Don't-add warning: a doji at a key level says the market is undecided — do not pyramid here.",
+      "detail": "Every signal has an entry use AND a management use. Most retail education focuses only on entry. The management use is often more profitable because it protects winners and prevents adding to losers. A trader who uses Tier 2 patterns only for entry triggers is missing half the value. The exits and the additions are where most P&L variance actually lives.",
+      "applicationToday": "When Arnie's counter-trend long had pulled back and was hovering near BE, if a small hammer had printed at the pullback low, that would have been a Tier 2 hold signal. None did — and the BE stop fired as planned. On the double top short, the huge bearish engulfing was a Tier 2 management signal saying the thesis was confirming — but NOT a signal to add to a losing position (that's pyramiding into a loser, addressed in unit 12).",
+      "rule": "Tier 2 patterns have three management uses: hold through noise, defensive tighten or partial, never-add warning. The same hammer means different things at entry vs in-trade. Read both."
+    },
+    {
+      "id": 8,
+      "title": "The double top mistake — the trendline break wasn't the trigger",
+      "concept": "A double top has a clear defining boundary: the NECKLINE — the lowest closing price of the pullback between the two peaks. The pattern's confirmation trigger is a body close BELOW that neckline. An internal trendline of rising lows INSIDE the consolidation between the peaks is NOT the defining boundary; it's an internal feature. Breaking that internal trendline is information that buyers are losing strength, but it is NOT the pattern's trigger.",
+      "detail": "This is the exact mistake the same impatience used to cause on double bottoms before Arnie learned the neckline-close rule: trading the EARLY signal instead of the CORRECT trigger. The trendline break is RADAR — it tells you to get ready, prepare your order, focus on the chart. The neckline close is the TRIGGER — that's when the click happens. Conflating them is what caused the 2/10 win rate disaster years ago, in mirror form. The mirror has to be applied: same discipline, mirrored direction.",
+      "applicationToday": "Arnie entered the double top short on the internal trendline break instead of waiting for the neckline close at 2836.2. Price didn't close below the neckline — it actually bounced and threatened to go back up to the resistance level for a third tap. The faster signal cost him. The CORRECT trigger never fired.",
+      "rule": "Apply the double bottom discipline as a mirror to double tops. Wait for the neckline close below — not the internal trendline break, not the wick poke, not the feeling. The mirror is total."
+    },
+    {
+      "id": 9,
+      "title": "The neckline definition — lowest CLOSING price using bodies, not wicks",
+      "concept": "The neckline of a double top is the LOWEST CLOSING PRICE of any candle in the pullback between the two peaks. Bodies, not wicks. For a double bottom, mirror: the HIGHEST CLOSING PRICE of any candle in the rally between the two troughs. The body shows where the market AGREED — where most volume actually traded and where consensus settled. The wick shows where price momentarily went but was rejected before the period closed.",
+      "detail": "Using bodies for the neckline is correct because the body is consensus and the wick is rejection. A body-defined neckline produces a more honest trigger — a candle CLOSING below means the market actually traded below that consensus level for a full bar. A wick below the body's neckline that doesn't close below is a fake break. This is why the body-defined neckline preserves edge AND keeps R:R reasonable. Waiting for wick breaks kills R:R because you're entering after the easy money is gone, and you're not actually getting more reliability — you're getting noise.",
+      "applicationToday": "Arnie's actual neckline on the double top was 2836.2 — a small red candle's close at the bottom of the pullback, right where the next big green push began. Claude initially said 'around 2837' (rough eyeball). Arnie was precise — 2836.2. The 0.8-point difference matters because it determined whether the neckline ever broke at all (it didn't) and whether the trendline-break entry was structurally premature (it was).",
+      "rule": "Neckline = lowest closing price between peaks (for tops) or highest closing price between troughs (for bottoms). Use BODIES. Be PRECISE — the exact tick matters because it sets the trigger, the stop, and the R:R."
+    },
+    {
+      "id": 10,
+      "title": "The hierarchy of confirmation — four levels of evidence ranked",
+      "concept": "Four levels of confirmation exist for any pattern break, ranked from weakest to strongest: (1) Trendline break alone — lowest probability, often false. (2) Wick break of the neckline body — false-break risk, never wait for this. (3) Body CLOSE beyond the neckline — the sweet spot, this is the trigger. (4) Close beyond + retest of the neckline from the other side — highest probability but you often miss trades waiting for it.",
+      "detail": "Most retail traders camp on level 1 (trendline break) because it fires fastest. The math says this is the worst entry — fastest signal AND lowest probability is the worst trade-off. The sweet spot is level 3: close beyond the body neckline. Level 4 is the cleanest entry of all (retest), but you give up many real trades waiting for the retest to occur. The discipline is to pull the trigger on level 3, NOT wait for level 4, NOT chase level 1.",
+      "applicationToday": "Arnie's double top trade fired on level 1 — the internal trendline break. The CORRECT trigger was level 3 — body close below 2836.2. Level 3 never happened. The trade should never have existed. The fix going forward is to memorize the four levels and pull the trigger ONLY on level 3 (or wait for level 4 if you're a high-patience trader).",
+      "rule": "Pull the trigger on level 3 — body close beyond the neckline. Level 1 is radar, level 4 is the bonus when it appears. Levels 1 and 2 are NOT entries."
+    },
+    {
+      "id": 11,
+      "title": "Why trendlines DO trigger flags — the unified rule explained",
+      "concept": "The unified rule that ties every pattern together: every chart pattern has a DEFINING BOUNDARY. The trigger is always a body close beyond that defining boundary. What changes is WHICH line is the defining boundary for each pattern. Double top → neckline. Double bottom → neckline. Bull flag → upper trendline of the consolidation channel. Bear flag → lower trendline. Triangle → the converging trendline. The principle is identical; only the line changes.",
+      "detail": "This resolves the apparent contradiction: a trendline can be a weak signal (when it's an internal feature inside a different pattern) OR the actual defining boundary (when it IS the pattern's structure). In a flag the parallel trendlines literally DEFINE the flag — without them, there is no flag pattern. So a body close beyond the flag's trendline IS the pattern's structural confirmation, equivalent to a neckline close on a double top. Same rule, different line.",
+      "applicationToday": "Arnie's flag rule (close beyond the trendline = trigger) and his neckline rule (close beyond the neckline = trigger) are the SAME RULE applied to two different patterns. The double top mistake was applying the flag-style 'trendline triggers' logic to a non-flag pattern where the internal trendline was NOT the defining boundary. Once the unified rule is understood, the mistake disappears.",
+      "rule": "Step 1: identify the pattern. Step 2: identify that pattern's defining boundary. Step 3: wait for a body close beyond that boundary. The principle is universal; only the line per pattern changes."
+    },
+    {
+      "id": 12,
+      "title": "Pyramiding — add to winners only, never to losers",
+      "concept": "Pyramiding (adding to an existing position on a strong confirming signal) is a legitimate technique used by elite traders — Livermore, Tudor Jones, Druckenmiller. But it has ONE non-negotiable rule: you only pyramid positions that are already IN PROFIT. Adding to an underwater position because a strong signal prints is averaging down — the move that destroys retail accounts. The strong signal can give you conviction to HOLD the original position, but never to ADD while losing.",
+      "detail": "When a position is underwater and a strong reversal signal prints, the brain says 'this is so strong I should double up — it HAS to work now.' This is the cognitive trap. Doubling an underwater position turns a planned 1R loss into a planned 2-3R loss if the signal also fails. The correct response is the opposite: either tighten the stop on the existing position (acknowledging the trade is suboptimal) or accept that the strong signal is real but separate, and pass. If the new signal is THAT strong, the trader can wait, exit the original position, and take the new signal as a fresh entry — with fresh size, fresh stop, fresh R:R math.",
+      "applicationToday": "When the huge bearish engulfing fired on Arnie's underwater double top short, the temptation was to double the position. The correct answer was no — adding to a loser even on strong confirmation is the rule that destroys accounts. If the engulfing signal was strong enough on its own, the right play was: exit the original short (acknowledge it was premature), then re-enter on a fresh trigger with fresh sizing. Two trades, two decisions, never one stacked decision.",
+      "rule": "Add to winners only. Never add to losers, even on strong confirmation. If a new signal is strong enough to add to, it's strong enough to be its own separate trade after exiting the current loser."
+    },
+    {
+      "id": 13,
+      "title": "The fan-line principle — parent trendline is the trigger, child trendlines are radar",
+      "concept": "When a trend accelerates, multiple trendlines form a 'fan.' The OLDEST parent trendline (most touches, longest duration) is the high-conviction structural line — its break on close is the major-shift trigger. NEWER steeper child trendlines reflect current momentum — their breaks are radar signals (momentum slowing, prepare to act) but NOT entry triggers by themselves.",
+      "detail": "Keep BOTH lines drawn on the chart. The steeper child line breaks first → tightens stops, takes partial profits, gets ready. The parent line breaks on close → that's the high-conviction entry trigger. Replacing the parent with the child means earlier entries but significantly more false signals. The parent line becomes MORE significant the longer it holds — a 4-5 touch line over an hour is more meaningful than a 2-touch steep line over 10 minutes. Don't abandon battle-tested lines just because something newer formed.",
+      "applicationToday": "On the descending bear flag, the parent trendline (3+ touches over 30+ minutes) was the high-conviction structural line. A steeper child trendline could have been drawn over the most recent 10 minutes of acceleration. The right play was to use the child line as radar (steeper break = get ready) and trade only the parent line break on close — which is exactly what happened on the counter-trend long.",
+      "rule": "Parent trendline = TRIGGER. Steeper child trendlines = RADAR. Always keep both drawn. Trade only the parent line break on close — never the child line break alone."
+    },
+    {
+      "id": 14,
+      "title": "NinjaTrader Sim101 error — the modification rejected, the original stop survived",
+      "concept": "The NinjaTrader error 'Sim101, Order [hash] can't be changed. Order quantity can't be less than 1' is a SAFETY FEATURE, not a system failure. It means the order modification was rejected — the platform refused to change a working order in a way it considered invalid. CRITICAL: the original stop did NOT get cancelled. It remained working at its original price. The position was never unprotected.",
+      "detail": "Causes are usually one of three: (1) drag-interpretation error where the quantity field was grabbed instead of the price field; (2) race condition where the order was changing state mid-modification (filling, partial fill, or being touched by ATM auto-logic); (3) ATM auto-logic conflict where the manual edit collided with the strategy's auto-trail logic. The error appearance is alarming, but the SYSTEM behavior is conservative — it rejects the change and keeps the safer current state. This is the opposite of what would be dangerous (silently making an invalid change).",
+      "applicationToday": "On Arnie's sim trade, the error popped up during an attempted stop adjustment. The original stop stayed in place. The position remained protected. The correct response is: click OK to dismiss, verify the stop is still on the chart, check the Orders tab in Control Center to confirm 'Working' status, then try again. Don't panic. The platform protected Arnie by REFUSING an invalid change.",
+      "rule": "Sim101 modification errors mean the change was refused — NOT that protection was lost. Verify the original stop is still working in the Orders tab. Don't panic. Don't re-enter blindly. Don't 'fix' a state that's already correct."
+    },
+    {
+      "id": 15,
+      "title": "Emergency protocol — what to do if an order error fires in real money",
+      "concept": "Five-step emergency protocol for any order error in real money: (1) STOP — do not make new decisions in panic mode. (2) Check the Orders tab in Control Center — confirm all stops are listed as 'Working.' (3) If any stop is missing or in 'Rejected' / 'Cancelled' state, hit FLATTEN to exit immediately with a market order. (4) After flat, breathe, then re-evaluate whether to re-enter. (5) Submit a NEW order with fresh ATM if appropriate. NEVER try to replace a missing stop while exposed — the market can move faster than the new order fires.",
+      "detail": "The discipline is verify state BEFORE acting. The most dangerous moment in a trading platform is when an error has just appeared and the trader doesn't know whether they're protected. The safe move is always to flatten if uncertain — taking the current P&L at market is INFINITELY better than running unprotected. Preventive measures: use the BE button instead of manual drag (atomic operation), modify one stop at a time, modify during slow market periods, build small buffer (try 2851.75 if 2851.5 keeps failing), and save ATM templates with preferred stop ladders so adjustments are cleaner.",
+      "applicationToday": "Today's error happened on sim, with no exposure. But the protocol must be muscle memory before it's ever needed on real money. The instant any unfamiliar dialog pops up in real money trading, the first action is to verify the Orders tab — not to dismiss the dialog, not to keep clicking, not to assume the system worked. Verify, then act.",
+      "rule": "Emergency protocol on any order error: STOP → check Orders tab → flatten if uncertain → re-enter only after confirmed flat with a fresh order. Verify state BEFORE acting. This must be muscle memory before it's ever needed."
+    },
+    {
+      "id": 16,
+      "title": "Claude Max usage — weekly vs session limits, and the truth about 1M context",
+      "concept": "Claude Max 5x has TWO separate limits: a SESSION limit (resets every 5 hours) and a WEEKLY limit (resets every Saturday at the subscription anniversary time). They are independent. A 23% session bar with 77% used and a 77% weekly bar with 23% used means: this 5-hour window has plenty left, but the entire week is nearly depleted. Anthropic recently doubled the SESSION limit but did NOT double the weekly cap. Long image-heavy conversations burn the weekly bucket extremely fast.",
+      "detail": "On context window: the 1M window on Opus 4.7 is billed at the same per-token rate as the 200K window. The per-token rate truly is identical. BUT — setting 1M means the session NEVER auto-compacts. It keeps growing. A conversation that would have compacted at 200K now accumulates to 400K, 600K, 800K — every new message resends the ENTIRE history, every time. So while the per-token PRICE is the same, the actual TOKEN COUNT burned is dramatically higher. For routine work, 200K is better for quota management because it triggers auto-compaction to keep sessions lean. Reserve 1M for sessions that actually need a million tokens of context loaded.",
+      "applicationToday": "Today's conversation included multiple chart images (each 1000+ tokens), six web searches with full results, very long detailed responses, and EVERY new message re-sent the entire conversation history. This is the maximum-burn scenario. Mitigation: start a new conversation for each trading day, keep images to the essential ones, switch to 200K context for routine sessions, and reserve 1M for large-codebase work that actually needs it.",
+      "rule": "Two limits, both real. Session resets every 5 hours; weekly resets Saturday. Use 200K context for routine work; reserve 1M for sessions that need the full window. Start fresh conversations for each trading day to keep accumulated history from blowing the weekly cap."
+    }
+  ],
+  "qaCards": [
+    {
+      "question": "How do I know if it's a double bottom forming or a bear flag continuing?",
+      "answer": "A double bottom needs (1) first low, (2) measured bounce creating a defined neckline, (3) second low at/near the first, (4) break above neckline on volume. A bear flag is tight consolidation in the middle of the range after a strong down move, with descending MAs capping bounces and volume dying. If the consolidation is sideways drift instead of a measured bounce-to-neckline, it's flag behavior. The body of the consolidation drifting near the lows (instead of bouncing toward neckline) is the giveaway."
+    },
+    {
+      "question": "Should I have doubled up on the strong bearish engulfing while underwater?",
+      "answer": "No. Pyramiding adds to WINNERS only, never to LOSERS. Even on a strong confirming signal, adding to an underwater position is averaging down — the move that destroys retail accounts. If the new signal is genuinely that strong, the correct play is to exit the original position (acknowledging it was premature), then re-enter on a fresh trigger with fresh sizing. Two separate trades, two separate decisions."
+    },
+    {
+      "question": "Do I use the original trendline or the new steeper one as my entry?",
+      "answer": "Use BOTH — but only the original (parent) is the entry trigger. The steeper newer (child) trendline is RADAR — it tells you momentum is shifting, tighten stops, get ready. The parent trendline break on close is the high-conviction entry trigger. Replacing the parent with the child means earlier entries but significantly more false signals. The parent line gets MORE significant the longer it holds."
+    },
+    {
+      "question": "If a NinjaTrader Sim101 order error pops up, am I exposed?",
+      "answer": "Almost certainly no. The Sim101 'order can't be changed' error means the modification was REFUSED — the original order remained at its original price. The system rejected an invalid change rather than silently making it. Verify state in the Orders tab: if your stop shows 'Working' at the original price, you're protected. If it shows 'Cancelled' or is missing, hit Flatten immediately and re-enter."
+    },
+    {
+      "question": "Was 1M context the right setting, or should I switch back to 200K?",
+      "answer": "For routine work, switch back to 200K. The per-token PRICE is identical between 1M and 200K — that part of the prior guidance was correct. But 1M sessions NEVER auto-compact, so they accumulate to 400K, 600K, 800K of total history, and every new message resends ALL of it. So the per-token cost is the same, but the actual token COUNT burned is much higher. Reserve 1M for sessions that genuinely need a million tokens of context (large codebases). Use 200K for routine work so auto-compaction keeps sessions lean and the weekly quota lasts."
+    }
+  ],
+  "keyRules": [
+    "If your gut wrote 'flag' before your brain said 'double bottom,' trust the gut — middle of range is the worst place to initiate",
+    "Counter-trend trades require 5 confluence signals minimum — below that is gambling, not edge",
+    "BE stops are mechanical — never override, never widen, a flat exit is a successful execution",
+    "Trade the highest-reliability patterns at the highest-confidence triggers — pattern volume is not pattern edge",
+    "Tier 1 fires the trade — Tier 2 stacks confluence ON TOP — size is binary, never sliding",
+    "Tier 2 alone = no trade; Tier 2 inside Tier 1 = more conviction same size; multiple Tier 2 at a level = full size",
+    "Tier 2 also serves trade management — hold through noise, defensive tighten, never-add warning",
+    "Apply the double bottom discipline as a mirror to double tops — neckline close below is the trigger",
+    "Neckline = lowest closing price between peaks (tops) or highest closing price between troughs (bottoms) — bodies, not wicks",
+    "Hierarchy of confirmation — body close beyond neckline is the sweet spot; pull the trigger on level 3",
+    "Every pattern has a defining boundary — body close beyond is the trigger; only the LINE changes per pattern",
+    "Add to winners only — never pyramid an underwater position even on strong confirmation",
+    "Parent trendline = TRIGGER, child trendlines = RADAR — keep both drawn, trade only the parent break on close",
+    "Sim101 errors mean the change was refused, not that protection was lost — verify Orders tab before acting",
+    "Emergency protocol — STOP, check Orders, flatten if uncertain, never replace a stop while exposed",
+    "Use 200K context for routine work to allow auto-compaction; reserve 1M for sessions that genuinely need it"
+  ],
+  "principlesReinforced": [1, 2, 3, 5, 6, 7, 8, 9, 10],
+  "whatIllDoDifferently": "Tomorrow morning I open the chart with the unified rule in front of me: every pattern has a defining boundary, and the trigger is always a body close beyond that boundary. Bear flag = lower trendline break on close. Bull flag = upper trendline break on close. Double bottom = neckline close above (highest closing price between troughs). Double top = neckline close below (lowest closing price between peaks). No more confusing an internal trendline inside a pattern with the pattern's actual defining boundary. Before any counter-trend entry I score the 5-of-5 confluence signal list: trendline broken, MAs reclaimed, volume expansion, delta confirming, breakout candle. Below 5 of 5 I do not take the trade. When BE stops fire, I read them as the system working — not as failures. When a strong confirmation signal prints while I'm underwater on a position, I do NOT pyramid — I exit the original (acknowledging it was premature) and re-enter fresh with fresh sizing. I keep both parent and child trendlines drawn — the child is radar, the parent is the trigger. When the platform throws an order error, I verify the Orders tab first, flatten if uncertain, never re-enter blindly. And I switch back to 200K context on routine days so auto-compaction protects my weekly quota. One unified discipline, applied to every pattern, with the same patience that took my double bottom win rate from 2/10 to 8/10.",
+  "closingThought": "Same rule. Different line. Today's lesson is that the discipline doesn't change per pattern — only the boundary changes. Bear flag trendline, double top neckline, bull flag trendline, double bottom neckline. The rule is one rule. The line is whichever line defines the pattern in front of you. The 2/10-to-8/10 transformation that worked on double bottoms isn't a double-bottom rule — it's a CHART rule. Port it everywhere. Mirror it everywhere. Same discipline. Different line."
+};
+
+// =============================================================================
 // DAILY LESSON — 2026-05-12 EVENING — Tonight's Pattern Study (Morning Star + 6-Pattern Cheat Sheet)
 // =============================================================================
 const may12_2026_evening = {
@@ -955,7 +1154,7 @@ const may7_2026 = {
 };
 
 
-export const dailyLessons = [may12_2026_evening, may12_2026, may11_2026, may7_2026, foundationDay];
+export const dailyLessons = [may13_2026, may12_2026_evening, may12_2026, may11_2026, may7_2026, foundationDay];
 
 export function getDailyLesson(date) {
   return dailyLessons.find(l => l.date === date);

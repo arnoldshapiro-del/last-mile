@@ -1,0 +1,81 @@
+// Teaching unit 8: The double top mistake — trendline break wasn't the trigger.
+export const charts = [
+  {
+    title: 'The double top setup — two peaks, neckline below',
+    candles: [
+      { o: 2832, h: 2832.5, l: 2830, c: 2830.5 },
+      { o: 2830.5, h: 2835, l: 2830, c: 2834.5 },
+      { o: 2834.5, h: 2841, l: 2834, c: 2840.5 },
+      { o: 2840.5, h: 2841.2, l: 2839, c: 2839.5 },
+      { o: 2839.5, h: 2840, l: 2837, c: 2837.5 },
+      { o: 2837.5, h: 2838, l: 2836, c: 2836.2 },
+      { o: 2836.2, h: 2840, l: 2836.2, c: 2839.5 },
+      { o: 2839.5, h: 2841.3, l: 2839, c: 2840.8 },
+      { o: 2840.8, h: 2841, l: 2839, c: 2839.2 },
+      { o: 2839.2, h: 2839.5, l: 2837, c: 2837.5 },
+    ],
+    annotations: [
+      { type: 'pivot', at: { i: 2, side: 'high' }, color: '#FF3D5A', label: 'Peak 1 — 2841' },
+      { type: 'pivot', at: { i: 7, side: 'high' }, color: '#FF3D5A', label: 'Peak 2 — 2841.3' },
+      { type: 'level', price: 2836.2, color: '#FBBF24', label: 'Neckline — 2836.2', dash: true },
+    ],
+    verdict: { label: 'M shape — wait for neckline close BELOW', type: 'warn' },
+    caption: 'Two peaks at ~2841. Pullback bottom at 2836.2 — that\'s the neckline. The trigger is a body close BELOW 2836.2. Until that, the pattern is forming, not confirmed.',
+  },
+  {
+    title: 'The MISTAKE — internal trendline break entry',
+    candles: [
+      { o: 2840.5, h: 2841.2, l: 2839, c: 2839.5 },
+      { o: 2839.5, h: 2840, l: 2837, c: 2837.5 },
+      { o: 2837.5, h: 2838, l: 2836, c: 2836.2 },
+      { o: 2836.2, h: 2840, l: 2836.2, c: 2839.5 },
+      { o: 2839.5, h: 2841.3, l: 2839, c: 2840.8 },
+      { o: 2840.8, h: 2841, l: 2839, c: 2839.2 },
+      { o: 2839.2, h: 2839.5, l: 2837, c: 2837.5 },
+      { o: 2837.5, h: 2838, l: 2837, c: 2837.2 },
+    ],
+    annotations: [
+      { type: 'trendline', from: { i: 2, price: 2836.2 }, to: { i: 6, price: 2837 }, color: '#94a3b8', label: 'Internal TL — NOT defining boundary', dash: true },
+      { type: 'level', price: 2836.2, color: '#FBBF24', label: 'NECKLINE — never broke', dash: true },
+      { type: 'arrow', at: { i: 7, price: 2837.2 }, direction: 'down', color: '#FF3D5A', label: 'SHORT (premature)' },
+    ],
+    verdict: { label: 'Trendline break ≠ pattern trigger', type: 'bad' },
+    caption: 'Arnie entered short on the INTERNAL trendline break inside the consolidation. The pattern\'s defining boundary (neckline 2836.2) never broke. The trade fired on radar, not trigger.',
+  },
+  {
+    title: 'What was supposed to happen — wait for neckline close',
+    candles: [
+      { o: 2837.5, h: 2838, l: 2837, c: 2837.2 },
+      { o: 2837.2, h: 2837.5, l: 2836.5, c: 2836.8 },
+      { o: 2836.8, h: 2837, l: 2836.2, c: 2836.3 },
+      { o: 2836.3, h: 2836.5, l: 2834, c: 2834.5 },
+      { o: 2834.5, h: 2835, l: 2832, c: 2832.5 },
+      { o: 2832.5, h: 2833, l: 2830, c: 2830.5 },
+    ],
+    annotations: [
+      { type: 'level', price: 2836.2, color: '#FBBF24', label: 'Neckline 2836.2', dash: true },
+      { type: 'arrow', at: { i: 3, price: 2834.5 }, direction: 'down', color: '#00D9A0', label: 'TRIGGER — close BELOW' },
+    ],
+    verdict: { label: 'Body close below 2836.2 = the trigger', type: 'good' },
+    caption: 'The correct sequence: wait, wait, wait — and then the trigger candle closes BELOW the neckline. THAT is the entry. Anything before is impatience and lower probability.',
+  },
+  {
+    title: 'Same impatience that took 8/10 down to 2/10 on bottoms',
+    candles: [
+      { o: 2820, h: 2821, l: 2819, c: 2820.5 },
+      { o: 2820.5, h: 2822, l: 2820, c: 2821.5 },
+      { o: 2821.5, h: 2824, l: 2821, c: 2823.5 },
+      { o: 2823.5, h: 2824, l: 2822, c: 2822.5 },
+      { o: 2822.5, h: 2823, l: 2820, c: 2820.5 },
+      { o: 2820.5, h: 2821, l: 2819, c: 2819.5 },
+      { o: 2819.5, h: 2820, l: 2818, c: 2818.5 },
+    ],
+    annotations: [
+      { type: 'badge', at: { i: 2, price: 2824.5 }, color: '#FF3D5A', text: 'OLD DB mistake' },
+      { type: 'badge', at: { i: 5, price: 2822 }, color: '#FF3D5A', text: 'NEW DT mistake — mirror' },
+      { type: 'level', price: 2823, color: '#FBBF24', label: 'Neckline — wait for close', dash: true },
+    ],
+    verdict: { label: 'The mirror — same lesson, opposite direction', type: 'warn' },
+    caption: 'The exact same impatience that took the DB win rate from 8/10 to 2/10 years ago appeared today on a DT in mirror form. Apply the discipline both directions. Mirror is total.',
+  },
+];

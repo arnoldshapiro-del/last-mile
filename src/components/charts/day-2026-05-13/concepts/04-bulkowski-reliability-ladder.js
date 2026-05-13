@@ -1,0 +1,83 @@
+// Teaching unit 4: Bulkowski's reliability ladder.
+export const charts = [
+  {
+    title: 'Chart patterns — 87-89% with confirmation',
+    candles: [
+      { o: 2840, h: 2840.5, l: 2836, c: 2836.5 },
+      { o: 2836.5, h: 2837, l: 2830, c: 2830.5 },
+      { o: 2830.5, h: 2831, l: 2823, c: 2823.5 },
+      { o: 2823.5, h: 2828, l: 2823, c: 2827.5 },
+      { o: 2827.5, h: 2831, l: 2827, c: 2830.5 },
+      { o: 2830.5, h: 2831, l: 2826, c: 2826.5 },
+      { o: 2826.5, h: 2827, l: 2823.5, c: 2824 },
+      { o: 2824, h: 2831.5, l: 2823.5, c: 2831.5 },
+      { o: 2831.5, h: 2835, l: 2831, c: 2834.5 },
+    ],
+    annotations: [
+      { type: 'pivot', at: { i: 2, side: 'low' }, color: '#22D3EE', label: 'Low 1' },
+      { type: 'pivot', at: { i: 6, side: 'low' }, color: '#22D3EE', label: 'Low 2' },
+      { type: 'level', price: 2831, color: '#FBBF24', label: 'Neckline — close above = 88%', dash: true },
+      { type: 'badge', at: { i: 7, price: 2831.5 }, color: '#00D9A0', text: '88%' },
+    ],
+    verdict: { label: 'Double bottom + neckline close = 88%', type: 'good' },
+    caption: 'Bulkowski\'s gold standard: double bottom with neckline close = 88%. Triple bottom 87%. Head & shoulders bottom 89%. Multi-bar structural confirmation produces high reliability.',
+  },
+  {
+    title: 'Candle patterns — 60-65% range (without context)',
+    candles: [
+      { o: 2826, h: 2826.5, l: 2824, c: 2824.5 },
+      { o: 2824.5, h: 2825, l: 2823, c: 2823.5 },
+      { o: 2823.5, h: 2824, l: 2820, c: 2820.5 },
+      { o: 2820.5, h: 2826, l: 2820.3, c: 2825.5 },
+      { o: 2825.5, h: 2826, l: 2825, c: 2825.5 },
+    ],
+    annotations: [
+      { type: 'badge', at: { i: 3, price: 2826 }, color: '#FBBF24', text: 'Hammer 60%' },
+      { type: 'badge', at: { i: 2, price: 2821 }, color: '#FBBF24', text: 'Engulfing 63%' },
+      { type: 'badge', at: { i: 4, price: 2826 }, color: '#FF3D5A', text: 'Tweezer 56%' },
+    ],
+    verdict: { label: 'Single-candle = coin flip + edge', type: 'warn' },
+    caption: 'Hammer 60%. Bullish engulfing 63%. Morning star 60-65%. Tweezer bottom 56%. Inverted hammer ~50%. Doji 50-55%. Single bars don\'t prove direction — they suggest it.',
+  },
+  {
+    title: 'The gap — why chart patterns outperform candle patterns',
+    candles: [
+      { o: 2820, h: 2820.5, l: 2819, c: 2819.5 },
+      { o: 2819.5, h: 2820, l: 2818.5, c: 2819 },
+      { o: 2819, h: 2820, l: 2818, c: 2819.5 },
+      { o: 2819.5, h: 2821, l: 2819, c: 2820.5 },
+      { o: 2820.5, h: 2823, l: 2820, c: 2822.5 },
+      { o: 2822.5, h: 2826, l: 2822, c: 2825.5 },
+      { o: 2825.5, h: 2829, l: 2825, c: 2828.5 },
+      { o: 2828.5, h: 2832, l: 2828, c: 2831.5 },
+    ],
+    annotations: [
+      { type: 'badge', at: { i: 0, price: 2820.5 }, color: '#FF3D5A', text: '1 BAR = 60%' },
+      { type: 'badge', at: { i: 7, price: 2832 }, color: '#00D9A0', text: '10 BARS = 88%' },
+      { type: 'level', price: 2831, color: '#FBBF24', label: 'Neckline confirmed by 10 bars', dash: true },
+    ],
+    verdict: { label: 'Time + structure = reliability', type: 'good' },
+    caption: 'One bar is a story; ten bars is a thesis. Chart patterns win because the market has had multiple periods to PROVE direction. Time and structure raise reliability — not magic.',
+  },
+  {
+    title: 'Arnie\'s empirical proof — 2/10 to 8/10 by waiting',
+    candles: [
+      { o: 2820, h: 2820.5, l: 2819, c: 2819.5 },
+      { o: 2819.5, h: 2820, l: 2818, c: 2818.5 },
+      { o: 2818.5, h: 2819, l: 2817, c: 2817.5 },
+      { o: 2817.5, h: 2821, l: 2817, c: 2820.5 },
+      { o: 2820.5, h: 2823, l: 2820, c: 2822.5 },
+      { o: 2822.5, h: 2823, l: 2820, c: 2820.5 },
+      { o: 2820.5, h: 2821, l: 2818, c: 2818.5 },
+      { o: 2818.5, h: 2823, l: 2818, c: 2822.5 },
+      { o: 2822.5, h: 2826, l: 2822, c: 2825.5 },
+    ],
+    annotations: [
+      { type: 'badge', at: { i: 3, price: 2821 }, color: '#FF3D5A', text: 'OLD: 2/10 wins' },
+      { type: 'badge', at: { i: 7, price: 2823 }, color: '#00D9A0', text: 'NEW: 8/10 wins' },
+      { type: 'level', price: 2822, color: '#FBBF24', label: 'Neckline — close ABOVE = enter', dash: true },
+    ],
+    verdict: { label: 'Same setup. Different trigger. 4x win rate.', type: 'good' },
+    caption: 'Real-money proof — Bulkowski\'s 88% is not theoretical. Arnie\'s account did the experiment: without neckline-close discipline = 20%. With it = 80%. The data is alive in your trades.',
+  },
+];
