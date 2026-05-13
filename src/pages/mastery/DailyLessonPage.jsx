@@ -6,6 +6,7 @@ import { ChartGallery } from '../../components/charts/day-2026-05-07/ChartGaller
 import { CHARTS_BY_UNIT_INDEX as MAY7_CHARTS, CONCEPT_SLUGS as MAY7_SLUGS } from '../../components/charts/day-2026-05-07/index.js';
 import { CHARTS_BY_UNIT_INDEX as MAY11_CHARTS, CONCEPT_SLUGS as MAY11_SLUGS } from '../../components/charts/day-2026-05-11/index.js';
 import { CHARTS_BY_UNIT_INDEX as MAY12_CHARTS, CONCEPT_SLUGS as MAY12_SLUGS } from '../../components/charts/day-2026-05-12/index.js';
+import { CHARTS_BY_UNIT_INDEX as MAY12E_CHARTS, CONCEPT_SLUGS as MAY12E_SLUGS } from '../../components/charts/day-2026-05-12-evening/index.js';
 
 // Per-date chart bundle registry. Add new entries here as more daily lessons
 // gain their own chart galleries. Renderer falls back gracefully when a date
@@ -14,6 +15,7 @@ const CHARTS_BY_DATE = {
   '2026-05-07': { charts: MAY7_CHARTS, slugs: MAY7_SLUGS },
   '2026-05-11': { charts: MAY11_CHARTS, slugs: MAY11_SLUGS },
   '2026-05-12': { charts: MAY12_CHARTS, slugs: MAY12_SLUGS },
+  '2026-05-12-evening': { charts: MAY12E_CHARTS, slugs: MAY12E_SLUGS },
 };
 
 // Detect a unit's schema. Old units have `question` + `answer` + `rules`;
@@ -90,6 +92,7 @@ export default function DailyLessonPage() {
   const principlesReinforced = Array.isArray(lesson.principlesReinforced) ? lesson.principlesReinforced : [];
   const tradesReview = Array.isArray(lesson.tradesReview) ? lesson.tradesReview : [];
   const qaCards = Array.isArray(lesson.qaCards) ? lesson.qaCards : [];
+  const attachments = Array.isArray(lesson.attachments) ? lesson.attachments : [];
   const differentlyItems = parseDifferently(lesson.whatIllDoDifferently);
 
   return (
@@ -356,6 +359,59 @@ export default function DailyLessonPage() {
               <p className="text-sm leading-relaxed m-0 text-text/80">{c.analysis}</p>
             </div>
           ))}
+        </section>
+      )}
+
+      {/* Attachments — downloadable / openable resources for this lesson (PDFs, HTML, etc) */}
+      {attachments.length > 0 && (
+        <section
+          className="rounded-2xl p-5 md:p-6 border"
+          style={{ background: 'rgba(167, 139, 250, 0.07)', borderColor: 'rgba(167, 139, 250, 0.30)' }}
+        >
+          <div className="flex items-center gap-2 mb-1">
+            <span style={{ color: '#a78bfa' }}>📎</span>
+            <h2 className="font-display font-semibold text-base m-0" style={{ color: '#a78bfa' }}>
+              Lesson Attachments
+            </h2>
+          </div>
+          <p className="text-xs text-muted mb-4">Open the interactive HTML cheat sheet in a tab next to your charts, or print the PDF and pin it next to your monitors.</p>
+          <div className="grid gap-3 md:grid-cols-2">
+            {attachments.map((a, i) => {
+              const isPdf = (a.kind || '').toLowerCase() === 'pdf' || (a.href || '').toLowerCase().endsWith('.pdf');
+              const isHtml = (a.kind || '').toLowerCase() === 'html' || (a.href || '').toLowerCase().endsWith('.html');
+              const icon = isPdf ? '📄' : isHtml ? '🌐' : '📁';
+              const colorBg = isPdf ? 'rgba(255, 180, 74, 0.10)' : 'rgba(0, 217, 160, 0.08)';
+              const colorBorder = isPdf ? 'rgba(255, 180, 74, 0.40)' : 'rgba(0, 217, 160, 0.40)';
+              const colorAccent = isPdf ? '#FFB44A' : '#00D9A0';
+              return (
+                <a
+                  key={i}
+                  href={a.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download={isPdf ? (a.downloadName || true) : undefined}
+                  className="rounded-xl p-4 border no-underline transition-transform hover:scale-[1.02]"
+                  style={{ background: colorBg, borderColor: colorBorder, color: 'inherit' }}
+                >
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl shrink-0" aria-hidden="true">{icon}</span>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[10px] uppercase tracking-[0.22em] num font-display font-medium mb-1" style={{ color: colorAccent }}>
+                        {isPdf ? 'PDF · Print-ready' : isHtml ? 'HTML · Interactive' : 'File'}
+                      </div>
+                      <div className="font-display font-semibold text-sm md:text-base mb-1 text-text leading-tight">{a.title}</div>
+                      {a.description && (
+                        <p className="text-xs text-text/75 m-0 leading-relaxed">{a.description}</p>
+                      )}
+                      <div className="mt-2 text-[10px] num font-display font-medium uppercase tracking-[0.22em]" style={{ color: colorAccent }}>
+                        {isPdf ? 'Download →' : isHtml ? 'Open in new tab →' : 'Open →'}
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
         </section>
       )}
 

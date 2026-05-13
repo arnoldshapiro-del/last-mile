@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Only 6 Patterns You Need · Arnie's Cheat Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0d14;
+    --surface: #0f1419;
+    --surface-2: #141a23;
+    --border: #1f2937;
+    --border-soft: #161d27;
+    --bull: #00d4aa;
+    --bear: #ff3b69;
+    --amber: #fbbf24;
+    --text: #e5e7eb;
+    --text-secondary: #9ca3af;
+    --text-muted: #6b7280;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Mono', 'Courier New', monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(0, 212, 170, 0.04) 0%, transparent 50%),
+      radial-gradient(circle at 85% 100%, rgba(255, 59, 105, 0.04) 0%, transparent 50%);
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 60px 24px 100px; }
+
+  header {
+    text-align: center;
+    margin-bottom: 80px;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  header::before {
+    content: ''; position: absolute; top: 0; left: 50%;
+    transform: translateX(-50%); width: 60px; height: 2px; background: var(--amber);
+  }
+  .eyebrow {
+    font-family: 'Space Mono', monospace; font-size: 11px;
+    letter-spacing: 0.3em; color: var(--amber); text-transform: uppercase; margin-bottom: 20px;
+  }
+  h1 {
+    font-family: 'Oxanium', sans-serif; font-weight: 800;
+    font-size: clamp(36px, 6vw, 64px); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 20px;
+    background: linear-gradient(180deg, #fff 0%, #9ca3af 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .subtitle { color: var(--text-secondary); font-size: 15px; max-width: 600px; margin: 0 auto; }
+  .subtitle .bull { color: var(--bull); }
+  .subtitle .bear { color: var(--bear); }
+
+  .intro {
+    background: var(--surface); border: 1px solid var(--border);
+    border-left: 3px solid var(--amber); padding: 28px 32px; margin-bottom: 60px; border-radius: 4px;
+  }
+  .intro p { color: var(--text-secondary); font-size: 14px; }
+  .intro strong { color: var(--text); font-weight: 700; }
+
+  .pattern {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 6px; margin-bottom: 48px; overflow: hidden; transition: border-color 0.2s;
+  }
+  .pattern:hover { border-color: #2a3441; }
+  .pattern-header {
+    padding: 28px 32px 20px; border-bottom: 1px solid var(--border-soft);
+    display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  }
+  .pattern-number {
+    font-family: 'Space Mono', monospace; font-size: 11px;
+    color: var(--amber); letter-spacing: 0.2em; margin-bottom: 8px;
+  }
+  .pattern-name {
+    font-family: 'Oxanium', sans-serif; font-size: 32px;
+    font-weight: 700; letter-spacing: -0.01em; line-height: 1.1;
+  }
+  .pattern-subtitle { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+  .reliability-badge {
+    font-size: 11px; padding: 6px 12px; border: 1px solid var(--border);
+    border-radius: 3px; background: var(--surface-2); white-space: nowrap;
+  }
+  .reliability-badge .num { color: var(--amber); font-weight: 700; }
+
+  .drawing { background: var(--surface-2); padding: 24px; border-bottom: 1px solid var(--border-soft); }
+  .drawing.split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0; }
+  .drawing-half { padding: 24px; border-right: 1px solid var(--border-soft); }
+  .drawing-half:last-child { border-right: none; }
+  @media (max-width: 700px) {
+    .drawing.split { grid-template-columns: 1fr; }
+    .drawing-half { border-right: none; border-bottom: 1px solid var(--border-soft); }
+    .drawing-half:last-child { border-bottom: none; }
+  }
+  .drawing-label {
+    font-size: 11px; color: var(--text-muted); letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .drawing svg { width: 100%; height: auto; display: block; }
+
+  .content { padding: 28px 32px 32px; }
+  .content h3 {
+    font-family: 'Oxanium', sans-serif; font-size: 11px; font-weight: 700;
+    color: var(--amber); letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 10px; margin-top: 24px;
+  }
+  .content h3:first-child { margin-top: 0; }
+  .content p { color: var(--text); font-size: 14px; margin-bottom: 14px; }
+  .content .secondary { color: var(--text-secondary); }
+  .content strong { color: var(--amber); font-weight: 700; }
+  .content .bull { color: var(--bull); font-weight: 700; }
+  .content .bear { color: var(--bear); font-weight: 700; }
+
+  .trade-plan {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--border); border: 1px solid var(--border); border-radius: 4px; margin: 16px 0;
+  }
+  .trade-cell { background: var(--surface-2); padding: 14px 16px; }
+  .trade-cell .label {
+    font-size: 10px; color: var(--text-muted); letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .trade-cell .value { font-size: 13px; color: var(--text); line-height: 1.4; }
+  @media (max-width: 600px) { .trade-plan { grid-template-columns: 1fr; } }
+
+  .confluence { list-style: none; padding: 0; }
+  .confluence li {
+    font-size: 13px; color: var(--text-secondary);
+    padding: 6px 0 6px 20px; position: relative;
+  }
+  .confluence li::before {
+    content: '+'; position: absolute; left: 0; color: var(--bull); font-weight: 700;
+  }
+
+  .summary {
+    margin-top: 80px; padding: 40px 32px;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+    border: 1px solid var(--border); border-radius: 6px;
+  }
+  .summary h2 {
+    font-family: 'Oxanium', sans-serif; font-size: 24px;
+    margin-bottom: 24px; letter-spacing: -0.01em;
+  }
+  .summary-table {
+    width: 100%; border-collapse: collapse;
+    font-family: 'Space Mono', monospace; font-size: 12px;
+  }
+  .summary-table th {
+    text-align: left; padding: 12px 16px; background: var(--surface-2);
+    color: var(--amber); font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; font-size: 10px; border-bottom: 1px solid var(--border);
+  }
+  .summary-table td {
+    padding: 14px 16px; border-bottom: 1px solid var(--border-soft); color: var(--text-secondary);
+  }
+  .summary-table td:first-child { color: var(--text); font-weight: 700; }
+  @media (max-width: 700px) {
+    .summary-table { font-size: 11px; }
+    .summary-table th, .summary-table td { padding: 10px 8px; }
+  }
+
+  .final-rule {
+    margin-top: 60px; text-align: center; padding: 40px 24px;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .final-rule .label {
+    font-size: 11px; color: var(--amber); letter-spacing: 0.3em;
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+  .final-rule p {
+    font-family: 'Oxanium', sans-serif; font-size: clamp(20px, 3vw, 26px);
+    font-weight: 500; color: var(--text); max-width: 700px; margin: 0 auto; line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="eyebrow">Arnie's Pattern Cheat Sheet · 2-Min Futures</div>
+  <h1>6 Patterns.<br>That's All You Need.</h1>
+  <p class="subtitle">The only candle patterns worth memorizing for scalping NQ, RTY, and M2K — <span class="bull">high frequency</span>, <span class="bear">real edge</span>, no noise.</p>
+</header>
+
+<div class="intro">
+  <p><strong>The rule:</strong> Most candlestick books teach you 40+ patterns. 90% of them are noise or appear so rarely that knowing them is useless. These 6 fire constantly on a 2-min chart and — when traded with context — give you a real edge. Master these, ignore the rest.</p>
+</div>
+
+<!-- PATTERN 1: PIN BAR -->
+<section class="pattern">
+  <div class="pattern-header">
+    <div>
+      <div class="pattern-number">PATTERN 01</div>
+      <h2 class="pattern-name">The Pin Bar</h2>
+      <div class="pattern-subtitle">Hammer (bottom) · Shooting Star (top) — the rejection candle</div>
+    </div>
+    <div class="reliability-badge">Hit rate: <span class="num">~70%</span> at strong levels</div>
+  </div>
+
+  <div class="drawing split">
+    <div class="drawing-half">
+      <div class="drawing-label">→ Hammer · Bullish reversal at support</div>
+      <svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid1" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#161d27" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="500" height="320" fill="url(#grid1)"/>
+        <line x1="20" y1="260" x2="480" y2="260" stroke="#fbbf24" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
+        <text x="475" y="255" fill="#fbbf24" font-family="Space Mono" font-size="9" text-anchor="end" opacity="0.7">SUPPORT</text>
+        <line x1="60" y1="40" x2="60" y2="170" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="50" y="60" width="20" height="90" fill="#ff3b69"/>
+        <line x1="120" y1="80" x2="120" y2="200" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="110" y="100" width="20" height="80" fill="#ff3b69"/>
+        <line x1="180" y1="130" x2="180" y2="225" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="170" y="150" width="20" height="60" fill="#ff3b69"/>
+        <line x1="240" y1="175" x2="240" y2="245" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="230" y="195" width="20" height="35" fill="#ff3b69"/>
+        <line x1="300" y1="195" x2="300" y2="275" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="290" y="200" width="20" height="20" fill="#00d4aa"/>
+        <rect x="280" y="188" width="40" height="95" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3 3" rx="2"/>
+        <line x1="360" y1="160" x2="360" y2="215" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="350" y="170" width="20" height="35" fill="#00d4aa"/>
+        <line x1="420" y1="120" x2="420" y2="180" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="410" y="130" width="20" height="40" fill="#00d4aa"/>
+        <line x1="330" y1="210" x2="360" y2="210" stroke="#fbbf24" stroke-width="0.6" opacity="0.7"/>
+        <text x="365" y="213" fill="#fbbf24" font-family="Space Mono" font-size="10">small body up top</text>
+        <line x1="330" y1="255" x2="360" y2="255" stroke="#fbbf24" stroke-width="0.6" opacity="0.7"/>
+        <text x="365" y="258" fill="#fbbf24" font-family="Space Mono" font-size="10">long wick = rejection</text>
+        <text x="300" y="305" fill="#fbbf24" font-family="Space Mono" font-size="11" font-weight="700" text-anchor="middle">HAMMER</text>
+      </svg>
+    </div>
+
+    <div class="drawing-half">
+      <div class="drawing-label">→ Shooting Star · Bearish reversal at resistance</div>
+      <svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="320" fill="url(#grid1)"/>
+        <line x1="20" y1="60" x2="480" y2="60" stroke="#fbbf24" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
+        <text x="475" y="55" fill="#fbbf24" font-family="Space Mono" font-size="9" text-anchor="end" opacity="0.7">RESISTANCE</text>
+        <line x1="60" y1="170" x2="60" y2="280" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="50" y="190" width="20" height="80" fill="#00d4aa"/>
+        <line x1="120" y1="140" x2="120" y2="240" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="110" y="160" width="20" height="70" fill="#00d4aa"/>
+        <line x1="180" y1="110" x2="180" y2="200" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="170" y="125" width="20" height="60" fill="#00d4aa"/>
+        <line x1="240" y1="85" x2="240" y2="155" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="230" y="100" width="20" height="35" fill="#00d4aa"/>
+        <line x1="300" y1="45" x2="300" y2="120" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="290" y="100" width="20" height="20" fill="#ff3b69"/>
+        <rect x="280" y="37" width="40" height="95" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3 3" rx="2"/>
+        <line x1="360" y1="115" x2="360" y2="165" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="350" y="120" width="20" height="35" fill="#ff3b69"/>
+        <line x1="420" y1="150" x2="420" y2="210" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="410" y="160" width="20" height="40" fill="#ff3b69"/>
+        <line x1="330" y1="65" x2="365" y2="65" stroke="#fbbf24" stroke-width="0.6" opacity="0.7"/>
+        <text x="370" y="68" fill="#fbbf24" font-family="Space Mono" font-size="10">long wick = rejection</text>
+        <line x1="330" y1="112" x2="365" y2="112" stroke="#fbbf24" stroke-width="0.6" opacity="0.7"/>
+        <text x="370" y="115" fill="#fbbf24" font-family="Space Mono" font-size="10">small body down bottom</text>
+        <text x="300" y="305" fill="#fbbf24" font-family="Space Mono" font-size="11" font-weight="700" text-anchor="middle">SHOOTING STAR</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="content">
+    <h3>What you're looking at</h3>
+    <p>A candle where the <strong>body is small</strong> and sits in the top or bottom third, with a <strong>wick at least 2× the size of the body</strong> on the opposite end. It doesn't matter if the body is green or red — what matters is where it closes relative to the wick.</p>
+    <h3>Psychology — why it works</h3>
+    <p class="secondary">Price tried to extend the move. Someone — usually big money — stepped in hard and rejected it back to where it started. The long wick is a footprint of that fight, and the small body shows who won. On a 2-min chart this often signals a 30–60 minute swing, sometimes longer.</p>
+    <h3>Trade plan</h3>
+    <div class="trade-plan">
+      <div class="trade-cell"><div class="label">Entry</div><div class="value">Buy stop 1–2 ticks above hammer high<br>(or sell stop below shooting star low)</div></div>
+      <div class="trade-cell"><div class="label">Stop</div><div class="value">1–2 ticks below hammer low<br>(or above shooting star high)</div></div>
+      <div class="trade-cell"><div class="label">Target</div><div class="value">Min 1.5:1 R:R<br>Or next 5-min S/R level</div></div>
+    </div>
+    <h3>Confluence — only trade pin bars with at least 2 of these</h3>
+    <ul class="confluence">
+      <li>At a clear support / resistance level you can see on the 5-min or 15-min</li>
+      <li>At a key moving average (VWAP, 20 EMA, 200 EMA)</li>
+      <li>At a Fibonacci level (50%, 61.8%, 78.6%)</li>
+      <li>After an extended move (not in chop)</li>
+      <li>Volume spike on the pin bar itself</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PATTERN 2: ENGULFING -->
+<section class="pattern">
+  <div class="pattern-header">
+    <div>
+      <div class="pattern-number">PATTERN 02</div>
+      <h2 class="pattern-name">Engulfing</h2>
+      <div class="pattern-subtitle">Two-candle complete sentiment flip</div>
+    </div>
+    <div class="reliability-badge">Hit rate: <span class="num">~72%</span> at levels with volume</div>
+  </div>
+
+  <div class="drawing split">
+    <div class="drawing-half">
+      <div class="drawing-label">→ Bullish Engulfing</div>
+      <svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid2" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#161d27" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="500" height="320" fill="url(#grid2)"/>
+        <line x1="60" y1="50" x2="60" y2="170" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="50" y="70" width="20" height="85" fill="#ff3b69"/>
+        <line x1="120" y1="90" x2="120" y2="200" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="110" y="110" width="20" height="75" fill="#ff3b69"/>
+        <line x1="180" y1="130" x2="180" y2="220" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="170" y="150" width="20" height="55" fill="#ff3b69"/>
+        <line x1="240" y1="180" x2="240" y2="230" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="230" y="190" width="20" height="30" fill="#ff3b69"/>
+        <line x1="300" y1="125" x2="300" y2="245" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="290" y="140" width="20" height="95" fill="#00d4aa"/>
+        <rect x="280" y="132" width="40" height="113" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3 3" rx="2"/>
+        <line x1="360" y1="100" x2="360" y2="170" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="350" y="115" width="20" height="40" fill="#00d4aa"/>
+        <line x1="420" y1="70" x2="420" y2="140" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="410" y="80" width="20" height="50" fill="#00d4aa"/>
+        <line x1="225" y1="190" x2="285" y2="190" stroke="#fbbf24" stroke-width="0.6" stroke-dasharray="2 2" opacity="0.8"/>
+        <line x1="225" y1="220" x2="285" y2="220" stroke="#fbbf24" stroke-width="0.6" stroke-dasharray="2 2" opacity="0.8"/>
+        <text x="270" y="305" fill="#fbbf24" font-family="Space Mono" font-size="11" font-weight="700" text-anchor="middle">BULLISH ENGULF</text>
+      </svg>
+    </div>
+
+    <div class="drawing-half">
+      <div class="drawing-label">→ Bearish Engulfing</div>
+      <svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="320" fill="url(#grid2)"/>
+        <line x1="60" y1="180" x2="60" y2="280" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="50" y="195" width="20" height="75" fill="#00d4aa"/>
+        <line x1="120" y1="150" x2="120" y2="240" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="110" y="165" width="20" height="65" fill="#00d4aa"/>
+        <line x1="180" y1="120" x2="180" y2="200" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="170" y="135" width="20" height="55" fill="#00d4aa"/>
+        <line x1="240" y1="95" x2="240" y2="145" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="230" y="105" width="20" height="30" fill="#00d4aa"/>
+        <line x1="300" y1="80" x2="300" y2="200" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="290" y="90" width="20" height="95" fill="#ff3b69"/>
+        <rect x="280" y="72" width="40" height="135" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3 3" rx="2"/>
+        <line x1="360" y1="155" x2="360" y2="225" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="350" y="165" width="20" height="50" fill="#ff3b69"/>
+        <line x1="420" y1="200" x2="420" y2="265" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="410" y="210" width="20" height="50" fill="#ff3b69"/>
+        <line x1="225" y1="105" x2="285" y2="105" stroke="#fbbf24" stroke-width="0.6" stroke-dasharray="2 2" opacity="0.8"/>
+        <line x1="225" y1="135" x2="285" y2="135" stroke="#fbbf24" stroke-width="0.6" stroke-dasharray="2 2" opacity="0.8"/>
+        <text x="270" y="305" fill="#fbbf24" font-family="Space Mono" font-size="11" font-weight="700" text-anchor="middle">BEARISH ENGULF</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="content">
+    <h3>What you're looking at</h3>
+    <p>Two candles where the <strong>second candle's body completely covers the first candle's body</strong>. The second one opens beyond the prior close and closes beyond the prior open — flipping sentiment in one move. Wicks don't matter, only the bodies.</p>
+    <h3>Psychology — why it works</h3>
+    <p class="secondary">The first candle represents one side's last stand. The engulfing candle is the other side overpowering them completely, in a single 2-minute window. It's the cleanest possible signal of a sentiment shift — buyers (or sellers) suddenly arrived in size and didn't care about the prior move.</p>
+    <h3>Trade plan</h3>
+    <div class="trade-plan">
+      <div class="trade-cell"><div class="label">Entry</div><div class="value">Market at close of engulfing candle (aggressive) OR break of its high/low (safer)</div></div>
+      <div class="trade-cell"><div class="label">Stop</div><div class="value">Opposite end of engulfing candle (above the wick high or below the wick low)</div></div>
+      <div class="trade-cell"><div class="label">Target</div><div class="value">1.5–2× the engulfing candle's own range OR next structure level</div></div>
+    </div>
+    <h3>Confluence — only trade engulfings with these</h3>
+    <ul class="confluence">
+      <li>At a clear S/R level (most important)</li>
+      <li>Volume on the engulfing candle is noticeably larger than the prior 5–10 candles</li>
+      <li>After a clear preceding move — not in chop</li>
+      <li>Higher timeframe (15-min) trend agrees with the engulf direction</li>
+      <li>The engulfing body is at least 1.5× the prior body — bigger is better</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PATTERN 3: MORNING STAR / EVENING STAR -->
+<section class="pattern">
+  <div class="pattern-header">
+    <div>
+      <div class="pattern-number">PATTERN 03</div>
+      <h2 class="pattern-name">Morning Star / Evening Star</h2>
+      <div class="pattern-subtitle">Three-candle reversal — the textbook bottom &amp; top</div>
+    </div>
+    <div class="reliability-badge">Hit rate: <span class="num">~75%</span> at strong levels w/ confluence</div>
+  </div>
+
+  <div class="drawing split">
+    <div class="drawing-half">
+      <div class="drawing-label">→ Morning Star · Bullish reversal at bottom</div>
+      <svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid3a" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#161d27" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="500" height="320" fill="url(#grid3a)"/>
+        <line x1="20" y1="260" x2="480" y2="260" stroke="#fbbf24" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
+        <text x="475" y="255" fill="#fbbf24" font-family="Space Mono" font-size="9" text-anchor="end" opacity="0.7">SUPPORT</text>
+
+        <!-- Setup: declining candles -->
+        <line x1="60" y1="50" x2="60" y2="140" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="50" y="65" width="20" height="65" fill="#ff3b69"/>
+        <line x1="120" y1="85" x2="120" y2="175" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="110" y="100" width="20" height="65" fill="#ff3b69"/>
+
+        <!-- CANDLE 1: Large red despair candle -->
+        <line x1="180" y1="135" x2="180" y2="245" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="170" y="145" width="20" height="95" fill="#ff3b69"/>
+        <text x="180" y="305" fill="#9ca3af" font-family="Space Mono" font-size="9" text-anchor="middle">1: despair</text>
+
+        <!-- CANDLE 2: Small body star (low) -->
+        <line x1="240" y1="240" x2="240" y2="275" stroke="#9ca3af" stroke-width="1.5"/>
+        <rect x="230" y="250" width="20" height="12" fill="#9ca3af"/>
+        <text x="240" y="305" fill="#9ca3af" font-family="Space Mono" font-size="9" text-anchor="middle">2: star</text>
+
+        <!-- CANDLE 3: Large green reversal closing into candle 1 -->
+        <line x1="300" y1="140" x2="300" y2="248" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="290" y="150" width="20" height="92" fill="#00d4aa"/>
+        <text x="300" y="305" fill="#9ca3af" font-family="Space Mono" font-size="9" text-anchor="middle">3: reversal</text>
+
+        <!-- Highlight ring around all three pattern candles -->
+        <rect x="160" y="127" width="160" height="158" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3 3" rx="3"/>
+
+        <!-- 50% midpoint dashed line of candle 1 -->
+        <line x1="160" y1="192" x2="320" y2="192" stroke="#fbbf24" stroke-width="0.6" stroke-dasharray="2 2" opacity="0.7"/>
+        <text x="325" y="195" fill="#fbbf24" font-family="Space Mono" font-size="9">50% of candle 1</text>
+        <text x="325" y="207" fill="#fbbf24" font-family="Space Mono" font-size="9">candle 3 closes</text>
+        <text x="325" y="219" fill="#fbbf24" font-family="Space Mono" font-size="9">above this line</text>
+
+        <!-- Follow-through up -->
+        <line x1="360" y1="105" x2="360" y2="175" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="350" y="115" width="20" height="50" fill="#00d4aa"/>
+        <line x1="420" y1="65" x2="420" y2="140" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="410" y="75" width="20" height="55" fill="#00d4aa"/>
+      </svg>
+    </div>
+
+    <div class="drawing-half">
+      <div class="drawing-label">→ Evening Star · Bearish reversal at top</div>
+      <svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="320" fill="url(#grid3a)"/>
+        <line x1="20" y1="60" x2="480" y2="60" stroke="#fbbf24" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
+        <text x="475" y="55" fill="#fbbf24" font-family="Space Mono" font-size="9" text-anchor="end" opacity="0.7">RESISTANCE</text>
+
+        <!-- Rising setup -->
+        <line x1="60" y1="180" x2="60" y2="265" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="50" y="195" width="20" height="60" fill="#00d4aa"/>
+        <line x1="120" y1="145" x2="120" y2="225" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="110" y="155" width="20" height="60" fill="#00d4aa"/>
+
+        <!-- CANDLE 1: Large green euphoria -->
+        <line x1="180" y1="75" x2="180" y2="180" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="170" y="85" width="20" height="90" fill="#00d4aa"/>
+        <text x="180" y="305" fill="#9ca3af" font-family="Space Mono" font-size="9" text-anchor="middle">1: euphoria</text>
+
+        <!-- CANDLE 2: Small body star (high) -->
+        <line x1="240" y1="45" x2="240" y2="85" stroke="#9ca3af" stroke-width="1.5"/>
+        <rect x="230" y="58" width="20" height="12" fill="#9ca3af"/>
+        <text x="240" y="305" fill="#9ca3af" font-family="Space Mono" font-size="9" text-anchor="middle">2: star</text>
+
+        <!-- CANDLE 3: Large red reversal -->
+        <line x1="300" y1="80" x2="300" y2="185" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="290" y="90" width="20" height="90" fill="#ff3b69"/>
+        <text x="300" y="305" fill="#9ca3af" font-family="Space Mono" font-size="9" text-anchor="middle">3: reversal</text>
+
+        <rect x="160" y="37" width="160" height="158" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3 3" rx="3"/>
+
+        <line x1="160" y1="130" x2="320" y2="130" stroke="#fbbf24" stroke-width="0.6" stroke-dasharray="2 2" opacity="0.7"/>
+        <text x="325" y="133" fill="#fbbf24" font-family="Space Mono" font-size="9">50% of candle 1</text>
+        <text x="325" y="145" fill="#fbbf24" font-family="Space Mono" font-size="9">candle 3 closes</text>
+        <text x="325" y="157" fill="#fbbf24" font-family="Space Mono" font-size="9">below this line</text>
+
+        <!-- Follow-through down -->
+        <line x1="360" y1="155" x2="360" y2="225" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="350" y="165" width="20" height="50" fill="#ff3b69"/>
+        <line x1="420" y1="195" x2="420" y2="270" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="410" y="205" width="20" height="55" fill="#ff3b69"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="content">
+    <h3>What you're looking at</h3>
+    <p>Three candles telling a complete reversal story: <strong>(1)</strong> a large candle continuing the prior trend, <strong>(2)</strong> a small-body candle (the "star") showing exhaustion, and <strong>(3)</strong> a large opposite-direction candle that closes <strong>past the midpoint of candle 1's body</strong>. The deeper candle 3 penetrates candle 1, the stronger the signal.</p>
+    <h3>Psychology — why it works</h3>
+    <p class="secondary">This is the only pattern in the set that shows the full sentiment shift across three time periods: dominance → exhaustion → reversal. That extra step of confirmation is why it has a slightly higher hit rate than engulfing — but it's also slower (you have to wait for candle 3 to complete), so you give up some R:R for that reliability.</p>
+    <h3>Trade plan</h3>
+    <div class="trade-plan">
+      <div class="trade-cell"><div class="label">Entry</div><div class="value">Market at close of candle 3<br>OR break of candle 3 high (conservative)</div></div>
+      <div class="trade-cell"><div class="label">Stop</div><div class="value">Below the low of candle 2 (the star)<br>Tightest stop in the set</div></div>
+      <div class="trade-cell"><div class="label">Target</div><div class="value">Min 1.5:1 R:R<br>Previous swing high / next structure</div></div>
+    </div>
+    <h3>Confluence — when a morning star actually works</h3>
+    <ul class="confluence">
+      <li><strong>Candle 3 closes more than 50% into candle 1 body</strong> — the deeper, the better</li>
+      <li>At a clear support level (or resistance for evening star)</li>
+      <li>Volume expansion on candle 3 — without it, the move lacks conviction</li>
+      <li>After an extended decline (4+ red candles) — not in chop</li>
+      <li>If candle 2 is a doji, the signal is stronger (called a "Morning Doji Star")</li>
+      <li>Higher timeframe doesn't disagree</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PATTERN 4: INSIDE BAR -->
+<section class="pattern">
+  <div class="pattern-header">
+    <div>
+      <div class="pattern-number">PATTERN 04</div>
+      <h2 class="pattern-name">Inside Bar</h2>
+      <div class="pattern-subtitle">Compression before the breakout</div>
+    </div>
+    <div class="reliability-badge">Hit rate: <span class="num">~65%</span> trend-aligned breakouts</div>
+  </div>
+
+  <div class="drawing">
+    <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid4" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#161d27" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+      <rect width="700" height="280" fill="url(#grid4)"/>
+      <line x1="60" y1="195" x2="60" y2="260" stroke="#00d4aa" stroke-width="1.5"/>
+      <rect x="50" y="210" width="20" height="45" fill="#00d4aa"/>
+      <line x1="120" y1="160" x2="120" y2="220" stroke="#00d4aa" stroke-width="1.5"/>
+      <rect x="110" y="175" width="20" height="40" fill="#00d4aa"/>
+      <line x1="180" y1="130" x2="180" y2="190" stroke="#00d4aa" stroke-width="1.5"/>
+      <rect x="170" y="140" width="20" height="45" fill="#00d4aa"/>
+      <line x1="240" y1="80" x2="240" y2="170" stroke="#00d4aa" stroke-width="1.5"/>
+      <rect x="230" y="95" width="20" height="65" fill="#00d4aa"/>
+      <text x="240" y="75" fill="#9ca3af" font-family="Space Mono" font-size="10" text-anchor="middle">mother</text>
+      <line x1="300" y1="105" x2="300" y2="150" stroke="#ff3b69" stroke-width="1.5"/>
+      <rect x="290" y="115" width="20" height="25" fill="#ff3b69"/>
+      <rect x="280" y="97" width="40" height="60" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3 3" rx="2"/>
+      <text x="300" y="172" fill="#fbbf24" font-family="Space Mono" font-size="10" text-anchor="middle" font-weight="700">INSIDE</text>
+      <line x1="225" y1="80" x2="320" y2="80" stroke="#fbbf24" stroke-width="0.6" stroke-dasharray="2 2" opacity="0.5"/>
+      <line x1="225" y1="170" x2="320" y2="170" stroke="#fbbf24" stroke-width="0.6" stroke-dasharray="2 2" opacity="0.5"/>
+      <text x="332" y="84" fill="#fbbf24" font-family="Space Mono" font-size="9">mother high</text>
+      <text x="332" y="173" fill="#fbbf24" font-family="Space Mono" font-size="9">mother low</text>
+      <line x1="380" y1="55" x2="380" y2="125" stroke="#00d4aa" stroke-width="1.5"/>
+      <rect x="370" y="60" width="20" height="55" fill="#00d4aa"/>
+      <line x1="440" y1="35" x2="440" y2="90" stroke="#00d4aa" stroke-width="1.5"/>
+      <rect x="430" y="45" width="20" height="35" fill="#00d4aa"/>
+      <line x1="500" y1="20" x2="500" y2="70" stroke="#00d4aa" stroke-width="1.5"/>
+      <rect x="490" y="30" width="20" height="35" fill="#00d4aa"/>
+      <text x="555" y="58" fill="#fbbf24" font-family="Space Mono" font-size="10">entry: break of mother high</text>
+      <line x1="540" y1="55" x2="395" y2="65" stroke="#fbbf24" stroke-width="0.6" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <div class="content">
+    <h3>What you're looking at</h3>
+    <p>A "mother" candle followed by a smaller candle whose entire range — high AND low — is completely <strong>inside</strong> the mother's range. The market paused. Volatility compressed. A move is coming.</p>
+    <h3>Psychology — why it works</h3>
+    <p class="secondary">After a big candle, the market takes a breath. Buyers and sellers reach a temporary truce inside the prior range. But compression is a spring being loaded — eventually one side breaks the deadlock and the move resumes. In trends, the break usually goes in the trend's direction.</p>
+    <h3>Trade plan</h3>
+    <div class="trade-plan">
+      <div class="trade-cell"><div class="label">Entry</div><div class="value">Buy stop above mother high (long) OR sell stop below mother low (short)</div></div>
+      <div class="trade-cell"><div class="label">Stop</div><div class="value">Opposite side of mother bar (or below inside bar for tighter stop)</div></div>
+      <div class="trade-cell"><div class="label">Target</div><div class="value">Project the mother bar's range from breakout point<br>1.5–2× usually clean</div></div>
+    </div>
+    <h3>Confluence — these turn inside bars into edge</h3>
+    <ul class="confluence">
+      <li><strong>Trade with the trend</strong> — the single biggest factor; counter-trend inside bars fail often</li>
+      <li>Inside bar at a known S/R level (compressing AT a level = explosive breakout potential)</li>
+      <li>Multiple inside bars in a row (nested compression = bigger move when it pops)</li>
+      <li>Inside bar after a strong trending move on 5-min chart</li>
+      <li>Mother bar was a momentum candle (large body, small wicks)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PATTERN 5: MARUBOZU -->
+<section class="pattern">
+  <div class="pattern-header">
+    <div>
+      <div class="pattern-number">PATTERN 05</div>
+      <h2 class="pattern-name">Marubozu</h2>
+      <div class="pattern-subtitle">No wicks. Pure conviction. The momentum signal.</div>
+    </div>
+    <div class="reliability-badge">Hit rate: <span class="num">~68%</span> as trend continuation</div>
+  </div>
+
+  <div class="drawing split">
+    <div class="drawing-half">
+      <div class="drawing-label">→ Bullish Marubozu</div>
+      <svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid5" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#161d27" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="500" height="320" fill="url(#grid5)"/>
+        <line x1="60" y1="220" x2="60" y2="275" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="50" y="230" width="20" height="35" fill="#00d4aa"/>
+        <line x1="120" y1="195" x2="120" y2="245" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="110" y="205" width="20" height="35" fill="#00d4aa"/>
+        <line x1="180" y1="180" x2="180" y2="225" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="170" y="190" width="20" height="25" fill="#ff3b69"/>
+        <line x1="240" y1="175" x2="240" y2="220" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="230" y="185" width="20" height="30" fill="#00d4aa"/>
+        <rect x="290" y="80" width="20" height="115" fill="#00d4aa"/>
+        <rect x="280" y="72" width="40" height="131" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3 3" rx="2"/>
+        <text x="320" y="95" fill="#fbbf24" font-family="Space Mono" font-size="9">no upper wick</text>
+        <text x="320" y="107" fill="#fbbf24" font-family="Space Mono" font-size="9">closed at high</text>
+        <text x="320" y="195" fill="#fbbf24" font-family="Space Mono" font-size="9">no lower wick</text>
+        <text x="320" y="207" fill="#fbbf24" font-family="Space Mono" font-size="9">opened at low</text>
+        <line x1="360" y1="50" x2="360" y2="105" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="350" y="60" width="20" height="40" fill="#00d4aa"/>
+        <line x1="420" y1="35" x2="420" y2="85" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="410" y="45" width="20" height="35" fill="#00d4aa"/>
+        <text x="250" y="305" fill="#fbbf24" font-family="Space Mono" font-size="11" font-weight="700" text-anchor="middle">BULL MARUBOZU</text>
+      </svg>
+    </div>
+
+    <div class="drawing-half">
+      <div class="drawing-label">→ Bearish Marubozu</div>
+      <svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="320" fill="url(#grid5)"/>
+        <line x1="60" y1="55" x2="60" y2="105" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="50" y="65" width="20" height="35" fill="#ff3b69"/>
+        <line x1="120" y1="80" x2="120" y2="125" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="110" y="90" width="20" height="30" fill="#ff3b69"/>
+        <line x1="180" y1="95" x2="180" y2="140" stroke="#00d4aa" stroke-width="1.5"/>
+        <rect x="170" y="105" width="20" height="30" fill="#00d4aa"/>
+        <line x1="240" y1="100" x2="240" y2="155" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="230" y="115" width="20" height="35" fill="#ff3b69"/>
+        <rect x="290" y="130" width="20" height="115" fill="#ff3b69"/>
+        <rect x="280" y="122" width="40" height="131" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3 3" rx="2"/>
+        <text x="320" y="143" fill="#fbbf24" font-family="Space Mono" font-size="9">opened at high</text>
+        <text x="320" y="245" fill="#fbbf24" font-family="Space Mono" font-size="9">closed at low</text>
+        <line x1="360" y1="225" x2="360" y2="280" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="350" y="240" width="20" height="40" fill="#ff3b69"/>
+        <line x1="420" y1="245" x2="420" y2="295" stroke="#ff3b69" stroke-width="1.5"/>
+        <rect x="410" y="260" width="20" height="35" fill="#ff3b69"/>
+        <text x="250" y="315" fill="#fbbf24" font-family="Space Mono" font-size="11" font-weight="700" text-anchor="middle">BEAR MARUBOZU</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="content">
+    <h3>What you're looking at</h3>
+    <p>A candle with a <strong>tall body and little to no wicks on either end</strong>. Opens at one extreme, closes at the other. Nobody pushed back. Pure one-sided conviction over the entire 2 minutes.</p>
+    <h3>Psychology — why it works</h3>
+    <p class="secondary">When buyers (or sellers) own a candle bell-to-bell with no pushback, momentum almost always carries into the next few candles. This is the "the freight train is moving" pattern. Don't fight it — ride it.</p>
+    <h3>Trade plan</h3>
+    <div class="trade-plan">
+      <div class="trade-cell"><div class="label">Entry</div><div class="value">Aggressive: market at close of marubozu<br>Conservative: pullback to its midpoint</div></div>
+      <div class="trade-cell"><div class="label">Stop</div><div class="value">Opposite end of the marubozu (stops are wider — size down accordingly)</div></div>
+      <div class="trade-cell"><div class="label">Target</div><div class="value">1× marubozu range minimum<br>Trail behind structure for runners</div></div>
+    </div>
+    <h3>Confluence — when to trust a marubozu</h3>
+    <ul class="confluence">
+      <li>It's in the direction of the higher-timeframe trend</li>
+      <li>It's a <strong>breakout candle</strong> — clearing a key level you've been watching</li>
+      <li>Volume on the marubozu is well above average</li>
+      <li>It comes after consolidation (compression → release = high probability move)</li>
+      <li>Caution: a marubozu at the END of an extended move can be exhaustion. Don't chase parabolic marubozus.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PATTERN 6: DOJI -->
+<section class="pattern">
+  <div class="pattern-header">
+    <div>
+      <div class="pattern-number">PATTERN 06</div>
+      <h2 class="pattern-name">Doji</h2>
+      <div class="pattern-subtitle">The indecision candle — a warning, not a signal</div>
+    </div>
+    <div class="reliability-badge">Hit rate: <span class="num">~65%</span> at extremes only</div>
+  </div>
+
+  <div class="drawing">
+    <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid6" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#161d27" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+      <rect width="700" height="280" fill="url(#grid6)"/>
+      <line x1="20" y1="60" x2="680" y2="60" stroke="#fbbf24" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
+      <text x="675" y="55" fill="#fbbf24" font-family="Space Mono" font-size="9" text-anchor="end" opacity="0.7">RESISTANCE</text>
+      <line x1="60" y1="180" x2="60" y2="245" stroke="#00d4aa" stroke-width="1.5"/>
+      <rect x="50" y="195" width="20" height="45" fill="#00d4aa"/>
+      <line x1="120" y1="145" x2="120" y2="210" stroke="#00d4aa" stroke-width="1.5"/>
+      <rect x="110" y="160" width="20" height="45" fill="#00d4aa"/>
+      <line x1="180" y1="115" x2="180" y2="175" stroke="#00d4aa" stroke-width="1.5"/>
+      <rect x="170" y="125" width="20" height="45" fill="#00d4aa"/>
+      <line x1="240" y1="80" x2="240" y2="140" stroke="#00d4aa" stroke-width="1.5"/>
+      <rect x="230" y="90" width="20" height="45" fill="#00d4aa"/>
+      <line x1="300" y1="40" x2="300" y2="130" stroke="#e5e7eb" stroke-width="1.5"/>
+      <rect x="290" y="83" width="20" height="3" fill="#e5e7eb"/>
+      <rect x="280" y="32" width="40" height="106" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3 3" rx="2"/>
+      <text x="325" y="60" fill="#fbbf24" font-family="Space Mono" font-size="10">long upper wick</text>
+      <text x="325" y="86" fill="#fbbf24" font-family="Space Mono" font-size="10">open ≈ close (flat body)</text>
+      <text x="325" y="124" fill="#fbbf24" font-family="Space Mono" font-size="10">long lower wick</text>
+      <line x1="380" y1="80" x2="380" y2="150" stroke="#ff3b69" stroke-width="1.5"/>
+      <rect x="370" y="90" width="20" height="50" fill="#ff3b69"/>
+      <line x1="440" y1="115" x2="440" y2="185" stroke="#ff3b69" stroke-width="1.5"/>
+      <rect x="430" y="125" width="20" height="55" fill="#ff3b69"/>
+      <line x1="500" y1="150" x2="500" y2="225" stroke="#ff3b69" stroke-width="1.5"/>
+      <rect x="490" y="160" width="20" height="60" fill="#ff3b69"/>
+      <text x="300" y="265" fill="#fbbf24" font-family="Space Mono" font-size="11" font-weight="700" text-anchor="middle">DOJI AT RESISTANCE = EXHAUSTION WARNING</text>
+    </svg>
+  </div>
+
+  <div class="content">
+    <h3>What you're looking at</h3>
+    <p>A candle where <strong>open and close are essentially equal</strong> — the body is just a horizontal line. Wicks can be long on top, bottom, or both. It means buyers and sellers were perfectly balanced over the candle.</p>
+    <h3>Psychology — why it works (and when it doesn't)</h3>
+    <p class="secondary">A doji is <strong>indecision frozen in time</strong>. In the middle of chop, it means nothing — there are hundreds of dojis on every 2-min chart all day. But at the <strong>end of an extended trend</strong> or right at a key level, a doji is a warning: the trend has lost its conviction.</p>
+    <h3>Key rule: never trade the doji itself</h3>
+    <p>Dojis are signals to <strong>watch</strong>, not enter. You wait for the NEXT candle to break the doji's high or low — that's your trigger. A doji that gets engulfed = high-probability reversal. A doji that gets ignored = no trade.</p>
+    <h3>Trade plan</h3>
+    <div class="trade-plan">
+      <div class="trade-cell"><div class="label">Entry</div><div class="value">Break of doji's low (short) or high (long) on the NEXT candle</div></div>
+      <div class="trade-cell"><div class="label">Stop</div><div class="value">Opposite end of doji's wick<br>(beyond the high if shorting, below low if buying)</div></div>
+      <div class="trade-cell"><div class="label">Target</div><div class="value">1.5–2× the doji's wick-to-wick range<br>Or nearest structure</div></div>
+    </div>
+    <h3>Confluence — when a doji actually matters</h3>
+    <ul class="confluence">
+      <li><strong>After a clear extended move</strong> — 4+ candles in one direction. Not in chop.</li>
+      <li>At a major S/R level, prior swing, or round number</li>
+      <li>At VWAP or a key MA on the 5/15-min</li>
+      <li>Long upper wick + at resistance = especially bearish (rejection doji)</li>
+      <li>Volume spike on the doji = real fight happened — credible signal</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<div class="summary">
+  <h2>Quick Reference</h2>
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Pattern</th><th>Type</th><th>Trade On</th><th>Best Context</th><th>Edge</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Pin Bar</td><td>Reversal · 1 candle</td><td>Break of pin high/low</td><td>At S/R or key MA</td><td>~70%</td></tr>
+      <tr><td>Engulfing</td><td>Reversal · 2 candles</td><td>Close of engulf, or high/low break</td><td>End of move at level w/ volume</td><td>~72%</td></tr>
+      <tr><td>Morning/Evening Star</td><td>Reversal · 3 candles</td><td>Close of candle 3</td><td>Extended move into level, candle 3 closes &gt; 50% into candle 1</td><td>~75%</td></tr>
+      <tr><td>Inside Bar</td><td>Continuation</td><td>Break of mother high/low</td><td>In a trend, after momentum candle</td><td>~65%</td></tr>
+      <tr><td>Marubozu</td><td>Momentum</td><td>Close, or pullback to mid</td><td>Breakout direction with volume</td><td>~68%</td></tr>
+      <tr><td>Doji</td><td>Warning</td><td>NEXT candle's break of doji high/low</td><td>At extreme of move or key level</td><td>~65%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="final-rule">
+  <div class="label">The one rule that matters</div>
+  <p>The pattern is never the edge. The <span style="color: var(--amber);">context</span> is the edge. A pin bar in chop is noise. A pin bar at the 200 EMA with volume after a 10-bar push is a layup. Same shape. Different trade.</p>
+</div>
+
+</div>
+</body>
+</html>

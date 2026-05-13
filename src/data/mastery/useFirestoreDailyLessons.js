@@ -25,6 +25,7 @@ export function normalizeLesson(raw) {
       typeof wid === 'string' ? wid : Array.isArray(wid) ? wid : '',
     tradesReview: Array.isArray(raw.tradesReview) ? raw.tradesReview : undefined,
     qaCards: Array.isArray(raw.qaCards) ? raw.qaCards : undefined,
+    attachments: Array.isArray(raw.attachments) ? raw.attachments : undefined,
     closingThought: typeof raw.closingThought === 'string' ? raw.closingThought : undefined,
   };
 }

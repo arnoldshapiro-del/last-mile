@@ -1,6 +1,196 @@
 // Daily Lessons — the living, growing part of Live Trading Mastery.
 // Reverse-chronological by date. New lessons get added by the daily prompt.
 
+
+
+// =============================================================================
+// DAILY LESSON — 2026-05-12 EVENING — Tonight's Pattern Study (Morning Star + 6-Pattern Cheat Sheet)
+// =============================================================================
+const may12_2026_evening = {
+  "date": "2026-05-12-evening",
+  "title": "Tonight's Pattern Study — Morning Star & The 6-Pattern Cheat Sheet",
+  "subtitle": "Stop trying to memorize every candlestick pattern. Master six.",
+  "sessionSummary": "An evening study session that did two big things. First — a complete deep-dive on the Morning Star reversal pattern: anatomy, psychology, variations, mechanics, honest success rates, confluence factors, NQ/RTY-specific considerations, and the most common failure modes. Second — the radical simplification Arnie has needed for years: stop trying to learn 100+ candlestick patterns. Master six. The session built a printable cheat sheet covering Pin Bar, Engulfing, Morning Star, Inside Bar, Marubozu, and Doji — the only patterns that actually fire with edge on a 2-minute futures chart. The session also unlocked a long-standing visual confusion (why Arnie's pattern-indicator candles paint black/gray instead of red/green), with four concrete ways to read the underlying OHLC anyway. The thread tying everything together: the pattern is never the edge. The context is the edge. Recognizing shapes is not trading — recognizing shapes AT THE RIGHT PLACE is.",
+  "teachingUnits": [
+    {
+      "id": 1,
+      "title": "The Morning Star — three-candle bullish reversal anatomy",
+      "concept": "Morning Star is a 3-candle bullish reversal at the bottom of a downtrend. Candle 1 is large bearish (despair). Candle 2 is small-bodied (indecision, ideally a doji). Candle 3 is large bullish closing at least 50% into Candle 1's body. The deeper Candle 3 closes into Candle 1, the stronger the signal.",
+      "detail": "The name comes from Venus — the morning star that appears before sunrise, signaling that darkness (the downtrend) is ending and light (the uptrend) is coming. Three candles = three full periods of market sentiment shifting. Sellers dominate (Candle 1). Sellers exhaust, buyers wake up (Candle 2). Buyers overwhelm sellers (Candle 3). The 3-period structure is exactly what makes it more reliable than single-candle patterns like a hammer — the market has had three full bars to decide, not one.",
+      "applicationToday": "Arnie spotted Morning Star #54 on his M2K chart but the three candles were painted black/gray by his PriceActionIndicators system. The pattern indicator overrode normal red/green coloring — we'll cover that in unit 9. The pattern itself was valid; the visual confusion was a separate problem.",
+      "rule": "Three candles, in this order: large bearish → small-body indecision → large bullish closing 50%+ into Candle 1. All three must be present. Two out of three is not a Morning Star."
+    },
+    {
+      "id": 2,
+      "title": "Morning Star psychology — the 3-act story",
+      "concept": "Every Morning Star tells the same three-act story. Act 1 (Candle 1): sellers feel fully in control. The trend continues. Act 2 (Candle 2): sellers exhaust themselves. Buyers and sellers reach equilibrium. The small body or doji represents the balance point. Act 3 (Candle 3): buyers overwhelm sellers. The reversal is confirmed.",
+      "detail": "Knowing the psychology matters because it's how you spot the FAILED version. A fake Morning Star happens when Candle 3 is small or has a long upper wick — meaning buyers tried but couldn't sustain control. The candle closes weakly, sellers came back at the highs, and the reversal thesis is broken. Strong Morning Stars have Candle 3 closing AT or NEAR its high with little to no upper wick. That's the visual signature of buyers winning the bar decisively.",
+      "applicationToday": "Arnie's M2K Morning Star #54 had a wick on top of Candle 3 — buyers ran it up, sellers gave some back before close. That's a yellow flag the indicator could not see. Visual psychology overrides the pattern label every time.",
+      "rule": "Read each candle as an act in a story. If Act 3 doesn't end with buyers visibly winning (strong close, minimal upper wick), the story doesn't resolve."
+    },
+    {
+      "id": 3,
+      "title": "Morning Star variations — Standard, Doji Star, Abandoned Baby",
+      "concept": "Three variations exist, ranked weakest to strongest. STANDARD: small real body in middle. DOJI STAR: middle candle is a doji (open ≈ close) — open and close are essentially the same, body is a flat line. Stronger signal because indecision is sharper. ABANDONED BABY: rare; middle candle gaps down AND gaps up, with shadows that don't overlap either adjacent candle. Extremely strong but almost never seen in futures.",
+      "detail": "In stocks the Abandoned Baby is occasionally tradable because of overnight gaps. In futures it's essentially nonexistent because the market trades nearly 24 hours — there are no real gaps. So on NQ/RTY/MES/M2K, you're looking for either the Standard or the Doji Star. The Doji Star is the one to wait for — it's the signal that buyers and sellers genuinely matched up, not just that selling pressure paused.",
+      "applicationToday": "The Morning Star Arnie was looking at was a Standard variant, not a Doji Star. Standard variants have a slightly lower hit rate than Doji Stars (roughly 65% vs 75% with confluence). Worth knowing what tier the pattern is in before sizing the trade.",
+      "rule": "Doji middle = strongest. Small-body middle = standard. Don't bother waiting for Abandoned Baby on futures — it doesn't print."
+    },
+    {
+      "id": 4,
+      "title": "How to trade a Morning Star — entry, stop, target",
+      "concept": "Three entry styles. CONSERVATIVE: wait for the next candle after Candle 3 to break above Candle 3's high — fewer false signals, worse R:R. AGGRESSIVE: enter at the close of Candle 3 — better R:R, more false signals. HYBRID: place a buy-stop a few ticks above Candle 3's high. Stop goes below Candle 2's low (the star). Target is at least 1:2 R:R, ideally the prior swing high or nearest resistance.",
+      "detail": "If the structural stop (below Candle 2's low) is too far away to make the R:R math work, SKIP THE TRADE. This is the universal rule from this morning's lesson applied to Morning Star — stop comes from structure, not from how much pain you can tolerate. Scale out: half at 1:1, runner trails behind structure (the same 1-2-Runner framework that produced today's +$1,227 breakthrough). Don't cap the runner at an arbitrary tick count.",
+      "applicationToday": "On a clean Morning Star at support: entry above Candle 3 high, stop below Candle 2 low, T1 at 1R, T2 at prior swing high, runner trails. Same structure as the ATM template — just with Morning Star deciding the entry trigger instead of trendline break.",
+      "rule": "Entry above Candle 3 high. Stop below Candle 2 low. R:R must be 1:2 minimum to take the trade. If structure forces a too-wide stop, reduce contracts; don't tighten the stop."
+    },
+    {
+      "id": 5,
+      "title": "Morning Star success rates — the honest numbers",
+      "concept": "Bulkowski's research (the gold standard for pattern statistics): ~78% success rate as a reversal. Live trading studies: 60-70% when traded in isolation. With confluence: climbs to 75-85%. Without confluence: drops BELOW 50%. Translation — the pattern alone is a coin flip. The pattern WITH context is where the edge lives.",
+      "detail": "Almost every trading-education source quotes the 78% Bulkowski number without mentioning that it requires confluence. That's how people get hurt — they take Morning Stars in random spots and lose. The honest framing: the 78% is the ceiling. The floor (no confluence) is below 50%. Where you trade in that range depends entirely on what else is true at the level.",
+      "applicationToday": "If Arnie sees a Morning Star with no other confirming signals (no support nearby, no oversold RSI, no volume expansion, against the higher-timeframe trend), it's a sub-50% trade. Skip it. Wait for the one at the structural level with three or more confluence factors — that's the 75-85% trade.",
+      "rule": "The pattern is the trigger, not the edge. The edge is the context that surrounds the pattern. Score every Morning Star against the confluence checklist before clicking buy."
+    },
+    {
+      "id": 6,
+      "title": "Confluence factors — what turns a Morning Star coin flip into a 75-85% trade",
+      "concept": "The 7 confluence factors that materially raise win rate: (1) Key support level — prior swing low, demand zone, round number. (2) Oversold RSI below 30, ideally with bullish divergence. (3) Volume expansion on Candle 3. (4) Higher-timeframe alignment — pattern on 15-min means more if 1H trend is up. (5) Major moving average as support — 200 EMA, 50 EMA. (6) Fibonacci retracement at 61.8% or 78.6%. (7) Extended decline preceding the pattern, not mid-trend chop.",
+      "detail": "Treat these as a checklist. 5 or more boxes checked = take the trade. 4 or fewer = pass. There's always another setup. The single most important confluence factor is #1 (key support) — without that, nothing else matters. Patterns in mid-air without support beneath them are almost always losers. The pattern is asking 'is THIS where the trend changes?' — without support, the answer is no.",
+      "applicationToday": "Arnie's Morning Star #54: was it at a key support level? Was RSI oversold? Did volume expand on Candle 3? Was the higher timeframe aligned? If 5+ yes, the trade was valid. If not, the indicator flagging it as Morning Star #54 doesn't matter — the math wasn't there.",
+      "rule": "Score 5 of 7 confluence factors as YES before any Morning Star entry. Below 5, skip. Key support level (#1) is non-negotiable — it's required for ANY Morning Star to be tradable."
+    },
+    {
+      "id": 7,
+      "title": "Morning Star on NQ and RTY — what's different in futures",
+      "concept": "Futures trade nearly 24 hours, so the classic 'gap down then gap up' Abandoned Baby version almost never appears. Look for the structural equivalent: Candle 2's body fully below Candle 1's close, Candle 3's body fully above Candle 2's close. Higher timeframes work better — 1H, 4H, daily Morning Stars on NQ/RTY are reliably tradeable. 1-min and 5-min Morning Stars are mostly noise.",
+      "detail": "Session matters enormously. Patterns forming at the NY open or London open carry real weight because volume backs them. Overnight Asian-session Morning Stars on NQ often fail when NY traders arrive with the opposite bias. RTY (small caps) is more volatile than NQ — wider stops needed, but reversals tend to be sharper when they work. News risk overrides everything: a Morning Star forming before CPI, FOMC, or NFP is worthless. The data drives price, not the pattern.",
+      "applicationToday": "Arnie trades 2-minute charts on M2K and MES. On the 2-minute, Morning Stars fire constantly and most are noise. The discipline is to filter them through the confluence checklist AND through session timing. A 2-minute Morning Star at 10:00 AM ET on M2K at S3 with oversold RSI and volume expansion is tradeable. The same pattern at 12:30 PM during lunch is not.",
+      "rule": "Morning Stars on 2-minute futures charts need EXTRA confluence to be tradable. Higher timeframes (15-min, 1-hour) need less. Lunch hour (11:30-1:30 ET) Morning Stars are noise — skip them."
+    },
+    {
+      "id": 8,
+      "title": "How Morning Stars fail — the red flags before you click",
+      "concept": "Six failure modes to recognize BEFORE entry. (1) No support nearby — pattern in mid-air. (2) Weak Candle 3 — closes less than 50% into Candle 1. (3) No volume confirmation — Candle 3 has lower volume than Candle 1. (4) Against the higher-timeframe trend — counter-trend trades have lower win rates. (5) In a tight range — pattern inside chop is meaningless. (6) News candle as Candle 1 — that move had a fundamental reason; the pattern doesn't override news.",
+      "detail": "Each failure mode is a binary check that takes about 5 seconds. (1) Look at the chart left of the pattern — is there a prior swing low, MA, or zone nearby? (2) Drop a horizontal line at Candle 1's midpoint — does Candle 3 close above it? (3) Compare volume bars under Candles 1 and 3. (4) Pull up the higher timeframe — uptrend or downtrend? (5) Look at the 30-min window before the pattern — trending or chopping? (6) Check the economic calendar — was there a release in the last 5-10 minutes?",
+      "applicationToday": "Arnie's M2K Morning Star #54 may have had a weak Candle 3 (visible upper wick mentioned by Arnie). That's failure mode #2 lit. Combined with no volume expansion or no support — three failure modes lit means it's a sub-50% trade, regardless of what the indicator labeled it.",
+      "rule": "Scan all six failure modes BEFORE entry. ANY two lit = skip. The pattern can be a textbook Morning Star and still be a losing trade if the failure modes are present."
+    },
+    {
+      "id": 9,
+      "title": "Why pattern indicators paint candles black/gray (and how to read OHLC anyway)",
+      "concept": "Pattern indicators like PriceActionIndicators override normal red/green coloring to flag 'these candles together form pattern #X.' It's a visual signal — they're marking the pattern. Same thing happens with Piercing Line, Inverted Hammer, etc. The underlying candle is STILL red or green; the indicator just painted over it with the pattern color.",
+      "detail": "Four ways to read OHLC when colors are overridden. (1) Hover the candle — NinjaTrader's data box (top-left) shows exact O/H/L/C. If Close > Open it was green. (2) Look at the next candle's open — the next candle's open is basically the previous candle's close. (3) Turn off the pattern coloring temporarily — right-click chart → Indicators → uncheck or set 'Paint bars' to false. (4) Use the crosshair / chart cursor — hover and read the OHLC tooltip.",
+      "applicationToday": "Arnie was confused why his Morning Star candles were black/gray instead of red/green. Answer: the PA indicator was flagging them as part of pattern #54. The third candle's actual close was bullish (next candle opened higher) but the upper wick showed a weak finish. Reading OHLC directly via the data box gives the real story.",
+      "rule": "Black/gray candles in NinjaTrader = pattern indicator override, not the actual bar color. Use the data box (hover the candle) to read true OHLC. Don't trust the visual override for direction."
+    },
+    {
+      "id": 10,
+      "title": "Candle anatomy — the body, the wicks, and what each part actually tells you",
+      "concept": "Every candle has two parts. BODY (fat rectangle) = where it opened and closed. Just two prices. WICKS / SHADOWS (thin lines top and bottom) = the high and low of the period. Top of upper wick = highest price reached. Bottom of lower wick = lowest price reached. Top of body = whichever is higher, open or close. Bottom of body = whichever is lower.",
+      "detail": "Wicks tell you the journey. Bodies tell you the result. Tall upper wick + small body sitting at the bottom of the range = price ran up, got rejected, closed back near where it started. Buyers tried, sellers won. Tiny upper wick + tall body = price went up and kept closing higher. Buyers in full control. Tall upper wick + body in the middle = volatile, indecisive. Same logic inverts for lower wicks on the downside. Wicks ARE the rejection footprints — they show where price went but couldn't stay.",
+      "applicationToday": "This anatomy is what makes the 6-pattern cheat sheet work. Pin Bar = a candle that's mostly wick with a tiny body. Marubozu = a candle that's all body with no wicks. Doji = a candle whose body is essentially a flat line. Every pattern in the cheat sheet is a body/wick configuration. Knowing the anatomy unlocks all of them.",
+      "rule": "Body = result. Wicks = journey. Read every candle through this lens. The visual story of who won the bar is in the body+wick configuration."
+    },
+    {
+      "id": 11,
+      "title": "Stop trying to learn 100 patterns. Master six.",
+      "concept": "On a 2-minute futures chart, only six patterns fire with real edge. (1) PIN BAR (Hammer + Shooting Star) — single candle, instant signal, appears multiple times per session at levels. (2) ENGULFING — cleanest two-candle reversal. (3) MORNING STAR / EVENING STAR — three-candle reversal with the extra confirmation candle. (4) INSIDE BAR — only continuation pattern in the set, compression → release. (5) MARUBOZU — momentum confirmation, pure body no wicks. (6) DOJI — not a signal, a warning; means be ready for a flip.",
+      "detail": "Every other pattern (Three White Soldiers, Three Black Crows, Harami, Tweezers, Dark Cloud Cover, Piercing Line, Three Inside Up/Down, etc.) is either too rare to memorize, too unreliable on 2-min, or a worse variation of one of the six. Focus is the edge. Cognitive load matters when you're trying to read the chart in real time — fewer patterns to scan means faster, more decisive reads. Most pros only watch a handful of patterns intentionally.",
+      "applicationToday": "Arnie has been overwhelmed trying to remember every pattern his indicator flags. The fix is to ignore most of them and only react to these six. The cheat sheet (saved as PDF and HTML) is the reference. Print it. Put it next to the monitors. Glance at it for the first 30 days until it's automatic.",
+      "rule": "Six patterns. Pin Bar, Engulfing, Morning Star, Inside Bar, Marubozu, Doji. Everything else is noise to ignore. Focus = edge."
+    },
+    {
+      "id": 12,
+      "title": "The 3-question mental shortcut for every candle",
+      "concept": "Look at every candle and ask only three questions. (1) Is there a long wick? → Pin Bar territory. Someone got rejected. (2) Did the body completely cover or get covered? → Engulfing or Inside Bar. (3) Are there no wicks? → Marubozu. Pure momentum. Three questions, four of the six patterns covered. The fifth (Doji) is just 'the body is a flat line — pay attention.' Morning Star is the multi-candle version of #2.",
+      "detail": "This is the cognitive shortcut that lets you read a chart in 5 seconds instead of 5 minutes. You're not scanning for 100 patterns. You're scanning for three structural features (long wick, body coverage, no wicks). Each feature points to a pattern family. Each pattern family has its own trade logic. The pattern recognition becomes nearly automatic after a few weeks of using this shortcut.",
+      "applicationToday": "Looking at any candle on Arnie's M2K or MES chart, run the three questions in order. If none of them get a YES, the candle is not telling you anything actionable — move on. If one gets a YES, you have a pattern family and can score confluence. Speed of decision matters at the 2-minute level.",
+      "rule": "Every candle gets the 3-question scan. Yes to any = pattern family identified. No to all = noise. Run it automatically, every candle, until it's reflex."
+    },
+    {
+      "id": 13,
+      "title": "Doji — the only 'pattern' that's actually a warning, not a signal",
+      "concept": "A Doji is when a candle opens and closes at virtually the same price — body is a flat line. It does NOT mean buy or sell. It means INDECISION. The market just told you the prior trend's momentum has paused. The Doji itself is not a tradable signal — it's a heads-up that the NEXT candle is the one to watch. If the next candle pushes strongly one way, that's your direction.",
+      "detail": "Most beginners trade the Doji itself — they see indecision and react. That's the wrong move. The Doji is a setup, not a trigger. The trigger is the candle AFTER the Doji that resolves the indecision. If the next candle is a strong green close in an uptrend's pullback area, the trend is resuming. If the next candle is a strong red close at a top, the reversal is happening. The Doji alone is information, not action.",
+      "applicationToday": "A Doji at the top of Arnie's bull flag is a yellow flag — buyers and sellers just matched up at the highs. If the next candle closes red below the Doji's low, the flag is failing. If the next candle closes green above the Doji's high, the flag is continuing. The Doji forced the question; the next candle answers it.",
+      "rule": "NEVER trade the Doji itself. ALWAYS wait for the candle after to confirm direction. The Doji is a warning to pay attention — not a buy or sell signal."
+    },
+    {
+      "id": 14,
+      "title": "The one rule above all rules — pattern is never the edge, context is the edge",
+      "concept": "Every pattern in the 6-pattern set fires constantly on a 2-minute chart. Most of those instances are noise. The PATTERN is not what generates the edge — the CONTEXT around it is. A pin bar in chop is meaningless. The same pin bar at the 200 EMA after a 10-bar drive with volume = high-conviction setup. Same shape. Completely different trade.",
+      "detail": "This is why mechanical pattern-recognition systems flag so many false signals — they can see the shape but not the context. The PA indicator labels candles as 'Morning Star #54' or 'Pin Bar' without asking 'is this AT a level?' or 'does volume confirm?' or 'is the higher timeframe aligned?' The pattern is a question. The context is the answer. Trading patterns without context is rolling dice with extra steps.",
+      "applicationToday": "Put this above the monitor: 'The pattern is never the edge. The context is the edge.' Before every trade, check the context before checking the pattern. If the context is wrong, no pattern saves the trade. If the context is right, multiple patterns will probably fire at the same spot — that's confluence working.",
+      "rule": "Pattern is the trigger. Context is the edge. Always score context first. If context is wrong, the pattern doesn't matter. If context is right, the pattern is a tradeable entry."
+    }
+  ],
+  "chartReferences": [],
+  "attachments": [
+    {
+      "title": "The Only 6 Patterns You Need — Interactive Cheat Sheet",
+      "description": "Full dark-themed reference page with hand-drawn SVG anatomy of each pattern, psychology, trade plan, and confluence checklist. Open in a tab next to NinjaTrader.",
+      "kind": "html",
+      "href": "/lessons/2026-05-12-evening/cheatsheet.html"
+    },
+    {
+      "title": "Arnie's 6-Pattern Cheat Sheet — Print-Ready PDF",
+      "description": "8-page Letter-size PDF designed for color print. Pin pages 2-7 next to your monitors. Pattern index + 6 pattern pages + quick reference + the one rule that matters.",
+      "kind": "pdf",
+      "href": "/lessons/2026-05-12-evening/cheatsheet.pdf",
+      "downloadName": "Arnies-6-Pattern-CheatSheet.pdf"
+    }
+  ],
+  "qaCards": [
+    {
+      "question": "Why are my Morning Star candles painted black/gray instead of red/green?",
+      "answer": "Your PriceActionIndicators system overrides normal candle coloring to mark patterns. Black/gray means 'this candle is part of recognized pattern #X.' The underlying candle is still red or green — you just can't see it because the indicator painted over. Hover the candle and read the data box (top-left of NinjaTrader) for the true OHLC."
+    },
+    {
+      "question": "If I can only trade 6 patterns, which are they and why these specifically?",
+      "answer": "Pin Bar, Engulfing, Morning Star, Inside Bar, Marubozu, Doji. Pin Bar = single-candle reversal at levels. Engulfing = 2-candle reversal with body coverage. Morning Star = 3-candle reversal with confirmation. Inside Bar = continuation pattern (compression then release). Marubozu = momentum confirmation. Doji = warning of pending direction change. Together they cover the trade types that actually fire on 2-min futures with real edge. Everything else is noise."
+    },
+    {
+      "question": "What's the actual success rate of a Morning Star?",
+      "answer": "~78% in Bulkowski's research, which is the ceiling and requires confluence. In live trading, 60-70% in isolation. With strong support + volume + higher-TF alignment, climbs to 75-85%. Without confluence, drops below 50%. The pattern alone is roughly a coin flip — the edge is in the context surrounding it."
+    },
+    {
+      "question": "When should I NOT trade a Morning Star?",
+      "answer": "Skip it when any of these are true: no support level nearby (pattern in mid-air), Candle 3 closes weakly with a big upper wick, no volume expansion on Candle 3, against the higher-timeframe trend, inside a tight range with no prior real downtrend, or formed during/near a major news release. ANY two of these = skip the trade."
+    },
+    {
+      "question": "Is a Doji a buy signal or a sell signal?",
+      "answer": "NEITHER. A Doji means indecision — buyers and sellers matched up. The Doji itself is not tradable. Wait for the NEXT candle: if it closes strongly one direction, that's the signal. The Doji is a warning to pay attention, not a trigger to act."
+    }
+  ],
+  "keyRules": [
+    "Morning Star = bearish candle, small-body or doji, bullish candle closing 50%+ into Candle 1. All three required.",
+    "Doji middle is the strongest Morning Star variant. Standard small-body is acceptable. Abandoned Baby essentially doesn't exist in futures.",
+    "Entry above Candle 3 high, stop below Candle 2 low, R:R must be 1:2 minimum",
+    "Score every Morning Star against the 7-factor confluence checklist before clicking buy. 5+ green = take it. 4 or fewer = skip.",
+    "Key support level is the #1 confluence factor — without it, no Morning Star is tradable",
+    "On 2-min futures charts, Morning Stars need EXTRA confluence to be edge. Higher-timeframe Morning Stars (15m/1h) need less.",
+    "Six failure modes: no support, weak C3, no volume, counter-trend, in chop, near news. ANY two lit = skip.",
+    "Black/gray candles in NinjaTrader = pattern indicator override, not the actual color. Read OHLC via the data box.",
+    "Master six patterns: Pin Bar, Engulfing, Morning Star, Inside Bar, Marubozu, Doji. Ignore everything else.",
+    "3-question candle scan: long wick? body coverage? no wicks? — covers four of the six patterns in 5 seconds.",
+    "NEVER trade the Doji itself. Wait for the candle after to confirm direction.",
+    "Pattern is the trigger. Context is the edge. Score context FIRST.",
+    "Lunch-hour patterns (11:30-1:30 ET) are noise — skip them regardless of how good they look.",
+    "Cheat sheet PDF lives next to the monitors. Glance at it daily for the first 30 days until automatic."
+  ],
+  "principlesReinforced": [
+    "FOCUS IS THE EDGE — fewer patterns = faster decisions = better trades",
+    "PATTERN IS THE TRIGGER, CONTEXT IS THE EDGE — score context first",
+    "CONFLUENCE BEFORE CONFIRMATION — 5+ supporting factors before pulling the trigger",
+    "MULTI-CANDLE PATTERNS BEAT SINGLE-CANDLE PATTERNS — more bars = more conviction",
+    "READ THE BAR, NOT THE LABEL — visual psychology overrides any indicator naming",
+    "SKIP WHEN UNSURE — there is always another setup, never force a marginal one",
+    "TIMEFRAME MATTERS — 2-min patterns need extra confluence; higher timeframes need less"
+  ],
+  "whatIllDoDifferently": "Print the 6-pattern cheat sheet PDF and put it next to my monitors tonight. Stop scanning for every pattern my PriceActionIndicators flags. Only react to Pin Bar, Engulfing, Morning Star, Inside Bar, Marubozu, and Doji. Run the 3-question candle scan on every bar — long wick? body coverage? no wicks? Score every potential trade against the confluence checklist before clicking buy — 5 of 7 green is the minimum to take it. Remember Bulkowski's number (78%) is the ceiling, not the floor — that number requires confluence. Without confluence, every pattern is a coin flip. Whenever I see black/gray candles from the PA indicator, hover and read the data box for true OHLC. Never trade a Doji directly — wait for the next candle. And above all, repeat the one rule: pattern is the trigger, context is the edge.",
+  "closingThought": "Tonight was the night the universe of candlestick patterns shrunk from overwhelming to manageable. Six patterns to master. Three questions to ask every candle. One rule above all rules — context is the edge. The pattern-recognition era ends. The pattern-in-context era begins. Tomorrow morning at the open, this is the lens through which every chart gets read."
+};
 const may12_2026 = {
   date: '2026-05-12',
   title: 'The Day The Runner Ran',
@@ -765,7 +955,7 @@ const may7_2026 = {
 };
 
 
-export const dailyLessons = [may12_2026, may11_2026, may7_2026, foundationDay];
+export const dailyLessons = [may12_2026_evening, may12_2026, may11_2026, may7_2026, foundationDay];
 
 export function getDailyLesson(date) {
   return dailyLessons.find(l => l.date === date);
