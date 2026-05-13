@@ -1,0 +1,66 @@
+// Teaching unit 5: 5-row decision table — double top vs bull flag pullback.
+export const charts = [
+  {
+    title: 'Bull flag pullback — 3+ smooth pushes, shallow pullback, candles still above support',
+    candles: [
+      { o: 2848, h: 2849, l: 2847.8, c: 2848.8 },
+      { o: 2848.8, h: 2851, l: 2848.5, c: 2850.5 },
+      { o: 2850.5, h: 2853, l: 2850.2, c: 2852.5 },
+      { o: 2852.5, h: 2855, l: 2852.2, c: 2854.5 },
+      { o: 2854.5, h: 2856, l: 2854.2, c: 2855.5 },
+      { o: 2855.5, h: 2855.8, l: 2854.5, c: 2854.8 },
+      { o: 2854.8, h: 2855, l: 2853.8, c: 2854 },
+      { o: 2854, h: 2856, l: 2853.8, c: 2855.5 },
+    ],
+    annotations: [
+      { type: 'trendline', from: { i: 0, price: 2847.8 }, to: { i: 7, price: 2853.5 }, color: '#00D9A0', label: 'Trend support holding', dash: false },
+      { type: 'badge', at: { i: 5, price: 2857 }, color: '#00D9A0', text: 'Shallow pullback (2 candles)' },
+    ],
+    verdict: { label: 'Bull flag — stay long or stand aside', type: 'good' },
+    caption: '3+ smooth pushes up, shallow 2-candle pullback that holds above the rising trend support. Inside bars or small pullback candles. This is bull flag continuation behavior — short side is the wrong direction.',
+  },
+  {
+    title: 'Double top — 2 distinct peaks, deep valley, rejection candle at the high',
+    candles: [
+      { o: 2848, h: 2849, l: 2847.5, c: 2848.5 },
+      { o: 2848.5, h: 2852, l: 2848, c: 2851.5 },
+      { o: 2851.5, h: 2855.5, l: 2851.2, c: 2855.2 },
+      { o: 2855.2, h: 2855.5, l: 2854, c: 2854.2 },
+      { o: 2854.2, h: 2854.5, l: 2851.2, c: 2851.5 },
+      { o: 2851.5, h: 2851.8, l: 2850.2, c: 2850.5 },
+      { o: 2850.5, h: 2853, l: 2850.2, c: 2852.5 },
+      { o: 2852.5, h: 2855.4, l: 2852.2, c: 2855.1 },
+      { o: 2855.1, h: 2855.3, l: 2853, c: 2853.2 },
+    ],
+    annotations: [
+      { type: 'pivot', at: { i: 2, side: 'high' }, color: '#FF3D5A', label: 'Peak 1 — 2 distinct' },
+      { type: 'pivot', at: { i: 7, side: 'high' }, color: '#FF3D5A', label: 'Peak 2 — equal height' },
+      { type: 'level', price: 2850.5, color: '#FBBF24', label: 'Deep valley/neckline', dash: true },
+      { type: 'badge', at: { i: 8, price: 2852 }, color: '#FF3D5A', text: 'Rejection candle' },
+    ],
+    verdict: { label: 'Double top — short on neckline close', type: 'bad' },
+    caption: '2 distinct peaks at roughly equal height. Deep valley creating a defined neckline. Rejection candle at the second peak. This is the M-shape that earns the 88% Bulkowski reliability number.',
+  },
+  {
+    title: 'The 5-row decision table — vote before clicking',
+    candles: [
+      { o: 2848, h: 2849, l: 2847.5, c: 2848.5 },
+      { o: 2848.5, h: 2852, l: 2848, c: 2851.5 },
+      { o: 2851.5, h: 2855, l: 2851.2, c: 2854.5 },
+      { o: 2854.5, h: 2855.2, l: 2854, c: 2854.8 },
+      { o: 2854.8, h: 2855, l: 2853, c: 2853.2 },
+      { o: 2853.2, h: 2853.5, l: 2852, c: 2852.2 },
+      { o: 2852.2, h: 2853, l: 2851.5, c: 2852.8 },
+      { o: 2852.8, h: 2855.4, l: 2852.5, c: 2855 },
+      { o: 2855, h: 2855.3, l: 2853.5, c: 2853.8 },
+    ],
+    annotations: [
+      { type: 'badge', at: { i: 1, price: 2855 }, color: '#FBBF24', text: 'PUSHES: 2 = top, 3+ = flag' },
+      { type: 'badge', at: { i: 4, price: 2849 }, color: '#FBBF24', text: 'VALLEY: deep = top, shallow = flag' },
+      { type: 'badge', at: { i: 6, price: 2858 }, color: '#FBBF24', text: 'CLOSE BELOW SUPPORT: yes = top, no = flag' },
+      { type: 'badge', at: { i: 7, price: 2851 }, color: '#FBBF24', text: 'CANDLE TYPE + TREND LINE = 2 more votes' },
+    ],
+    verdict: { label: 'Vote 4-5 of 5 = take. 3-2 = wait.', type: 'warn' },
+    caption: 'Score all 5 signals before clicking. (1) Pushes 2 vs 3+. (2) Valley depth deep vs shallow. (3) Close below support yes vs no. (4) Candle type bearish engulfing vs inside bar. (5) Trend line rejected vs holding. 4-5 of 5 = trade. 3-2 = wait for the line.',
+  },
+];

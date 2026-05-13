@@ -1,0 +1,83 @@
+// Teaching unit 10: 3-question checklist before shorting any "lower high".
+export const charts = [
+  {
+    title: 'Question 1 — Where is price relative to the channel?',
+    candles: [
+      { o: 2858, h: 2859, l: 2857.5, c: 2858.5 },
+      { o: 2858.5, h: 2858.8, l: 2857, c: 2857.2 },
+      { o: 2857.2, h: 2857.5, l: 2855.8, c: 2856 },
+      { o: 2856, h: 2856.5, l: 2854.5, c: 2854.8 },
+      { o: 2854.8, h: 2855.2, l: 2853.5, c: 2853.8 },
+      { o: 2853.8, h: 2855, l: 2853.5, c: 2854.8 },
+      { o: 2854.8, h: 2856.5, l: 2854.5, c: 2856.2 },
+      { o: 2856.2, h: 2856.8, l: 2854.8, c: 2855 },
+      { o: 2855, h: 2855.5, l: 2853, c: 2853.2 },
+    ],
+    annotations: [
+      { type: 'trendline', from: { i: 0, price: 2859 }, to: { i: 8, price: 2856 }, color: '#00D9A0', label: 'Upper line', dash: false },
+      { type: 'trendline', from: { i: 2, price: 2855.8 }, to: { i: 8, price: 2853 }, color: '#00D9A0', label: 'Lower line', dash: false },
+      { type: 'badge', at: { i: 7, price: 2858 }, color: '#00D9A0', text: '✓ Near upper line — short candidate' },
+      { type: 'badge', at: { i: 4, price: 2851 }, color: '#FF3D5A', text: '✗ Near lower line — DANGER zone' },
+    ],
+    verdict: { label: 'Near upper = OK. Middle/lower = DANGER.', type: 'warn' },
+    caption: 'Q1: Where is price right now relative to the channel? Near the upper line = reasonable short candidate (rejection zone). Middle of channel or near lower line = danger zone (bounce zone). Selling near the lower line is selling into the next bounce.',
+  },
+  {
+    title: 'Question 2 — Has price already CLOSED below the prior swing low?',
+    candles: [
+      { o: 2856, h: 2857, l: 2855.5, c: 2856.5 },
+      { o: 2856.5, h: 2856.8, l: 2854, c: 2854.2 },
+      { o: 2854.2, h: 2854.5, l: 2851.5, c: 2851.8 },
+      { o: 2851.8, h: 2852, l: 2851, c: 2851.2 },
+      { o: 2851.2, h: 2853, l: 2851, c: 2852.5 },
+      { o: 2852.5, h: 2854.5, l: 2852.2, c: 2854.2 },
+      { o: 2854.2, h: 2854.5, l: 2853, c: 2853.2 },
+      { o: 2853.2, h: 2853.5, l: 2851.8, c: 2852 },
+    ],
+    annotations: [
+      { type: 'pivot', at: { i: 3, side: 'low' }, color: '#FBBF24', label: 'Prior swing low = 2851' },
+      { type: 'level', price: 2851, color: '#FBBF24', label: 'Prior low — needs CLOSE below', dash: true },
+      { type: 'badge', at: { i: 7, price: 2854 }, color: '#FF3D5A', text: '✗ Never closed below 2851 = no proof' },
+    ],
+    verdict: { label: 'No close below = no confirmation = no trade', type: 'bad' },
+    caption: 'Q2: Has price already CLOSED below the prior swing low? If NO, the lower high is just potential energy. Without that close, the structure has not broken. Trading on the lower high alone is acting on the story before the proof has printed.',
+  },
+  {
+    title: 'Question 3 — Is this a wedge or a channel?',
+    candles: [
+      { o: 2860, h: 2861, l: 2859.5, c: 2860.5 },
+      { o: 2860.5, h: 2860.8, l: 2858, c: 2858.2 },
+      { o: 2858.2, h: 2858.5, l: 2856, c: 2856.2 },
+      { o: 2856.2, h: 2858, l: 2856, c: 2857.8 },
+      { o: 2857.8, h: 2858, l: 2856.5, c: 2856.8 },
+      { o: 2856.8, h: 2857, l: 2856, c: 2856.2 },
+      { o: 2856.2, h: 2857.2, l: 2856, c: 2857 },
+      { o: 2857, h: 2857.2, l: 2856.2, c: 2856.5 },
+    ],
+    annotations: [
+      { type: 'trendline', from: { i: 0, price: 2861 }, to: { i: 7, price: 2857.2 }, color: '#94a3b8', label: 'Upper wedge — slope -0.5', dash: true },
+      { type: 'trendline', from: { i: 2, price: 2856 }, to: { i: 7, price: 2856.2 }, color: '#94a3b8', label: 'Lower wedge — slope -0.03', dash: true },
+      { type: 'badge', at: { i: 6, price: 2854 }, color: '#FBBF24', text: 'CONVERGING = wedge → resolves UP' },
+    ],
+    verdict: { label: 'Wedge breaks OPPOSITE its slope', type: 'good' },
+    caption: 'Q3: Wedge or channel? Channels have parallel lines and can resolve either direction. Wedges have CONVERGING lines and break OPPOSITE to their slope — descending wedges break UP (~68%). If you see converging downward lines, your bias is LONG, not short.',
+  },
+  {
+    title: 'All 3 must align for the short — failing 1 kills it',
+    candles: [
+      { o: 2856, h: 2857, l: 2855.5, c: 2856.5 },
+      { o: 2856.5, h: 2856.8, l: 2855, c: 2855.2 },
+      { o: 2855.2, h: 2855.5, l: 2853, c: 2853.2 },
+      { o: 2853.2, h: 2853.5, l: 2851, c: 2851.2 },
+      { o: 2851.2, h: 2851.5, l: 2850, c: 2850.2 },
+    ],
+    annotations: [
+      { type: 'badge', at: { i: 0, price: 2858 }, color: '#00D9A0', text: '✓ Q1: at upper boundary' },
+      { type: 'badge', at: { i: 2, price: 2856 }, color: '#00D9A0', text: '✓ Q2: prior low closed below' },
+      { type: 'badge', at: { i: 4, price: 2848 }, color: '#00D9A0', text: '✓ Q3: parallel channel (not wedge)' },
+      { type: 'arrow', at: { i: 4, price: 2849 }, direction: 'down', color: '#00D9A0', label: 'TAKE — all 3 questions YES' },
+    ],
+    verdict: { label: '3 of 3 = trade. Less = no trade.', type: 'good' },
+    caption: 'Run all three questions out loud before clicking. ALL three must align in favor of the short. Failing any one of them is a dealbreaker — the trade does not exist yet. That discipline is the entire defense against the channel trap.',
+  },
+];

@@ -4,6 +4,177 @@
 
 
 // =============================================================================
+// DAILY LESSON — 2026-05-13-evening — The Higher Wick and the Channel Trap
+// =============================================================================
+const may13_2026_evening = {
+  "date": "2026-05-13-evening",
+  "title": "The Higher Wick and the Channel Trap",
+  "subtitle": "Two real-time pattern decisions — when ambiguity feels suffocating, the close on the defining line is still the answer.",
+  "sessionSummary": "End-of-day study session walking through two specific live moments that confused you in real time — the kind of moments that cost real money because the pattern is genuinely ambiguous and the brain is forced to decide right now. Section one was the double-top question on RTY: was the 2855 area actually a double top, did the higher wick on the second push invalidate it, and when should you have shorted? The teaching unraveled three knots at once: a true double top has three required components (high #1, valley, high #2) with the neckline defined as the lowest CLOSE in the valley; a higher wick on the second peak does NOT negate the pattern — wicks are rejection, only the close matters; and your specific chart was probably not a textbook double top at all — three big green pushes followed by chop and a wick rejection is closer to an exhaustion top or a failed breakout than a clean M-shape. The real entry signal hidden inside the noise was the Bearish Engulfing #141 your indicator already flagged. Section two was the lower-high question on the descending structure: you saw three red candles forming what looked like a lower high, you shorted the breakdown, the chart turned around and went the other way. The teaching here was the most important lesson of the day: a lower high BY ITSELF is just a story — until price closes below the prior swing low, you have no proof. Inside a descending channel or wedge, every push up that gets rejected at the upper boundary IS a lower high — but it is noise, not signal, because the structure has not broken. Worse, descending wedges (converging lower highs and lower lows) statistically resolve UPWARD more often than down, which is why your short failed and the move went the other way. The unifying truth across both sections: every chart pattern has a defining boundary, and the only valid trigger is a body close beyond that boundary. Trade the break, not the bounces inside it.",
+  "tradesReview": [
+    {
+      "instrument": "RTY 2-min — afternoon session ~2:33 PM",
+      "setup": "Ambiguous structure near 2855: three big green pushes up, a red pullback to the purple line ~2853, a small green push, a second green push, then a red candle with a big wick up — the highest wick of the entire pattern. Doji next, then a strong red candle. You were debating in real time whether this was a double top forming or a bull flag still resolving upward. Indicator flagged Bearish Engulfing #141 with target 2853.4.",
+      "decision": "Held the question open instead of clicking. The pattern was ambiguous — three pushes is more than a textbook double top, the higher wick made you wonder if the M-shape was even valid, and the purple line was a candidate neckline that price kept dancing around. You correctly identified the Bearish Engulfing as the strongest signal in the chaos but were unsure whether the pattern justified the trade.",
+      "outcome": "Lesson taken — the pattern was NOT a textbook double top (three pushes + chop + wick rejection is exhaustion or failed breakout, not the clean M-shape required for a double top). The higher wick did NOT invalidate anything — wicks are rejection. The Bearish Engulfing #141 at the resistance area was the cleanest entry signal in the entire setup, regardless of what we call the pattern.",
+      "lesson": "When the pattern name is ambiguous, the entry signal is still clear: a high-quality reversal candle (Bearish Engulfing, doji + red, evening star) AT a resistance level, with a stop above the wick and target at the next support, is a valid trade even if you cannot give the pattern a textbook name. The candle is more reliable than the label. Stop trying to label every setup — read the candles and the level."
+    },
+    {
+      "instrument": "RTY 2-min — afternoon session ~3:10 PM",
+      "setup": "After a higher high earlier, price came down hard with red candles to ~2851. Bounced up green-green-green to ~2856. Then three red candles printed forming what looked like a lower high — you saw the M-shape forming and entered short. But the entire structure was inside a descending wedge bounded by two green diagonal trendlines. The 'lower high' you saw was actually the last touch of the upper wedge line.",
+      "decision": "Entered short on the appearance of a lower high inside the wedge. No close below the prior swing low at 2851 had occurred. No break of the lower wedge line had occurred. The trade was based on visual interpretation of the lower high alone, not on confirmed structural breakdown.",
+      "outcome": "Trade went against you — the wedge resolved UPWARD (which is the statistically common resolution of a descending wedge) and the short stopped out. The 'lower high' was inside the channel, not breaking it.",
+      "lesson": "A lower high is just a story. A close below the prior swing low is the proof. Inside a descending channel or wedge, the lower highs ARE the upper boundary being respected — they are noise, not signal. The trade exists when the channel breaks (close below the lower line for short, close above the upper line for long), not while price is bouncing inside it. Descending wedges typically resolve UP, not down — bias should actually be long on the upper-line break."
+    }
+  ],
+  "teachingUnits": [
+    {
+      "id": 1,
+      "title": "The 3 required components of a true double top",
+      "concept": "A textbook double top requires three discrete elements in this exact order: (1) High #1 — price pushes up to a level and gets rejected, (2) The Valley — price pulls back to a support level which becomes the neckline, (3) High #2 — price pushes back up to approximately the same level and gets rejected AGAIN. If any of these three components is missing or fuzzy, you do not have a double top — you have something else that may or may not act like one.",
+      "detail": "The shape has to look like a clean M when you squint at the chart. Two distinct peaks with roughly equal highs, separated by a meaningful pullback to a level that you can draw a horizontal line through. If the structure is three or more pushes up with chop between them, that is no longer a double top — that is an exhaustion top, a triple top, a rounded top, or a failed breakout. Each of those patterns has different statistics, different triggers, different entry points. Calling everything a double top because it ended up rejecting at resistance is how you take valid-looking trades on patterns that do not actually have the 88% Bulkowski reliability of a true confirmed double top.",
+      "applicationToday": "Your 2:33 PM RTY chart had THREE big green pushes up to the 2855 area, separated by chop and pullbacks, ending with a red wick rejection. That is not the M-shape of a double top — it is closer to an exhaustion top or a failed breakout. The fact that price ultimately rejected at 2855 and fell does not make it a double top retroactively. The pattern label matters because it determines your trigger and your win-rate expectation.",
+      "rule": "Three components or it is not a double top: high #1, valley to neckline, high #2 at approximately equal height. Three or more pushes up = different pattern, different rules, different statistics."
+    },
+    {
+      "id": 2,
+      "title": "The neckline = the LOWEST CLOSE in the valley (bodies, not wicks)",
+      "concept": "The neckline of a double top is precisely defined: it is the lowest CLOSING price of any candle in the pullback valley between the two peaks. Not the lowest wick. Not the average. Not the support level you eyeballed. The body close. This is the line whose break — by another body close beneath it — confirms the pattern.",
+      "detail": "Bodies show consensus — where the market AGREED for that period of time. Wicks show momentary excursions that were rejected. The neckline must be drawn from consensus prices because the trigger requires consensus to break it. If the neckline is drawn from a wick low, then a future wick break also looks valid, and you end up firing on noise. Drawing the neckline from the body low and requiring a body close beneath it for the trigger is what gives the double top pattern its 88% reliability in Bulkowski's research. Skip that discipline and the win rate collapses.",
+      "applicationToday": "On your 2:33 PM chart, the candidate neckline you were considering was the purple line around 2855 (which was actually closer to resistance) and the pink magenta line below it. The actual neckline of any double-top reading would be the lowest body close in the pullback area — and the question to ask in real time is: did any candle CLOSE below that line? If yes → trigger. If only wicks broke it → no trigger.",
+      "rule": "Neckline = lowest body close in the valley between the two peaks. Confirmation = another body close beneath that line. Wicks alone never confirm anything."
+    },
+    {
+      "id": 3,
+      "title": "Does a higher wick on Peak 2 negate the double top? NO — and here is why",
+      "concept": "When the second peak has a wick that goes ABOVE the first peak's high but the candle CLOSES back down near or below the first peak's close, the double top is still valid. A wick is rejection — sellers being EVEN MORE aggressive than the first time. The market tried harder to go higher, failed, and got slapped down. That is bullish in the very short term and extremely bearish for the slightly longer term. What matters is where the candle CLOSED, not where the wick went.",
+      "detail": "Two scenarios distinguish a still-valid double top from a true breakout: (A) Peak 2 wick ABOVE Peak 1 close, but Peak 2 CLOSE approximately equal to Peak 1 close → still a valid double top, with even stronger rejection than the first attempt. (B) Peak 2 CLOSED significantly above Peak 1 close → the pattern is BROKEN, this is a breakout above resistance, the bullish read is correct. The dividing line is where the close lands, not where the wick reaches. This is the same body-vs-wick discipline as the neckline rule, applied at the top instead of the bottom.",
+      "applicationToday": "Your 2:33 PM chart had a red candle with the highest wick of the entire pattern. That wick made you wonder if the double-top reading was wrong. It was not — the close came right back down. If anything, the higher wick made the rejection MORE convincing, not less. Sellers ate the breakout attempt and stuffed price back down on the same candle. That kind of rejection candle near resistance is one of the highest-quality short signals you can get.",
+      "rule": "Higher wick on Peak 2 does NOT invalidate a double top — wicks are rejection, the close is what counts. Peak 2 close ≈ Peak 1 close = pattern intact. Peak 2 close significantly higher = breakout, pattern broken."
+    },
+    {
+      "id": 4,
+      "title": "Three pushes + chop + wick = exhaustion top or failed breakout, not double top",
+      "concept": "The cleanest M-shape patterns have two pushes and a clear valley. When you see three or more pushes followed by chop and a wick rejection, you are looking at an exhaustion top or a failed breakout. Both are bearish. Both can be traded. But neither carries the 88% Bulkowski double-top win rate — the statistics for exhaustion patterns are softer and the entry mechanics are different.",
+      "detail": "Exhaustion tops form when buyers keep pushing higher but each push gets shorter, smaller, less convincing. The chop in between the pushes is consolidation that buyers cannot resolve upward. The final wick is the last desperate attempt that gets rejected. Failed breakouts form when price pushes through a resistance level but cannot hold above it — the 'breakout' candle gets sold and price retreats below the level it just broke. Either of these patterns trades on the rejection candle (Bearish Engulfing, evening star, large red rejection) at the level, NOT on a neckline-style trigger because there is no clean neckline to break. The trigger candle IS the entry.",
+      "applicationToday": "Your 2:33 PM chart had THREE distinct pushes up plus chop plus the highest wick of the pattern at the end. That is exhaustion top behavior, not double top behavior. The correct entry was therefore the rejection candle (Bearish Engulfing #141) with stop above the wick — not waiting for a neckline close that the pattern did not really have.",
+      "rule": "Three or more pushes + chop + wick rejection = exhaustion top or failed breakout, not double top. Trade the rejection candle at the level. The pattern label and the trigger are different conversations."
+    },
+    {
+      "id": 5,
+      "title": "Double top vs bull flag pullback — the 5-row decision table",
+      "concept": "When the structure is genuinely ambiguous between 'double top forming' and 'bull flag pulling back,' five concrete signals distinguish them. (1) Pushes up: 2 distinct peaks = top, 3+ smooth climb = flag. (2) Valley/pullback depth: deep and meaningful = top, shallow 2-4 candles = flag. (3) Did price CLOSE below the support line: yes = top, only wicked but recovered = flag. (4) Candle structure at the high: bearish engulfing or doji + red = top, inside bars or small pullback candles = flag. (5) Trend line behavior: rejected from above = top, still above support = flag.",
+      "detail": "These five signals usually agree with each other if you actually look at them. The trap is when 4 of 5 say one thing and 1 of 5 says the other and you cherry-pick the lone vote that supports the trade you wanted to take. The discipline: read all five signals, count how many point to each pattern, and trade only when the vote is overwhelming (4 or 5 of 5). If the vote is 3-2 or 2-3, the pattern is genuinely ambiguous and the right play is to wait for the defining boundary to break.",
+      "applicationToday": "On the 2:33 PM chart: pushes (3 = leans flag), valley depth (shallow = leans flag), close below purple (eventually yes = leans top), candle structure (bearish engulfing #141 = leans top), trend line (rejected = leans top). Vote was 3-2 leaning top, which is genuinely ambiguous — exactly why you were confused. The Bearish Engulfing was the tiebreaker because rejection candles at resistance carry their own short signal regardless of which pattern is forming.",
+      "rule": "Score the 5 signals before clicking. 4-5 of 5 = take the trade. 3-2 = ambiguous, wait for the defining line to break. The ambiguous score is the warning sign — that is exactly when you usually lose money."
+    },
+    {
+      "id": 6,
+      "title": "The Bearish Engulfing #141 — the actual entry signal in the chaos",
+      "concept": "Your PA indicator flagged a Bearish Engulfing at #141. That candle was the cleanest entry signal in the entire 2:33 PM setup — better than trying to perfectly diagnose whether the pattern was a double top, exhaustion top, or failed breakout. A Bearish Engulfing AT or NEAR a prior high, after multiple pushes up, after a wick rejection, is a valid short trade with a clear stop and a clear target — regardless of pattern label.",
+      "detail": "The four ingredients required: (1) price at or near a resistance level (prior high, trend line, key level), (2) a candle that opens above the prior candle's open and closes below the prior candle's low (the engulfing definition), (3) a clear stop just above the highest wick, (4) a target at the next meaningful support. When all four are present, the trade has structure regardless of whether the bigger pattern has a textbook name. The pattern name is almost secondary to the rejection candle at the level. Pros call this 'price action over labels' — read what the candles are doing right now at the level, not what shape the last 20 candles have made.",
+      "applicationToday": "Bearish Engulfing #141 fired at the 2855 resistance area, after three pushes up, after a wick rejection, with target 2853.4 already calculated by your indicator. The entry was the close of #141. The stop was just above the highest wick (which you correctly identified as the extreme of the pattern). The target of 2853.4 was the right call. You read the trade well — the only question was whether to take it, and the answer is yes, regardless of whether the bigger pattern was a 'true' double top.",
+      "rule": "When the pattern label is fuzzy, the rejection candle at the level is still your trigger. Bearish Engulfing or evening star at resistance + clear stop above wick + target at next support = valid trade. Stop labeling, start reading the candles."
+    },
+    {
+      "id": 7,
+      "title": "A lower high is a story — a close below the prior low is the proof",
+      "concept": "This is the single most important rule in this entire lesson. A 'lower high' on its own means almost nothing. It only becomes a tradeable signal when price CONFIRMS it by closing below the prior swing low. Until that close happens, the lower high is just price oscillating inside a bigger structure that has not actually broken yet. Acting on the lower high before the confirmation is acting on potential energy, not realized momentum.",
+      "detail": "The trader's brain wants to be early. Seeing a lower high feels like proof of weakness. But until a close below the prior low actually prints, all you have is a candle that wicked above and rejected — which inside a downtrending structure happens at every upper-channel-line touch. The pattern is not 'lower high → trade.' The pattern is 'lower high → wait for close below prior low → trade.' The middle step is the entire game. Skip it and you are entering on the bounce instead of the break, which is exactly the wrong side of the move.",
+      "applicationToday": "On the 3:10 PM chart, you saw a lower high forming and shorted. But there was no close below the prior swing low at 2851. Without that confirmation, the lower high was just a touch of the upper channel boundary — which is exactly where the next bounce starts inside a descending channel. The chart agreed: it bounced off the lower channel line and resolved upward, stopping out the short.",
+      "rule": "A lower high is a story. A close below the prior low is the proof. Never enter on the story alone — wait for the proof. The two-step sequence is non-negotiable: lower high observed, then close below prior low confirmed."
+    },
+    {
+      "id": 8,
+      "title": "Inside a descending channel, every push up IS a lower high — that is just the upper boundary",
+      "concept": "Descending channels and descending wedges are bounded by two parallel or converging trendlines that slope downward. Inside the channel, the price action is mechanical: every push up touches the upper line and gets rejected (creating a 'lower high'), every push down touches the lower line and bounces (creating a 'lower low'). These lower highs are NOT signals — they ARE the channel structure. Reading them as breakdown signals is reading the channel itself as a breakdown.",
+      "detail": "This is the trap that catches experienced traders every day. The visual logic 'lower high → bearish' is correct in the abstract, but inside a channel the lower highs are simply the geometry of the pattern. Until price breaks out of the channel — by closing OUTSIDE one of the trendlines — the structure has not changed, only the bounce direction has changed. Trading the lower highs INSIDE the channel is fighting the bounces. The right entry is the breakout above the upper line (long) or the breakdown below the lower line (short), confirmed by a body close, not a wick.",
+      "applicationToday": "On the 3:10 PM chart, the two green diagonal trendlines defined a descending channel. The 'lower high' you saw was the third or fourth touch of the upper line — geometrically required by the channel itself, not a new bearish signal. Shorting that lower high was shorting the bounce inside the structure. Price then bounced off the lower line and resolved upward when the channel broke.",
+      "rule": "Inside a channel, lower highs and lower lows are the geometry, not signals. Trade the channel BREAK on a body close, never the bounces inside it. If you cannot draw the channel, you are not ready to trade the structure."
+    },
+    {
+      "id": 9,
+      "title": "The 3 situations every 'lower high' falls into — only 1 of 3 is a real short",
+      "concept": "Every 'lower high' you ever see is one of three things. SITUATION 1: TRUE lower high — high → low → lower high → CLOSE below the prior low confirmed. This is the only one you short. SITUATION 2: Lower high INSIDE a channel/flag — bouncing between two diagonal lines, the lower highs are the upper boundary touches. Do NOT short, wait for the channel to break. SITUATION 3: Descending wedge resolving UPWARD — converging lower highs and lower lows, statistically resolves UP, the 'lower high' is the last touch of the upper wedge line before the breakout. Do NOT short, bias should be long on the upper-line break.",
+      "detail": "Situation 2 is the most common trap because the channel can persist for many bars and the lower-high signal looks identical each time. Situation 3 is the most painful trap because the trader is fighting the actual statistical edge — descending wedges resolve UP roughly 68% of the time per Bulkowski data, so shorting them inside the wedge is taking the lower-probability side. Situation 1 is rare but unmistakable: a real lower high after a confirmed downtrend break, with the prior swing low closing below as proof. The discipline is to identify which situation you are in BEFORE clicking, not after.",
+      "applicationToday": "Your 3:10 PM trade was Situation 2 (or possibly Situation 3 if the structure was a wedge). Either way, no Situation 1 confirmation existed — the prior swing low at 2851 had not been broken on a close. The right play was to wait for the channel to break and trade in the breakout direction.",
+      "rule": "Identify which of the three situations the lower high lives in BEFORE entering. Situation 1 = trade. Situation 2 = wait for channel break. Situation 3 = bias is actually long on upper-line break. The wrong situation reading is the entire reason this setup loses money."
+    },
+    {
+      "id": 10,
+      "title": "The 3-question checklist before shorting any 'lower high'",
+      "concept": "Three questions in this exact order, before any 'lower high' short trigger. (1) Where is price relative to the channel? Near the upper line = reasonable short candidate. Middle of channel or near lower line = DANGER, do not short. (2) Has price already CLOSED below the prior swing low? If no, there is no confirmation — the lower high is just potential energy, not a signal. (3) Is this a wedge or a channel? Wedges (converging lines) tend to break OPPOSITE to the wedge slope — descending wedges break UP. If you see converging lines sloping down, your bias should actually be long on the upper-line break, not short on the lower highs.",
+      "detail": "All three questions are dealbreakers — failing any one of them kills the short setup. Question 1 protects you from selling near a bounce zone. Question 2 protects you from acting on unconfirmed structure. Question 3 protects you from fighting the statistical edge of wedge resolution. Run all three out loud before clicking. If the answers do not all align in favor of the short, the trade is not there yet.",
+      "applicationToday": "On your 3:10 PM trade, the answers were: (1) price was somewhere in the middle of the channel, not at the upper line — already a yellow flag. (2) No close below 2851 had happened — red flag. (3) Structure was likely a descending wedge, statistically biased UP — red flag. Three out of three said 'do not short.' The trade should not have been taken.",
+      "rule": "Three questions before any lower-high short: where in the channel, has the prior low closed below, is this a wedge. All three must align in favor of the short or the trade does not exist yet."
+    },
+    {
+      "id": 11,
+      "title": "Descending wedges typically resolve UPWARD — Bulkowski's data plus visual logic",
+      "concept": "A descending wedge (also called a falling wedge) has lower highs and lower lows that are CONVERGING — the two trendlines are both sloping down but coming together over time. Per Bulkowski's tested data, descending wedges resolve UPWARD roughly 68-70% of the time. Shorting inside the wedge is taking the 30% side. The correct trade is the breakout above the upper wedge line, not the breakdown.",
+      "detail": "The reason wedges resolve opposite to their slope is compression. As the lines converge, price has less and less room to move, sellers run out of supply, and the slightest buying pressure pops price out the upper side. Visually a descending wedge looks bearish — both highs and lows are falling — but statistically it is a bullish setup. This is one of the most counterintuitive patterns in technical analysis, which is why retail traders consistently lose money fighting wedges in the wrong direction. The wedge break is the trade. The bounces inside are the trap.",
+      "applicationToday": "Your 3:10 PM chart had two converging green diagonal trendlines — that geometry is a descending wedge. The statistical bias was UP. The 'lower high' you shorted was inside the wedge, on the wrong side of the actual statistical edge. The wedge then resolved upward (per the 68% probability), stopping out the short.",
+      "rule": "Descending wedges resolve UP roughly 68% of the time. If you see two converging lines sloping down, your bias is LONG on the upper-line break, not short on the lower highs. Wedges break opposite to their slope — that is the entire pattern."
+    },
+    {
+      "id": 12,
+      "title": "The unifying rule across both lessons — trade the line break, not the bounces",
+      "concept": "Every pattern has a defining boundary — a single line whose break, by a body close, is the trigger. Double top: the neckline. Bull flag: the flag's lower line on a continuation, upper line on a reversal. Channel: either of the two channel lines. Wedge: the upper line for the upward resolution, lower line for the downward. Inside the boundary, all the bouncing, all the lower highs, all the higher wicks — all of that is noise inside the structure, not signal. The signal is the close on the line.",
+      "detail": "This is the meta-rule that ties every chart pattern together. The rule does not change — only the line changes. Once you internalize this, pattern recognition collapses from 'I have to memorize 20 different patterns and their entries' to 'every pattern has a line — find the line, wait for the close.' Both of today's lessons were the same lesson at the surface: in the double top section you needed a close below the neckline; in the channel section you needed a close below the lower channel line. Both setups had the trader entering BEFORE the close confirmed the break — which is the universal mistake. Wait for the close. Always.",
+      "applicationToday": "2:33 PM trade: the defining line was the neckline (or the resistance level if not a textbook double top). The Bearish Engulfing #141 was the rejection candle at the line, which is itself a valid trigger. 3:10 PM trade: the defining line was the lower wedge boundary. No close below it occurred. The short was taken before the line broke and stopped out when the wedge resolved upward. Same meta-rule, two different lines, two different outcomes.",
+      "rule": "Every pattern has a defining boundary. The trigger is always a body close beyond that boundary. Trade the line break, not the bounces inside it. The middle of any structure is the worst place to initiate."
+    }
+  ],
+  "qaCards": [
+    {
+      "question": "Did the chart at 2:33 PM make a double top or not?",
+      "answer": "Probably not a textbook double top. Three big green pushes followed by chop and a wick rejection is closer to an exhaustion top or a failed breakout than a clean M-shape. A true double top has exactly two distinct peaks separated by a clear valley. The chart still rejected at resistance and the trade still worked on the Bearish Engulfing #141 — but the pattern label was 'exhaustion top with rejection candle,' not 'double top with neckline break.' Different statistics, different mechanics, same general direction."
+    },
+    {
+      "question": "Does a higher wick on the second peak negate a double top?",
+      "answer": "No. A wick is a rejection. If Peak 2's wick goes above Peak 1's high but Peak 2 CLOSES near or below Peak 1's close, the pattern is still valid — and arguably stronger because sellers were even more aggressive than the first time. The pattern is only broken if Peak 2 CLOSES significantly above Peak 1's close. Wicks measure where price went momentarily; closes measure where the market agreed. The close decides."
+    },
+    {
+      "question": "When should I have entered the short on the 2:33 PM setup?",
+      "answer": "On the close of Bearish Engulfing #141, regardless of whether you can label the bigger pattern. The four ingredients were all present: price at resistance, engulfing candle structure, clear stop above the wick, target at next support (2853.4 per your indicator). The pattern label is almost secondary to the rejection candle at the level. Wait for the engulfing candle to close, click on the close, place stop above the wick. That is the entry."
+    },
+    {
+      "question": "On the 3:10 PM chart, was that really a lower high or just noise inside a flag?",
+      "answer": "It was a lower high INSIDE a descending wedge, which is the same as 'noise inside a structure.' The structure had not broken yet — no close below the prior swing low at 2851 had occurred. Inside a descending wedge, every upper-line touch IS a lower high by definition; that geometry is the pattern itself, not a new signal. The trade did not exist until the wedge broke. When it did break, it broke UPWARD (which is the statistical norm for descending wedges), which is why the short failed."
+    },
+    {
+      "question": "If it was not a true lower high, what would a true lower high look like?",
+      "answer": "Sequence in this exact order: high → low → lower high → CLOSE below the prior low. The middle step (a confirmed prior low that gets undercut on a close) is what turns 'lower high observed' into 'lower high confirmed.' Without that close-below-the-prior-low step, the lower high is just price inside a structure that has not broken yet. The proof is always the close below the line, not the visual interpretation of the pattern."
+    },
+    {
+      "question": "Why did the chart go the other way after I shorted the lower high?",
+      "answer": "Because the structure was a descending wedge and descending wedges statistically resolve UPWARD roughly 68% of the time per Bulkowski's tested data. The two converging lines compress price, sellers run out of supply, and the slightest buying pressure pops price out the upper side. Shorting inside a descending wedge is taking the 30% side of a probability distribution — the trade was on the wrong side of the actual edge. The break of the upper wedge line was the long trigger."
+    }
+  ],
+  "closingThought": "Both of today's questions came from the same place — a moment in real time where the pattern was ambiguous and the brain demanded a decision. The first trade you handled correctly: you saw the rejection candle at resistance and the trade worked even though you could not perfectly label the pattern. The second trade you handled wrong: you read a lower high as a signal when the structure had not broken yet, and the wedge resolved against you. The lesson is identical across both: every pattern has a defining boundary, and the only valid trigger is a body close beyond that boundary. The bouncing inside the structure — the higher wicks, the lower highs, the chop — is all noise. The signal is the close on the line. Once you internalize that, you stop trying to label every setup and you start watching one thing: where is the line, and has price closed beyond it. That is the entire game in two questions.",
+  "chartReferences": [],
+  "keyRules": [
+    "A true double top requires three components: high #1, valley to neckline, high #2 — three or more pushes is a different pattern with different statistics.",
+    "The neckline = the lowest CLOSE in the valley between the two peaks. Bodies, not wicks. Confirmation = another body close beneath that line.",
+    "A higher wick on Peak 2 does NOT negate a double top — wicks are rejection. Only the close decides whether the pattern is intact or broken.",
+    "When the pattern label is ambiguous, the rejection candle at the level (Bearish Engulfing, evening star) is still a valid trigger by itself.",
+    "A lower high is just a story. A close below the prior swing low is the proof. Never enter on the story alone.",
+    "Inside a descending channel or wedge, every push up that hits the upper line IS a 'lower high' by definition — that is geometry, not signal.",
+    "Three questions before any lower-high short: where in the channel, has prior low closed below, is this a wedge. All 3 must align.",
+    "Descending wedges resolve UP roughly 68% of the time. Bias is LONG on the upper-line break, not short on the lower highs inside.",
+    "Every pattern has a defining boundary. The trigger is always a body close beyond that boundary. Trade the line break, not the bounces inside it."
+  ],
+  "principlesReinforced": [
+    "PATIENCE OVER SPEED — the close on the defining line is always the trigger; entering before that close is the universal mistake regardless of pattern.",
+    "PATTERN OVER LABEL — when the label is fuzzy, the candle at the level is still a valid trigger; stop trying to name every setup and start reading the candles.",
+    "STATISTICS OVER FEELING — descending wedges resolve UP per Bulkowski 68%; fighting that with a 'lower high' short is taking the 32% side of the distribution.",
+    "STRUCTURE OVER STORY — a lower high is potential energy until a close below the prior low realizes it; do not act on potential energy."
+  ],
+  "whatIllDoDifferently": "Tomorrow morning I open the chart with two questions taped to my monitor: WHERE IS THE LINE, and HAS PRICE CLOSED BEYOND IT. Before any short on a 'lower high' I run the 3-question checklist out loud — where in the channel, prior low closed below, wedge or channel — and if any answer fails, I do not click. Before any double-top entry I confirm three components: high #1, valley to neckline (lowest body close in the pullback), high #2 at approximately equal height. If the structure has 3+ pushes, I treat it as exhaustion top and enter on the rejection candle (Bearish Engulfing, evening star) at the level — not on a neckline that the pattern does not really have. Higher wicks on Peak 2 are now clarifying, not confusing — wicks are rejection, the close decides. When I see two converging lines sloping down, my bias is LONG on the upper-line break, not short on the lower highs. The unifying rule from now on: every pattern has a defining boundary, the trigger is a body close beyond that boundary, the bouncing inside is noise. One discipline, one line per pattern, one close, one trigger."
+};
+
+
+// =============================================================================
 // DAILY LESSON — 2026-05-13 — The Day The Rule Became Universal
 // =============================================================================
 const may13_2026 = {
@@ -1154,7 +1325,7 @@ const may7_2026 = {
 };
 
 
-export const dailyLessons = [may13_2026, may12_2026_evening, may12_2026, may11_2026, may7_2026, foundationDay];
+export const dailyLessons = [may13_2026_evening, may13_2026, may12_2026_evening, may12_2026, may11_2026, may7_2026, foundationDay];
 
 export function getDailyLesson(date) {
   return dailyLessons.find(l => l.date === date);

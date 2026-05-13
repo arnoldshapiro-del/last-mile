@@ -1,0 +1,67 @@
+// Teaching unit 1: A true double top requires 3 components — high #1, valley/neckline, high #2.
+export const charts = [
+  {
+    title: 'A textbook double top — clean M-shape with 3 components',
+    candles: [
+      { o: 2848, h: 2849, l: 2847.5, c: 2848.5 },
+      { o: 2848.5, h: 2851, l: 2848, c: 2850.5 },
+      { o: 2850.5, h: 2854, l: 2850, c: 2853.8 },
+      { o: 2853.8, h: 2856, l: 2853.5, c: 2855.5 },
+      { o: 2855.5, h: 2855.8, l: 2853, c: 2853.5 },
+      { o: 2853.5, h: 2853.8, l: 2851.5, c: 2851.8 },
+      { o: 2851.8, h: 2852, l: 2850.2, c: 2850.5 },
+      { o: 2850.5, h: 2853, l: 2850.3, c: 2852.8 },
+      { o: 2852.8, h: 2855.6, l: 2852.5, c: 2855.2 },
+      { o: 2855.2, h: 2855.5, l: 2853.5, c: 2853.8 },
+      { o: 2853.8, h: 2854, l: 2851, c: 2851.2 },
+    ],
+    annotations: [
+      { type: 'pivot', at: { i: 3, side: 'high' }, color: '#FF3D5A', label: 'Component 1 — High #1 = 2855.5' },
+      { type: 'pivot', at: { i: 6, side: 'low' }, color: '#FBBF24', label: 'Component 2 — Valley = 2850.5' },
+      { type: 'pivot', at: { i: 8, side: 'high' }, color: '#FF3D5A', label: 'Component 3 — High #2 = 2855.2' },
+      { type: 'level', price: 2850.5, color: '#FBBF24', label: 'NECKLINE — defining boundary', dash: true },
+    ],
+    verdict: { label: 'All 3 components present — valid double top', type: 'good' },
+    caption: 'A clean M-shape with two roughly equal peaks at 2855, separated by a clear valley at 2850.5 that becomes the neckline. This is the textbook structure that carries the 88% Bulkowski reliability number.',
+  },
+  {
+    title: 'NOT a double top — only 1 component (just a high and a drop)',
+    candles: [
+      { o: 2849, h: 2850, l: 2848.5, c: 2849.5 },
+      { o: 2849.5, h: 2852, l: 2849, c: 2851.8 },
+      { o: 2851.8, h: 2855, l: 2851.5, c: 2854.5 },
+      { o: 2854.5, h: 2855.5, l: 2854, c: 2855 },
+      { o: 2855, h: 2855.2, l: 2853, c: 2853.2 },
+      { o: 2853.2, h: 2853.5, l: 2851, c: 2851.2 },
+      { o: 2851.2, h: 2851.5, l: 2849, c: 2849.5 },
+    ],
+    annotations: [
+      { type: 'pivot', at: { i: 3, side: 'high' }, color: '#FF3D5A', label: 'High — but only ONE peak' },
+      { type: 'badge', at: { i: 5, price: 2851 }, color: '#94a3b8', text: 'No valley + no second peak' },
+    ],
+    verdict: { label: '1 push up + drop ≠ double top', type: 'bad' },
+    caption: 'A single push to a high and then a drop is not a double top — it is just a rejection candle or a failed push. No valley, no second peak, no pattern. Trading this as a double top sets you up to use the wrong stop and the wrong target.',
+  },
+  {
+    title: 'NOT a double top — 3 pushes is exhaustion or triple top',
+    candles: [
+      { o: 2848, h: 2849, l: 2847.5, c: 2848.5 },
+      { o: 2848.5, h: 2852, l: 2848, c: 2851.5 },
+      { o: 2851.5, h: 2855.2, l: 2851, c: 2854.8 },
+      { o: 2854.8, h: 2855, l: 2853, c: 2853.2 },
+      { o: 2853.2, h: 2855.4, l: 2853, c: 2855.1 },
+      { o: 2855.1, h: 2855.3, l: 2853.5, c: 2853.8 },
+      { o: 2853.8, h: 2855.6, l: 2853.5, c: 2855 },
+      { o: 2855, h: 2855.8, l: 2853.2, c: 2853.5 },
+      { o: 2853.5, h: 2853.8, l: 2851.5, c: 2851.8 },
+    ],
+    annotations: [
+      { type: 'pivot', at: { i: 2, side: 'high' }, color: '#FF3D5A', label: 'Push 1' },
+      { type: 'pivot', at: { i: 4, side: 'high' }, color: '#FF3D5A', label: 'Push 2' },
+      { type: 'pivot', at: { i: 6, side: 'high' }, color: '#FF3D5A', label: 'Push 3' },
+      { type: 'badge', at: { i: 7, price: 2856 }, color: '#FBBF24', text: 'Exhaustion top — different pattern' },
+    ],
+    verdict: { label: '3 pushes = exhaustion top, NOT double top', type: 'warn' },
+    caption: 'Three or more pushes to the same area is exhaustion top behavior, not double top. Different statistics, different mechanics, different entry. Calling it a double top because it ended up rejecting is how you misjudge the trade probability.',
+  },
+];

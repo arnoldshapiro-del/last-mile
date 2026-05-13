@@ -8,6 +8,7 @@ import { CHARTS_BY_UNIT_INDEX as MAY11_CHARTS, CONCEPT_SLUGS as MAY11_SLUGS } fr
 import { CHARTS_BY_UNIT_INDEX as MAY12_CHARTS, CONCEPT_SLUGS as MAY12_SLUGS } from '../../components/charts/day-2026-05-12/index.js';
 import { CHARTS_BY_UNIT_INDEX as MAY12E_CHARTS, CONCEPT_SLUGS as MAY12E_SLUGS } from '../../components/charts/day-2026-05-12-evening/index.js';
 import { CHARTS_BY_UNIT_INDEX as MAY13_CHARTS, CONCEPT_SLUGS as MAY13_SLUGS } from '../../components/charts/day-2026-05-13/index.js';
+import { CHARTS_BY_UNIT_INDEX as MAY13E_CHARTS, CONCEPT_SLUGS as MAY13E_SLUGS } from '../../components/charts/day-2026-05-13-evening/index.js';
 
 // Per-date chart bundle registry. Add new entries here as more daily lessons
 // gain their own chart galleries. Renderer falls back gracefully when a date
@@ -18,6 +19,7 @@ const CHARTS_BY_DATE = {
   '2026-05-12': { charts: MAY12_CHARTS, slugs: MAY12_SLUGS },
   '2026-05-12-evening': { charts: MAY12E_CHARTS, slugs: MAY12E_SLUGS },
   '2026-05-13': { charts: MAY13_CHARTS, slugs: MAY13_SLUGS },
+  '2026-05-13-evening': { charts: MAY13E_CHARTS, slugs: MAY13E_SLUGS },
 };
 
 // Detect a unit's schema. Old units have `question` + `answer` + `rules`;
