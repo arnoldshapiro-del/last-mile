@@ -1,5 +1,7 @@
-// Generic candlestick SVG renderer for the May 7, 2026 chart galleries.
-// Mirrors the unis-ta-bootcamp-day1 version with the same API.
+// Generic candlestick SVG renderer for the daily-lesson chart galleries.
+// LARGE-FORMAT BY DESIGN — Arnie studies these on a second monitor, so every
+// chart renders big with oversized labels. Do not shrink this coordinate space
+// or the fonts. Mirrors the unis-ta-bootcamp-day1 version with the same API.
 
 import React from 'react';
 
@@ -10,16 +12,17 @@ const VERDICT_COLOR = {
   info: { bg: 'rgba(74, 158, 255, 0.18)', border: 'rgba(74, 158, 255, 0.55)', text: '#93c5fd' },
 };
 
-const W = 500;
-const H = 320;
-const PADDING_L = 20;
-const PADDING_R = 60;
-const TITLE_H = 36;
-const CHART_TOP = TITLE_H + 8;
-const VERDICT_H = 30;
-const CAPTION_H = 36;
-const VOLUME_H = 38;
-const CHART_BOTTOM_PADDING = VERDICT_H + CAPTION_H + 6;
+// Large-format coordinate space — these charts are meant to be studied, not glanced at.
+const W = 760;
+const H = 560;
+const PADDING_L = 30;
+const PADDING_R = 96;
+const TITLE_H = 56;
+const CHART_TOP = TITLE_H + 16;
+const VERDICT_H = 44;
+const CAPTION_H = 66;
+const VOLUME_H = 64;
+const CHART_BOTTOM_PADDING = VERDICT_H + CAPTION_H + 10;
 
 function priceToY(price, min, max, top, bottom) {
   if (max === min) return (top + bottom) / 2;
@@ -29,6 +32,21 @@ function indexToX(i, total) {
   const gridW = W - PADDING_L - PADDING_R;
   const cellW = gridW / total;
   return PADDING_L + cellW * (i + 0.5);
+}
+
+// Split a caption into at most two balanced lines so nothing gets clipped.
+function wrapCaption(text) {
+  const MAX = 66;
+  if (!text) return [''];
+  if (text.length <= MAX) return [text];
+  const mid = Math.floor(text.length / 2);
+  let split = text.lastIndexOf(' ', mid + 14);
+  if (split < mid - 14) split = text.indexOf(' ', mid);
+  if (split === -1) split = mid;
+  const line1 = text.slice(0, split).trim();
+  let line2 = text.slice(split).trim();
+  if (line2.length > MAX + 14) line2 = line2.slice(0, MAX + 13).trim() + '…';
+  return [line1, line2];
 }
 
 export function CandlestickChart({ chart }) {
@@ -56,7 +74,8 @@ export function CandlestickChart({ chart }) {
   const max = dataMax + range * 0.08;
 
   const cellW = (W - PADDING_L - PADDING_R) / candles.length;
-  const candleW = Math.max(2, Math.min(20, cellW * 0.55));
+  const candleW = Math.max(3, Math.min(40, cellW * 0.6));
+  const captionLines = wrapCaption(caption);
 
   return (
     <svg
@@ -65,12 +84,12 @@ export function CandlestickChart({ chart }) {
       role="img"
       aria-label={title + ' — ' + caption}
     >
-      <rect x={0} y={0} width={W} height={H} fill="#070c18" rx={10} />
-      <rect x={0} y={0} width={W} height={H} fill="url(#chart-grid)" rx={10} opacity={0.45} />
+      <rect x={0} y={0} width={W} height={H} fill="#070c18" rx={12} />
+      <rect x={0} y={0} width={W} height={H} fill="url(#chart-grid)" rx={12} opacity={0.45} />
 
       <defs>
-        <pattern id="chart-grid" width="50" height="40" patternUnits="userSpaceOnUse">
-          <path d="M 50 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth={1} />
+        <pattern id="chart-grid" width="60" height="48" patternUnits="userSpaceOnUse">
+          <path d="M 60 0 L 0 0 0 48" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth={1} />
         </pattern>
         <linearGradient id="title-bg" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#101828" />
@@ -78,14 +97,14 @@ export function CandlestickChart({ chart }) {
         </linearGradient>
       </defs>
 
-      <rect x={0} y={0} width={W} height={TITLE_H} fill="url(#title-bg)" rx={10} ry={10} />
-      <rect x={0} y={TITLE_H - 1} width={W} height={1} fill="rgba(0, 217, 160, 0.30)" />
+      <rect x={0} y={0} width={W} height={TITLE_H} fill="url(#title-bg)" rx={12} ry={12} />
+      <rect x={0} y={TITLE_H - 2} width={W} height={2} fill="rgba(0, 217, 160, 0.35)" />
       <text
         x={W / 2}
-        y={TITLE_H / 2 + 4}
+        y={TITLE_H / 2 + 8}
         textAnchor="middle"
         fill="#f5f9ff"
-        fontSize={13}
+        fontSize={22}
         fontFamily="Oxanium, system-ui, sans-serif"
         fontWeight={600}
       >
@@ -97,8 +116,8 @@ export function CandlestickChart({ chart }) {
         const price = min + (max - min) * p;
         return (
           <g key={i}>
-            <line x1={PADDING_L} y1={y} x2={W - PADDING_R} y2={y} stroke="rgba(255,255,255,0.04)" strokeWidth={1} />
-            <text x={W - PADDING_R + 4} y={y + 3} fill="rgba(148,163,184,0.6)" fontSize={9} fontFamily="Space Mono, ui-monospace, monospace">
+            <line x1={PADDING_L} y1={y} x2={W - PADDING_R} y2={y} stroke="rgba(255,255,255,0.05)" strokeWidth={1} />
+            <text x={W - PADDING_R + 8} y={y + 5} fill="rgba(148,163,184,0.7)" fontSize={14} fontFamily="Space Mono, ui-monospace, monospace">
               {price.toFixed(2)}
             </text>
           </g>
@@ -113,7 +132,7 @@ export function CandlestickChart({ chart }) {
           <g key={'z' + i}>
             <rect x={PADDING_L} y={Math.min(yTop, yBot)} width={W - PADDING_L - PADDING_R} height={Math.abs(yBot - yTop)} fill={color} />
             {a.label && (
-              <text x={PADDING_L + 6} y={Math.min(yTop, yBot) + 11} fill="rgba(255,255,255,0.7)" fontSize={9} fontFamily="Inter, system-ui, sans-serif">
+              <text x={PADDING_L + 10} y={Math.min(yTop, yBot) + 19} fill="rgba(255,255,255,0.80)" fontSize={13.5} fontFamily="Inter, system-ui, sans-serif">
                 {a.label}
               </text>
             )}
@@ -132,11 +151,11 @@ export function CandlestickChart({ chart }) {
         const stroke = bullish ? '#00b386' : '#cc2e47';
         const yBodyTop = Math.min(yO, yC);
         const yBodyBot = Math.max(yO, yC);
-        const bodyH = Math.max(2, yBodyBot - yBodyTop);
+        const bodyH = Math.max(3, yBodyBot - yBodyTop);
         return (
           <g key={i}>
-            <line x1={x} y1={yH} x2={x} y2={yL} stroke={stroke} strokeWidth={1.5} />
-            <rect x={x - candleW / 2} y={yBodyTop} width={candleW} height={bodyH} fill={fill} stroke={stroke} strokeWidth={1} rx={1} />
+            <line x1={x} y1={yH} x2={x} y2={yL} stroke={stroke} strokeWidth={2.5} />
+            <rect x={x - candleW / 2} y={yBodyTop} width={candleW} height={bodyH} fill={fill} stroke={stroke} strokeWidth={1.5} rx={2} />
           </g>
         );
       })}
@@ -144,14 +163,14 @@ export function CandlestickChart({ chart }) {
       {annotations.filter(a => a.type === 'level').map((a, i) => {
         const y = priceToY(a.price, min, max, CHART_TOP, chartBottom);
         const color = a.color || '#FFB44A';
-        const dasharray = a.dash ? '4 3' : undefined;
+        const dasharray = a.dash ? '6 4' : undefined;
         return (
           <g key={'l' + i}>
-            <line x1={PADDING_L} y1={y} x2={W - PADDING_R} y2={y} stroke={color} strokeWidth={1.5} strokeDasharray={dasharray} opacity={0.85} />
+            <line x1={PADDING_L} y1={y} x2={W - PADDING_R} y2={y} stroke={color} strokeWidth={2.5} strokeDasharray={dasharray} opacity={0.9} />
             {a.label && (
               <g>
-                <rect x={PADDING_L + 4} y={y - 11} width={(a.label.length * 5.5) + 8} height={14} fill={color} opacity={0.9} rx={3} />
-                <text x={PADDING_L + 8} y={y - 1} fill="#070c18" fontSize={9} fontFamily="Oxanium, system-ui, sans-serif" fontWeight={700}>{a.label}</text>
+                <rect x={PADDING_L + 6} y={y - 21} width={(a.label.length * 8.4) + 16} height={24} fill={color} opacity={0.92} rx={4} />
+                <text x={PADDING_L + 14} y={y - 4} fill="#070c18" fontSize={14} fontFamily="Oxanium, system-ui, sans-serif" fontWeight={700}>{a.label}</text>
               </g>
             )}
           </g>
@@ -164,12 +183,12 @@ export function CandlestickChart({ chart }) {
         const x2 = indexToX(a.to.i, candles.length);
         const y2 = priceToY(a.to.price, min, max, CHART_TOP, chartBottom);
         const color = a.color || '#5eead4';
-        const dasharray = a.dash ? '5 3' : undefined;
+        const dasharray = a.dash ? '7 4' : undefined;
         return (
           <g key={'t' + i}>
-            <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth={2} strokeDasharray={dasharray} opacity={0.85} />
+            <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth={3} strokeDasharray={dasharray} opacity={0.9} />
             {a.label && (
-              <text x={(x1 + x2) / 2} y={(y1 + y2) / 2 - 6} fill={color} fontSize={9} fontFamily="Oxanium, system-ui, sans-serif" fontWeight={600} textAnchor="middle">
+              <text x={(x1 + x2) / 2} y={(y1 + y2) / 2 - 10} fill={color} fontSize={14} fontFamily="Oxanium, system-ui, sans-serif" fontWeight={600} textAnchor="middle">
                 {a.label}
               </text>
             )}
@@ -182,28 +201,28 @@ export function CandlestickChart({ chart }) {
         const y = priceToY(a.at.price, min, max, CHART_TOP, chartBottom);
         const color = a.color || '#FFB44A';
         const isUp = a.direction === 'up';
-        const offset = isUp ? 18 : -18;
+        const offset = isUp ? 30 : -30;
         const arrowY1 = y + offset;
-        const arrowY2 = y + (isUp ? 4 : -4);
+        const arrowY2 = y + (isUp ? 7 : -7);
         return (
           <g key={'a' + i}>
-            <line x1={x} y1={arrowY1} x2={x} y2={arrowY2} stroke={color} strokeWidth={2} />
+            <line x1={x} y1={arrowY1} x2={x} y2={arrowY2} stroke={color} strokeWidth={3} />
             <polygon
-              points={`${x - 4},${arrowY2 + (isUp ? -1 : 1)} ${x + 4},${arrowY2 + (isUp ? -1 : 1)} ${x},${y + (isUp ? -1 : 1)}`}
+              points={`${x - 7},${arrowY2 + (isUp ? -2 : 2)} ${x + 7},${arrowY2 + (isUp ? -2 : 2)} ${x},${y + (isUp ? -2 : 2)}`}
               fill={color}
             />
             {a.label && (
               <g>
                 <rect
-                  x={x - (a.label.length * 3.2) - 4}
-                  y={arrowY1 + (isUp ? -2 : -10)}
-                  width={(a.label.length * 6.4) + 8}
-                  height={12}
+                  x={x - (a.label.length * 4.5) - 6}
+                  y={arrowY1 + (isUp ? -1 : -19)}
+                  width={(a.label.length * 9) + 12}
+                  height={20}
                   fill={color}
-                  rx={2}
-                  opacity={0.95}
+                  rx={3}
+                  opacity={0.96}
                 />
-                <text x={x} y={arrowY1 + (isUp ? 7 : -1)} textAnchor="middle" fill="#070c18" fontSize={8} fontWeight={700} fontFamily="Oxanium, system-ui, sans-serif">
+                <text x={x} y={arrowY1 + (isUp ? 13 : -5)} textAnchor="middle" fill="#070c18" fontSize={13} fontWeight={700} fontFamily="Oxanium, system-ui, sans-serif">
                   {a.label}
                 </text>
               </g>
@@ -216,11 +235,11 @@ export function CandlestickChart({ chart }) {
         const x = indexToX(a.at.i, candles.length);
         const y = priceToY(a.at.price, min, max, CHART_TOP, chartBottom);
         const color = a.color || '#a78bfa';
-        const w = (a.text.length * 5.5) + 10;
+        const w = (a.text.length * 8.6) + 18;
         return (
           <g key={'b' + i}>
-            <rect x={x - w / 2} y={y - 6} width={w} height={12} fill={color} rx={3} opacity={0.92} />
-            <text x={x} y={y + 3} textAnchor="middle" fill="#070c18" fontSize={8.5} fontWeight={700} fontFamily="Oxanium, system-ui, sans-serif">
+            <rect x={x - w / 2} y={y - 12} width={w} height={24} fill={color} rx={5} opacity={0.94} />
+            <text x={x} y={y + 5} textAnchor="middle" fill="#070c18" fontSize={13.5} fontWeight={700} fontFamily="Oxanium, system-ui, sans-serif">
               {a.text}
             </text>
           </g>
@@ -235,15 +254,15 @@ export function CandlestickChart({ chart }) {
         const price = isHigh ? candle.h : candle.l;
         const x = indexToX(a.at.i, candles.length);
         const y = priceToY(price, min, max, CHART_TOP, chartBottom);
-        const offsetY = isHigh ? -7 : 7;
+        const offsetY = isHigh ? -11 : 11;
         const cy = y + offsetY;
         const color = a.color || (isHigh ? '#FBBF24' : '#22D3EE');
-        const labelY = isHigh ? cy - 6 : cy + 14;
+        const labelY = isHigh ? cy - 11 : cy + 23;
         return (
           <g key={'p' + i}>
-            <circle cx={x} cy={cy} r={4} fill={color} stroke="#070c18" strokeWidth={1.2} />
+            <circle cx={x} cy={cy} r={7} fill={color} stroke="#070c18" strokeWidth={2} />
             {a.label && (
-              <text x={x} y={labelY} textAnchor="middle" fill={color} fontSize={9} fontWeight={700} fontFamily="Oxanium, system-ui, sans-serif">
+              <text x={x} y={labelY} textAnchor="middle" fill={color} fontSize={14} fontWeight={700} fontFamily="Oxanium, system-ui, sans-serif">
                 {a.label}
               </text>
             )}
@@ -254,13 +273,13 @@ export function CandlestickChart({ chart }) {
       {hasVolume && (() => {
         const volAnn = annotations.find(a => a.type === 'volume');
         if (!volAnn || !volAnn.bars) return null;
-        const volTop = chartBottom + 8;
-        const volBottom = volTop + VOLUME_H - 6;
+        const volTop = chartBottom + 14;
+        const volBottom = volTop + VOLUME_H - 12;
         const volMax = Math.max(...volAnn.bars, 1);
         return (
           <g>
             <line x1={PADDING_L} y1={volTop} x2={W - PADDING_R} y2={volTop} stroke="rgba(255,255,255,0.10)" strokeWidth={1} />
-            <text x={PADDING_L} y={volTop - 2} fill="rgba(148,163,184,0.6)" fontSize={8} fontFamily="Oxanium, system-ui, sans-serif">VOL</text>
+            <text x={PADDING_L} y={volTop - 5} fill="rgba(148,163,184,0.7)" fontSize={12} fontFamily="Oxanium, system-ui, sans-serif">VOL</text>
             {volAnn.bars.map((v, i) => {
               const barX = indexToX(i, candles.length);
               const candle = candles[i];
@@ -284,28 +303,31 @@ export function CandlestickChart({ chart }) {
 
       {verdict && (() => {
         const colors = VERDICT_COLOR[verdict.type];
-        const padX = 10;
-        const verdictY = H - VERDICT_H - CAPTION_H + 8;
-        const verdictW = (verdict.label.length * 7) + padX * 2;
+        const padX = 16;
+        const verdictY = H - VERDICT_H - CAPTION_H + 12;
+        const verdictW = (verdict.label.length * 9.6) + padX * 2;
         return (
           <g>
-            <rect x={PADDING_L} y={verdictY} width={verdictW} height={20} fill={colors.bg} stroke={colors.border} strokeWidth={1} rx={10} />
-            <text x={PADDING_L + verdictW / 2} y={verdictY + 14} textAnchor="middle" fill={colors.text} fontSize={10} fontWeight={700} fontFamily="Oxanium, system-ui, sans-serif">
+            <rect x={PADDING_L} y={verdictY} width={verdictW} height={30} fill={colors.bg} stroke={colors.border} strokeWidth={1.5} rx={15} />
+            <text x={PADDING_L + verdictW / 2} y={verdictY + 20} textAnchor="middle" fill={colors.text} fontSize={15} fontWeight={700} fontFamily="Oxanium, system-ui, sans-serif">
               {verdict.label}
             </text>
           </g>
         );
       })()}
 
-      <text
-        x={PADDING_L}
-        y={H - 14}
-        fill="rgba(232, 232, 232, 0.85)"
-        fontSize={10.5}
-        fontFamily="Inter, system-ui, sans-serif"
-      >
-        {caption.length > 90 ? caption.slice(0, 90).trim() + '…' : caption}
-      </text>
+      {captionLines.map((line, i) => (
+        <text
+          key={'cap' + i}
+          x={PADDING_L}
+          y={captionLines.length === 1 ? H - 22 : H - 39 + i * 21}
+          fill="rgba(232, 232, 232, 0.88)"
+          fontSize={15}
+          fontFamily="Inter, system-ui, sans-serif"
+        >
+          {line}
+        </text>
+      ))}
     </svg>
   );
 }
