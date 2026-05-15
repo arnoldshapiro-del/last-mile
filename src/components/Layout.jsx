@@ -6,6 +6,7 @@ const NAV = [
   { to: '/',                       label: 'Home',     icon: HomeIcon },
   { to: '/drill',                  label: 'Drill',    icon: DrillIcon },
   { to: '/mastery',                label: 'Live Trading Mastery', icon: TargetIcon, accent: 'mastery' },
+  { to: '/trend-master-class',     label: 'The Trend Master Class', icon: CompassIcon, accent: 'tmc' },
   { kind: 'group', label: 'Setup Labs' },
   { to: '/lab/bull-flag',          label: 'Bull Flag',     icon: BullFlagIcon },
   { to: '/lab/bear-flag',          label: 'Bear Flag',     icon: BearFlagIcon },
@@ -50,6 +51,9 @@ export default function Layout() {
               : item.accent === 'mastery'
               ? ({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-display font-medium transition-colors ` +
                   (isActive ? 'bg-amber/15 text-amber border border-amber/40 shadow-glowAmber' : 'text-amber/80 hover:bg-amber/10 border border-amber/25')
+              : item.accent === 'tmc'
+              ? ({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-display font-medium transition-colors ` +
+                  (isActive ? 'bg-blue/15 text-blue border border-blue/40' : 'text-blue/80 hover:bg-blue/10 border border-blue/25')
               : ({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-display font-medium transition-colors ` +
                   (isActive ? 'bg-green/10 text-green border border-green/20' : 'text-text/80 hover:bg-surface2 border border-transparent');
             return (
@@ -82,6 +86,9 @@ export default function Layout() {
               : item.accent === 'mastery'
               ? ({ isActive }) => `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-display font-medium whitespace-nowrap shrink-0 ` +
                   (isActive ? 'bg-amber/20 text-amber border border-amber/40' : 'text-amber/80 border border-amber/25')
+              : item.accent === 'tmc'
+              ? ({ isActive }) => `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-display font-medium whitespace-nowrap shrink-0 ` +
+                  (isActive ? 'bg-blue/20 text-blue border border-blue/40' : 'text-blue/80 border border-blue/25')
               : ({ isActive }) => `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-display font-medium whitespace-nowrap shrink-0 ` +
                   (isActive ? 'bg-green/15 text-green border border-green/30' : 'text-text/70 border border-transparent');
             return (
@@ -122,6 +129,10 @@ function HomeIcon({ className }) {
 // Target — Live Trading Mastery (concentric circles, amber accent)
 function TargetIcon({ className }) {
   return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>);
+}
+// Compass — The Trend Master Class (direction + timing)
+function CompassIcon({ className }) {
+  return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polygon points="16,8 13,13 8,16 11,11" fill="currentColor" stroke="none" /></svg>);
 }
 function DrillIcon({ className }) {
   return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>);

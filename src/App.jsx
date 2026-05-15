@@ -4,6 +4,7 @@ import Layout from './components/Layout.jsx';
 import { NarratorBar } from './components/NarratorBar.jsx';
 import Home from './pages/Home.jsx';
 import Drill from './pages/Drill.jsx';
+import TrendMasterClass from './pages/TrendMasterClass.jsx';
 import BearFlag from './pages/BearFlag.jsx';
 import BullFlag from './pages/BullFlag.jsx';
 import DoubleTop from './pages/DoubleTop.jsx';
@@ -34,6 +35,7 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/trend-master-class" element={<TrendMasterClass />} />
         <Route path="/drill" element={<Drill />} />
         <Route path="/lab/bull-flag" element={<BullFlag />} />
         <Route path="/lab/bear-flag" element={<BearFlag />} />
