@@ -16,6 +16,8 @@ import VWAPRejection from './pages/VWAPRejection.jsx';
 import PreSession from './pages/PreSession.jsx';
 import InSession from './pages/InSession.jsx';
 import Journal from './pages/Journal.jsx';
+import JournalGate from './pages/journal/JournalGate.jsx';
+import JournalPage from './pages/journal/JournalPage.jsx';
 import Progress from './pages/Progress.jsx';
 import MasteryLayout from './pages/mastery/MasteryLayout.jsx';
 import MasteryOverview from './pages/mastery/MasteryOverview.jsx';
@@ -33,6 +35,17 @@ import MasteryProgress from './pages/mastery/MasteryProgress.jsx';
 export default function App() {
   return (
     <Routes>
+      {/* Locked Personal Trading Journal & Reflection — outside Layout so it
+          renders full-bleed with its own header. JournalGate enforces the
+          email whitelist a second time and signs out non-whitelisted users. */}
+      <Route
+        path="/journal"
+        element={
+          <JournalGate>
+            <JournalPage />
+          </JournalGate>
+        }
+      />
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/trend-master-class" element={<TrendMasterClass />} />
@@ -47,10 +60,9 @@ export default function App() {
         <Route path="/lab/vwap-rejection" element={<VWAPRejection />} />
         <Route path="/protocol/pre-session" element={<PreSession />} />
         <Route path="/protocol/in-session" element={<InSession />} />
-        {/* The 5-Question Journal (compliance score + streak) moved to /checkin
-            so the new locked Personal Trading Journal & Reflection can take /journal. */}
+        {/* The 5-Question Journal (compliance score + streak) lives here now;
+            /journal is the locked Personal Trading Journal & Reflection. */}
         <Route path="/checkin" element={<Journal />} />
-        <Route path="/journal" element={<Navigate to="/checkin" replace />} />
         <Route path="/progress" element={<Progress />} />
         {/* Old /qa routes redirect into /mastery — Drill / Library / Progress replaced them. */}
         <Route path="/qa" element={<Navigate to="/mastery/library" replace />} />
