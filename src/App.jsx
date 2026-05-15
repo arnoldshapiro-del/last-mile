@@ -47,7 +47,10 @@ export default function App() {
         <Route path="/lab/vwap-rejection" element={<VWAPRejection />} />
         <Route path="/protocol/pre-session" element={<PreSession />} />
         <Route path="/protocol/in-session" element={<InSession />} />
-        <Route path="/journal" element={<Journal />} />
+        {/* The 5-Question Journal (compliance score + streak) moved to /checkin
+            so the new locked Personal Trading Journal & Reflection can take /journal. */}
+        <Route path="/checkin" element={<Journal />} />
+        <Route path="/journal" element={<Navigate to="/checkin" replace />} />
         <Route path="/progress" element={<Progress />} />
         {/* Old /qa routes redirect into /mastery — Drill / Library / Progress replaced them. */}
         <Route path="/qa" element={<Navigate to="/mastery/library" replace />} />

@@ -96,7 +96,7 @@ export default function InSession() {
   const endSessionAndJournal = () => {
     sounds.sessionEnd();
     endSession('completed');
-    nav('/journal');
+    nav('/checkin');
   };
 
   const submitOverride = () => {
