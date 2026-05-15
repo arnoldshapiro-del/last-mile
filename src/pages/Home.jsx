@@ -236,7 +236,7 @@ export default function Home() {
               <div className="font-display font-semibold">Today's journal is not done yet</div>
               <div className="text-sm text-muted">Five questions. Sixty seconds. Required to start tomorrow.</div>
             </div>
-            <Link to="/journal" className="btn btn-amber py-2 px-4 text-sm">Open</Link>
+            <Link to="/checkin" className="btn btn-amber py-2 px-4 text-sm">Open</Link>
           </div>
         </div>
       )}

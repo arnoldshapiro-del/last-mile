@@ -18,7 +18,7 @@ const NAV = [
   { to: '/lab/vwap-rejection',     label: 'VWAP Rejection', icon: AnchorIcon },
   { kind: 'group', label: 'Session' },
   { to: '/protocol/pre-session',   label: 'Protocol', icon: ShieldIcon },
-  { to: '/journal',                label: 'Journal',  icon: BookIcon },
+  { to: '/checkin',                label: 'Check-In', icon: BookIcon },
   { to: '/progress',               label: 'Progress', icon: ChartIcon }
 ];
 

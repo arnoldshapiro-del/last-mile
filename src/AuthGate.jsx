@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
 import { auth, googleProvider } from './lib/firebase.js';
-
-const ALLOWED_EMAIL = 'arnold.shapiro@gmail.com';
+import { isAllowedEmail } from './lib/authConfig.js';
 
 export default function AuthGate({ children }) {
   const [user, setUser] = useState(null);
@@ -12,7 +11,7 @@ export default function AuthGate({ children }) {
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (u) => {
       if (!u) { setUser(null); setLoading(false); return; }
-      if (u.email !== ALLOWED_EMAIL) {
+      if (!isAllowedEmail(u.email)) {
         setError(`Access denied for ${u.email}.`);
         await signOut(auth);
         setUser(null);
