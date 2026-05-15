@@ -69,6 +69,13 @@ export default function Layout() {
           <p className="text-xs text-muted leading-relaxed">
             Trade window: 10:15 — 12:00 ET. Two patterns only. Stop at target.
           </p>
+          {/* Discreet locked journal link — small, lowercase, intentionally easy to miss. */}
+          <NavLink
+            to="/journal"
+            className="block mt-4 text-[11px] lowercase tracking-wider text-muted hover:text-text transition-colors"
+          >
+            journal
+          </NavLink>
         </div>
       </aside>
 
