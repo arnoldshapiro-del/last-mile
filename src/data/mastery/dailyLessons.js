@@ -4,6 +4,130 @@
 
 
 // =============================================================================
+// DAILY LESSON — 2026-05-15 — The Day the Framework Came Together
+// =============================================================================
+const may15_2026 = {
+  "date": "2026-05-15",
+  "title": "The Day the Framework Came Together",
+  "subtitle": "The integrated 4-Layer Framework — Direction × Location × Pattern × Timing — applied for a +$700 sim day against $400 risk per trade. Three execution mistakes named and fixed, the critical rules made explicit, and the technical scaffolding written down so it sticks.",
+  "sessionSummary": "Sim session. Risk per trade $400, net P&L +$700, risk-reward of the day roughly 1.75:1. The session correctly identified the 15-minute downtrend at the open, restricted activity to shorts only, executed three trades using the integrated 4-Layer Framework, and produced one clean win plus a stopped-out trade that did NOT trigger a revenge re-entry. Three execution errors were named in real-time and corrected within the same session: (1) an ATM template mismatch — MES chart, M2K-sized template — that doubled contract count to 16 instead of 8 on the stopped trade; (2) entering a 2-minute short on trendline break alone, before a 2-minute lower low confirmed; (3) moving the stop to breakeven after Target 1 instead of using a structural trail behind the most recent 2-min swing high. Each error became a rule. The deeper outcome is that the four layers — DIRECTION on the 15-min, LOCATION on the 5-min swing, PATTERN at that location, TIMING on the 2-min entry signal — finally functioned as one decision tree instead of four loose ideas. That is the framework coming together. The reps from here are what convert it into reflex.",
+  "teachingUnits": [
+    {
+      "id": 1,
+      "title": "Layer 1 — DIRECTION (15-minute chart)",
+      "concept": "Identify the overall trend before any trade. Five states only: Clean Uptrend, Topping (Uptrend Halted), Chop, Bottoming (Downtrend Halted), Clean Downtrend. Trade only in the direction of the 15-minute trend. In transition or chop: stand aside.",
+      "detail": "The 15-minute chart answers one question: what is the path of least resistance for the day? Clean uptrend = higher high AND higher low intact — long-only. Clean downtrend = lower high AND lower low intact — short-only. Anything else is a transition state, and transition states are stand-aside states. The mistake new traders make is asking 'where do I short' in an uptrend or 'where do I get long' in a downtrend. The first job of Layer 1 is to filter those questions out before they cost money. Direction is not optional — it is the bias filter, and every subsequent layer assumes the bias has already been set.",
+      "applicationToday": "Today the 15-minute was in a clean downtrend at the open — lower high, lower low intact. Direction-bias: SHORT-ONLY for the entire session. Every trade taken was a short. Every long opportunity that briefly looked attractive on the 2-min was filtered out by Layer 1 before reaching Layer 2.",
+      "rule": "Trade only in the direction of the 15-min trend. If chop or transition: stand aside."
+    },
+    {
+      "id": 2,
+      "title": "Layer 2 — LOCATION (5-minute chart)",
+      "concept": "Identify the 5-min swing high (for shorts) or swing low (for longs). INCLUDE THE WICK, not just the body. The swing high or low is where the thesis lives or dies.",
+      "detail": "The 5-minute chart answers: where on the chart does the trade have edge? A short doesn't have edge in the middle of a candle range — it has edge at a tested high. A long doesn't have edge mid-pullback — it has edge at a tested low. The swing high/low is that level. CRITICAL: the wick counts. A wick is sellers stepping in (at a high) or buyers stepping in (at a low). Marking the swing at the body alone moves your stop too tight and your edge too low. Mark the level where the chart actually rejected — the wick high or wick low — and that becomes the line where your thesis is right or wrong.",
+      "applicationToday": "On the first short, the 5-min swing high included a 2-point wick. Marking it at the body would have put the stop 2 points too tight and the trade would have stopped on a normal test. Marking it at the wick gave the stop room to breathe — and the trade ran. On the second short, the swing was identified at the body — that trade stopped out (Mistake 2 contributed, but the wick mark would have helped here too).",
+      "rule": "Mark the 5-min swing high/low at the wick, not the body. The wick is where price actually rejected — that is where the thesis lives or dies."
+    },
+    {
+      "id": 3,
+      "title": "Layer 3 — PATTERN (5-minute chart at the swing)",
+      "concept": "Watch for reversal patterns AT the swing high or low. Bearish engulfings, double tops, and shooting stars for shorts; bullish engulfings, double bottoms, and hammers for longs. The pattern confirms that the location is meaningful.",
+      "detail": "Pattern alone is meaningless — bearish engulfings print in the middle of uptrends all day long and they fail. Location alone is meaningful but slow — a swing high will hold or not, but you wait a long time to find out. The combination — pattern AT location — is the engine. The pattern is the market telling you 'I just tested this level and rejected it'. Without the pattern, you are guessing that the level will hold. With the pattern, the market has shown you it already did, in real time.",
+      "applicationToday": "Trade 1 short had a clean bearish engulfing right at the 5-min swing high — pattern + location together. Trade 2 short had only the swing high (Mistake 2 — no pattern confirmation, no 2-min lower low yet). The first trade won, the second stopped out. Pattern was the differentiator.",
+      "rule": "No pattern at the swing = no trade. Pattern in the middle of a range = no trade. Pattern AT the swing = considered trade."
+    },
+    {
+      "id": 4,
+      "title": "Layer 4 — TIMING (2-minute chart)",
+      "concept": "Drop to 2-min for the entry signal. Wait for trendline break PLUS a 2-min lower low (for shorts) or higher high (for longs). Trendline break alone = warning. Lower low / higher high = confirmation. Wait for the CLOSE, not the wick.",
+      "detail": "The 2-minute chart answers: when do I actually click? You have direction (Layer 1), location (Layer 2), and pattern (Layer 3). All three say 'short here'. Layer 4 says 'now'. The trendline break is the first crack — sellers are starting to win on the 2-min. But the trendline break alone is often a fake-out (price wicks through and recovers). The 2-min lower low is the confirmation that sellers are not just winning, they are PRESSING. That sequence — break, then lower low, then CLOSE — is the trigger. Anything earlier is a guess. Anything later is fine but starts to chase.",
+      "applicationToday": "Trade 1: waited for the 2-min trendline break, waited for a clean 2-min lower low to close, then entered short. Won. Trade 2 (Mistake 2): entered short on the trendline break alone. Got stopped when price wicked above the stop without a lower low ever printing. Same setup, different timing discipline, different outcome.",
+      "rule": "Wait for trendline break PLUS 2-min lower low/higher high. Wait for CLOSE, not wick. Trendline break alone = warning, not entry."
+    },
+    {
+      "id": 5,
+      "title": "Wicks vs Closes — the test/break distinction",
+      "concept": "A WICK above a level is a TEST (often a strong rejection signal). A CLOSE above a level is a BREAK (an invalidation). For entry: wait for close. For invalidation: wait for close.",
+      "detail": "Almost every meaningful price action decision comes down to this distinction. A wick is a probe — buyers or sellers stuck their head above a level and got smacked back. That's BULLISH for the side that did the smacking. A close is the level genuinely failing — supply or demand actually shifted across that line. Using wicks as entries (or invalidations) creates whipsaw losses. Using closes creates patience and precision. The 'wait for the close' rule is not slowness — it is the single most consistent edge separating amateur from professional execution.",
+      "applicationToday": "Trade 2 stopped on a wick through the stop, then the bar closed back below the stop. If the stop had been one tick wider (on the wick of the swing instead of just above the body) AND if the entry had waited for a 2-min lower low close, the trade would still be alive. Two compounding wick/close mistakes in one trade.",
+      "rule": "Entries: wait for the close. Invalidations: wait for the close. Stops: place above/below the WICK of the structural swing, not the body."
+    },
+    {
+      "id": 6,
+      "title": "Stop management has TWO phases — and the rules differ",
+      "concept": "Setup Phase (first ~30 seconds after entry, before price meaningfully moves): stop AND targets can both be adjusted to structure. Widening the stop is OK if structure demands it. Management Phase (after price moves): stops only tighten or trail. NEVER widen.",
+      "detail": "Most stop-management rules are taught as a single rule ('never widen the stop') and that's wrong — it's two rules masquerading as one. In the first 30 seconds after entry, you are still SETTING UP the trade. If you realize the structural stop is 2 points away instead of 1, widening to the structural level is correct — that's where the thesis dies. But the moment price moves, you have committed to the structure you have. Widening the stop from that point on is no longer 'adjusting to structure', it's emotional refusal to take a small loss. The critical self-check before any stop change: 'Am I widening because structure tells me to, or because I do not want to take this loss?' Structure-driven = setup phase OK. Emotion-driven = never. If you cannot honestly answer 'structure', do not touch it.",
+      "applicationToday": "On Trade 1, within the first 30 seconds, recognized the actual swing high was 1 tick higher than where the stop was placed and widened the stop by 1 tick to the wick. Setup phase, structurally justified — correct. After T1 hit on the same trade, did NOT widen the stop on a pullback even when it looked like price would tag it. Management phase — held the rule, trade ran to T2.",
+      "rule": "Setup phase (first 30 sec): adjust to structure, widening OK. Management phase (after price moves): tighten or trail only. Never widen. Self-check before any stop change: structure or emotion?"
+    },
+    {
+      "id": 7,
+      "title": "Trailing stops — structural trail, NOT breakeven trail",
+      "concept": "After T1: trail the stop to just above the most recent 2-min swing high (structural trail). After T2: move to breakeven on the remainder. Do NOT move to breakeven after T1 — it kills good trades.",
+      "detail": "The breakeven-after-T1 rule sounds disciplined ('protect what you made!') and it is wrong for trend trades. Normal pullbacks after T1 routinely tag breakeven before the trend continues. Move to BE after T1 and you take yourself out of every winning trend trade right before the move. The structural trail solves it: after T1, the stop goes just outside the most recent 2-min swing — wherever the trend is REALLY building. The trade only stops if the structure that defines the trend breaks. Normal pullbacks (which respect structure) don't trigger it. Only structural failures do. BE is too tight a noise filter; the most recent 2-min swing is the right noise filter.",
+      "applicationToday": "Trade 3 (Mistake 3): hit T1, moved stop to BE on the remainder, normal pullback tagged BE, exited with small profit. Price then ran significantly further. If structural trail had been used (stop just above the most recent 2-min swing high), the trade would have been alive for the full move. Self-corrected: rule rewritten — structural trail after T1, never BE trail.",
+      "rule": "After T1: trail to just above the most recent 2-min swing high (structural). NEVER to BE. After T2: move to BE on the remainder only."
+    },
+    {
+      "id": 8,
+      "title": "The Pre-Flight Check — before every single click",
+      "concept": "Before EVERY click: (1) Read the chart symbol (top left). (2) Read the ATM template name (top right of order panel). (3) Read the quantity field. Say it out loud: 'MES chart. MES ATM. 8 contracts.' Only then click.",
+      "detail": "Today's worst mistake (Mistake 1) was the cheapest one to prevent: the chart was MES, the ATM was 'Claude M2K 16'. Result: 16 contracts on a stopped trade instead of 8, doubling the loss. The pre-flight check is the entire fix — a 3-second verbal verification that the platform's three most important fields match your intent. Trading without it is flying without a checklist. The 1-3 second pause before clicking is a feature, not a bug — it is the place where discretionary judgment catches what algorithms cannot.",
+      "applicationToday": "Mistake 1 cost the day roughly $400 extra (the doubled position size on the stopped trade). Every trade after that point in the session began with the verbal pre-flight check. Zero recurrence. The rule is now mandatory.",
+      "rule": "Before EVERY click: read symbol, read ATM, read quantity, say it out loud. The 3-second pause is non-negotiable."
+    }
+  ],
+  "chartReferences": [
+    {
+      "caption": "15-min downtrend at the open — clean LH/LL",
+      "analysis": "The 15-min was already in a clean downtrend at the open: a lower high printed in the prior session, and the prior swing low was being approached. Direction-bias: SHORT-ONLY for the session. Layer 1 set the rails before any 5-min analysis even began."
+    },
+    {
+      "caption": "Trade 1 — bearish engulfing at 5-min swing high (PATTERN at LOCATION)",
+      "analysis": "5-min swing high marked at the WICK (included the 2-point upper wick), bearish engulfing closed at the level, 2-min trendline broke, 2-min lower low closed below the break — all four layers stacked. Entry was the textbook integrated setup. Won."
+    },
+    {
+      "caption": "Trade 2 — entry on trendline break alone, no 2-min lower low (Mistake 2)",
+      "analysis": "Same 5-min swing high, similar pattern setup. Difference: entered on the 2-min trendline break before any 2-min lower low printed. Price wicked above the stop, then closed back below — classic fake-out. Stopped out on a trade that, with one more candle of patience, would have stayed alive."
+    },
+    {
+      "caption": "Trade 3 — T1 hit, moved to BE, normal pullback tagged BE (Mistake 3)",
+      "analysis": "Hit T1 cleanly. Moved stop to BE on the remainder — the textbook 'protect what you made' move. Normal pullback (which respected the 2-min swing) tagged BE. Exited for tiny profit on the remainder. Price then ran 8 more points. The pullback was structural — a structural trail would have held. BE was the wrong noise filter."
+    }
+  ],
+  "keyRules": [
+    "Trade only in the direction of the 15-min trend. In chop or transition: stand aside.",
+    "Mark the 5-min swing high/low at the WICK, not the body — that is where the thesis lives or dies.",
+    "No pattern at the swing = no trade. Pattern in the middle of a range = no trade. Pattern AT the swing = considered trade.",
+    "Wait for 2-min trendline break PLUS lower low/higher high. Wait for CLOSE, not wick.",
+    "Stop management has two phases: Setup (first 30 sec — widen OK if structural) and Management (after price moves — only tighten or trail, NEVER widen).",
+    "After T1: trail to just above the most recent 2-min swing high (structural). NEVER to BE. After T2: move to BE on the remainder.",
+    "The pre-flight check before every click: symbol, ATM template, quantity — said out loud. Non-negotiable.",
+    "The critical self-check before any stop change: 'Am I widening because structure tells me to, or because I do not want to take this loss?' Structure: OK in setup phase. Emotion: never."
+  ],
+  "principlesReinforced": [
+    "Direction is the bias filter — set it before anything else.",
+    "Edge lives at structural levels, not in the middle of candle ranges.",
+    "Patterns at meaningful locations are the engine — patterns alone are noise.",
+    "Patience for confirmation (close, lower low, structural break) is the single most consistent edge separating amateur from pro execution.",
+    "The 1-3 second pause before clicking is a FEATURE, not a bug — it's discretionary judgment doing what algorithms cannot."
+  ],
+  "whatIllDoDifferently": [
+    "Do the pre-flight check (symbol, ATM, quantity, out loud) before every single click — no exceptions.",
+    "Wait for 2-min lower low/higher high in addition to the trendline break before entering.",
+    "After T1, trail to the most recent 2-min swing — never to BE.",
+    "Mark every 5-min swing high/low at the wick, not the body.",
+    "Run the self-check (structure or emotion?) before ever touching the stop after entry.",
+    "Don't buy more indicators — the constraint is mastery of what I have, not more tools.",
+    "Don't automate what I should do manually — discretionary judgment is the edge.",
+    "After any loss, sit out at least 15 minutes. No revenge trade. If a clean 4-layer setup re-forms with calm execution, consider it. If not, the day is over."
+  ],
+  "closingThought": "Today the framework functioned as one integrated decision tree for the first time, not four loose ideas. Direction × Location × Pattern × Timing — every trade either had all four or was skipped. The three mistakes were execution errors layered on top of a framework that was, itself, working. That's a different kind of bad day than 'I don't know what to do' — it's 'I know what to do, now I have to do it consistently.' Reps from here. Just reps."
+};
+
+
+
+// =============================================================================
 // DAILY LESSON — 2026-05-14 — The Day The Trend Was Right and the Entry Was Wrong
 // =============================================================================
 const may14_2026 = {
@@ -1537,7 +1661,7 @@ const may7_2026 = {
 };
 
 
-export const dailyLessons = [may14_2026, may13_2026_evening, may13_2026, may12_2026_evening, may12_2026, may11_2026, may7_2026, foundationDay];
+export const dailyLessons = [may15_2026, may14_2026, may13_2026_evening, may13_2026, may12_2026_evening, may12_2026, may11_2026, may7_2026, foundationDay];
 
 export function getDailyLesson(date) {
   return dailyLessons.find(l => l.date === date);

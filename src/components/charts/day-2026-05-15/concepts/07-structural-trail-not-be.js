@@ -1,0 +1,57 @@
+// Teaching unit 7: Structural trail, NOT breakeven trail.
+// Two charts: BE trail kills a good trade vs structural trail rides it.
+export const charts = [
+  {
+    title: 'MISTAKE 3: BE trail kills the trade',
+    candles: [
+      { o: 2846, h: 2848, l: 2843, c: 2844 },
+      { o: 2844, h: 2845, l: 2840, c: 2841 },
+      { o: 2841, h: 2842, l: 2836, c: 2837 },
+      { o: 2837, h: 2838, l: 2832, c: 2833 },
+      { o: 2833, h: 2834, l: 2828, c: 2829 },
+      { o: 2829, h: 2831, l: 2826, c: 2827 },
+      { o: 2827, h: 2833, l: 2826, c: 2832 },
+      { o: 2832, h: 2837, l: 2831, c: 2836 },
+      { o: 2836, h: 2838, l: 2833, c: 2834 },
+      { o: 2834, h: 2836, l: 2825, c: 2827 },
+      { o: 2827, h: 2829, l: 2820, c: 2822 },
+      { o: 2822, h: 2824, l: 2815, c: 2817 },
+    ],
+    annotations: [
+      { type: 'arrow', at: { i: 0, price: 2844 }, direction: 'down', color: '#888', label: 'entry @ 2844' },
+      { type: 'level', price: 2827, color: '#FFB44A', dash: true, label: 'T1 hit @ 2827' },
+      { type: 'level', price: 2844, color: '#FF3D5A', label: 'STOP moved to BE @ 2844 (mistake)' },
+      { type: 'arrow', at: { i: 7, price: 2837 }, direction: 'up', color: '#FF3D5A', label: 'normal pullback tags BE' },
+      { type: 'badge', at: { i: 8, price: 2840 }, text: 'exited remainder at BE for tiny profit', color: '#FF3D5A' },
+      { type: 'arrow', at: { i: 11, price: 2817 }, direction: 'down', color: '#888', label: 'price ran 17 more pts after exit' },
+    ],
+    verdict: { label: 'BE was the wrong noise filter — gave away the trend', type: 'bad' },
+    caption: 'Hit T1, moved stop to BE on the remainder. Normal pullback (which respected the 2-min swing structure) reached BE. Exited tiny. Then trend resumed for 17 more points. BE is too tight a filter for trend trades.',
+  },
+  {
+    title: 'CORRECT: structural trail rides the trend',
+    candles: [
+      { o: 2846, h: 2848, l: 2843, c: 2844 },
+      { o: 2844, h: 2845, l: 2840, c: 2841 },
+      { o: 2841, h: 2842, l: 2836, c: 2837 },
+      { o: 2837, h: 2838, l: 2832, c: 2833 },
+      { o: 2833, h: 2834, l: 2828, c: 2829 },
+      { o: 2829, h: 2831, l: 2826, c: 2827 },
+      { o: 2827, h: 2833, l: 2826, c: 2832 },
+      { o: 2832, h: 2837, l: 2831, c: 2836 },
+      { o: 2836, h: 2838, l: 2833, c: 2834 },
+      { o: 2834, h: 2836, l: 2825, c: 2827 },
+      { o: 2827, h: 2829, l: 2820, c: 2822 },
+      { o: 2822, h: 2824, l: 2815, c: 2817 },
+    ],
+    annotations: [
+      { type: 'arrow', at: { i: 0, price: 2844 }, direction: 'down', color: '#888', label: 'entry @ 2844' },
+      { type: 'level', price: 2827, color: '#FFB44A', dash: true, label: 'T1 hit @ 2827' },
+      { type: 'pivot', at: { i: 8, price: 2838 }, kind: 'LH', label: 'most recent 2-min swing high (2838)' },
+      { type: 'level', price: 2839, color: '#00D9A0', label: 'STRUCTURAL TRAIL — just above the 2-min swing (2839)' },
+      { type: 'badge', at: { i: 11, price: 2818 }, text: 'pullback didn\'t reach the structural trail — trade rides to 2817', color: '#00D9A0' },
+    ],
+    verdict: { label: 'Structural trail rode the full move', type: 'good' },
+    caption: 'Same trade, same pullback. The structural trail (just above the most recent 2-min swing high) was never threatened — only a true structural failure could have hit it. Trade rode the full 27-point move instead of exiting at BE.',
+  },
+];
