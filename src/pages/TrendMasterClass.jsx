@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 
 /* ============================================================
@@ -57,6 +58,140 @@ function LevelLine({ y, x1 = 8, x2 = 392, label, side = 'right', dashed = true, 
         </text>
       ) : null}
     </g>
+  );
+}
+
+// ============================================================
+//  ClickableChart — wraps any inline SVG/element to render LARGE
+//  (full-width of its container) AND open a true fullscreen lightbox
+//  when clicked or tapped. Closes on click anywhere, Escape, or X.
+//  Matches the daily-lesson ChartGallery lightbox UX so every chart
+//  on this page behaves the same way as the per-day chart galleries.
+// ============================================================
+function ClickableChart({ children, caption }) {
+  const [open, setOpen] = useState(false);
+  const close = useCallback(() => setOpen(false), []);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKey = (e) => { if (e.key === 'Escape') close(); };
+    window.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [open, close]);
+
+  return (
+    <>
+      <div
+        onClick={() => setOpen(true)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpen(true); }
+        }}
+        role="button"
+        tabIndex={0}
+        title="Click to fill the screen"
+        style={{
+          background: 'rgba(7, 12, 24, 0.65)',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: 12,
+          padding: 12,
+          cursor: 'zoom-in',
+          transition: 'border-color 120ms, transform 120ms',
+        }}
+        onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(122, 184, 255, 0.45)'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)'; }}
+      >
+        {children}
+        {caption && (
+          <p
+            style={{
+              margin: '8px 4px 0',
+              fontFamily: "'Space Mono', monospace",
+              fontSize: 10,
+              color: 'rgba(168, 179, 199, 0.85)',
+              lineHeight: 1.4,
+            }}
+          >
+            {caption} <span style={{ color: 'rgba(122, 184, 255, 0.75)' }}>· tap to enlarge</span>
+          </p>
+        )}
+      </div>
+      {open && typeof document !== 'undefined' && createPortal(
+        <div
+          onClick={close}
+          role="dialog"
+          aria-modal="true"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 99999,
+            background: 'rgba(3, 6, 12, 0.96)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '4vh 2vw',
+            cursor: 'zoom-out',
+          }}
+        >
+          <div style={{ width: 'min(96vw, 140vh)' }}>
+            {children}
+            {caption && (
+              <p
+                style={{
+                  marginTop: 16,
+                  fontFamily: "'Oxanium', sans-serif",
+                  fontSize: 14,
+                  color: '#cbd5e1',
+                  textAlign: 'center',
+                }}
+              >
+                {caption}
+              </p>
+            )}
+          </div>
+          <button
+            type="button"
+            onClick={close}
+            aria-label="Close fullscreen chart"
+            style={{
+              position: 'fixed',
+              top: 16,
+              right: 20,
+              background: 'rgba(255,255,255,0.10)',
+              border: '1px solid rgba(255,255,255,0.25)',
+              color: '#f5f9ff',
+              borderRadius: 10,
+              padding: '8px 16px',
+              fontSize: 14,
+              fontFamily: "'Oxanium', sans-serif",
+              fontWeight: 600,
+              cursor: 'pointer',
+            }}
+          >
+            ✕ Close
+          </button>
+          <div
+            style={{
+              position: 'fixed',
+              bottom: 14,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              color: 'rgba(203,213,225,0.6)',
+              fontSize: 12,
+              fontFamily: "'Oxanium', sans-serif",
+              whiteSpace: 'nowrap',
+            }}
+          >
+            click anywhere or press Esc to close
+          </div>
+        </div>,
+        document.body,
+      )}
+    </>
   );
 }
 
@@ -925,11 +1060,10 @@ export default function TrendMasterClass() {
                   <p className="text-xs m-0 leading-snug text-text/85">{s.structural}</p>
                 </div>
 
-                <div
-                  className="rounded-lg p-2 mb-3"
-                  style={{ background: 'rgba(0,0,0,0.30)', border: '1px solid rgba(255,255,255,0.05)' }}
-                >
-                  <SvgEl />
+                <div className="mb-3">
+                  <ClickableChart caption={`State ${s.num} — ${s.name}`}>
+                    <SvgEl />
+                  </ClickableChart>
                 </div>
 
                 <div className="mt-auto">
@@ -1142,11 +1276,10 @@ export default function TrendMasterClass() {
             The 5-min downtrend is the 15-min's pullback. It's the gift that gives you a great long entry.
           </h3>
 
-          <div
-            className="rounded-xl p-3 mb-4"
-            style={{ background: 'rgba(0,0,0,0.30)', border: '1px solid rgba(255,255,255,0.05)' }}
-          >
-            <ScenarioASVG />
+          <div className="mb-4">
+            <ClickableChart caption="Scenario A — 15-min uptrend with a 5-min pullback to a swing low. The 5-min downtrend is the 15-min's pullback — your long entry opportunity, NOT a counter-trend short.">
+              <ScenarioASVG />
+            </ClickableChart>
           </div>
 
           <ol className="text-sm leading-relaxed m-0 pl-5 space-y-1.5 text-text/85">
@@ -1185,11 +1318,10 @@ export default function TrendMasterClass() {
             The 5-min uptrend is the 15-min's bounce. It's the gift that gives you a great short entry.
           </h3>
 
-          <div
-            className="rounded-xl p-3 mb-4"
-            style={{ background: 'rgba(0,0,0,0.30)', border: '1px solid rgba(255,255,255,0.05)' }}
-          >
-            <ScenarioBSVG />
+          <div className="mb-4">
+            <ClickableChart caption="Scenario B — 15-min downtrend with a 5-min bounce to a swing high. The 5-min uptrend is the 15-min's bounce — your short entry opportunity, NOT a counter-trend long.">
+              <ScenarioBSVG />
+            </ClickableChart>
           </div>
 
           <ol className="text-sm leading-relaxed m-0 pl-5 space-y-1.5 text-text/85">
@@ -1460,12 +1592,9 @@ export default function TrendMasterClass() {
                 <div className="p-4 sm:p-5">
                   <div className="flex flex-col lg:flex-row gap-5">
                     <div className="lg:w-2/5 shrink-0">
-                      <div
-                        className="rounded-xl p-3"
-                        style={{ background: 'rgba(0,0,0,0.30)', border: '1px solid rgba(255,255,255,0.05)' }}
-                      >
+                      <ClickableChart caption={`Chart ${card.num} — ${card.title}`}>
                         <SvgEl />
-                      </div>
+                      </ClickableChart>
                     </div>
 
                     <div className="flex-1 min-w-0">
