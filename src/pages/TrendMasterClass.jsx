@@ -1417,11 +1417,10 @@ export default function TrendMasterClass() {
               <h4 className="font-display font-bold text-sm m-0 mb-2" style={{ color: '#fff3dc' }}>
                 {sub.title}
               </h4>
-              <div
-                className="rounded-lg p-2 mb-3"
-                style={{ background: 'rgba(0,0,0,0.30)', border: '1px solid rgba(255,255,255,0.05)' }}
-              >
-                {sub.svg}
+              <div className="mb-3">
+                <ClickableChart caption={`Chop sub-type — ${sub.title}`}>
+                  {sub.svg}
+                </ClickableChart>
               </div>
               <p className="text-xs m-0 leading-snug text-text/80">{sub.desc}</p>
             </article>
