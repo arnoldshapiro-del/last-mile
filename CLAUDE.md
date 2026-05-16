@@ -20,12 +20,18 @@ Arnie has 5.5 years of pattern recognition and a persistent give-back problem (s
 - Web Audio API (no audio files — synthesized brief acoustic cues)
 
 ## Status
-- **Deployed and live (2026-05-12).** GitHub + Netlify both active.
+- **Deployed and live (2026-05-15).** GitHub + Netlify both active.
 - All 6 original modules + Live Trading Mastery section (Principles, Core Lessons, Master Checklists, Daily Lessons, Drill, Library, Progress, Overview).
 - Dev server runs on port 5300 via launch.json config "last-mile".
 - Daily lesson workflow proven end-to-end: paste Claude.ai transcript → JSON + Firestore push + chart concept files + deploy in ~45-90 min.
-- Per-date chart registry in `src/pages/mastery/DailyLessonPage.jsx` (`CHARTS_BY_DATE`) wires `2026-05-07`, `2026-05-11`, `2026-05-12` so far.
-- Chart inventory: ~455 hand-crafted SVG candlestick charts across Principles/Core Lessons/Q&A/Checklists/Overview/3 daily lessons.
+- Per-date chart registry in `src/pages/mastery/DailyLessonPage.jsx` (`CHARTS_BY_DATE`) wires `2026-05-07`, `2026-05-11`, `2026-05-12`, `2026-05-12-evening`, `2026-05-13`, `2026-05-13-evening`, `2026-05-14`, `2026-05-15`.
+- Chart inventory: ~470 hand-crafted SVG candlestick charts across Principles/Core Lessons/Q&A/Checklists/Overview/8 daily lessons.
+
+**Locked /journal route (added 2026-05-15):** Personal Trading Journal & Reflection. Behind Firebase Google sign-in + email whitelist (`arnold.shapiro@gmail.com`, `mshapiro@sibcycline.com`) in `src/lib/authConfig.js`. Uses the SAME Firebase project (`shapiro-apps`) as Bootcamp. Inner `src/pages/journal/JournalGate.jsx` enforces the whitelist with sign-out on mismatch. Discreet lowercase "journal" link in the sidebar footer.
+
+**Path rename (2026-05-15):** the existing 5-Question Journal moved from `/journal` to `/checkin` (sidebar label changed to "Check-In"). Feature itself unchanged — just at a new path so the locked `/journal` could take that path. Updated InSession.jsx + Home.jsx internal links.
+
+**Trend Master Class (2026-05-15):** every chart on the page now click-to-fullscreen via ClickableChart wrapper. Sections wrapped: 5 trend states, Scenario A/B, 10 real-world cards, 3 chop sub-types. Lightbox UX mirrors the daily-lesson ChartGallery. Section 12 / Why-this-works / per-rule Iron Rule charts are Bootcamp-only — not yet ported to Last Mile.
 
 ## Daily lesson pipeline
 1. Arnie pastes Claude.ai trading transcript at end of trading day

@@ -1,5 +1,35 @@
 # SESSION_NOTES.md — Last Mile
 
+## Session — 2026-05-15 — Locked /journal, May 15 daily lesson, click-to-fullscreen on TMC
+
+**What we did (mirror of bootcamp work where applicable):**
+- New locked `/journal` route ("Personal Trading Journal & Reflection") behind Firebase Google sign-in + email whitelist (`arnold.shapiro@gmail.com`, `mshapiro@sibcycline.com`). Uses the SAME Firebase project (`shapiro-apps`) as Bootcamp. New JournalGate component double-checks the whitelist.
+- **Path migration:** the existing 5-Question Journal route at `/journal` was renamed to `/checkin` so the new locked `/journal` could use the path. Sidebar label changed from "Journal" to "Check-In". Updated all internal links (InSession.jsx, Home.jsx) to point to `/checkin`. The 5-Question Journal feature itself is intact, just at a new path.
+- Created `src/lib/authConfig.js` with shared `ALLOWED_EMAILS` constant. Widened the existing AuthGate hardcoded single-email check to use this array.
+- Mirrored the May 15 daily lesson "The Day the Framework Came Together" from Bootcamp — same 8 teaching units (the 4-Layer Framework + wicks-vs-closes + two-phase stop + structural trail + pre-flight). Same 17 hand-crafted SVG charts under `src/components/charts/day-2026-05-15/`. Lesson is shared via Firestore so both apps render the same content.
+- Added ClickableChart wrapper to `TrendMasterClass.jsx` — wraps any inline SVG, renders large, opens fullscreen lightbox on click. Adapted to use the blue palette (BLUE_LIGHT hover border instead of teal). Wrapped all existing chart sites: 5 trend states (Section 3), Scenario A + Scenario B (Section 4), 10 real-world chart cards (Section 8), and the 3 chop sub-types (Section 6). Behavior matches Bootcamp.
+
+**What's working:**
+- May 15 lesson live at `https://arnies-last-mile.netlify.app/mastery/daily/2026-05-15`.
+- Locked `/journal` live at `https://arnies-last-mile.netlify.app/journal`. Same whitelist as Bootcamp.
+- 5-Question Journal still works, now at `/checkin`.
+- All existing TMC charts (sections 1-11) click-to-fullscreen at `/trend-master-class`.
+
+**Important decisions:**
+- TMC Section 12 / Why-this-works / Iron Rules per-rule charts / Walk-through-with-charts are Bootcamp-only this session. Last Mile still has the older 11-section TMC, but now with click-to-fullscreen on every chart. Port to Last Mile is a future task (would need blue palette translation throughout).
+- Used "35+ years" experience phrasing in the journal entry per the existing site-wide rule.
+- Default workflow changed across all projects (per Arnie's global memory update): from now on, commit straight to main (no feature branches) unless explicitly requested or for risky/irreversible changes.
+
+**Permanent rules learned this session (carried in global memory):**
+1. NEVER use PowerShell `Get-Content -Raw` / `Set-Content -Encoding utf8` round-trip on files with Unicode — the cp1252 default reading corrupts em-dashes (—), ×, ≠, →, ↑↓, ▲▼. Use Python `ftfy.fix_text` or the Edit tool for any text manipulation.
+2. PowerShell `Get-Content` lies about encoding when checking — verify with Python.
+3. `useFirestoreDailyLessons.js`: Firestore lessons entirely shadow seed lessons when Firestore is non-empty (no merge). If pushing partial data, missing lessons disappear from the UI.
+
+**What's next:**
+- Optional Last Mile parity port: Section 12 + Why-this-works charts + Iron Rules per-rule charts + Walk-through-with-charts grid (would need blue palette).
+
+---
+
 ## Session — 2026-05-12 — Daily lesson workflow shipped end-to-end + chart component upgrade
 
 **What we did:**
