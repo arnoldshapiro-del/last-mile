@@ -86,3 +86,31 @@ Per the spec's build order, next steps require Arnie's go-ahead:
 - **DO NOT** touch GitHub or attempt deployment without explicit instruction.
 - **DO NOT** attempt Vercel CLI under any circumstances.
 - The Double Top lab's live RTY example chart references Arnie's actual May 5, 2026 setup. Keep that section faithful to reality — Bearish Engulfing #111 at 2850-2851, valley ~2840.
+
+## Session Hygiene
+
+SESSION HYGIENE RULES (auto-execute, do not ask)
+
+1. **PAUSE SUMMARY (mandatory)**
+   At any natural stopping point — when a phase completes, before a long pause, when context is getting heavy, or when Arnie says he's stepping away — post a final summary message in this exact format:
+
+   ```
+   PAUSING HERE.
+   Last completed: [specific description of what was just finished]
+   Next up: [specific description of what comes next]
+   Resume here when ready.
+   ```
+
+   Post this WITHOUT being asked. It is the last thing you do before the session goes quiet.
+
+2. **SESSION RENAME SUGGESTION (mandatory at pause)**
+   After the pause summary above, suggest a descriptive session rename in this format:
+
+   ```
+   Suggested session name: '[Project] - [Phase] - [Status]'
+   (e.g., 'Brooks Integration - Phase D+E - Done')
+   To rename: right-click this session in the sidebar → Rename.
+   ```
+
+3. **RESUME ORIENTATION (on session start)**
+   When a session begins, if the prompt references prior work, immediately confirm what was previously completed before doing anything new. Don't redo work that's already done.
