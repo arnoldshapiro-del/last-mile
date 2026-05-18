@@ -44,6 +44,13 @@ Arnie has 5.5 years of pattern recognition and a persistent give-back problem (s
 8. Build + commit + push → Netlify auto-deploys
 9. Optional companion HTML at `Desktop\YYYY-MM-DD-<topic>.html` for offline study
 
+## Per-trade lesson save (in-app, 2026-05-17 — replaces desktop .bat)
+On Home (`/`) there's now an in-app "📥 SAVE TODAY'S LESSONS FROM CLIPBOARD" button. The user copies the per-trade JSON output from Claude.ai, opens Last Mile (or Brooks Hub in Bootcamp), clicks the button. The button reads the clipboard → POSTs to `/.netlify/functions/save-lessons` → the function commits each lesson to `arnoldshapiro-del/unis-ta-bootcamp-day1`'s `public/lessons/{category}/{lesson_id}-{subcategory}.json` plus an upserted `index.json` in ONE atomic GitHub commit.
+- Function source: `netlify/functions/save-lessons.mjs` (identical to the Bootcamp's copy)
+- Required env var on the Netlify site for Last Mile: `GITHUB_TOKEN` (fine-grained PAT with Contents: write on `arnoldshapiro-del/unis-ta-bootcamp-day1`)
+- Schema: same `docs/LESSON_JSON_SCHEMA.md` that lives in the Bootcamp repo
+- This makes the desktop `Save Today's Lesson.bat` optional/deletable
+
 ## Modules built (per spec)
 1. **Home (`/`)** — locked commitments display, four principles cards, today's pattern focus, quick stats
 2. **Pre-Session Ritual (`/protocol/pre-session`)** — 4-step flow: calm check → lock commitments → read aloud → today's threat

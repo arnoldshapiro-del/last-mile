@@ -10,6 +10,7 @@ import {
   todayKey
 } from '../lib/store.js';
 import { recentAccuracy, fmtPct } from '../lib/util.js';
+import SaveLessonsButton from '../components/SaveLessonsButton.jsx';
 
 const PRINCIPLES = [
   {
@@ -130,6 +131,16 @@ export default function Home() {
           </div>
         </div>
       </header>
+
+      {/* In-app save button — replaces the desktop .bat workflow */}
+      <div className="mb-6 -mt-2">
+        <SaveLessonsButton
+          onSaved={() => {
+            // Give Netlify ~45s to redeploy the data side, then hard-reload.
+            setTimeout(() => window.location.reload(), 45000);
+          }}
+        />
+      </div>
 
       {/* Status pills row */}
       <div className="flex flex-wrap gap-2 mb-8">

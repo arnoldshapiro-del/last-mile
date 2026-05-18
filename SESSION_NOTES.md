@@ -1,5 +1,25 @@
 # SESSION_NOTES.md — Last Mile
 
+## Session — 2026-05-17 — In-app Save Today's Lessons button (Phase B+ Brooks Integration)
+
+**What we did:**
+- Added a `📥 SAVE TODAY'S LESSONS FROM CLIPBOARD` button at the top of Home (`/`). Reads clipboard JSON, validates, POSTs to a local Netlify Function which commits ALL lesson files + the upserted `index.json` to `arnoldshapiro-del/unis-ta-bootcamp-day1` in ONE atomic commit via the GitHub Git Database API.
+- Built `netlify/functions/save-lessons.mjs` (mirror of the Bootcamp version — both apps own their own function, both write to the same data home).
+- Created `src/components/SaveLessonsButton.jsx` matching Last Mile's existing dark/teal styling.
+- Added `netlify.toml` to declare the functions directory. Updated `public/_redirects` so `/.netlify/functions/*` is routed before the SPA fallback.
+
+**What's working (verified):**
+- Function validation paths checked via Node smoke-test: missing lessons field → 400, empty array → 400, missing lesson_id → 400 with warning, GET → 405, missing `GITHUB_TOKEN` → 500 with clear message.
+- Brooks Hub mirror verified in dev preview: button renders, empty-clipboard → clear error, invalid-JSON → first 80 chars echoed back. Same component logic used here.
+
+**Required setup before live use:**
+- Set `GITHUB_TOKEN` env var on the Last Mile Netlify site (fine-grained PAT with Contents: write on `arnoldshapiro-del/unis-ta-bootcamp-day1`). Same env var must also be set on the Bootcamp Netlify site.
+
+**What's next:**
+- Phase C — Last Mile Brooks Discipline Layer.
+
+---
+
 ## Session — 2026-05-15 — Locked /journal, May 15 daily lesson, click-to-fullscreen on TMC
 
 **What we did (mirror of bootcamp work where applicable):**

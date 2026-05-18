@@ -1,1 +1,3 @@
-/*    /index.html   200
+# Functions must be matched first so the SPA fallback doesn't swallow them.
+/.netlify/functions/*  /.netlify/functions/:splat  200
+/*                     /index.html                 200
