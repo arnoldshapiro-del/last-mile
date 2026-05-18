@@ -59,7 +59,7 @@ export default function BrooksDiscipline() {
           href="https://brooks-scalping-lab.netlify.app"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-border bg-bg text-text/80 hover:text-green hover:border-green/40 transition-colors no-underline font-display font-medium tracking-wider uppercase"
+          className="inline-flex items-center gap-1.5 px-3 py-2 md:py-1 rounded-full border border-border bg-bg text-text/80 hover:text-green hover:border-green/40 transition-colors no-underline font-display font-medium tracking-wider uppercase"
         >
           → Brooks Scalping Lab
           <ExternalLink className="w-3 h-3" />
@@ -68,7 +68,7 @@ export default function BrooksDiscipline() {
           href="https://unis-ta-bootcamp-day1.netlify.app/brooks"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-border bg-bg text-text/80 hover:text-green hover:border-green/40 transition-colors no-underline font-display font-medium tracking-wider uppercase"
+          className="inline-flex items-center gap-1.5 px-3 py-2 md:py-1 rounded-full border border-border bg-bg text-text/80 hover:text-green hover:border-green/40 transition-colors no-underline font-display font-medium tracking-wider uppercase"
         >
           → Uni's Brooks Hub
           <ExternalLink className="w-3 h-3" />
