@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ExternalLink } from 'lucide-react';
 import {
   getBrooksPreMarket,
   setBrooksPreMarket,
@@ -51,6 +52,29 @@ export default function BrooksDiscipline() {
 
   return (
     <div className="max-w-3xl mx-auto px-5 md:px-8 py-6 md:py-10">
+      {/* Cross-app ribbon — only on this page, doesn't clutter the rest of Last Mile */}
+      <div className="flex items-center justify-end gap-2 flex-wrap mb-4 text-[11px]">
+        <span className="label mr-1 hidden md:inline">Jump to</span>
+        <a
+          href="https://brooks-scalping-lab.netlify.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-border bg-bg text-text/80 hover:text-green hover:border-green/40 transition-colors no-underline font-display font-medium tracking-wider uppercase"
+        >
+          → Brooks Scalping Lab
+          <ExternalLink className="w-3 h-3" />
+        </a>
+        <a
+          href="https://unis-ta-bootcamp-day1.netlify.app/brooks"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-border bg-bg text-text/80 hover:text-green hover:border-green/40 transition-colors no-underline font-display font-medium tracking-wider uppercase"
+        >
+          → Uni's Brooks Hub
+          <ExternalLink className="w-3 h-3" />
+        </a>
+      </div>
+
       <header className="mb-6">
         <div className="label mb-1">Daily Checklist</div>
         <h1 className="h1">Brooks Discipline Layer</h1>
