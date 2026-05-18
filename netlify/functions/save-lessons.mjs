@@ -70,15 +70,20 @@ async function gh(url, token, init = {}) {
 }
 
 async function fetchExistingIndex(owner, repo, branch, token) {
+  // Use the Contents API (NOT raw.githubusercontent.com — that CDN caches
+  // for ~30-60 s and would make rapid back-to-back saves overwrite each
+  // other instead of upserting).
   try {
-    const res = await fetch(
-      `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/public/lessons/index.json`,
-      { headers: { Authorization: `Bearer ${token}` } },
+    const data = await gh(
+      `/repos/${owner}/${repo}/contents/public/lessons/index.json?ref=${branch}`,
+      token,
     );
-    if (!res.ok) return [];
-    const json = await res.json();
+    if (!data || !data.content) return [];
+    const text = Buffer.from(data.content, data.encoding || 'base64').toString('utf8');
+    const json = JSON.parse(text);
     return Array.isArray(json) ? json : [];
   } catch {
+    // 404 (file doesn't exist yet) or any other failure → start fresh.
     return [];
   }
 }
