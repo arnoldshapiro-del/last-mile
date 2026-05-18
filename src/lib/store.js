@@ -213,6 +213,80 @@ export function bumpStreakIfPerfect(complianceScore) {
   }
 }
 
+// ---- Brooks Discipline Layer (Phase C) ----
+
+const BROOKS_PRE_KEY  = 'brooks:premarket';     // { date, checks: {...}, method }
+const BROOKS_TRADE_KEY = 'brooks:pertrade';     // [{ at, date, checks, decision }]
+const BROOKS_POST_KEY  = 'brooks:posttrade';    // [{ at, date, fields }]
+
+const PRE_CHECKLIST_ITEMS = [
+  'reviewed_15min_trend',
+  'identified_sr',
+  'method_chosen',
+  'max_risk_300',
+  'starting_size_1_2',
+  'reviewed_decision_tree',
+  'skip_first_15',
+];
+
+export const BROOKS_PRE_ITEMS = PRE_CHECKLIST_ITEMS;
+
+export function getBrooksPreMarket(date = todayKey()) {
+  const raw = store.get(BROOKS_PRE_KEY);
+  if (!raw || raw.date !== date) {
+    return { date, checks: {}, method: 'patterns_on_2min' };
+  }
+  return raw;
+}
+
+export function setBrooksPreMarket(next) {
+  const today = todayKey();
+  store.set(BROOKS_PRE_KEY, { ...next, date: today });
+  return getBrooksPreMarket(today);
+}
+
+export function isBrooksPreMarketComplete(state) {
+  if (!state || state.date !== todayKey()) return false;
+  return PRE_CHECKLIST_ITEMS.every(k => state.checks?.[k] === true);
+}
+
+export function logBrooksPerTrade({ checks, decision }) {
+  const list = store.get(BROOKS_TRADE_KEY, []);
+  const row = {
+    at: new Date().toISOString(),
+    date: todayKey(),
+    checks,
+    decision,            // 'taken' | 'skipped'
+  };
+  list.unshift(row);
+  if (list.length > 200) list.length = 200;
+  store.set(BROOKS_TRADE_KEY, list);
+  return list;
+}
+
+export function getBrooksPerTradeToday() {
+  const list = store.get(BROOKS_TRADE_KEY, []);
+  return list.filter(r => r.date === todayKey());
+}
+
+export function logBrooksPostTrade(fields) {
+  const list = store.get(BROOKS_POST_KEY, []);
+  const row = {
+    at: new Date().toISOString(),
+    date: todayKey(),
+    fields,
+  };
+  list.unshift(row);
+  if (list.length > 200) list.length = 200;
+  store.set(BROOKS_POST_KEY, list);
+  return list;
+}
+
+export function getBrooksPostTradeToday() {
+  const list = store.get(BROOKS_POST_KEY, []);
+  return list.filter(r => r.date === todayKey());
+}
+
 export function logOverride(reason) {
   const overrides = store.get(KEYS.OVERRIDES, []);
   overrides.unshift({ at: new Date().toISOString(), reason });

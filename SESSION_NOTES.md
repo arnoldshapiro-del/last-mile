@@ -1,5 +1,35 @@
 # SESSION_NOTES.md — Last Mile
 
+## Session — 2026-05-17 (continued) — Phase C: Brooks Discipline Layer
+
+**What we did:**
+- New route `/protocol/brooks-discipline` (page `src/pages/BrooksDiscipline.jsx`) with four collapsible cards in native Last Mile dark/teal aesthetic.
+- Card 1 — Pre-Market Brooks Check (7 items, persist per-day via `lastmile:brooks:premarket`, method radios for 2-min vs 5-min). Reset at midnight.
+- Card 2 — Per-Trade Brooks Check, opens `BrooksPerTradeModal` (6 quality checks, red/green banner, decision logged to `lastmile:brooks:pertrade`). Floating `⚡ TRADE ABOUT TO TAKE` button pinned top-right of `/protocol/in-session`.
+- Card 3 — Post-Trade Brooks Review, opens `BrooksPostTradeModal` (pattern dropdown + signal/stop/exit radios + 10-char-min lesson textarea, logs to `lastmile:brooks:posttrade`). On InSession, modal opens AUTOMATICALLY after each routine trade is logged via `submitTrade` — overlays (profit-target / give-back / loss-warn) take precedence and skip the auto-open.
+- Card 4 — Today's Brooks Lessons via `BrooksLessonsTodayPanel`, fetches `unis-ta-bootcamp-day1.netlify.app/lessons/index.json`, filters to today + brooks/tape_reading. New CORS header on the Bootcamp side (`netlify.toml [[headers]] for "/lessons/*" → Access-Control-Allow-Origin = "*"`) makes the cross-origin fetch work.
+- Store helpers added to `src/lib/store.js`.
+- Sidebar entry: "Brooks Discipline" with GradCapIcon between "Protocol" and "Check-In".
+- Home page: teal bridge card linking to the discipline page, placed between the commitments section and the BEGIN LIVE SESSION CTA.
+- Root `.claude\launch.json` fix: the `last-mile` preview entry was pointing at the STALE `Project Files\last-mile\` folder (10 commits behind, abandoned). Repointed to `Project Files\arnies-last-mile\`. Earlier Phase B+ verification had been hitting the stale folder silently.
+
+**What's working (verified in dev preview at /protocol/brooks-discipline + /protocol/in-session):**
+- All 4 cards render with correct content, expand/collapse, status pills.
+- Pre-market check toggles persist to localStorage.
+- Per-trade modal: opens, banner switches red→green when all 6 boxes checked, "Trade taken" logs and the count "1 logged today" updates.
+- Post-trade modal: select + 3 radio groups + textarea (10-char gate), "Save review" enabled when all 5 fields valid, saves and updates "1 reviewed today" + shows latest review summary.
+- InSession floating `⚡ TRADE ABOUT TO TAKE` button at top-right (12px right edge, no header overlap), opens per-trade modal.
+- Mobile 375px: page stacks cleanly, method radios wrap, cards full-width.
+
+**Required ops setup (already done in Phase B+):**
+- `GITHUB_TOKEN` env var on both Netlify sites.
+- After this commit, the Bootcamp redeploy will publish the CORS header — Card 4 then works in production.
+
+**What's next:**
+- Phase F — Cross-app navigation.
+
+---
+
 ## Session — 2026-05-17 — In-app Save Today's Lessons button (Phase B+ Brooks Integration)
 
 **What we did:**

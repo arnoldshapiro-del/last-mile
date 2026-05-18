@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   getCommitments,
   getActiveSession,
@@ -11,6 +11,8 @@ import {
 } from '../lib/store.js';
 import { sounds } from '../lib/audio.js';
 import { fmtMoney, fmtClock, clamp } from '../lib/util.js';
+import BrooksPerTradeModal from '../components/BrooksPerTradeModal.jsx';
+import BrooksPostTradeModal from '../components/BrooksPostTradeModal.jsx';
 
 export default function InSession() {
   const nav = useNavigate();
@@ -23,6 +25,8 @@ export default function InSession() {
   const [overrideText, setOverrideText] = useState('');
   const [showOverrideForm, setShowOverrideForm] = useState(false);
   const [overrideKey, setOverrideKey] = useState('');
+  const [showBrooksPerTrade, setShowBrooksPerTrade] = useState(false);
+  const [showBrooksPostTrade, setShowBrooksPostTrade] = useState(false);
   const fired = useRef({ profit: false, lossWarn: false, giveback: false });
 
   // Bootstrap: must have commitments
@@ -91,6 +95,10 @@ export default function InSession() {
       setOverlay('giveback');
       return;
     }
+
+    // Routine trade logged — auto-open the post-trade Brooks review.
+    // (Skipped above when an overlay fires, which takes precedence.)
+    setShowBrooksPostTrade(true);
   };
 
   const endSessionAndJournal = () => {
@@ -116,7 +124,18 @@ export default function InSession() {
 
   return (
     <div className="max-w-3xl mx-auto px-5 md:px-8 py-6 md:py-10">
-      <header className="flex items-baseline justify-between mb-6">
+      {/* Floating Brooks per-trade button — fixed top-right so it's always
+          one click away during an active session. Doesn't enforce anything;
+          it's a quality filter prompt before pulling the trigger. */}
+      <button
+        onClick={() => setShowBrooksPerTrade(true)}
+        className="fixed top-3 right-3 md:top-5 md:right-5 z-30 px-3 py-2 md:px-4 md:py-2.5 rounded-lg text-xs md:text-sm font-display font-semibold bg-green/15 text-green border border-green/40 hover:bg-green/25 shadow-lg shadow-green/10"
+        title="Open the per-trade Brooks quality filter"
+      >
+        ⚡ TRADE ABOUT TO TAKE
+      </button>
+
+      <header className="flex items-baseline justify-between mb-6 pr-32 md:pr-44">
         <div>
           <div className="label mb-1">Live Session</div>
           <h1 className="h2">In-Session Companion</h1>
@@ -125,6 +144,13 @@ export default function InSession() {
           End → Journal
         </button>
       </header>
+
+      {/* Quick link to the Brooks Discipline page (for the wider context) */}
+      <div className="-mt-3 mb-4">
+        <Link to="/protocol/brooks-discipline" className="text-xs text-muted hover:text-text underline-offset-2 hover:underline">
+          Open full Brooks Discipline Layer →
+        </Link>
+      </div>
 
       {/* Vital stats grid */}
       <section className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
@@ -214,6 +240,15 @@ export default function InSession() {
           onConfirm={submitOverride}
         />
       )}
+
+      <BrooksPerTradeModal
+        open={showBrooksPerTrade}
+        onClose={() => setShowBrooksPerTrade(false)}
+      />
+      <BrooksPostTradeModal
+        open={showBrooksPostTrade}
+        onClose={() => setShowBrooksPostTrade(false)}
+      />
     </div>
   );
 }

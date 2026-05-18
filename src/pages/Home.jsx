@@ -188,6 +188,21 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Bridge: Brooks Discipline Layer — between pre-market prep and live session */}
+      <Link
+        to="/protocol/brooks-discipline"
+        className="card-tight mb-4 flex items-center justify-between gap-3 no-underline border-green/20 hover:border-green/40 transition-colors"
+      >
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="w-9 h-9 rounded-lg bg-green/10 border border-green/30 flex items-center justify-center text-green text-lg shrink-0">🎓</div>
+          <div className="min-w-0">
+            <div className="font-display font-semibold text-text leading-tight">Brooks Discipline Layer</div>
+            <div className="text-xs text-muted leading-snug mt-0.5">Pre-market check, per-trade filter, post-trade review, today's lessons</div>
+          </div>
+        </div>
+        <span className="text-muted shrink-0">→</span>
+      </Link>
+
       {/* Big primary CTA */}
       <button onClick={beginSession}
         className="btn btn-primary w-full text-lg py-5 mb-8 shadow-glow">

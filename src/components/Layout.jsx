@@ -17,9 +17,10 @@ const NAV = [
   { to: '/lab/inside-bar',         label: 'Inside Bar',     icon: BoxIcon },
   { to: '/lab/vwap-rejection',     label: 'VWAP Rejection', icon: AnchorIcon },
   { kind: 'group', label: 'Session' },
-  { to: '/protocol/pre-session',   label: 'Protocol', icon: ShieldIcon },
-  { to: '/checkin',                label: 'Check-In', icon: BookIcon },
-  { to: '/progress',               label: 'Progress', icon: ChartIcon }
+  { to: '/protocol/pre-session',      label: 'Protocol',        icon: ShieldIcon },
+  { to: '/protocol/brooks-discipline', label: 'Brooks Discipline', icon: GradCapIcon },
+  { to: '/checkin',                   label: 'Check-In',        icon: BookIcon },
+  { to: '/progress',                  label: 'Progress',        icon: ChartIcon }
 ];
 
 export default function Layout() {
@@ -184,6 +185,10 @@ function ShieldIcon({ className }) {
 }
 function BookIcon({ className }) {
   return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h11a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4Z" /><path d="M4 4v14" /></svg>);
+}
+// Brooks Discipline — graduation cap (mirrors Bootcamp Brooks Hub nav icon)
+function GradCapIcon({ className }) {
+  return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M2 10 12 5l10 5-10 5L2 10Z" /><path d="M6 12v4c0 1.5 3 3 6 3s6-1.5 6-3v-4" /><path d="M22 10v6" /></svg>);
 }
 function ChartIcon({ className }) {
   return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19V5" /><path d="M4 19h16" /><path d="M8 15v-4" /><path d="M12 15V8" /><path d="M16 15v-2" /></svg>);

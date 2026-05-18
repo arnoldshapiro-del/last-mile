@@ -15,6 +15,7 @@ import InsideBar from './pages/InsideBar.jsx';
 import VWAPRejection from './pages/VWAPRejection.jsx';
 import PreSession from './pages/PreSession.jsx';
 import InSession from './pages/InSession.jsx';
+import BrooksDiscipline from './pages/BrooksDiscipline.jsx';
 import Journal from './pages/Journal.jsx';
 import JournalGate from './pages/journal/JournalGate.jsx';
 import JournalPage from './pages/journal/JournalPage.jsx';
@@ -59,6 +60,7 @@ export default function App() {
         <Route path="/lab/inside-bar" element={<InsideBar />} />
         <Route path="/lab/vwap-rejection" element={<VWAPRejection />} />
         <Route path="/protocol/pre-session" element={<PreSession />} />
+        <Route path="/protocol/brooks-discipline" element={<BrooksDiscipline />} />
         <Route path="/protocol/in-session" element={<InSession />} />
         {/* The 5-Question Journal (compliance score + streak) lives here now;
             /journal is the locked Personal Trading Journal & Reflection. */}

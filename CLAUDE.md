@@ -44,6 +44,17 @@ Arnie has 5.5 years of pattern recognition and a persistent give-back problem (s
 8. Build + commit + push → Netlify auto-deploys
 9. Optional companion HTML at `Desktop\YYYY-MM-DD-<topic>.html` for offline study
 
+## Brooks Discipline Layer (Phase C, 2026-05-17)
+Route: `/protocol/brooks-discipline`. Native Last Mile aesthetic (dark/teal terminal, NOT Bootcamp's Brooks Hub). Sidebar entry between "Protocol" and "Check-In". Home page has a teal bridge card linking to it.
+
+Four collapsible cards:
+1. **Pre-Market Brooks Check** — 7-item checklist persisted per-day in `lastmile:brooks:premarket`. Method radios (`patterns_on_2min` default vs `patterns_on_5min`). Resets at midnight.
+2. **Per-Trade Brooks Check** — opens `BrooksPerTradeModal`. Six quality checks. Floating `⚡ TRADE ABOUT TO TAKE` button is also pinned to top-right of `/protocol/in-session` for one-click access during a live session. Decision (`taken`/`skipped`) logs to `lastmile:brooks:pertrade`.
+3. **Post-Trade Brooks Review** — opens `BrooksPostTradeModal`. Five fields (pattern, signal-bar quality, stop placement, exit, one-sentence lesson, 10-char minimum). On InSession, this modal opens AUTOMATICALLY after each `submitTrade` call (skipped when a profit-target / give-back / loss-warn overlay is already firing — those take precedence). Logs to `lastmile:brooks:posttrade`.
+4. **Today's Brooks Lessons** — `BrooksLessonsTodayPanel` fetches `https://unis-ta-bootcamp-day1.netlify.app/lessons/index.json` (same data home as the Bootcamp Brooks Hub), filters to today + `brooks`/`tape_reading`. CORS header `Access-Control-Allow-Origin: *` on `/lessons/*` in the Bootcamp netlify.toml allows the cross-origin fetch from this app.
+
+Files: `src/pages/BrooksDiscipline.jsx`, `src/components/BrooksPerTradeModal.jsx`, `src/components/BrooksPostTradeModal.jsx`, `src/components/BrooksLessonsTodayPanel.jsx`. Store helpers added to `src/lib/store.js` (`getBrooksPreMarket`, `setBrooksPreMarket`, `isBrooksPreMarketComplete`, `BROOKS_PRE_ITEMS`, `logBrooksPerTrade`, `getBrooksPerTradeToday`, `logBrooksPostTrade`, `getBrooksPostTradeToday`).
+
 ## Per-trade lesson save (in-app, 2026-05-17 — replaces desktop .bat)
 On Home (`/`) there's now an in-app "📥 SAVE TODAY'S LESSONS FROM CLIPBOARD" button. The user copies the per-trade JSON output from Claude.ai, opens Last Mile (or Brooks Hub in Bootcamp), clicks the button. The button reads the clipboard → POSTs to `/.netlify/functions/save-lessons` → the function commits each lesson to `arnoldshapiro-del/unis-ta-bootcamp-day1`'s `public/lessons/{category}/{lesson_id}-{subcategory}.json` plus an upserted `index.json` in ONE atomic GitHub commit.
 - Function source: `netlify/functions/save-lessons.mjs` (identical to the Bootcamp's copy)
