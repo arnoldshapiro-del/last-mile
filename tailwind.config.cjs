@@ -29,7 +29,28 @@ module.exports = {
         red: {
           DEFAULT: '#FF3D5A',
           dim: '#C42E48'
-        }
+        },
+        // Second Signal design tokens — used ONLY inside /second-signal/* via
+        // the .ss-root wrapper. Class names are unique to that namespace so
+        // they don't bleed into host UI.
+        'bg-deep': '#0F172A',
+        'bg-card': '#1E293B',
+        'bg-elevated': '#293548',
+        'text-primary': '#F1F5F9',
+        'text-muted': '#94A3B8',
+        'text-dim': '#64748B',
+        accent: '#38BDF8',
+        bull: {
+          DEFAULT: '#16A34A',
+          light: '#22C55E'
+        },
+        bear: {
+          DEFAULT: '#DC2626',
+          light: '#EF4444'
+        },
+        warn: '#F59E0B',
+        neutral: '#475569',
+        'border-default': '#334155'
       },
       fontFamily: {
         display: ['Oxanium', 'system-ui', 'sans-serif'],

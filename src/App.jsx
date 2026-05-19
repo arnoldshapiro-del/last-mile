@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
+
+// Arnie's Second Signal — embedded standalone app. Lazy-loaded so it doesn't
+// bloat the main bundle. Renders full-bleed OUTSIDE the host's Layout, same
+// pattern as /journal.
+const SecondSignalApp = lazy(() => import('./second-signal/SecondSignalApp.jsx'));
 import { NarratorBar } from './components/NarratorBar.jsx';
 import Home from './pages/Home.jsx';
 import Drill from './pages/Drill.jsx';
@@ -45,6 +50,15 @@ export default function App() {
           <JournalGate>
             <JournalPage />
           </JournalGate>
+        }
+      />
+      {/* Arnie's Second Signal — embedded standalone, full-bleed (no host chrome). */}
+      <Route
+        path="/second-signal/*"
+        element={
+          <Suspense fallback={<div style={{padding:'2rem',fontFamily:'monospace',color:'#94A3B8'}}>Loading Second Signal…</div>}>
+            <SecondSignalApp />
+          </Suspense>
         }
       />
       <Route element={<Layout />}>

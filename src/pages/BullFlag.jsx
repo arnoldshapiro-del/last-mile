@@ -35,9 +35,17 @@ function Header() {
         <div className="label">Setup Lab</div>
       </div>
       <h1 className="font-display font-bold text-4xl md:text-5xl tracking-tight mb-3">Bull Flag</h1>
-      <p className="text-text/80 text-lg max-w-3xl leading-relaxed">
+      <p className="text-text/80 text-lg max-w-3xl leading-relaxed mb-4">
         The 2-minute scalper's complete bull flag treatment. Twelve large worked examples, a breakout decision tree, three entry tiers, lookalike-pattern comparisons, and a time-of-day guide.
       </p>
+      <Link
+        to="/second-signal/patterns/bull-flag"
+        className="inline-flex items-center gap-2 text-sm border border-blue/30 bg-blue/5 text-text/85 hover:bg-blue/10 hover:border-blue/50 transition-colors px-3 py-2 rounded-lg no-underline max-w-3xl"
+      >
+        <span className="text-blue font-display font-medium">New to H2/L2?</span>
+        <span>Learn the method first in Second Signal: Bull Flag</span>
+        <span className="text-blue ml-auto">→</span>
+      </Link>
     </div>
   );
 }

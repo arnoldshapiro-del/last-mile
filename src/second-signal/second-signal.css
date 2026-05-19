@@ -1,0 +1,200 @@
+/* Arnie's Second Signal — scoped styles for the embedded experience in Last Mile.
+ *
+ * Every rule is namespaced under .ss-root so it CANNOT bleed into the host.
+ * Outside .ss-root, none of these styles apply.
+ *
+ * The body scroll-lock class used by ExpandableChart is .ss-modal-open
+ * (renamed from .modal-open to avoid collision with anything the host uses).
+ */
+
+/* ---- Root reset (replaces standalone's html/body baseline) ----------- */
+.ss-root {
+  --bg-deep: #0F172A;
+  --bg-card: #1E293B;
+  --bg-elevated: #293548;
+  --text-primary: #F1F5F9;
+  --text-muted: #94A3B8;
+  --text-dim: #64748B;
+  --accent: #38BDF8;
+  --bull: #16A34A;
+  --bull-light: #22C55E;
+  --bear: #DC2626;
+  --bear-light: #EF4444;
+  --warn: #F59E0B;
+  --neutral: #475569;
+  --border: #334155;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'Oxanium', system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Apply Oxanium to everything inside, then override mono targets below */
+.ss-root,
+.ss-root p,
+.ss-root span,
+.ss-root div,
+.ss-root li,
+.ss-root a {
+  font-family: 'Oxanium', system-ui, sans-serif;
+}
+
+.ss-root h1,
+.ss-root h2,
+.ss-root h3,
+.ss-root h4,
+.ss-root h5,
+.ss-root h6,
+.ss-root code,
+.ss-root kbd,
+.ss-root .mono,
+.ss-root button {
+  font-family: 'Space Mono', ui-monospace, monospace;
+}
+
+.ss-root * {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ss-root a {
+  color: var(--accent);
+}
+
+/* Focus ring scoped to the embedded app only */
+.ss-root *:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---- Component utility classes (scoped, override host's same-name) ---- */
+
+.ss-root .card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.ss-root .card-elevated {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.ss-root .tap-target {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ss-root .btn-primary {
+  background: var(--accent);
+  color: var(--bg-deep);
+  font-weight: 700;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  min-height: 44px;
+  transition: opacity 120ms ease;
+}
+.ss-root .btn-primary:hover { opacity: 0.85; }
+.ss-root .btn-primary:active { opacity: 0.7; }
+
+.ss-root .btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  font-weight: 500;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  min-height: 44px;
+  transition: background 120ms ease;
+}
+.ss-root .btn-secondary:hover { background: var(--bg-elevated); }
+
+.ss-root .btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: color 120ms ease;
+}
+.ss-root .btn-ghost:hover { color: var(--text-primary); }
+
+/* ---- Flash animations ------------------------------------------------ */
+@keyframes ss-flash-bull {
+  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+  30% { box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.6); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+@keyframes ss-flash-bear {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+  30% { box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.6); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+.ss-root .flash-correct { animation: ss-flash-bull 700ms ease-out; border-color: var(--bull) !important; }
+.ss-root .flash-wrong { animation: ss-flash-bear 700ms ease-out; border-color: var(--bear) !important; }
+
+/* ---- Body modal scroll-lock (escapes .ss-root since body is parent) -- */
+body.ss-modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* ---- Bottom nav + fullscreen safe areas ----------------------------- */
+.ss-root .bottom-nav-safe {
+  padding-bottom: calc(8px + var(--safe-bottom));
+}
+.ss-root .fullscreen-safe-top {
+  padding-top: calc(12px + var(--safe-top));
+}
+
+/* ---- Section heading rhythm ----------------------------------------- */
+.ss-root .section-h1 { font-size: 32px; font-weight: 700; line-height: 1.2; }
+.ss-root .section-h2 { font-size: 24px; font-weight: 700; line-height: 1.25; }
+.ss-root .section-h3 { font-size: 20px; font-weight: 500; line-height: 1.3; }
+.ss-root .body-muted { color: var(--text-muted); font-size: 16px; }
+
+@media (max-width: 480px) {
+  .ss-root .section-h1 { font-size: 26px; }
+  .ss-root .section-h2 { font-size: 20px; }
+}
+
+/* ---- Prevent text selection on tap targets -------------------------- */
+.ss-root button,
+.ss-root .tap-target {
+  user-select: none;
+}
+
+/* ---- Scoped scrollbar styling (don't override host outside .ss-root) -- */
+.ss-root ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.ss-root ::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+.ss-root ::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+.ss-root ::-webkit-scrollbar-thumb:hover {
+  background: var(--neutral);
+}

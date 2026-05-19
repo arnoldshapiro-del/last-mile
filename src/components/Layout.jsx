@@ -7,6 +7,8 @@ const NAV = [
   { to: '/drill',                  label: 'Drill',    icon: DrillIcon },
   { to: '/mastery',                label: 'Live Trading Mastery', icon: TargetIcon, accent: 'mastery' },
   { to: '/trend-master-class',     label: 'The Trend Master Class', icon: CompassIcon, accent: 'tmc' },
+  { kind: 'group', label: 'Pattern Learning' },
+  { to: '/second-signal',          label: 'Second Signal', icon: SecondSignalIcon, accent: 'tmc' },
   { kind: 'group', label: 'Setup Labs' },
   { to: '/lab/bull-flag',          label: 'Bull Flag',     icon: BullFlagIcon },
   { to: '/lab/bear-flag',          label: 'Bear Flag',     icon: BearFlagIcon },
@@ -192,6 +194,10 @@ function GradCapIcon({ className }) {
 }
 function ChartIcon({ className }) {
   return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19V5" /><path d="M4 19h16" /><path d="M8 15v-4" /><path d="M12 15V8" /><path d="M16 15v-2" /></svg>);
+}
+// Second Signal — two arrows forming "second try" loop
+function SecondSignalIcon({ className }) {
+  return (<svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M17 2l3 3-3 3" /><path d="M3 11v-2a4 4 0 0 1 4-4h13" /><path d="M7 22l-3-3 3-3" /><path d="M21 13v2a4 4 0 0 1-4 4H4" /></svg>);
 }
 // Notebook with bookmark — Q&A Journal
 function NotebookIcon({ className }) {
